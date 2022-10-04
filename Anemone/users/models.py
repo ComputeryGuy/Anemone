@@ -9,7 +9,6 @@ class Profile(models.Model):
             on_delete=models.CASCADE,      # On delete of user, profile is deleted
             primary_key = True,          
     )
-    household_code = models.CharField(max_length=8, blank=True)
 
     def __str__(self):
         return self.user.username
