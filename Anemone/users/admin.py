@@ -3,6 +3,6 @@ from .models import *
 
 admin.site.register(Profile)
 admin.site.register(Household)
-admin.site.register(Message)
+admin.site.register(Bulletin)
 admin.site.register(Event)
 admin.site.register(Chore)
