@@ -1,0 +1,593 @@
+
+/* =================== app.js styles =================== */
+
+/* =================== media queries =================== */
+
+/* ---------- MOBILE ---------- */
+@media only screen and (max-width: 40em) {
+	/* =================== base page styles =================== */
+	body {
+		margin-bottom: 60px;
+	}
+
+	/* =================== grids =================== */
+	.main-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: auto auto auto;
+		gap: 10px;
+	}
+	
+	/* navigation sidebar to bottom of page */
+	.left-section {
+		grid-column: span 4;
+		grid-row: 3;
+	}
+	
+	.middle-section {
+		grid-column: span 4;
+		grid-row: 1;
+	}
+	
+	.right-section {
+		grid-column: span 4;
+		grid-row: 2;
+	}
+
+	/* =================== left section =================== */
+	
+	/* ---------- navigation sidebar ---------- */
+	#nav-sidebar {
+		background-color: var(--primary-background-colour);
+		padding: .5rem 0;
+
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		border-radius: 10px 10px 0 0;
+		box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.25);
+	}
+
+	/* remove the logo */
+	.logo-container {
+		display: none;
+	}
+
+	/* row flex .list and .list-bottom-content */
+	.nav-sidebar-content {
+		display: flex;
+		flex-direction: row;
+		padding: 0 1rem;
+	}
+	
+	/* row flex .list-item inside .list */
+	.list {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		justify-content: space-evenly;
+		align-items: center;
+		text-align: center;
+		padding: 0 1rem;
+
+		position: relative;
+	}
+	
+	.list-item {
+		list-style: none;
+	}
+
+	.nav-link .material-symbols-rounded {
+		padding: .7rem;
+		color: var(--primary-white);
+		font-size: 20px;
+	}
+	
+	/* TODO: background colour changes to current page */
+	.mobile-current {
+		background-color: var(--primary-dark-blue);
+		border-radius: var(--std-border-radius);
+	}
+
+	/* hide on mobile */
+	.list-bottom-content {
+		display: none;
+	}
+
+	.nav-link {
+		text-decoration: none;
+	}
+
+	/* remove nav link words */
+	.nav-link .link {
+		display: none;
+		/* font-size: 8px; */
+	}
+
+	#notif-number {
+		display: none;
+	}
+
+	/* =================== middle section =================== */
+	.middle-section {
+		padding: 1rem 1rem 0;
+	}
+
+	/* ---------- welcome ---------- */
+	.welcome-container h1 {
+		font-size: 24px;
+	}
+
+	.info-square-container,
+	.task-avail-container,
+	.recent-notifs-container {
+		margin-top: 1rem;
+	}
+
+	/* ---------- info square ---------- */
+	.small-info-squares {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.info-square {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		text-align: center;
+		width: 80%;
+		height: 8rem;
+		padding: 0.5rem;
+		margin: 0 auto;
+
+	}
+
+	.info-square h1 {
+		font-size: 54px;
+	}
+
+	.info-square h3 {
+		font-size: 12px;
+		color: var(--primary-light-blue);
+	}
+
+	/* ---------- tasks available ---------- */
+	.task-avail-container {
+		padding: 1rem;
+
+		display: grid;
+		grid-template-rows: auto auto auto;
+		gap: 10px;
+
+		text-align: center;
+
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+	}
+
+	.task-avail-container *:not(:last-child) {
+		margin-bottom: .5rem;
+	}
+
+	.task-avail-container #current-points-avil {
+		font-size: 60px;
+	}
+
+	.task-avail-container p {
+		font-size: 16px;
+	}
+
+	/* the span */
+	.task-avail-container .add-blue {
+		color: var(--primary-light-blue);
+		font-weight: 500;
+		font-size: 20px;
+	}
+
+	.button {
+		padding: calc(18px/2.5) 4rem;
+	}
+
+	/* ---------- recent notifications ---------- */
+	.recent-notifs-container {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+	}
+
+	.notifs-header {
+		margin-bottom: 1rem;
+	}
+
+	/* do not display button */
+	.notifs-header .button-container {
+		display: none;
+	}
+
+	/* ---------- a notification ---------- */
+	.a-notification-container {
+		margin-bottom: 1rem;
+	}
+
+	.a-notification {
+		display: grid;
+		grid-template-columns: min-content auto;
+		gap: 10px;
+
+		padding: .3rem .5rem;
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		margin-left: 1rem;
+	}
+	
+	/* gives bottom margin to all elements except the last child */
+	.a-notification:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+	
+	.user-profile {
+		margin: auto auto;
+		padding: .3rem;
+		text-align: center;
+	}
+	
+	.user-profile img {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 100%;
+		border: 3px solid var(--primary-dark-blue);
+		margin-bottom: .3rem;
+	}
+	
+	.user-post .time-date-header {
+		color: var(--primary-dark-blue);
+	}
+	
+	.user-post .notif-style {
+		color: grey
+	}
+
+	/* =================== right section =================== */
+	.right-section {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+		/* each card is 16px between eachother, 
+			b/c right section is in separate grid column 
+			it already has a 10px margin.
+			therefore 16px (=1rem) - 10px = 6px
+		*/
+		margin: calc(1rem - 10px) 1rem;
+	}
+
+	/* ---------- calendar ---------- */
+	.calendar {
+		display: none;
+	}
+
+	/* ---------- today's events ---------- */
+	.right-section h2 {
+		margin-bottom: 1rem;
+	}
+
+	.a-event {
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		padding: 0.3rem;
+		padding-left: .5rem;
+		margin-bottom: 1rem;
+		margin-left: 1rem;
+	}
+	
+	.a-event p {
+		color: grey;
+	}
+
+	/* ---------- go to calendar btn ---------- */
+	.button-container {
+		text-align: center;
+	}
+}
+
+/* ---------- TABLET ---------- */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+
+	/* =================== base page styles =================== */
+	body {
+		margin-bottom: 60px;
+	}
+
+	/* =================== grids =================== */
+	.main-grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: auto auto auto;
+		gap: 10px;
+	}
+	
+	/* navigation sidebar to bottom of page */
+	.left-section {
+		grid-column: span 6;
+		grid-row: 3;
+	}
+	
+	.middle-section {
+		grid-column: span 6;
+		grid-row: 1;
+	}
+	
+	.right-section {
+		grid-column: span 6;
+		grid-row: 2;
+	}
+
+	/* =================== left section =================== */
+
+	/* ---------- navigation sidebar ---------- */
+	#nav-sidebar {
+		background-color: var(--primary-background-colour);
+		padding: .5rem 0;
+
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		border-radius: 10px 10px 0 0;
+		box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.25);
+	}
+
+	/* remove the logo */
+	.logo-container {
+		display: none;
+	}
+
+	/* row flex .list and .list-bottom-content */
+	.nav-sidebar-content {
+		display: flex;
+		flex-direction: row;
+		padding: 0 1rem;
+	}
+	
+	/* row flex .list-item inside .list */
+	.list {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		justify-content: space-evenly;
+		align-items: center;
+		text-align: center;
+		padding: 0 1rem;
+
+		position: relative;
+	}
+	
+	.list-item {
+		list-style: none;
+	}
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+
+	.nav-link .material-symbols-rounded {
+		padding: .7rem;
+		color: var(--primary-white);
+		font-size: 20px;
+		margin-bottom: .3rem;
+	}
+	
+	/* TODO: background colour changes to current page */
+	.mobile-current {
+		background-color: var(--primary-dark-blue);
+		border-radius: var(--std-border-radius);
+	}
+
+	/* hide on mobile */
+	.list-bottom-content {
+		display: none;
+	}
+
+	.nav-link {
+		text-decoration: none;
+	}
+
+	/* remove nav link words */
+	.nav-link .link {
+		/* display: none; */
+		font-size: 10px;
+	}
+
+	#notif-number {
+		display: none;
+	}
+
+	/* =================== middle section =================== */
+	.middle-section {
+		padding: 1rem 1rem 0;
+	}
+
+	/* ---------- welcome ---------- */
+	.welcome-container h1 {
+		font-size: 24px;
+	}
+
+	.info-square-container,
+	.task-avail-container,
+	.recent-notifs-container {
+		margin-top: 1rem;
+	}
+
+	/* ---------- info square ---------- */
+	.small-info-squares {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.info-square {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		text-align: center;
+		width: 80%;
+		height: 8rem;
+		padding: 0.5rem;
+		margin: 0 auto;
+	}
+
+	.info-square h1 {
+		font-size: 54px;
+	}
+
+	.info-square h3 {
+		font-size: 12px;
+		color: var(--primary-light-blue);
+	}
+
+	/* ---------- tasks available ---------- */
+	.task-avail-container {
+		padding: 1rem;
+
+		display: grid;
+		grid-template-rows: auto auto auto;
+		gap: 10px;
+
+		text-align: center;
+
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+	}
+
+	.task-avail-container *:not(:last-child) {
+		margin-bottom: .5rem;
+	}
+
+	.task-avail-container #current-points-avil {
+		font-size: 60px;
+	}
+
+	.task-avail-container p {
+		font-size: 16px;
+	}
+
+	/* the span */
+	.task-avail-container .add-blue {
+		color: var(--primary-light-blue);
+		font-weight: 500;
+		font-size: 20px;
+	}
+
+	.button {
+		padding: calc(18px/2) 4rem;
+	}
+
+	/* ---------- recent notifications ---------- */
+	.recent-notifs-container {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+	}
+
+	.notifs-header {
+		margin-bottom: 1rem;
+	}
+
+	/* do not display button */
+	.notifs-header .button-container {
+		display: none;
+	}
+
+	/* ---------- a notification ---------- */
+	.a-notification-container {
+		margin-bottom: 1rem;
+	}
+	.a-notification {
+		display: grid;
+		grid-template-columns: min-content auto;
+		gap: 10px;
+
+		padding: .3rem .5rem;
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		margin-left: 1rem;
+	}
+	
+	/* gives bottom margin to all elements except the last child */
+	.a-notification:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+	
+	.user-profile {
+		margin: auto auto;
+		padding: .3rem;
+		text-align: center;
+	}
+	
+	.user-profile img {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 100%;
+		border: 3px solid var(--primary-dark-blue);
+		margin-bottom: .3rem;
+	}
+	
+	.user-post .time-date-header {
+		color: var(--primary-dark-blue);
+	}
+	
+	.user-post .notif-style {
+		color: grey
+	}
+
+	/* =================== right section =================== */
+	.right-section {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+		margin: calc(1rem - 10px) 1rem;
+	}
+
+	/* ---------- calendar ---------- */
+	.calendar {
+		display: none;
+	}
+
+	/* ---------- today's events ---------- */
+	.right-section h2 {
+		margin-bottom: 1rem;
+	}
+
+	.a-event {
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		padding: 0.3rem;
+		padding-left: .5rem;
+		margin-bottom: 1rem;
+		margin-left: 1rem;
+	}
+	
+	.a-event p {
+		color: grey;
+	}
+
+	/* ---------- go to calendar btn ---------- */
+	.button-container {
+		text-align: center;
+	}
+}
+
+/* ---------- XL SCREENS ---------- */
+/* @media only screen and (min-width: 90.063em) and (max-width: 120em) {} */
+
+/* ---------- XXL SCREENS ---------- */
+/* @media only screen and (min-width: 120.063em) {} */
