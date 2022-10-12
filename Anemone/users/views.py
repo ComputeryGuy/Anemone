@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms.forms import *
 from .models import *
 
+from django.http import HttpResponse
 
 def home(request):
     return render(request, 'users/home.html')
@@ -44,3 +45,30 @@ def post_bulletin(request):
                 return redirect('/')
     form = BulletinForm()
     return render(request, 'users/bulletin.html', {'form': form})
+
+
+def create_household(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = HouseholdCreateForm(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['household_name']
+                pin = form.cleaned_data['household_pin']
+                household = Household.objects.create(name=name,
+                                                    pin = pin)
+                return redirect('/')
+    form = HouseholdCreateForm()
+    return render(request, 'users/createHousehold.html', {'form': form})
+
+def join_household(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = JoinGroupForm(request.POST)
+            profile = Profile.objects.get(user = request.user)
+            if form.is_valid():
+                enteredPin = form.cleaned_data['household_pin']
+                group = Household.objects.get(pin = enteredPin)
+                group.profiles.add(profile)
+                return redirect('/')
+    form = JoinGroupForm()
+    return render(request, 'users/joinHousehold.html', {'form': form})
