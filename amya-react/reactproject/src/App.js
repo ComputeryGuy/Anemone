@@ -1,26 +1,18 @@
+import React from 'react'
 
-import Left from './app-components/Left'
-import Middle from './app-components/Middle'
-import Right from './app-components/Right'
+import Dashboard from './Dashboard'
+import Tasks from './Tasks'
 
-// import main style -- css variables
-import './styles/main-style.css'
-
-// import app style -- desktop style
-import './styles/app-style.css'
-
-// import app queries -- media queries for mobile and tablet
-import './styles/app-queries.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App () {
 	return (
-
-		// this is inside <div id="root"> ... </div>
-		<div class="main-grid">
-			<Left />
-			<Middle />
-			<Right />
-		</div>
+		<Router>
+			<Switch>
+				<Route exact path="/" component={Dashboard}/>
+				<Route exact path="/tasks" component={Tasks}/>
+			</Switch>
+		</Router>
 	);
 }
 
