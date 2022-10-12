@@ -66,8 +66,15 @@ class Chore(models.Model):
 
 
 class Household(models.Model):
-    profiles = models.ManyToManyField(Profile)
-    messages = models.ManyToManyField(Bulletin)
-    events = models.ManyToManyField(Event)
-    chores = models.ManyToManyField(Chore)
+    name = models.CharField(max_length = 30, default = "NO NAME!")
+    profiles = models.ManyToManyField(Profile, blank = True)
+    messages = models.ManyToManyField(Bulletin, blank = True)
+    events = models.ManyToManyField(Event, blank = True)
+    chores = models.ManyToManyField(Chore, blank = True)
 
+    pin = models.IntegerField(default = 12345)
+
+#class Pin(models.Model):
+#    pin = models.IntegerField(unique=True)
+#    attached_group = models.ForeignKey(Household)
+    

@@ -25,4 +25,7 @@ urlpatterns = [
     path('bulletin/', user_views.post_bulletin, name='bulletin'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('createHousehold/', user_views.create_household, name='createGroup'),
+    path('joinHousehold/', user_views.join_household, name='joinGroup'),
+
 ]
