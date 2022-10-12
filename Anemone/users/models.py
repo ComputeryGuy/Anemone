@@ -72,7 +72,7 @@ class Household(models.Model):
     events = models.ManyToManyField(Event, blank = True)
     chores = models.ManyToManyField(Chore, blank = True)
 
-    pin = models.IntegerField(default = 12345)
+    pin = models.IntegerField(unique = True)
 
 #class Pin(models.Model):
 #    pin = models.IntegerField(unique=True)
