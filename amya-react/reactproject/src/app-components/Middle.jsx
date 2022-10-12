@@ -1,6 +1,7 @@
 import React from 'react'
 import Notification from '../reuse-components/Notification'
 import Button from '../reuse-components/Button'
+import InfoSquare from '../reuse-components/InfoSquare'
 
 import daren from '../assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg'
 import rapheal from '../assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg'
@@ -20,25 +21,13 @@ class Middle extends React.Component {
 
 						<div class="small-info-squares">
 
-							<div class="info-square">
-								<h1>100</h1>
-								<h3>Total Points</h3>
-							</div>
+							<InfoSquare number={"100"} subHeader={"Total Points"} />
 
-							<div class="info-square">
-								<h1>3</h1>
-								<h3>New Tasks</h3>
-							</div>
+							<InfoSquare number={"3"} subHeader={"New Tasks"} />
 
-							<div class="info-square">
-								<h1>5</h1>
-								<h3>Completed Tasks</h3>
-							</div>
+							<InfoSquare number={"5"} subHeader={"Completed Tasks"} />
 
-							<div class="info-square">
-								<h1>40</h1>
-								<h3>Points Earned Today</h3>
-							</div>
+							<InfoSquare number={"40"} subHeader={"Points Earned Today"} />
 
 						</div>
 
@@ -52,14 +41,14 @@ class Middle extends React.Component {
 							available from 6 <span class="add-blue">unclaimed</span> tasks
 						</p>
 			
-						<Button buttonText={"go to tasks"}/>
+						<Button buttonClass={"button-container"} buttonText={"go to tasks"}/>
 					</div>
 
 					<div class="recent-notifs-container">
 
 						<div class="notifs-header">
 							<h2>Recent Notifications</h2>
-							<Button buttonText={"go to notifications"}/>
+							<Button buttonClass={"button-container"} buttonText={"go to notifications"}/>
 						</div>
 
 						<div class="a-notification-container">
@@ -68,9 +57,7 @@ class Middle extends React.Component {
 			
 						</div>
 
-						<div class="button-container mobile">
-							<a class="button" href="#">go to notifications</a>
-						</div>
+						<Button buttonClass={"button-container mobile"} buttonText={"go to notifications"}/>
 					</div>
 
 				</div>
