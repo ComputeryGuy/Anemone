@@ -4,7 +4,7 @@ class Button extends React.Component {
 	render () {
 		return (
 
-			<div class="button-container">
+			<div class={this.props.buttonClass}>
 				<a href="#" class="button">{this.props.buttonText}</a>
 			</div>
 

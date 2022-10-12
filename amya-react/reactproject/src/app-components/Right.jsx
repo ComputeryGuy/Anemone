@@ -23,7 +23,7 @@ class Right extends React.Component {
 					<Event eventName={"Event 4"} myTime={"04:00 AM - 05:00 PM"} myDate={"Thursday, Oct 6, 2022"}/>
 				</div>
 
-				<Button buttonText={"go to calendar"}/>
+				<Button buttonClass={"button-container"} buttonText={"go to calendar"}/>
 
 			</section>
 		);
