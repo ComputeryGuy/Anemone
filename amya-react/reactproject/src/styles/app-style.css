@@ -8,7 +8,6 @@
 	/* =================== grids =================== */
 	.main-grid {
 		display: grid;
-		/* grid-template-columns: repeat(12, 1fr); */
 		grid-template-columns: max-content repeat(11, 1fr);
 		gap: 10px;
 	}

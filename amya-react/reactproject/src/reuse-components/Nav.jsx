@@ -1,6 +1,8 @@
 import React from 'react'
 import logo from '../assets/icons/logo-round.png'
 
+import { NavLink, Link } from 'react-router-dom'
+
 class Nav extends React.Component {
 	render () {
 		return (
@@ -14,19 +16,19 @@ class Nav extends React.Component {
 					<ul class="list">
 
 						<li class="list-item">
-							<a href="." class="nav-link desktop-current">
+							<NavLink to="/" class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">dashboard</span>
 								<span class="link">Dashboard</span>
-							</a>
+							</NavLink>
 						</li>
 
 						<li class="list-item">
-							<a href="./tasks.html" class="nav-link">
+							<NavLink to="/tasks" class="nav-link">
 								<span class="material-symbols-rounded">task_alt</span>
 								<span class="link">Tasks</span>
-							</a>
+							</NavLink>
 						</li>
-		
+
 						<li class="list-item">
 							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">calendar_month</span>
