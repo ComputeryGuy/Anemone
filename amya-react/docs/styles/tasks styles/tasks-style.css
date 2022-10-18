@@ -1,0 +1,124 @@
+/* =================== tasks.html styles =================== */
+
+/* ---------- DESKTOP ---------- */
+
+/* @media only screen and (min-width: 64.063em) { */
+
+/* =================== grids =================== */
+.main-grid {
+	display: grid;
+	grid-template-columns: max-content repeat(11, 1fr);
+	gap: 10px;
+}
+
+/* =================== left section =================== */
+.left-section {
+	grid-column: span 1;
+}
+
+/* ---------- navigation sidebar ---------- */
+#nav-sidebar {
+	background-color: var(--primary-background-colour);
+	margin: 1rem;
+}
+
+.logo-container {
+	padding: 1rem;
+	text-align: center;
+}
+
+#logo {
+	width: 5rem;
+}
+
+.nav-sidebar-content {
+	display: flex;
+	height: calc(100vh - 9.5rem);
+	flex-direction: column;
+	justify-content: space-between;
+	padding: .8rem;
+}
+
+.nav-sidebar-content .list-item {
+	list-style: none;
+}
+
+.list-item.mobile {
+	display: none;
+}
+
+.list-item .nav-link {
+	display: flex;
+	align-items: center;
+	margin: .5rem 0;
+	padding: .8rem;
+	text-decoration: none;
+	border-radius: var(--std-border-radius);
+	transition: var(--std-transition);
+}
+
+.desktop-current {
+	background-color: var(--primary-dark-blue);
+}
+
+.list-item .nav-link:hover {
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
+}
+
+.nav-link .material-symbols-rounded {
+	margin-right: .4rem;
+	font-size: 16px;
+	color: var(--primary-white);
+}
+
+.nav-link .link {
+	font-size: 12px;
+	color: white;
+}
+
+.link #notif-number {
+	background-color: var(--primary-light-blue);
+	--std-border-radius: 5px;
+	border-radius: var(--std-border-radius);
+	padding: 0.3rem .4rem;
+	margin-left: .5rem;
+}
+
+/* =================== middle section =================== */
+.middle-section {
+	grid-column: span 11;
+	margin: 1rem;
+}
+
+.progress-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+}
+
+/* ---------- todo container ---------- */
+.todo-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.column {
+	grid-column: span 1;
+
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	height: calc(100vh - 5rem);
+
+	padding: 1rem;
+
+	
+	text-align: center;
+}
+
+.column h3, span {
+	display: inline-block;
+	font-size: 16px;
+}
