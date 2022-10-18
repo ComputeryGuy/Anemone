@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -72,3 +72,9 @@ def join_household(request):
                 return redirect('/')
     form = JoinGroupForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
+
+
+def dashboard(request, household_id):
+    if request.user.is_authenticated:
+        dash = get_object_or_404(Household, pk=household_id)
+        return render(request, 'users/dashboard.html', {})
