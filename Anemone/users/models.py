@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import CharField
@@ -20,6 +21,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+    instance.profile.save()
 
 
 @receiver(post_save, sender=User)
@@ -48,6 +50,9 @@ class Chore(models.Model):
 
 
 class Household(models.Model):
+    household_id = models.UUIDField(primary_key=True,
+                                    default = uuid.uuid4,
+                                    editable = False)
     name = models.CharField(max_length = 30, default = "NO NAME!")
     profiles = models.ManyToManyField(Profile, blank = True)
     messages = models.ManyToManyField(Bulletin, blank = True)
