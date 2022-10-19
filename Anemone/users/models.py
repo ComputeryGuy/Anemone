@@ -31,6 +31,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Bulletin(models.Model):
     user = models.CharField(max_length=500)
+    title = models.CharField(max_length=100)
     bulletin_body = models.CharField(max_length=500)
     creation_time = models.DateTimeField()
     expire_time = models.DateTimeField()
@@ -47,6 +48,7 @@ class Chore(models.Model):
     body = models.TextField()
     due_date = models.DateTimeField()
     points = models.IntegerField()
+    claimed = models.BooleanField(default=False)
 
 
 class Household(models.Model):
@@ -55,7 +57,7 @@ class Household(models.Model):
                                     editable = False)
     name = models.CharField(max_length = 30, default = "NO NAME!")
     profiles = models.ManyToManyField(Profile, blank = True)
-    messages = models.ManyToManyField(Bulletin, blank = True)
+    bulletins = models.ManyToManyField(Bulletin, blank = True)
     events = models.ManyToManyField(Event, blank = True)
     chores = models.ManyToManyField(Chore, blank = True)
 
