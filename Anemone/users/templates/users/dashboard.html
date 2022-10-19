@@ -1,5 +1,241 @@
-{% extends 'users/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block content %}
-	<p>Dashboard</p>
-{% endblock %}
+	<title>Roommate</title>
+
+	{% load static %}
+
+	<!-- link favicon -->
+	<link rel="shortcut icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+
+	<!-- link main style sheet -->
+	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
+
+	<!-- link the index specific stylesheet -->
+	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-style.css' %}">
+
+	<!-- link the media queries sheet -->
+	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-queries.css' %}">
+
+	<!-- link google icons -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+	<!-- helps with react organisation -->
+	<div class="main-grid">
+		<!-- TODO: on current page highlight the menu icon -->
+		<section class="left-section">
+
+			<nav id="nav-sidebar">
+
+				<div class="logo-container">
+					<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+				</div>
+
+				<div class="nav-sidebar-content">
+
+					<ul class="list">
+						<li class="list-item">
+							<a href="." class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
+								<span class="link">Dashboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./tasks.html" class="nav-link">
+								<span class="material-symbols-rounded">task_alt</span>
+								<span class="link">Tasks</span>
+							</a>
+						</li>
+		
+						<li class="list-item">
+							<a href="." class="nav-link">
+								<span class="material-symbols-rounded">calendar_month</span>
+								<span class="link">Calendar</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="." class="nav-link">
+								<span class="material-symbols-rounded">notifications</span>
+								<!-- TODO: increase in # makes hover colour expand too. Is that annoying? -->
+								<span class="link">Notifications <span id="notif-number">5</span></span>
+							</a>
+						</li>
+						<li class="list-item">
+							<a href="." class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
+								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+						<li class="list-item mobile">
+							<a href="#" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+						<li class="list-item mobile">
+							<a href="{% url 'logout' %}" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+					</ul>
+					<div class="list-bottom-content">
+						<li class="list-item">
+							<a href="#" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+						<li class="list-item">
+							<a href="{% url 'logout' %}" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+					</div>
+				</div>
+			</nav>
+		</section>
+
+		<section class="middle-section">
+
+			<div class="welcome-container">
+				<h1>Welcome back, {{ user_name }}!</h1>
+			</div>
+
+			<div class="information-container">
+
+				<div class="info-square-container">
+
+					<!-- TODO: what happens if the points earned is larger than 3 digits -->
+					<div class="small-info-squares">
+
+						<div class="info-square">
+							<h1>{{ total_points }}</h1>
+							<h3>Total Points</h3>
+						</div>
+
+						<div class="info-square">
+							<h1>{{ new_tasks }}</h1>
+							<h3>New Tasks</h3>
+						</div>
+
+						<div class="info-square">
+							<h1>{{ completed_tasks }}</h1>
+							<h3>Completed Tasks</h3>
+						</div>
+
+						<div class="info-square">
+							<h1>{{ points_earned_today }}</h1>
+							<h3>Points Earned Today</h3>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="task-avail-container">
+
+					<h1 id="current-points-avil">{{ unclaimed_points }} pts</h1>
+		
+					<p>
+						available</br>
+						from {{ unclaimed_tasks_count }} <span class="add-blue">unclaimed</span> tasks
+					</p>
+		
+					<div class="button-container">
+						<a class="button" href="./tasks.html">go to tasks</a>
+					</div>
+				</div>
+
+				<div class="recent-notifs-container">
+					<div class="notifs-header">
+						<h2>Recent Notifications</h2>
+						<div class="button-container">
+							<a class="button" href="#">go to notifications</a>
+						</div>
+					</div>
+					<div class="a-notification-container">
+						
+						{% for bulletin in bulletins %}
+						<div class="a-notification">
+							<div class="user-profile">
+								<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								<p class="user-name">{{ bulletin.user }}</p>
+							</div>
+							<div class="user-post">
+								<p class="time-date-header">Posted: <span class="notif-style">{{ bulletin.creation_time|date:'h:i A | l, F d, Y' }}</span></p>
+								<h3 class="notif-title">{{ bulletin.title }}</h3>
+								<p class="notif-body">
+									{{ bulletin.body }}
+								</p>
+							</div>
+						</div>
+						{% endfor %}
+                        <!-- 
+						<div class="a-notification">
+							<div class="user-profile">
+								<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+								<p class="user-name">Rapheal</p>
+							</div>
+							<div class="user-post">
+								<p class="time-date-header">Posted: <span class="notif-style">08:30 PM | Wednesday, October 5, 2022</span></p>
+								<h3 class="notif-title">+10pts - Raphael has completed the task "Take out Trash"</h3>
+								<p class="notif-body"></p>
+							</div>
+						</div>
+						-->
+					</div>
+					<div class="button-container mobile">
+						<a class="button" href="#">go to notifications</a>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<section class="right-section">
+
+			<div class="calendar">I am a calendar</div>
+
+			<div class="event-container">
+				<h2>Today's Events</h2>
+
+				<!-- TODO: when clicked on the event information appears -->
+				<div class="a-event">
+					<h4>Group Event 1</h4>
+					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
+				</div>
+				<div class="a-event">
+					<h4>Group Event 1</h4>
+					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
+				</div>
+				<div class="a-event">
+					<h4>Group Event 1</h4>
+					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
+				</div>
+				<div class="a-event">
+					<h4>Group Event 1</h4>
+					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
+				</div>
+			</div>
+
+			<div class="button-container">
+				<a href="#" class="button">go to calendar</a>
+			</div>
+
+		</section>
+
+	</div>
+	
+</body>
+</html>

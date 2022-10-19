@@ -4,13 +4,21 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Sum
 from .forms.forms import *
 from .models import *
 
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, 'users/home.html')
+    if request.user.is_authenticated:
+        if request.user.profile.household_set.all().count() != 0:
+            uuid = str(request.user.profile.household_set.all()[0].household_id)
+            url = '/' + uuid
+            return redirect(url)
+        else:
+            return redirect('joinGroup')
+    return redirect('login')
 
 
 def register(request):
@@ -42,7 +50,8 @@ def post_bulletin(request):
                                                    bulletin_body=bulletin_body,
                                                    creation_time=creation_time,
                                                    expire_time=expire_time, )
-                return redirect('/')
+                request.user.profile.household_set.all()[0].bulletins.add(bulletin)
+                return redirect('dashboard')
     form = BulletinForm()
     return render(request, 'users/bulletin.html', {'form': form})
 
@@ -76,5 +85,25 @@ def join_household(request):
 
 def dashboard(request, household_id):
     if request.user.is_authenticated:
-        dash = get_object_or_404(Household, pk=household_id)
-        return render(request, 'users/dashboard.html', {})
+        household = get_object_or_404(Household, pk=household_id)
+        chores = household.chores.all()
+        user_name = request.user.username
+        total_points = None
+        new_tasks = None
+        completed_tasks = None
+        points_earned_today = None
+        unclaimed_tasks = chores.filter(claimed=False)
+        unclaimed_tasks_count = unclaimed_tasks.count()
+        unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
+        if unclaimed_points == None:
+            unclaimed_points = 0
+        bulletins = household.bulletins.all()
+        values = {'user_name': user_name,
+                 'total_points': total_points,
+                 'new_tasks': new_tasks,
+                 'completed_tasks': completed_tasks,
+                 'points_earned_today': points_earned_today,
+                 'unclaimed_tasks_count': unclaimed_tasks_count,
+                 'unclaimed_points': unclaimed_points,
+                 'bulletins': bulletins,}
+        return render(request, 'users/dashboard.html', values) 
