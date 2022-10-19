@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import Count, Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -43,4 +44,5 @@ def post_bulletin(request):
                                                    expire_time=expire_time, )
                 return redirect('/')
     form = BulletinForm()
-    return render(request, 'users/bulletin.html', {'form': form})
+
+    return render(request, 'users/bulletin.html', {'form': form},)
