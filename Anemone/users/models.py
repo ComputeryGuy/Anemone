@@ -66,4 +66,3 @@ class Household(models.Model):
 #class Pin(models.Model):
 #    pin = models.IntegerField(unique=True)
 #    attached_group = models.ForeignKey(Household)
-    

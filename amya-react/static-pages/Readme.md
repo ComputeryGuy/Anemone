@@ -12,6 +12,7 @@
 --primary-card-colour: #30353f;
 
 ## Fonts and Font Sizes:
+Google fonts
 Font: M PLUS 1
 Font Weights: 
 - Regular 400
