@@ -1,10 +1,8 @@
-
-
-/* =================== media queries =================== */
+/* =================== MEDIA QUERIES =================== */
 
 /* ---------- MOBILE ---------- */
 @media only screen and (max-width: 40em) {
-	/* =================== base page styles =================== */
+
 	body {
 		margin-bottom: 60px;
 	}
@@ -16,96 +14,21 @@
 		grid-template-rows: auto auto auto;
 		gap: 10px;
 	}
-	
+
 	/* navigation sidebar to bottom of page */
 	.left-section {
 		grid-column: span 4;
 		grid-row: 3;
 	}
-	
+
 	.middle-section {
 		grid-column: span 4;
 		grid-row: 1;
 	}
-	
+
 	.right-section {
 		grid-column: span 4;
 		grid-row: 2;
-	}
-
-	/* =================== left section =================== */
-	
-	/* ---------- navigation sidebar ---------- */
-	#nav-sidebar {
-		background-color: var(--primary-background-colour);
-		padding: .5rem 0;
-
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		border-radius: 10px 10px 0 0;
-		box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.25);
-	}
-
-	/* remove the logo */
-	.logo-container {
-		display: none;
-	}
-
-	/* row flex .list and .list-bottom-content */
-	.nav-sidebar-content {
-		display: flex;
-		flex-direction: row;
-		padding: 0 1rem;
-	}
-	
-	/* row flex .list-item inside .list */
-	.list {
-		display: flex;
-		flex-direction: row;
-		width: 100%;
-		justify-content: space-evenly;
-		align-items: center;
-		text-align: center;
-		padding: 0 1rem;
-
-		position: relative;
-	}
-	
-	.list-item {
-		list-style: none;
-	}
-
-	.nav-link .material-symbols-rounded {
-		padding: .7rem;
-		color: var(--primary-white);
-		font-size: 20px;
-	}
-	
-	/* TODO: background colour changes to current page */
-	.mobile-current {
-		background-color: var(--primary-dark-blue);
-		border-radius: var(--std-border-radius);
-	}
-
-	/* hide on mobile */
-	.list-bottom-content {
-		display: none;
-	}
-
-	.nav-link {
-		text-decoration: none;
-	}
-
-	/* remove nav link words */
-	.nav-link .link {
-		display: none;
-		/* font-size: 8px; */
-	}
-
-	#notif-number {
-		display: none;
 	}
 
 	/* =================== middle section =================== */
@@ -140,7 +63,6 @@
 		height: 8rem;
 		padding: 0.5rem;
 		margin: 0 auto;
-
 	}
 
 	.info-square h1 {
@@ -186,9 +108,7 @@
 		font-size: 20px;
 	}
 
-	.button {
-		padding: calc(18px/2.5) 4rem;
-	}
+	/* FIXME: button */
 
 	/* ---------- recent notifications ---------- */
 	.recent-notifs-container {
@@ -222,18 +142,18 @@
 		border-radius: 0 10px 10px 0;
 		margin-left: 1rem;
 	}
-	
+
 	/* gives bottom margin to all elements except the last child */
 	.a-notification:not(:last-child) {
 		margin-bottom: 1rem;
 	}
-	
+
 	.user-profile {
 		margin: auto auto;
 		padding: .3rem;
 		text-align: center;
 	}
-	
+
 	.user-profile img {
 		width: 2.5rem;
 		height: 2.5rem;
@@ -241,11 +161,11 @@
 		border: 3px solid var(--primary-dark-blue);
 		margin-bottom: .3rem;
 	}
-	
+
 	.user-post .time-date-header {
 		color: var(--primary-dark-blue);
 	}
-	
+
 	.user-post .notif-style {
 		color: grey
 	}
@@ -256,6 +176,7 @@
 		border-radius: var(--std-border-radius);
 		box-shadow: var(--std-box-shadow);
 		padding: 1rem;
+
 		/* each card is 16px between eachother, 
 			b/c right section is in separate grid column 
 			it already has a 10px margin.
@@ -282,21 +203,18 @@
 		margin-bottom: 1rem;
 		margin-left: 1rem;
 	}
-	
+
 	.a-event p {
 		color: grey;
 	}
 
 	/* ---------- go to calendar btn ---------- */
-	.button-container {
-		text-align: center;
-	}
+	/* FIXME: button */
 }
 
 /* ---------- TABLET ---------- */
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
 
-	/* =================== base page styles =================== */
 	body {
 		margin-bottom: 60px;
 	}
@@ -308,103 +226,21 @@
 		grid-template-rows: auto auto auto;
 		gap: 10px;
 	}
-	
+
 	/* navigation sidebar to bottom of page */
 	.left-section {
 		grid-column: span 6;
 		grid-row: 3;
 	}
-	
+
 	.middle-section {
 		grid-column: span 6;
 		grid-row: 1;
 	}
-	
+
 	.right-section {
 		grid-column: span 6;
 		grid-row: 2;
-	}
-
-	/* =================== left section =================== */
-
-	/* ---------- navigation sidebar ---------- */
-	#nav-sidebar {
-		background-color: var(--primary-background-colour);
-		padding: .5rem 0;
-
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		border-radius: 10px 10px 0 0;
-		box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.25);
-	}
-
-	/* remove the logo */
-	.logo-container {
-		display: none;
-	}
-
-	/* row flex .list and .list-bottom-content */
-	.nav-sidebar-content {
-		display: flex;
-		flex-direction: row;
-		padding: 0 1rem;
-	}
-	
-	/* row flex .list-item inside .list */
-	.list {
-		display: flex;
-		flex-direction: row;
-		width: 100%;
-		justify-content: space-evenly;
-		align-items: center;
-		text-align: center;
-		padding: 0 1rem;
-
-		position: relative;
-	}
-	
-	.list-item {
-		list-style: none;
-	}
-
-	.nav-link {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-	}
-
-	.nav-link .material-symbols-rounded {
-		padding: .7rem;
-		color: var(--primary-white);
-		font-size: 20px;
-		margin-bottom: .3rem;
-	}
-	
-	/* TODO: background colour changes to current page */
-	.mobile-current {
-		background-color: var(--primary-dark-blue);
-		border-radius: var(--std-border-radius);
-	}
-
-	/* hide on mobile */
-	.list-bottom-content {
-		display: none;
-	}
-
-	.nav-link {
-		text-decoration: none;
-	}
-
-	/* remove nav link words */
-	.nav-link .link {
-		/* display: none; */
-		font-size: 10px;
-	}
-
-	#notif-number {
-		display: none;
 	}
 
 	/* =================== middle section =================== */
@@ -484,9 +320,7 @@
 		font-size: 20px;
 	}
 
-	.button {
-		padding: calc(18px/2) 4rem;
-	}
+	/* FIXME: button */
 
 	/* ---------- recent notifications ---------- */
 	.recent-notifs-container {
@@ -509,6 +343,7 @@
 	.a-notification-container {
 		margin-bottom: 1rem;
 	}
+
 	.a-notification {
 		display: grid;
 		grid-template-columns: min-content auto;
@@ -519,18 +354,18 @@
 		border-radius: 0 10px 10px 0;
 		margin-left: 1rem;
 	}
-	
+
 	/* gives bottom margin to all elements except the last child */
 	.a-notification:not(:last-child) {
 		margin-bottom: 1rem;
 	}
-	
+
 	.user-profile {
 		margin: auto auto;
 		padding: .3rem;
 		text-align: center;
 	}
-	
+
 	.user-profile img {
 		width: 2.5rem;
 		height: 2.5rem;
@@ -538,11 +373,11 @@
 		border: 3px solid var(--primary-dark-blue);
 		margin-bottom: .3rem;
 	}
-	
+
 	.user-post .time-date-header {
 		color: var(--primary-dark-blue);
 	}
-	
+
 	.user-post .notif-style {
 		color: grey
 	}
@@ -574,21 +409,229 @@
 		margin-bottom: 1rem;
 		margin-left: 1rem;
 	}
-	
+
 	.a-event p {
 		color: grey;
 	}
 
 	/* ---------- go to calendar btn ---------- */
-	.button-container {
-		text-align: center;
-	}
+	/* FIXME: button */
 }
 
-/* =================== extra large screens =================== */
+/* ---------- DESKTOP ---------- */
+@media only screen and (min-width: 64.063em) {
 
-/* ---------- XL SCREENS ---------- */
-/* @media only screen and (min-width: 90.063em) and (max-width: 120em) {} */
+	/* =================== section grids =================== */
+	.left-section {
+		grid-column: span 1;
+	}
 
-/* ---------- XXL SCREENS ---------- */
-/* @media only screen and (min-width: 120.063em) {} */
+	.middle-section {
+		grid-column: span 8;
+	}
+
+	.right-section {
+		grid-column: span 3;
+	}
+
+	/* =================== middle section =================== */
+	.middle-section {
+		padding: 1rem;
+	}
+
+	/* ---------- welcome ---------- */
+	.info-square-container,
+	.task-avail-container,
+	.recent-notifs-container {
+		margin-top: 1rem;
+	}
+
+	/* ---------- info square ---------- */
+	.info-square-container {
+		display: grid;
+		grid-template-columns: auto;
+		gap: 60px;
+		margin: 1rem 5rem 0;
+	}
+
+	.small-info-squares {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px;
+	}
+
+	.info-square {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		text-align: center;
+		width: 8rem;
+		height: 8rem;
+		transition: var(--std-transition);
+		padding: 0.5rem;
+		box-shadow: var(--std-box-shadow);
+	}
+
+	.info-square:hover {
+		transform: translateY(-.5rem);
+		transition: var(--std-transition);
+	}
+
+	.info-square h1 {
+		font-size: 54px;
+	}
+
+	.info-square h3 {
+		font-size: 12px;
+		color: var(--primary-light-blue);
+	}
+
+	/* ---------- tasks available ---------- */
+	.task-avail-container {
+		padding: 1rem;
+
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+
+		text-align: center;
+
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+	}
+
+	.task-avail-container #current-points-avil {
+		font-size: 60px;
+	}
+
+	.task-avail-container p {
+		font-size: 16px;
+		margin: auto auto;
+	}
+
+	/* the span */
+	.task-avail-container .add-blue {
+		color: var(--primary-light-blue);
+		font-weight: 500;
+		font-size: 20px;
+	}
+
+	/* FIXME: button edits */
+
+	/* ---------- recent notifications ---------- */
+	.recent-notifs-container {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+	}
+
+	.notifs-header {
+		display: grid;
+		grid-template-columns: .4fr auto;
+		margin-bottom: .5rem;
+	}
+
+	/* ---------- a notification ---------- */
+	.a-notification-container {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		gap: 16px;
+	}
+
+	.a-notification {
+		display: grid;
+		grid-template-columns: min-content auto;
+		gap: 10px;
+		padding: .3rem .5rem;
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		margin-left: 1rem;
+		transition: var(--std-transition);
+	}
+
+	.user-profile {
+		margin: auto auto;
+		padding: .3rem;
+		text-align: center;
+	}
+
+	.user-profile img {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 100%;
+		border: 3px solid var(--primary-dark-blue);
+		margin-bottom: .3rem;
+	}
+
+	.user-post {
+		max-width: 44rem;
+	}
+
+	.user-post .time-date-header {
+		color: var(--primary-dark-blue);
+	}
+
+	.user-post .notif-style {
+		color: grey
+	}
+
+	/* ---------- a notification ---------- */
+	/* FIXME: button */
+
+	/* =================== right section =================== */
+	.right-section {
+		background-color: var(--primary-card-colour);
+		border-radius: var(--std-border-radius) 0px 0px var(--std-border-radius);
+		padding: 1rem;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content auto auto;
+		gap: 20px;
+
+		height: 100vh;
+	}
+
+	/* ---------- calendar ---------- */
+	.calendar {
+		background-color: green;
+		border-radius: var(--std-border-radius);
+		width: 15rem;
+		height: 15rem;
+		margin: 0 auto;
+	}
+
+	/* ---------- today's events ---------- */
+	.event-container h2 {
+		margin-bottom: 1rem;
+	}
+
+	.a-event {
+		border-left: var(--std-left-border);
+		border-radius: 0 10px 10px 0;
+		padding: 0.3rem;
+		padding-left: .5rem;
+		transition: var(--std-transition);
+		margin-left: 1rem;
+	}
+
+	/* selects all elements except the last one */
+	.a-event:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+
+	.a-event:hover {
+		cursor: pointer;
+		background-color: var(--primary-background-colour);
+		transition: var(--std-transition);
+	}
+
+	.a-event p {
+		color: grey;
+	}
+
+	/* ---------- go to calendar btn ---------- */
+	/* FIXME: button */
+}
