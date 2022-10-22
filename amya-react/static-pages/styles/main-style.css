@@ -1,7 +1,6 @@
+
 /* =================== imported fonts =================== */
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700;800&display=swap');
-
-/* ---------- sub-header ---------- */
 
 /* =================== global variables =================== */
 :root {
@@ -22,19 +21,19 @@
 
 /* ---------- global buttion styles ---------- */
 .button {
-	background-color: var(--primary-dark-blue);
+	/* background-color: var(--primary-dark-blue);
 	border: none;
 	border-radius: 100px;
 	
-	font-size: 10px;
-	padding: calc(18px/2.5) calc(32px/2.5);
+	font-size: 12px;
+	padding: calc(18px/2) calc(32px/2);
 	text-decoration: none;
-	transition: var(--std-transition);
+	transition: var(--std-transition); */
 }
 
 .button:hover {
-	cursor: pointer;
-	transform: scale(1.1);
+	/* cursor: pointer;
+	transform: scale(1.1); */
 }
 
 /* =================== reset default styles =================== */
@@ -42,6 +41,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	
 	font-family: 'M PLUS 1', sans-serif;
 	color: var(--primary-white);
 }
@@ -79,4 +79,80 @@ p {
 	/* regular */
 	font-weight: 400;
 	font-size: 12px;
+}
+
+/* =================== main grid global =================== */
+.main-grid {
+	display: grid;
+	grid-template-columns: max-content repeat(11, 1fr);
+	gap: 10px;
+}
+
+/* =================== global navigation -- desktop =================== */
+#nav-sidebar {
+	background-color: var(--primary-background-colour);
+	margin: 1rem;
+}
+
+.logo-container {
+	padding: 1rem;
+	text-align: center;
+}
+
+.logo-container #logo {
+	width: 5rem;
+}
+
+.nav-sidebar-content {
+	display: flex;
+	height: calc(100vh - 9.5rem);
+	flex-direction: column;
+	justify-content: space-between;
+	padding: .8rem;
+}
+
+.nav-sidebar-content .list-item {
+	list-style: none;
+}
+
+.list-item.mobile {
+	display: none;
+}
+
+.list-item .nav-link {
+	display: flex;
+	align-items: center;
+	margin: .5rem 0;
+	padding: .8rem;
+	text-decoration: none;
+	border-radius: var(--std-border-radius);
+	transition: var(--std-transition);
+}
+
+.desktop-current {
+	background-color: var(--primary-dark-blue);
+}
+
+.list-item .nav-link:hover {
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
+}
+
+.nav-link .material-symbols-rounded {
+	margin-right: .4rem;
+	font-size: 16px;
+	color: var(--primary-white);
+}
+
+.nav-link .link {
+	font-size: 12px;
+	color: white;
+}
+
+.link #notif-number {
+	background-color: var(--primary-light-blue);
+	--std-border-radius: 5px;
+	border-radius: var(--std-border-radius);
+	padding: 0.3rem .4rem;
+	margin-left: .5rem;
 }
