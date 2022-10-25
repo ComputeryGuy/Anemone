@@ -56,6 +56,58 @@ def post_bulletin(request):
     return render(request, 'users/bulletin.html', {'form': form})
 
 
+def create_task(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = request.POST
+            form_data = form.dict()
+            # Task information
+            profile_created = request.user.profile
+            task_title = form_data['task_title']
+            task_body = form_data['task_body']
+            due_datetime = form_data['due_date'] + " " + form_data['due_time']
+            due_datetime = datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
+            task = Chore.objects.create(title = task_title,
+                                        body = task_body,
+                                        due_date = due_datetime,
+                                        points = 1000,
+                                        user_created = profile_created)
+            # Frequency information
+            if 'repeats' in form_data:
+                frequency = form_data['frequency']
+                if frequency == 'weekly':
+                    mo = tu = we = th = fr = sa = su = False
+                    if 'mo' in form_data:
+                        mo = True
+                    if 'tu' in form_data:
+                        tu = True
+                    if 'we' in form_data:
+                        we = True
+                    if 'th' in form_data:
+                        th = True
+                    if 'fr' in form_data:
+                        fr = True
+                    if 'sa' in form_data:
+                        sa = True
+                    if 'su' in form_data:
+                        su = True
+                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                               frequency = frequency,
+                                                               mo = mo,
+                                                               tu = tu,
+                                                               we = we,
+                                                               th = th,
+                                                               fr = fr,
+                                                               sa = sa,
+                                                               su = su,)
+                else:
+                    day_of_month = form_data['day_of_month']
+                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                               frequency = frequency,
+                                                               day_of_month = day_of_month)
+    datetimeform = DateTimeForm()
+    return render(request, 'users/create_task.html', {'datetimeform': datetimeform})
+
 def create_household(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -68,6 +120,7 @@ def create_household(request):
                 return redirect('/')
     form = HouseholdCreateForm()
     return render(request, 'users/createHousehold.html', {'form': form})
+
 
 def join_household(request):
     if request.user.is_authenticated:
