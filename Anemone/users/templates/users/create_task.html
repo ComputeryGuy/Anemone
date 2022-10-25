@@ -1,0 +1,42 @@
+<head>
+{% include 'users/admin_widgets.html' %}
+<h3>Create Task</h3>
+
+<form action="" method="POST">
+	{% csrf_token %}
+	<label for="task_title">Task Title</label>
+	<input type="text" name="task_title" required><br>
+	<textarea name="task_body" rows="3" cols="40"></textarea>
+	{% for field in datetimeform %}
+		<p>{{ field.label }} {{ field }}</p>
+	{% endfor %}
+	</br>
+	<label for="repeats">Repeats</label>
+	<input type="checkbox" name="repeats">
+	<select name="frequency">
+		<option value="weekly">Weekly</option>
+		<option value="monthly">Monthly</option>
+	</select>
+	</br>
+	<div>
+		<p style="display:inline">Weekly: </p>
+		<label for="mo">Mo</label>
+		<input type="checkbox" name="mo">
+		<label for="tu">Tu</label>
+		<input type="checkbox" name="tu">
+		<label for="we">We</label>
+		<input type="checkbox" name="we">
+		<label for="th">Th</label>
+		<input type="checkbox" name="th">
+		<label for="fr">Fr</label>
+		<input type="checkbox" name="fr">
+		<label for="Sa">Sa</label>
+		<input type="checkbox" name="sa">
+		<label for="su">Su</label>
+		<input type="checkbox" name="su">
+	<div>
+	<label for="day_of_month">Monthly (day of month): </label>
+	<input type="number" name="day_of_month" min="1" max="31"><br>
+	<button type="submit">Create Task</button>
+</form>
+</head>

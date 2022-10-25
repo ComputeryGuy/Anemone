@@ -67,6 +67,20 @@ class Chore(models.Model):
                                      null=True, blank=True, related_name='chore_user_claimed')
 
 
+class TaskRecurrence(models.Model):
+    #Recurrence Info
+    task_to_clone = models.ForeignKey(Chore, default=None, on_delete=models.CASCADE)
+    frequency = models.CharField(max_length=8)
+    mo = models.BooleanField(default=False)
+    tu = models.BooleanField(default=False)
+    we = models.BooleanField(default=False)
+    th = models.BooleanField(default=False)
+    fr = models.BooleanField(default=False)
+    sa = models.BooleanField(default=False)
+    su = models.BooleanField(default=False)
+    day_of_month = models.IntegerField(null=True, blank=True)
+
+
 @receiver(pre_save, sender=Chore)
 def cache_previous_status(sender, instance, *args, **kwargs):
     if not instance._state.adding:
