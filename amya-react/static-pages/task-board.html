@@ -37,15 +37,15 @@
 					<ul class="list">
 
 						<li class="list-item">
-							<a href="./index.html" class="nav-link desktop-current">
-								<span class="material-symbols-rounded mobile-current">dashboard</span>
+							<a href="./index.html" class="nav-link">
+								<span class="material-symbols-rounded">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./task-board.html" class="nav-link">
-								<span class="material-symbols-rounded">task_alt</span>
+							<a href="./task-board.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">task_alt</span>
 								<span class="link">Tasks</span>
 							</a>
 						</li>
@@ -119,14 +119,14 @@
 				<div class="left-buttons">
 
 					<a class="btns-link" href="./tasks-board.html">
-						<button class="button">
+						<button class="top-container-btn left current">
 							<span class="material-symbols-rounded">grid_view</span>
 							<p>Board</p>
 						</button>
 					</a>
 
-					<a class="btns-link" href="./tasks-list.html">
-						<button class="top-container-btns">
+					<a class="btns-link" href="./task-list.html">
+						<button class="top-container-btn left">
 							<span class="material-symbols-rounded">list</span>
 							<p>List</p>
 						</button>
@@ -135,7 +135,7 @@
 				
 				<div class="right-buttons">
 					<!-- TODO: link to modal -->
-					<button class="top-container-btns">
+					<button class="top-container-btn right">
 						<span class="material-symbols-rounded">add</span>
 						<p>Add Task</p>
 					</button>
@@ -146,7 +146,8 @@
 			<div class="bottom-container">
 				
 				<div class="task-column-container">
-	
+					
+					<!-- unclaimed -->
 					<div class="column">
 
 						<div class="column-header-container">
@@ -161,49 +162,90 @@
 							<p>New Task</p>
 						</button>
 	
-						<div class="a-task" draggable="true">
+						<div class="task-container">
 
-							<div class="task-description-container">
-								<h3 class="task-title">Slack Integration</h3>
-								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
-								</p>
-							</div>
-
-							<div class="task-priority-container">
-								<p class="task-priority">High Priority</p>
-								<div class="task-user-img"></div>
-							</div>
-
-							<hr class="task-horz-line">
-	
-							<div class="task-stats">
-
-								<div class="task-stats-top">
-									<p class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										100
+							<div class="a-task" draggable="true">
+								<div class="task-description-container">
+									<h3 class="task-title">
+										Slack Integration
+										<span id="reminder" class="material-symbols-rounded">notifications_active</span>
+									</h3>
+									<p class="task-description">
+										Add a filled in the portal to the let the user
+										connect to their Slack account.
 									</p>
+								</div>
+								<div class="task-priority-container">
+									<p class="task-priority-high">High Priority</p>
+									<div class="task-user-img"></div>
+								</div>
+								<hr class="task-horz-line">
+								<div class="task-stats">
+									<div class="task-stats-top">
+										<div class="task-points">
+											<span class="material-symbols-rounded">monetization_on</span>
+											<p>100</p>
+										</div>
+										<div class="task-sub-tasks">
+											<span class="material-symbols-rounded">add_task</span>
+											<div>3</div>
+										</div>
+									</div>
+									<div class="task-stats-bottom">
+										<div class="task-due-date">
+											<span class="material-symbols-rounded">calendar_month</span>
+											<p>October 23, 2022</p>
+										</div>
+									</div>
+								</div>
+							</div>
 
-									<p class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										3
+							<div class="a-task" draggable="true">
+
+								<div class="task-description-container">
+									<h3 class="task-title">Slack Integration</h3>
+									<p class="task-description">
+										Add a filled in the portal to the let the user
+										connect to their Slack account.
 									</p>
 								</div>
 
-								<div class="task-stats-bottom">
-									<p class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										October 23, 2022
-									</p>
+								<div class="task-priority-container">
+									<p class="task-priority-low">Low Priority</p>
+									<div class="task-user-img"></div>
+								</div>
+
+								<hr class="task-horz-line">
+
+								<div class="task-stats">
+
+									<div class="task-stats-top">
+										<div class="task-points">
+											<span class="material-symbols-rounded">monetization_on</span>
+											<p>100</p>
+										</div>
+										<div class="task-sub-tasks">
+											<span class="material-symbols-rounded">add_task</span>
+											<div>3</div>
+										</div>
+									</div>
+
+									<div class="task-stats-bottom">
+										<div class="task-due-date">
+											<span class="material-symbols-rounded">calendar_month</span>
+											<p>October 23, 2022</p>
+										</div>
+									</div>
+
 								</div>
 							</div>
 						</div>
 	
 					</div>
 	
+					<!-- to do -->
 					<div class="column">
+
 						<div class="column-header-container">
 							<h4 class="column-header">
 								To Do <span class="column-total">2</span>
@@ -214,31 +256,123 @@
 							<span class="material-symbols-rounded">add</span>
 							<p>New Task</p>
 						</button>
+
+						<div class="task-container">
+
+							<div class="a-task" draggable="true">
+								<div class="task-description-container">
+									<h3 class="task-title">Slack Integration</h3>
+									<p class="task-description">
+										Add a filled in the portal to the let the user
+										connect to their Slack account.
+									</p>
+								</div>
+								<div class="task-priority-container">
+									<p class="task-priority-meduim">Medium Priority</p>
+									<div class="task-user-img">
+										<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									</div>
+								</div>
+								<hr class="task-horz-line">
+								<div class="task-stats">
+									<div class="task-stats-top">
+										<div class="task-points">
+											<span class="material-symbols-rounded">monetization_on</span>
+											<p>100</p>
+										</div>
+										<div class="task-sub-tasks">
+											<span class="material-symbols-rounded">add_task</span>
+											<div>3</div>
+										</div>
+									</div>
+									<div class="task-stats-bottom">
+							
+										<div class="task-due-date">
+											<span class="material-symbols-rounded">calendar_month</span>
+											<p>October 23, 2022</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="a-task" draggable="true">
+								<div class="task-description-container">
+									<h3 class="task-title">Slack Integration</h3>
+									<p class="task-description">
+										Add a filled in the portal to the let the user
+										connect to their Slack account.
+									</p>
+								</div>
+								<div class="task-priority-container">
+									<p class="task-priority-meduim">Medium Priority</p>
+									<div class="task-user-img">
+										<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									</div>
+								</div>
+								<hr class="task-horz-line">
+								<div class="task-stats">
+									<div class="task-stats-top">
+										<div class="task-points">
+											<span class="material-symbols-rounded">monetization_on</span>
+											<p>100</p>
+										</div>
+										<div class="task-sub-tasks">
+											<span class="material-symbols-rounded">add_task</span>
+											<div>3</div>
+										</div>
+									</div>
+									<div class="task-stats-bottom">
+							
+										<div class="task-due-date">
+											<span class="material-symbols-rounded">calendar_month</span>
+											<p>October 23, 2022</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 	
+					<!-- in progress -->
 					<div class="column">
+
 						<div class="column-header-container">
 							<h4 class="column-header">
 								In Progress <span class="column-total">1</span>
 							</h4>
 						</div>
+
 						<button class="new-task-btn-col">
 							<span class="material-symbols-rounded">add</span>
 							<p>New Task</p>
 						</button>
+
+						<div class="task-container">
+
+						</div>
+
 					</div>
-	
+					
+					<!-- completed -->
 					<div class="column">
+
 						<div class="column-header-container">
 							<h4 class="column-header">
 								Completed <span class="column-total">1</span>
 							</h4>
 						</div>
+
 						<button class="new-task-btn-col">
 							<span class="material-symbols-rounded">add</span>
 							<p>New Task</p>
 						</button>
+
+						<div class="task-container">
+
+						</div>
 					</div>
+				
 				</div>
 				
 			</div>

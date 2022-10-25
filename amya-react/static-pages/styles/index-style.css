@@ -1,5 +1,5 @@
 /* =================== MEDIA QUERIES =================== */
-
+/* FIXME: see if I can make a constants header like I did in task-board.css */
 /* ---------- MOBILE ---------- */
 @media only screen and (max-width: 40em) {
 
@@ -30,6 +30,7 @@
 		grid-column: span 4;
 		grid-row: 2;
 	}
+	/* =================== left section =================== */
 
 	/* =================== middle section =================== */
 	.middle-section {
@@ -242,6 +243,8 @@
 		grid-column: span 6;
 		grid-row: 2;
 	}
+
+	/* =================== left section =================== */
 
 	/* =================== middle section =================== */
 	.middle-section {
