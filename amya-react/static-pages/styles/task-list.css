@@ -1,0 +1,62 @@
+/* =================== CONSTANT STYLES =================== */
+
+/* ---------- top button container ---------- */
+/* ---------- left buttons ---------- */
+.left-buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.left-buttons a {
+	text-decoration: none;
+}
+
+.left-buttons .btns-link:not(:last-child) {
+	margin-right: 1rem;
+}
+
+/* ---------- buttons (both left and right) ---------- */
+.top-container-btn {
+	background-color: var(--primary-card-colour);
+	border: 2px solid var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	padding: .6rem 2rem;
+
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+}
+
+.top-container-btn span, .top-container-btn p {
+	margin: auto 0;
+	font-size: 14px;
+}
+
+.top-container-btn *:not(:last-child) {
+	margin-right: .3rem;
+	display: inline-block;
+}
+
+/* ---------- current button ---------- */
+.top-container-btn.current {
+	border: 2px solid var(--primary-light-blue);
+	background-color: rgba(107, 175, 255, 50%);
+}
+
+/* ---------- right button ---------- */
+.top-container-btn.right {
+	background-color: var(--primary-dark-blue);
+	border: 2px solid rgba(0, 111, 242, 50%);
+}
+
+
+/* =================== base page styles =================== */
+
+/* =================== font styles =================== */
+
+/* =================== primary media query =================== */
+
+/* =================== media queries =================== */
+@media screen and (max-width: px) {
+  
+}
