@@ -117,7 +117,7 @@
 	border-radius: var(--std-border-radius);
 }
 
-.task-priority-meduim {
+.task-priority-medium {
 	background-color: rgba(255, 165, 0, 30%);
 	color: rgb(255, 165, 0);
 	padding: .4rem .5rem;
@@ -179,7 +179,7 @@
 /* =================== media queries =================== */
 
 /* ---------- MOBILE ---------- */
-@media screen and (max-width: 40em) {
+@media only screen and (max-width: 40em) {
 
 	body {
 		margin-bottom: 60px;
@@ -255,7 +255,7 @@
 }
 
 /* ---------- TABLET ---------- */
-@media screen and (min-width: 40.063em) and (max-width: 64em) {
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
 
 	body {
 		margin-bottom: 60px;
@@ -326,7 +326,7 @@
 }
 
 /* ---------- DESKTOP ---------- */
-@media screen and (min-width: 64.063em) {
+@media only screen and (min-width: 64.063em) {
 
 	/* =================== left section =================== */
 	.left-section {
@@ -358,12 +358,12 @@
 
 	/* ---------- buttons ---------- */
 	.button {
-		cursor: pointer;
 		transition: var(--std-transition);
 	}
-
+	
 	/* left buttons hover */
 	.button:hover {
+		cursor: pointer;
 		transition: var(--std-transition);
 		border: 2px solid var(--primary-light-blue);
 		background-color: rgb(107, 175, 255, 50%);
@@ -401,15 +401,15 @@
 		flex-direction: row;
 		justify-content: center;
 		
-		cursor: pointer;
 		transition: var(--std-transition);
 	}
-
+	
 	.new-task-btn-col * {
 		margin: auto 0;
 	}
-
+	
 	.new-task-btn-col:hover {
+		cursor: pointer;
 		background-color: var(--primary-dark-blue);
 		transition: var(--std-transition);
 	}

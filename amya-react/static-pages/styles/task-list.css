@@ -50,44 +50,79 @@
 	border: 2px solid rgba(0, 111, 242, 50%);
 }
 
-.table-container {
+/* =================== bottom container =================== */
+.bottom-container {
+	grid-row: span 1;
+
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: min-content min-content;
-}
-
-.table-header-container {
-	display: grid;
-	grid-template-columns: repeat(4, auto);
+	grid-template-rows: repeat(5, min-content);
 	gap: 10px;
 }
 
-.table-header-container h4 {
-	background-color: green;
+/* ---------- new task button ---------- */
+.new-task-button-container #new-task-button {
+	grid-row: span 1;
+	margin: 1rem 0px;
+	width: 100%;
+	background-color: var(--primary-dark-blue);
+	border: 2px solid var(--primary-dark-blue);
+	border-radius: var(--std-border-radius);
+	padding: 1rem;
 
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	transition: var(--std-transition);
 }
 
-.task {
-	display: grid;
-	grid-template-columns: repeat(4, auto);
-	gap: 10px;
+.new-task-button-container #new-task-button * {
+	font-size: 16px;
 }
 
-.checkbox-container {
-	grid-column: span 1;
-
+/* ---------- each row (unclaimed, to do, in progress, complete) ---------- */
+.row {
+	grid-row: span 1;
 }
 
-.assignee-container img {
-	width: 4rem;
-	height: 4rem;
+
+/* ---------- task priority colours ---------- */
+.task-priority-high {
+	background-color: rgba(255, 0, 0, 30%);
+	color: rgb(255, 0, 0);
+	padding: .4rem .5rem;
+	border-radius: var(--std-border-radius);
 }
+
+.task-priority-medium {
+	background-color: rgba(255, 165, 0, 30%);
+	color: rgb(255, 165, 0);
+	padding: .4rem .5rem;
+	border-radius: var(--std-border-radius);
+}
+
+.task-priority-low {
+	background-color: rgba(0, 128, 0, 30%);
+	color: rgb(0, 128, 0);
+	padding: .4rem .5rem;
+	border-radius: var(--std-border-radius);
+}
+
+.task-priority-none {
+	background-color: rgba(128, 128, 128, 50%);
+	color: rgb(128, 128, 128);
+	padding: .4rem .5rem;
+	border-radius: var(--std-border-radius);
+}
+
 /* =================== media queries =================== */
 /* ---------- MOBILE ---------- */
 /* ---------- TABLET ---------- */
 
 /* ---------- DESKTOP ---------- */
-@media  screen and (min-width: 64.063em) {
+@media only screen and (min-width: 64.063em) {
 	
 	/* =================== left section =================== */
 	.left-section {
@@ -136,28 +171,12 @@
 		border: 2px solid var(--primary-dark-blue);
 	}
 
-	/* ---------- bottom container ---------- */
-	.bottom-container {
-		grid-row: span 1;
+	/* =================== bottom container =================== */
 
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: min-content min-content;
-		gap: 10px;
-	}
 
-	/* ---------- new task button ---------- */
-	.new-task-button-container #new-task-button {
-		width: 100%;
-		background-color: var(--primary-dark-blue);
-		margin: 1rem 0;
-	}
-
-	/* ---------- row container ---------- */
-	.row-container {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(4, min-content);
-		gap: 10px;
+	.new-task-button-container #new-task-button:hover {
+		background-color: var(--primary-light-blue);
+		transition: var(--std-transition);
+		cursor: pointer;
 	}
 }
