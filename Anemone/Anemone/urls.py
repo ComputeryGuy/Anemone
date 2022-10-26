@@ -29,4 +29,6 @@ urlpatterns = [
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
     path('<uuid:household_id>', user_views.dashboard, name="dashboard"),
+    path('bonus_points/', user_views.bonus_points, name="bonusPoints"),
+    path('minus_points/', user_views.minus_points, name="minusPoints"),
 ]

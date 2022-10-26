@@ -25,7 +25,7 @@ class Profile(models.Model):
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
-    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True)
+    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True, related_name = "members")
 
     def modify_points(self, points, chore):  # add in views when task is marked as complete
         self.points += points
@@ -68,7 +68,7 @@ class Event(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(default=None, null=True, blank=True)
     points = models.IntegerField()
     claimed = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not

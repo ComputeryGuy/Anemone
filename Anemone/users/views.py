@@ -9,6 +9,9 @@ from .forms.forms import *
 from .models import *
 
 from django.http import HttpResponse
+from django.http import JsonResponse
+
+from django.forms.models import model_to_dict
 
 def home(request):
     if request.user.is_authenticated:
@@ -162,3 +165,102 @@ def dashboard(request, household_id):
                  'unclaimed_points': unclaimed_points,
                  'bulletins': bulletins,}
         return render(request, 'users/dashboard.html', values) 
+
+
+##in current iteration creates a new chore
+    ## then credits that chore as complete to the desired user
+def bonus_points(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BonusPointsForm(request.POST)
+            uProfile = Profile.objects.get(user = request.user)
+            if form.is_valid():
+                uName = request.user.username
+                bonusMember = form.cleaned_data['member_name']
+                points = form.cleaned_data['bonus_points']
+
+                
+                bonusMember = User.objects.get(username = bonusMember)
+                bonusProfile = Profile.objects.get(user = bonusMember)
+
+
+                taskName = 'Kudos for {member}'.format(member = bonusMember)
+                taskBody = '{uName} thinks {member} deserves a {points} point bonus!'.format(uName = uName, member = bonusMember, points = points)
+
+                kudos = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                task_status=True, user_created=uProfile, user_claimed=bonusProfile, household=(uProfile.household))
+                bonusProfile.modify_points(points, kudos)
+
+                
+                return redirect('/')
+
+    form = BonusPointsForm()
+    return render(request, 'users/giveBonus.html', {'form': form})
+
+##in current iteration creates a new chore
+    ## then credits that chore as complete to the desired user
+def minus_points(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = MinusPointsForm(request.POST)
+            uProfile = Profile.objects.get(user = request.user)
+            if form.is_valid():
+                uName = request.user.username
+                minusMember = form.cleaned_data['member_name']
+                points = form.cleaned_data['minus_points']
+                points = -points
+
+                
+                minusMember = User.objects.get(username = minusMember)
+                minusProfile = Profile.objects.get(user = minusMember)
+
+
+                taskName = 'Bad for {member}'.format(member = minusMember)
+
+                print(taskName)
+                taskBody = '{uName} thinks {member} deserves a {points} point reduction!'.format(uName = uName, member = minusMember, points = points)
+
+                print(taskBody)
+                minus = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                task_status=True, user_created=uProfile, user_claimed=minusProfile, household=(uProfile.household))
+                minusProfile.modify_points(points, minus)
+
+                
+                return redirect('/')
+
+    form = MinusPointsForm()
+    return render(request, 'users/joinHousehold.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+'''        household = request.user.profile.household
+        householdMembers = household.members.all()
+        mList = []
+        for queries in householdMembers:
+            mList.append(queries.user.username)
+            print(queries.user.username)
+        print(mList)
+
+        try:
+            selected_choice = household.member_set.get(pk=request.POST['choice'])
+        except (KeyError, User.DoesNotExist):
+            return render(request, 'users/listMembers.html', {
+                'household': household,
+                'error_message': "You didn't select a choice.",
+            })
+        else:
+            selected_choice.modify_points(self, )
+
+        return render(request, 'users/listMembers.html',{household.name:mList})
+        return JsonResponse({household.name:mList}, safe = False)
+
+        return HttpResponse("HOWDY!!")
+'''        
