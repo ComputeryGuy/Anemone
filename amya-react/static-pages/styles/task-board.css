@@ -3,21 +3,21 @@
 
 /* ---------- top button container ---------- */
 /* ---------- left buttons ---------- */
-.left-buttons {
+.left-buttons-container {
 	display: flex;
 	flex-direction: row;
 }
 
-.left-buttons a {
+.btns-link {
 	text-decoration: none;
 }
 
-.left-buttons .btns-link:not(:last-child) {
+.left-buttons-container .btns-link:not(:last-child) {
 	margin-right: 1rem;
 }
 
 /* ---------- buttons (both left and right) ---------- */
-.top-container-btn {
+.button {
 	background-color: var(--primary-card-colour);
 	border: 2px solid var(--primary-card-colour);
 	border-radius: var(--std-border-radius);
@@ -28,24 +28,24 @@
 	text-align: center;
 }
 
-.top-container-btn span, .top-container-btn p {
+.button span, .button p {
 	margin: auto 0;
 	font-size: 14px;
 }
 
-.top-container-btn *:not(:last-child) {
+.button *:not(:last-child) {
 	margin-right: .3rem;
 	display: inline-block;
 }
 
 /* ---------- current button ---------- */
-.top-container-btn.current {
+.button.current {
 	border: 2px solid var(--primary-light-blue);
 	background-color: rgba(107, 175, 255, 50%);
 }
 
 /* ---------- right button ---------- */
-.top-container-btn.right {
+.button.right {
 	background-color: var(--primary-dark-blue);
 	border: 2px solid rgba(0, 111, 242, 50%);
 }
@@ -206,7 +206,7 @@
 
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: min-content auto;
+		grid-template-rows: min-content min-content;
 		gap: 10px;
 	}
 
@@ -222,12 +222,12 @@
 	}
 
 
-	.left-buttons {
+	.left-buttons-container {
 		display: flex;
 		flex-direction: row;
 	}
 
-	.right-buttons {
+	.right-buttons-container {
 		display: none;
 	}
 
@@ -282,7 +282,7 @@
 
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: min-content auto;
+		grid-template-rows: min-content min-content;
 		gap: 10px;
 	}
 
@@ -298,7 +298,7 @@
 		justify-content: space-between;
 	}
 	
-	.right-buttons {
+	.right-buttons-container {
 		display: none;
 	}
 
@@ -340,7 +340,7 @@
 
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: min-content auto;
+		grid-template-rows: min-content min-content;
 		gap: 10px;
 	}
 
@@ -357,20 +357,20 @@
 	}
 
 	/* ---------- buttons ---------- */
-	.top-container-btn {
+	.button {
 		cursor: pointer;
 		transition: var(--std-transition);
 	}
 
 	/* left buttons hover */
-	.top-container-btn:hover {
+	.button:hover {
 		transition: var(--std-transition);
 		border: 2px solid var(--primary-light-blue);
 		background-color: rgb(107, 175, 255, 50%);
 	}
 
 	/* right buttons hover */
-	.top-container-btn.right:hover {
+	.button.right:hover {
 		background-color: rgba(0, 111, 242, 50%);
 		border: 2px solid var(--primary-dark-blue);
 	}
