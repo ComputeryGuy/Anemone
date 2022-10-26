@@ -12,8 +12,8 @@ from django.http import HttpResponse
 
 def home(request):
     if request.user.is_authenticated:
-        if request.user.profile.household_set.all().count() != 0:
-            uuid = str(request.user.profile.household_set.all()[0].household_id)
+        if request.user.profile.household is not None:
+            uuid = str(request.user.profile.household.household_id)
             url = '/' + uuid
             return redirect(url)
         else:
@@ -42,6 +42,7 @@ def post_bulletin(request):
         if request.method == 'POST':
             form = BulletinForm(request.POST)
             if form.is_valid():
+                print("wah")
                 user = request.user.username
                 bulletin_body = form.cleaned_data['bulletin_body']
                 creation_time = datetime.now()
@@ -49,8 +50,8 @@ def post_bulletin(request):
                 bulletin = Bulletin.objects.create(user=user,
                                                    bulletin_body=bulletin_body,
                                                    creation_time=creation_time,
-                                                   expire_time=expire_time, )
-                request.user.profile.household_set.all()[0].bulletins.add(bulletin)
+                                                   expire_time=expire_time, 
+                                                   household = request.user.profile.household_set.all()[0])
                 return redirect('dashboard')
     form = BulletinForm()
     return render(request, 'users/bulletin.html', {'form': form})
@@ -67,7 +68,7 @@ def create_task(request):
             task_body = form_data['task_body']
             due_datetime = form_data['due_date'] + " " + form_data['due_time']
             due_datetime = datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
-            task = Chore.objects.create(title = task_title,
+            task = Task.objects.create(title = task_title,
                                         body = task_body,
                                         due_date = due_datetime,
                                         points = 1000,
@@ -130,7 +131,8 @@ def join_household(request):
             if form.is_valid():
                 enteredPin = form.cleaned_data['household_pin']
                 group = Household.objects.get(pin = enteredPin)
-                group.profiles.add(profile)
+                profile.household = group
+                profile.save()
                 return redirect('/')
     form = JoinGroupForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
@@ -139,18 +141,18 @@ def join_household(request):
 def dashboard(request, household_id):
     if request.user.is_authenticated:
         household = get_object_or_404(Household, pk=household_id)
-        chores = household.chores.all()
+        tasks = household.task_set.all()
         user_name = request.user.username
         total_points = None
         new_tasks = None
         completed_tasks = None
         points_earned_today = None
-        unclaimed_tasks = chores.filter(claimed=False)
+        unclaimed_tasks = tasks.filter(claimed=False)
         unclaimed_tasks_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
         if unclaimed_points == None:
             unclaimed_points = 0
-        bulletins = household.bulletins.all()
+        bulletins = household.bulletin_set.all()
         values = {'user_name': user_name,
                  'total_points': total_points,
                  'new_tasks': new_tasks,

@@ -6,6 +6,15 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 
+class Household(models.Model):
+    household_id = models.UUIDField(primary_key=True,
+                                    default = uuid.uuid4,
+                                    editable = False)
+    name = models.CharField(max_length = 30, default = "NO NAME!")
+
+    pin = models.IntegerField(unique = True)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(
             User,
@@ -16,6 +25,7 @@ class Profile(models.Model):
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
+    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True)
 
     def modify_points(self, points, chore):  # add in views when task is marked as complete
         self.points += points
@@ -46,6 +56,7 @@ class Bulletin(models.Model):
     bulletin_body = models.CharField(max_length=500)
     creation_time = models.DateTimeField()
     expire_time = models.DateTimeField()
+    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True)
 
 
 class Event(models.Model):
@@ -54,7 +65,7 @@ class Event(models.Model):
     datetime = models.DateTimeField()
 
 
-class Chore(models.Model):
+class Task(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
     due_date = models.DateTimeField()
@@ -62,14 +73,15 @@ class Chore(models.Model):
     claimed = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not
     user_created = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
-                                     null=True, blank=True, related_name='chore_user_created')
+                                     null=True, blank=True, related_name='task_user_created')
     user_claimed = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
-                                     null=True, blank=True, related_name='chore_user_claimed')
+                                     null=True, blank=True, related_name='task_user_claimed')
+    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True)
 
 
 class TaskRecurrence(models.Model):
     #Recurrence Info
-    task_to_clone = models.ForeignKey(Chore, default=None, on_delete=models.CASCADE)
+    task_to_clone = models.ForeignKey(Task, default=None, on_delete=models.CASCADE)
     frequency = models.CharField(max_length=8)
     mo = models.BooleanField(default=False)
     tu = models.BooleanField(default=False)
@@ -81,19 +93,19 @@ class TaskRecurrence(models.Model):
     day_of_month = models.IntegerField(null=True, blank=True)
 
 
-@receiver(pre_save, sender=Chore)
+@receiver(pre_save, sender=Task)
 def cache_previous_status(sender, instance, *args, **kwargs):
     if not instance._state.adding:
         original_status = None
         if instance.user_claimed is not None:
-            original_status = Chore.objects.get(pk=instance.id).task_status
+            original_status = Task.objects.get(pk=instance.id).task_status
 
         instance.__original_status = original_status
     else:
         instance.__original_status = None
 
 
-@receiver(post_save, sender=Chore)
+@receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
     if instance.task_status != instance.__original_status and instance.user_claimed is not None and instance.__original_status is not None:
         profile = instance.user_claimed
@@ -103,17 +115,6 @@ def point_updater(sender, instance, **kwargs):
             profile.modify_points(-instance.points, instance)
 
 
-class Household(models.Model):
-    household_id = models.UUIDField(primary_key=True,
-                                    default = uuid.uuid4,
-                                    editable = False)
-    name = models.CharField(max_length = 30, default = "NO NAME!")
-    profiles = models.ManyToManyField(Profile, blank = True)
-    bulletins = models.ManyToManyField(Bulletin, blank = True)
-    events = models.ManyToManyField(Event, blank = True)
-    chores = models.ManyToManyField(Chore, blank = True)
-
-    pin = models.IntegerField(unique = True)
 
 #class Pin(models.Model):
 #    pin = models.IntegerField(unique=True)
