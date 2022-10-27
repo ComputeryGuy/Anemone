@@ -67,13 +67,6 @@
 }
 
 /* ---------- task ---------- */
-/* .task-container {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: max-content;
-	gap: 16px;
-} */
-
 .a-task {
 	background-color: var(--primary-card-colour);
 	padding: .8rem;
@@ -83,6 +76,7 @@
 	box-shadow: var(--std-box-shadow);
 	margin-bottom: 1rem;
 }
+
 .task-description-container {
 	margin-bottom: 1rem;
 }

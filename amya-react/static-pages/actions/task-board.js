@@ -1,24 +1,7 @@
-// $(document)ready ... = prevents any jQuery code from running before the document finishes loading
+// TODO: make it so that you can only move cards on desktop
 $(document).ready(function () {
-
-
-
-	// while holding the mouse down on a task...
-	$(".a-task").mousedown(function () { 
-		$(this).draggable({
-			containment: ".task-column-container",
-			snap: '.column',
-			cursor: 'move'
-		});
-	});
-
-	// when I un-hold the task...
-	$(".a-task").mouseup(function () { 
-		
-	});
-
-	// can sort the tasks
 	$(".column").sortable ({
-		cursor: 'move'
+		cursor: 'move',
+		connectWith: '.column'
 	});
 });
