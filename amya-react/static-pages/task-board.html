@@ -19,17 +19,18 @@
 	<!-- google icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-	<!-- jquery cdn -->
+	<!-- jquery cdns -->
+	<!-- import jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.1.js" 
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
-	crossorigin="anonymous"></script>
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
-	<!-- link jquery file -->
-	<script src="./actions/task-board.js"></script>
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
 
 </head>
 <body>
-
+	<!-- TODO: add sort button so that users can filter their tasks to the top or just filter them -->
 	<div class="main-grid">
 
 		<section class="left-section">
@@ -171,7 +172,7 @@
 							<p>New Task</p>
 						</button>
 	
-						<div class="task-container">
+						<!-- <div class="task-container"> -->
 
 							<div class="a-task" draggable="true">
 								<div class="task-description-container">
@@ -248,7 +249,7 @@
 
 								</div>
 							</div>
-						</div>
+						<!-- </div> -->
 	
 					</div>
 	
@@ -266,7 +267,7 @@
 							<p>New Task</p>
 						</button>
 
-						<div class="task-container">
+						<!-- <div class="task-container"> -->
 
 							<div class="a-task" draggable="true">
 								<div class="task-description-container">
@@ -276,6 +277,7 @@
 										connect to their Slack account.
 									</p>
 								</div>
+
 								<div class="task-priority-container">
 									<p class="task-priority-medium">Medium Priority</p>
 									<div class="task-user-img">
@@ -339,7 +341,43 @@
 									</div>
 								</div>
 							</div>
-						</div>
+
+							<div class="a-task" draggable="true">
+								<div class="task-description-container">
+									<h3 class="task-title">
+										Slack Integration
+										<span id="reminder" class="material-symbols-rounded">notifications_active</span>
+									</h3>
+									<p class="task-description">
+										Add a filled in the portal to the let the user
+										connect to their Slack account.
+									</p>
+								</div>
+								<div class="task-priority-container">
+									<p class="task-priority-high">High Priority</p>
+									<div class="task-user-img"></div>
+								</div>
+								<hr class="task-horz-line">
+								<div class="task-stats">
+									<div class="task-stats-top">
+										<div class="task-points">
+											<span class="material-symbols-rounded">monetization_on</span>
+											<p>100</p>
+										</div>
+										<div class="task-sub-tasks">
+											<span class="material-symbols-rounded">add_task</span>
+											<div>3</div>
+										</div>
+									</div>
+									<div class="task-stats-bottom">
+										<div class="task-due-date">
+											<span class="material-symbols-rounded">calendar_month</span>
+											<p>October 23, 2022</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						<!-- </div> -->
 
 					</div>
 	
@@ -357,9 +395,9 @@
 							<p>New Task</p>
 						</button>
 
-						<div class="task-container">
+						<!-- <div class="task-container">
 
-						</div>
+						</div> -->
 
 					</div>
 					
@@ -377,9 +415,9 @@
 							<p>New Task</p>
 						</button>
 
-						<div class="task-container">
+						<!-- <div class="task-container">
 
-						</div>
+						</div> -->
 					</div>
 				
 				</div>
@@ -389,6 +427,8 @@
 		</section>
 
 	</div>
-	
+
+	<!-- link jquery file -->
+	<script src="./actions/task-board.js"></script>
 </body>
 </html>

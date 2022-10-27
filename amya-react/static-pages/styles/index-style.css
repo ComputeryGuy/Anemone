@@ -450,20 +450,14 @@
 	}
 
 	/* ---------- info square ---------- */
-	.info-square-container {
-		display: grid;
-		grid-template-columns: auto;
-		gap: 60px;
-		margin: 1rem 5rem 0;
-	}
-
 	.small-info-squares {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 10px;
 	}
-
+	
 	.info-square {
+		margin: 0 auto;
 		background-color: var(--primary-card-colour);
 		border-radius: var(--std-border-radius);
 		text-align: center;
@@ -494,6 +488,7 @@
 
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: auto min-content;
 		gap: 10px;
 
 		text-align: center;
@@ -502,14 +497,24 @@
 		border-radius: var(--std-border-radius);
 		box-shadow: var(--std-box-shadow);
 	}
+	
+	.task-avail-container p {
+		grid-column: span 1;
+		grid-row: 1;
+		
+		font-size: 16px;
+		margin: auto auto;
+	}
 
 	.task-avail-container #current-points-avil {
+		grid-column: span 1;
+		grid-row: 1;
 		font-size: 60px;
 	}
 
-	.task-avail-container p {
-		font-size: 16px;
-		margin: auto auto;
+	.task-avail-container a {
+		grid-column: span 1;
+		grid-row: 2;
 	}
 
 	/* the span */
