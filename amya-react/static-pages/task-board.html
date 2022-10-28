@@ -16,6 +16,9 @@
 	<!-- task board style -->
 	<link rel="stylesheet" href="./styles/task-board.css">
 
+	<!-- task form style -->
+	<link rel="stylesheet" href="./styles/task-form.css">
+	
 	<!-- google icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
@@ -32,6 +35,133 @@
 <body>
 	<!-- TODO: add sort button so that users can filter their tasks to the top or just filter them -->
 	<div class="main-grid">
+
+		<div class="task-form-container">
+			<div class="exit-btn-container">
+				<button id="exit-btn">
+					<span class="material-symbols-rounded">close</span>
+				</button>
+			</div>
+
+			<div class="task-header-container">
+				<h1>Let's Create a Task</h1>
+			</div>
+
+			<form action="" method="post" class="task-form">
+
+		
+				<div class="task-title-container">
+					<label for="task_title">Name</label>
+					<input type="text" name="task_title" placeholder="Give your task a name" required>
+				</div>
+
+				<div class="task-description-container">
+					<label for="task_description">Details</label>
+					<textarea name="task_description" id="" cols="40" rows="3"></textarea>
+				</div>
+
+				<div class="sub-task-container">
+					<p>Add Sub-Task</p>
+
+					<div class="sub-task">
+						<input type="checkbox" name="sub_task" id="">
+						<label for="sub_task">My sub-task</label>
+					</div>
+				</div>
+
+				<div class="start-end-container">
+					<div class="start">
+						<label for="start_date">Created:</label>
+						<input type="date" name="start_date" id="">
+					</div>
+
+					<div class="end">
+						<label for="end_date">Due: </label>
+						<input type="date" name="end_date" id="">
+					</div>
+
+					<p>You have 
+						<span id="total-days">X</span>
+						 days till this task is due
+					</p>
+				</div>
+
+				<div class="priority-container">
+					<label for="priority_select">Priority</label>
+					<select name="priority_select" id="">
+						<option value="high">High Priority</option>
+						<option value="medium">Medium Priority</option>
+						<option value="low">Low Priority</option>
+					</select>
+				</div>
+
+				<div class="repeats-container">
+					<label for="repeats">Repeats?</label>
+
+					<div class="repeat-toggle">
+						<input type="checkbox" name="repeats" id="">
+						<label for="repeats" class="toggle"></label>
+					</div>
+
+					<div class="repeats-information-expanded">
+						<label for="repeat_number">Repeat every</label>
+						<input type="number" name="repeat_number" id="" min="1" max="100">
+
+						<select name="repeat_type" id="">
+							<option value="day">Day</option>
+							<option value="week">Week</option>
+							<option value="month">Month</option>
+						</select>
+
+						<div class="repeat-on-container">
+							<p>Repeat on</p>
+							<label for="sun">Sunday</label>
+							<input type="checkbox" name="sun" id="">
+							
+							<label for="mon">Monday</label>
+							<input type="checkbox" name="mon" id="">
+							<label for="tue">Tuesday</label>
+							<input type="checkbox" name="tue" id="">
+							<label for="wed">Wednesday</label>
+							<input type="checkbox" name="wed" id="">
+							<label for="thu">Thursday</label>
+							<input type="checkbox" name="thu" id="">
+							
+							<label for="fri">Friday</label>
+							<input type="checkbox" name="fri" id="">
+							<label for="sat">Saturday</label>
+							<input type="checkbox" name="sat" id="">
+						</div>
+
+						<div class="repeat-ends-container">
+							<p>Ends</p>
+
+							<div class="repeat-ends-on-container">
+								<p>On</p>
+
+								<div class="repeat-toggle">
+									<input type="checkbox" name="repeats" id="">
+									<label for="repeats" class="toggle"></label>
+								</div>
+
+								<input type="date" name="ends_on_date" id="">
+							</div>
+
+							<div class="repeat-after-container">
+								<p>After</p>
+								<div class="repeat-toggle">
+									<input type="checkbox" name="repeats" id="">
+									<label for="repeats" class="toggle"></label>
+								</div>
+								<input type="number" name="repeat_after_numb" id="" min="1" max="100">
+								<p>occurences</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</form>
+		</div>
 
 		<section class="left-section">
 
