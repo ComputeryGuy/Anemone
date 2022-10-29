@@ -1,13 +1,359 @@
+
+/* =================== global variables =================== */
+:root {
+	--primary-form-colour: #005FCF;
+}
+
+/* =================== font styles =================== */
+label {
+	font-size: 12px;
+}
+
+/* =================== CONSTANTS =================== */
+input[type=text], 
+textarea, 
+input[type=date], 
+input[type=number], 
+select {
+	background-color: rgba(107, 175, 255, 50%);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+	outline: none;
+}
+
+input[type=number] {
+	padding: .3rem;
+	padding-left: .8rem;
+}
+
+/* change the place holder colour */
+input[type=text]::placeholder, 
+textarea::placeholder, 
+input[type=date]::placeholder, 
+input[type=number]::placeholder, 
+select::placeholder {
+	color: white;
+}
+
+input[type=text]:focus, 
+textarea:focus, 
+input[type=date]:focus, 
+input[type=number]:focus, 
+select:focus {
+	border: 2px solid var(--primary-white);
+}
+
+/* =================== form container =================== */
 .task-form-container {
 	position: absolute;
-	background-color: green;
 
 	display: flex;
 	flex-direction: column;
 	right: 0;
 
-	padding: 1rem;
-	min-height: 99vh;
-
+	max-width: 40vw;
+	max-height: 100vh;
+	background-color: var(--primary-form-colour);
 	box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 45%);
+	border-radius: 10px 0px 0px 10px;
+	padding: 1.5rem;
+
+	display: none;
+}
+/* TODO: figure out what colour for here */
+/* =================== exit button =================== */
+#exit-btn {
+	background-color: var(--primary-dark-blue);
+	/* background-color: var(--primary-form-colour); */
+	border-radius: var(--std-border-radius);
+	padding: .3rem;
+	display: flex;
+	align-self: center;
+	border: none;
+	transition: var(--std-transition);
+}
+
+#exit-btn span {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#exit-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-light-blue);
+	transition: var(--std-transition);
+}
+
+/* =================== header container =================== */
+.header-container h2 {
+	text-align: center;
+	margin: .3rem 0;
+}
+
+/* =================== form =================== */
+/* ---------- task name ---------- */
+.task-name-container {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0;
+}
+
+.task-name-container input[type=text] {
+	padding: .5rem;
+}
+
+/* ---------- task details ---------- */
+.task-detail-container {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0;
+}
+
+.task-detail-container textarea {
+	padding: .5rem;
+}
+
+/* ---------- sub task container ---------- */
+.sub-task-container {
+	margin: 1rem 0;
+}
+
+.sub-task-container h4 {
+	margin-bottom: .5rem;
+}
+
+.sub-task-list-container {
+	padding: 1rem;
+	background-color: rgba(107, 175, 255, 50%);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+}
+
+.sub-task-list {
+	list-style: none;
+}
+
+.sub-task-list li {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: .5rem;
+}
+
+.sub-task-list li input {
+	margin-right: .5rem;
+	align-self: center;
+}
+
+/* ---------- add sub task ---------- */
+.add-sub-task-container {
+	margin-top: 2rem;
+}
+
+/* TODO: figure out what colour for here */
+.add-sub-task-btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-white);
+	background-color: blue;
+
+
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-card-colour);
+	border-color: blue;
+
+	padding: .3rem;
+	transition: var(--std-transition);
+}
+
+.add-sub-task-btn:hover {
+	background-color: red;
+	cursor: pointer;
+	transition: var(--std-transition);
+}
+
+/* ---------- start and end dates ---------- */
+.due-date-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+	margin: 1rem 0;
+}
+
+.due-date-container div {
+	background-color: rgba(107, 175, 255, 50%);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+	padding: .5rem;
+	width: 100%;
+	text-align: center;
+}
+
+.due-container input[type=date] {
+	padding: .3rem;
+}
+
+.due-container p {
+	margin-top: .5rem;
+}
+
+#total-days {
+	color: black;
+	font-weight: 600;
+}
+
+/* ---------- priority ---------- */
+.priority-container {
+	margin: 1rem 0;
+}
+
+.priority-container select {
+	width: 100%;
+	padding: .3rem;
+}
+
+/* ---------- repeats container ---------- */
+.repeat-toggle-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 1rem 0;
+}
+
+.repeat-toggle-container label {
+	margin-right: .3rem;
+}
+
+/* =================== repeat expanded =================== */
+.repeat-expanded {
+	padding: 1rem;
+	background-color: rgba(107, 175, 255, 50%);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+
+	display: none;
+}
+
+.every-container {
+	display: flex;
+	flex-direction: row;
+}
+
+/* ---------- repeats every container ---------- */
+.repeat-every-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 2rem;
+}
+
+.repeat-every-container *:not(:last-child) {
+	margin-right: .5rem;
+}
+
+.repeat-every-container input[type=number] {
+	width: 4rem;
+}
+
+/* ---------- radio buttons ---------- */
+.radio-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.radio-btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+	margin-right: 1rem;
+}
+
+.radio-btn input[type=radio] {
+	margin-right: .5rem;
+}
+
+/* ---------- repeat on container ---------- */
+.repeat-on-container {
+	margin: 1rem 0;
+}
+
+.repeat-on-container p {
+	margin-bottom: .5rem;
+}
+
+.days-of-the-week-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 10px;
+
+	padding: 1rem;
+	background-color: rgba(107, 175, 255, 50%);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+}
+
+/* ---------- repeat on container ---------- */
+.repeat-ends-container {
+	margin: 1rem 0 0;
+}
+
+.repeat-ends-container #ends-header {
+	margin-bottom: 1rem;
+}
+
+.repeat-ends-container div:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.on-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.on-container *:not(:last-child) {
+	margin-right: .5rem;
+}
+
+.on-container input[type=date] {
+	padding: .3rem;
+}
+
+.on-container input[type=number] {
+	width: 4rem;
+}
+/* ---------- submit form button ---------- */
+.submit-task-container {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.submit-task-container button {
+	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-white);
+	background-color: blue;
+
+
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-card-colour);
+	border-color: blue;
+	padding: .5rem;
+	width: 100%;
+	transition: var(--std-transition);
+}
+
+.submit-task-container button:hover {
+	cursor: pointer;
+	background-color: rgba(107, 175, 255, 50%);
+
+
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+
+	transition: var(--std-transition);
 }

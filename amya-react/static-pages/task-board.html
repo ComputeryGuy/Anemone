@@ -36,129 +36,182 @@
 	<!-- TODO: add sort button so that users can filter their tasks to the top or just filter them -->
 	<div class="main-grid">
 
-		<div class="task-form-container">
+		<div id="form-container" class="task-form-container">
+
 			<div class="exit-btn-container">
 				<button id="exit-btn">
 					<span class="material-symbols-rounded">close</span>
 				</button>
 			</div>
 
-			<div class="task-header-container">
-				<h1>Let's Create a Task</h1>
+			<div class="header-container">
+				<h2>Let's Create a Task!</h2>
 			</div>
 
 			<form action="" method="post" class="task-form">
 
-		
-				<div class="task-title-container">
-					<label for="task_title">Name</label>
-					<input type="text" name="task_title" placeholder="Give your task a name" required>
+				<div class="task-name-container">
+					<label for="task_name"></label>
+					<input type="text" id="task_name" placeholder="Name" required>
 				</div>
 
-				<div class="task-description-container">
-					<label for="task_description">Details</label>
-					<textarea name="task_description" id="" cols="40" rows="3"></textarea>
+				<div class="task-detail-container">
+					<label for="task_detail"></label>
+					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
 				</div>
 
 				<div class="sub-task-container">
-					<p>Add Sub-Task</p>
 
-					<div class="sub-task">
-						<input type="checkbox" name="sub_task" id="">
-						<label for="sub_task">My sub-task</label>
+					<h4>Subtasks</h4>
+
+					<div class="sub-task-list-container">
+
+						<ol class="sub-task-list">
+
+							<li class="sub-task-list-item">
+								<input type="checkbox" class="sub_task">
+								<label for="sub_task">This is a sub task.</label>
+							</li>
+
+							<li class="sub-task-list-item">
+								<input type="checkbox" class="sub_task">
+								<label for="sub_task">This is a sub task.</label>
+							</li>
+						</ol>
+
+						<div class="add-sub-task-container">
+							<button class="add-sub-task-btn">
+								<span class="material-symbols-rounded">add</span>
+								<p>Add Subtask</p>
+							</button>
+						</div>
+
 					</div>
 				</div>
 
-				<div class="start-end-container">
-					<div class="start">
-						<label for="start_date">Created:</label>
-						<input type="date" name="start_date" id="">
+				<div class="due-date-container">
+
+					<div class="created-container">
+						<p>Created:
+							<span id="todays-date">10/28/2022</span>
+						</p>
 					</div>
 
-					<div class="end">
-						<label for="end_date">Due: </label>
-						<input type="date" name="end_date" id="">
+					<div class="due-container">
+						<label for="end_date">Due:</label>
+						<input type="date" id="end_date">
+						<p>
+							You have 
+							<span id="total-days">5</span>
+								days till this task is due.
+						</p>
 					</div>
 
-					<p>You have 
-						<span id="total-days">X</span>
-						 days till this task is due
-					</p>
 				</div>
 
 				<div class="priority-container">
-					<label for="priority_select">Priority</label>
-					<select name="priority_select" id="">
-						<option value="high">High Priority</option>
-						<option value="medium">Medium Priority</option>
+
+					<label for="priority_select"></label>
+
+					<select id="priority_select">
 						<option value="low">Low Priority</option>
+						<option value="medium">Medium Priority</option>
+						<option value="high">High Priority</option>
 					</select>
+
 				</div>
 
 				<div class="repeats-container">
-					<label for="repeats">Repeats?</label>
 
-					<div class="repeat-toggle">
-						<input type="checkbox" name="repeats" id="">
-						<label for="repeats" class="toggle"></label>
+					<div class="repeat-toggle-container">
+
+						<label for="repeat_toggle">Repeats?</label>
+						<input type="checkbox" name="" id="repeat_toggle">
+
 					</div>
 
-					<div class="repeats-information-expanded">
-						<label for="repeat_number">Repeat every</label>
-						<input type="number" name="repeat_number" id="" min="1" max="100">
+					<div class="repeat-expanded">
+						
+						<div class="every-container">
 
-						<select name="repeat_type" id="">
-							<option value="day">Day</option>
-							<option value="week">Week</option>
-							<option value="month">Month</option>
-						</select>
+							<div class="repeat-every-container">
+								<label for="repeat_number">Repeat every</label>
+								<input type="number" id="repeat_number" min="1" max="100">
+							</div>
+
+							<div class="radio-container">
+
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="day">
+									<label for="repeat_type">Day</label>
+								</div>
+
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="week">
+									<label for="repeat_type">Week</label>
+								</div>
+
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="month">
+									<label for="repeat_type">Month</label>
+								</div>
+
+							</div>
+
+						</div>
 
 						<div class="repeat-on-container">
-							<p>Repeat on</p>
-							<label for="sun">Sunday</label>
-							<input type="checkbox" name="sun" id="">
+							<p>Repeat on:</p>
+
+							<div class="days-of-the-week-container">
+
+								<label for="mon">Monday</label>
+								<input type="checkbox" id="mon">
 							
-							<label for="mon">Monday</label>
-							<input type="checkbox" name="mon" id="">
-							<label for="tue">Tuesday</label>
-							<input type="checkbox" name="tue" id="">
-							<label for="wed">Wednesday</label>
-							<input type="checkbox" name="wed" id="">
-							<label for="thu">Thursday</label>
-							<input type="checkbox" name="thu" id="">
-							
-							<label for="fri">Friday</label>
-							<input type="checkbox" name="fri" id="">
-							<label for="sat">Saturday</label>
-							<input type="checkbox" name="sat" id="">
+								<label for="tue">Tuesday</label>
+								<input type="checkbox" id="tue">
+
+								<label for="wed">Wednesday</label>
+								<input type="checkbox" id="wed">
+								
+								<label for="thu">Thursday</label>
+								<input type="checkbox" id="thu">
+
+								<label for="fri">Friday</label>
+								<input type="checkbox" id="fri">
+
+								<label for="sat">Saturday</label>
+								<input type="checkbox" id="sat">
+
+								<label for="sun">Sunday</label>
+								<input type="checkbox" id="sun">
+								
+							</div>
+
 						</div>
 
 						<div class="repeat-ends-container">
-							<p>Ends</p>
+							<p id="ends-header">Ends</p>
 
-							<div class="repeat-ends-on-container">
+							<div class="on-container">
 								<p>On</p>
-
-								<div class="repeat-toggle">
-									<input type="checkbox" name="repeats" id="">
-									<label for="repeats" class="toggle"></label>
-								</div>
-
 								<input type="date" name="ends_on_date" id="">
 							</div>
 
-							<div class="repeat-after-container">
+							<div class="on-container">
 								<p>After</p>
-								<div class="repeat-toggle">
-									<input type="checkbox" name="repeats" id="">
-									<label for="repeats" class="toggle"></label>
-								</div>
 								<input type="number" name="repeat_after_numb" id="" min="1" max="100">
 								<p>occurences</p>
 							</div>
 						</div>
 
 					</div>
+				</div>
+
+				<div class="submit-task-container">
+					<button type="submit" id="submit-btn">
+						<p>Create Task</p>
+					</button>
 				</div>
 			</form>
 		</div>
@@ -275,7 +328,7 @@
 				
 				<div class="right-buttons-container">
 					<!-- TODO: link to modal -->
-					<button class="button right" type="button" data-toggle="modal" data-target="#myModal">
+					<button class="button right" type="button" data-toggle="modal" data-target="#form-container">
 						<span class="material-symbols-rounded">add</span>
 						<p>Add Task</p>
 					</button>
@@ -296,11 +349,6 @@
 								<span class="column-total">2</span>
 							</h4>
 						</div>
-
-						<button class="new-task-btn-col">
-							<span class="material-symbols-rounded">add</span>
-							<p>New Task</p>
-						</button>
 	
 
 						<div class="a-task" draggable="true">
@@ -389,12 +437,6 @@
 								To Do <span class="column-total">2</span>
 							</h4>
 						</div>
-
-						<button class="new-task-btn-col">
-							<span class="material-symbols-rounded">add</span>
-							<p>New Task</p>
-						</button>
-
 
 						<div class="a-task" draggable="true">
 							<div class="task-description-container">
@@ -516,11 +558,6 @@
 							</h4>
 						</div>
 
-						<button class="new-task-btn-col">
-							<span class="material-symbols-rounded">add</span>
-							<p>New Task</p>
-						</button>
-
 					</div>
 					
 					<!-- completed -->
@@ -531,11 +568,6 @@
 								Completed <span class="column-total">1</span>
 							</h4>
 						</div>
-
-						<button class="new-task-btn-col">
-							<span class="material-symbols-rounded">add</span>
-							<p>New Task</p>
-						</button>
 
 					</div>
 				
