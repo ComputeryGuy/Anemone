@@ -18,6 +18,9 @@
 
 	<!-- task form style -->
 	<link rel="stylesheet" href="./styles/task-form.css">
+
+	<!-- claim task form -->
+	<link rel="stylesheet" href="./styles/claim-task-form.css">
 	
 	<!-- google icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -35,6 +38,7 @@
 <body>
 	<div class="main-grid">
 
+		<!-- create task form -->
 		<div id="form-container" class="task-form-container">
 
 			<div class="exit-btn-container">
@@ -107,16 +111,22 @@
 					</div>
 
 				</div>
+				
+				<div class="bid-and-priority-container">
 
-				<div class="priority-container">
-
-					<label for="priority_select"></label>
-
-					<select id="priority_select">
-						<option value="low">Low Priority</option>
-						<option value="medium">Medium Priority</option>
-						<option value="high">High Priority</option>
-					</select>
+					<div class="bid-container">
+						<label for="user_bid"></label>
+						<input type="number" name="" id="user-bid" min="1" max="100" placeholder="Your Bid" required>
+					</div>
+					
+					<div class="priority-container">
+						<label for="priority_select"></label>
+						<select id="priority_select">
+							<option value="low">Low Priority</option>
+							<option value="medium">Medium Priority</option>
+							<option value="high">High Priority</option>
+						</select>
+					</div>
 
 				</div>
 
@@ -218,6 +228,39 @@
 					</button>
 				</div>
 			</form>
+		</div>
+
+		<!-- claim task form -->
+		<div id="overlay" class="overlay-container">
+
+			<div id="claim-container" class="claim-task-container">
+
+				<div class="claim-exit-container">
+					<button id="claim-exit-btn">
+						<span class="material-symbols-rounded">close</span>
+					</button>
+				</div>
+
+				<h3 id="question">Would you like to claim this task?</h3>
+
+				<form action="" method="post" class="claim-form">
+
+						<div class="selections-container">
+							<input type="radio" name="claim_task" id="yes_sel">
+							<label for="yes_sel">Yes</label>
+							
+							<br>
+
+							<input type="radio" name="claim_task" id="no_sel">
+							<label for="no_sel">No</label>
+						</div>
+
+					<div class="claim-submit-container">
+						<button type="submit">Submit</button>
+					</div>
+
+				</form>
+			</div>
 		</div>
 
 		<section class="left-section">
@@ -354,7 +397,8 @@
 							</h4>
 						</div>
 	
-
+						<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
+						<!-- make sure that the class name 'unclaimed' is added -->
 						<div class="a-task unclaimed" draggable="true">
 							<div class="task-description-container">
 								<h3 class="task-title">
@@ -380,22 +424,26 @@
 								<div class="task-stats-top">
 									
 									<div class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										<p>100</p>
+										<p>
+											Points:
+											<span id="current-points">100</span>
+										</p>
 
-										<button id="bit-btn">bh</button>
 									</div>
 
 									<div class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										<div>3</div>
+										<p>Subtasks:
+											<span id="total-sub-tasks">3</span>
+										</p>
 									</div>
 								</div>
 
 								<div class="task-stats-bottom">
 									<div class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										<p>October 23, 2022</p>
+										<p>
+											Due: 
+											<span id="due-date">October 23, 2022</span>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -412,78 +460,7 @@
 							</h4>
 						</div>
 
-						<div class="a-task" draggable="true">
-							<div class="task-description-container">
-								<h3 class="task-title">Slack Integration</h3>
-								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
-								</p>
-							</div>
 
-							<div class="task-priority-container">
-								<p class="task-priority-medium">Medium Priority</p>
-								<div class="task-user-img">
-									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-								</div>
-							</div>
-							<hr class="task-horz-line">
-							<div class="task-stats">
-								<div class="task-stats-top">
-									<div class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										<p>100</p>
-									</div>
-									<div class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										<div>3</div>
-									</div>
-								</div>
-								<div class="task-stats-bottom">
-						
-									<div class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										<p>October 23, 2022</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="a-task" draggable="true">
-							<div class="task-description-container">
-								<h3 class="task-title">Slack Integration</h3>
-								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
-								</p>
-							</div>
-							<div class="task-priority-container">
-								<p class="task-priority-medium">Medium Priority</p>
-								<div class="task-user-img">
-									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-								</div>
-							</div>
-							<hr class="task-horz-line">
-							<div class="task-stats">
-								<div class="task-stats-top">
-									<div class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										<p>100</p>
-									</div>
-									<div class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										<div>3</div>
-									</div>
-								</div>
-								<div class="task-stats-bottom">
-						
-									<div class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										<p>October 23, 2022</p>
-									</div>
-								</div>
-							</div>
-						</div>
 
 					</div>
 	
@@ -496,47 +473,6 @@
 							</h4>
 						</div>
 
-						<div class="a-task" draggable="true">
-
-							<div class="task-description-container">
-								<h3 class="task-title">Slack Integration</h3>
-								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
-								</p>
-							</div>
-
-							<div class="task-priority-container">
-								<p class="task-priority-low">Low Priority</p>
-								<div class="task-user-img">
-									<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-								</div>
-							</div>
-
-							<hr class="task-horz-line">
-
-							<div class="task-stats">
-
-								<div class="task-stats-top">
-									<div class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										<p>100</p>
-									</div>
-									<div class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										<div>3</div>
-									</div>
-								</div>
-
-								<div class="task-stats-bottom">
-									<div class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										<p>October 23, 2022</p>
-									</div>
-								</div>
-
-							</div>
-						</div>
 
 					</div>
 					

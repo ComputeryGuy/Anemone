@@ -45,7 +45,7 @@ select:focus {
 }
 
 /* =================== form container =================== */
-.task-form-container {
+#form-container {
 	position: absolute;
 
 	display: flex;
@@ -147,7 +147,10 @@ select:focus {
 
 /* ---------- add sub task button ---------- */
 .add-sub-task-container {
-	margin-top: 2rem;
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
 
 .add-sub-task-btn {
@@ -159,7 +162,7 @@ select:focus {
 	border: 2px solid blue;
 	border-radius: var(--std-border-radius);
 
-	padding: .5rem;
+	padding: .4rem;
 	transition: var(--std-transition);
 }
 
@@ -213,14 +216,22 @@ select:focus {
 	font-weight: 600;
 }
 
-/* ---------- priority ---------- */
-.priority-container {
-	margin: 1rem 0;
+/* ---------- bid and priority container ---------- */
+.bid-and-priority-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 15px;
 }
 
+/* ---------- priority container ---------- */
 .priority-container select {
 	width: 100%;
 	padding: .3rem;
+}
+
+/* ---------- bid container ---------- */
+.bid-container input[type=number] {
+	width: 100%;
 }
 
 /* ---------- repeats container ---------- */
@@ -357,14 +368,10 @@ select:focus {
 }
 
 .submit-task-container button {
-	background-color: var(--primary-input-colour);
-	background-color: var(--primary-white);
 	background-color: blue;
-
-
+	border: 2px solid blue;
 	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-card-colour);
-	border-color: blue;
+
 	padding: .5rem;
 	width: 100%;
 	transition: var(--std-transition);
@@ -372,8 +379,7 @@ select:focus {
 
 .submit-task-container button:hover {
 	cursor: pointer;
-	background-color: var(--primary-input-colour);
-	border-radius: var(--std-border-radius);
+	background-color: var(--primary-input-colour); 
 	border-color: var(--primary-light-blue);
 	transition: var(--std-transition);
 }

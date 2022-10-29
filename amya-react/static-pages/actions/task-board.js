@@ -1,24 +1,28 @@
+
 // TODO: make it so that you can only move cards on desktop
 $(document).ready(function () {
 
-	/* =================== CHECK FOR UNCLAIMED TASKS =================== */
-	
+	/* =================== SHOW AND HIDE CLAIM TASK FORM =================== */
 	$(".a-task").click(
 		function (e) { 
 			e.preventDefault();
+
+			// if the task as the class 'unclaimed'
 			if ( $(this).hasClass("unclaimed") ) {
-				alert("unclaimed")
-				// add the bid button
+				// show claim form
+				$("#overlay").show();
 			}
-			else {
-				alert ("claimed")
-				// show the span and points
+			else { //else, hide claim form
+				$("#overlay").hide();
 			}
 		}
 	);
 
-	// on click bid button show bid form
-
+	// if click on exit btn in claim form, hide claim form
+	$("#claim-exit-btn").click(function (e) { 
+		e.preventDefault();
+		$("#overlay").hide();
+	});
 
 	/* =================== TASK CARD MOVE FUNCTIONS =================== */
 	// make is so I can move tasks around on the page
@@ -66,15 +70,15 @@ $(document).ready(function () {
 			if ( $(this).prop("checked") == true) {
 				// alert ("Checkbox is checked.")
 				
-				// scroll on overflow
-				$(".task-form-container").css({"overflow-y":"scroll"});
+				// // scroll on overflow
+				// $(".task-form-container").css({"overflow-y":"scroll"});
 				
 				// show the extra info regarding repeats
 				$(".repeat-expanded").show(); 
 			}
 			else {
-				// else, remove scroll bar
-				$(".task-form-container").css({"overflow-y":"visible"});
+				// // else, remove scroll bar
+				// $(".task-form-container").css({"overflow-y":"visible"});
 				
 				// hide repeat extra information
 				$(".repeat-expanded").hide();
