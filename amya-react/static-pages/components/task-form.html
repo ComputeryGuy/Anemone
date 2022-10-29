@@ -1,0 +1,185 @@
+<!-- the task form -->
+<div id="form-container" class="task-form-container">
+
+	<div class="exit-btn-container">
+		<button id="exit-btn">
+			<span class="material-symbols-rounded">close</span>
+		</button>
+	</div>
+
+	<div class="header-container">
+		<h2>Let's Create a Task!</h2>
+	</div>
+
+	<form action="" method="post" class="task-form">
+
+		<div class="task-name-container">
+			<label for="task_name"></label>
+			<input type="text" id="task_name" placeholder="Name" required>
+		</div>
+
+		<div class="task-detail-container">
+			<label for="task_detail"></label>
+			<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
+		</div>
+
+		<div class="sub-task-container">
+
+			<h4>Subtasks</h4>
+
+			<div class="sub-task-list-container">
+
+				<ol class="sub-task-list">
+
+					<li class="sub-task-list-item">
+						<input type="checkbox" class="sub_task">
+						<label for="sub_task">This is a sub task.</label>
+					</li>
+
+					<li class="sub-task-list-item">
+						<input type="checkbox" class="sub_task">
+						<label for="sub_task">This is a sub task.</label>
+					</li>
+				</ol>
+
+				<div class="add-sub-task-container">
+					<button class="add-sub-task-btn">
+						<span class="material-symbols-rounded">add</span>
+						<p>Add Subtask</p>
+					</button>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="due-date-container">
+
+			<div class="created-container">
+				<p>Created:
+					<span id="todays-date">today's date here</span>
+				</p>
+			</div>
+
+			<div class="due-container">
+				<label for="end_date">Due:</label>
+				<input type="date" id="end_date">
+				<p>
+					You have 
+					<span id="total-days">5</span>
+						days till this task is due.
+				</p>
+			</div>
+
+		</div>
+
+		<div class="priority-container">
+
+			<label for="priority_select"></label>
+
+			<select id="priority_select">
+				<option value="low">Low Priority</option>
+				<option value="medium">Medium Priority</option>
+				<option value="high">High Priority</option>
+			</select>
+
+		</div>
+
+		<div class="repeats-container">
+
+			<div class="repeat-toggle-container">
+
+				<label for="repeat_toggle">Repeats?</label>
+				<input type="checkbox" name="" id="repeat_toggle">
+
+			</div>
+
+			<div class="repeat-expanded">
+				
+				<div class="every-container">
+
+					<div class="repeat-every-container">
+						<label for="repeat_number">Repeat every</label>
+						<input type="number" id="repeat_number" min="1" max="100">
+					</div>
+
+					<div class="radio-container">
+
+						<div class="radio-btn">
+							<input type="radio" name="repeat-type-radio" id="day">
+							<label for="repeat_type">Day</label>
+						</div>
+
+						<div class="radio-btn">
+							<input type="radio" name="repeat-type-radio" id="week">
+							<label for="repeat_type">Week</label>
+						</div>
+
+						<div class="radio-btn">
+							<input type="radio" name="repeat-type-radio" id="month">
+							<label for="repeat_type">Month</label>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="repeat-on-container">
+					<p>Repeat on:</p>
+
+					<div class="days-of-the-week-container">
+
+						<label for="mon">Monday</label>
+						<input type="checkbox" id="mon">
+					
+						<label for="tue">Tuesday</label>
+						<input type="checkbox" id="tue">
+
+						<label for="wed">Wednesday</label>
+						<input type="checkbox" id="wed">
+						
+						<label for="thu">Thursday</label>
+						<input type="checkbox" id="thu">
+
+						<label for="fri">Friday</label>
+						<input type="checkbox" id="fri">
+
+						<label for="sat">Saturday</label>
+						<input type="checkbox" id="sat">
+
+						<label for="sun">Sunday</label>
+						<input type="checkbox" id="sun">
+						
+					</div>
+
+				</div>
+
+				<div class="repeat-ends-container">
+					<p id="ends-header">Ends</p>
+
+					<div class="repeat-type-container">
+
+						<div class="on-container">
+							<p>On</p>
+							<input type="date" name="ends_on_date" id="">
+						</div>
+
+						<p id="repeat-type-or">OR</p>
+
+						<div class="on-container">
+							<p>After</p>
+							<input type="number" name="repeat_after_numb" id="" min="1" max="100">
+							<p>occurences</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="submit-task-container">
+			<button type="submit" id="submit-btn">
+				<p>Create Task</p>
+			</button>
+		</div>
+	</form>
+</div>

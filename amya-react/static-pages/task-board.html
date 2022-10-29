@@ -33,7 +33,6 @@
 
 </head>
 <body>
-	<!-- TODO: add sort button so that users can filter their tasks to the top or just filter them -->
 	<div class="main-grid">
 
 		<div id="form-container" class="task-form-container">
@@ -93,7 +92,7 @@
 
 					<div class="created-container">
 						<p>Created:
-							<span id="todays-date">10/28/2022</span>
+							<span id="todays-date">today's date here</span>
 						</p>
 					</div>
 
@@ -193,15 +192,20 @@
 						<div class="repeat-ends-container">
 							<p id="ends-header">Ends</p>
 
-							<div class="on-container">
-								<p>On</p>
-								<input type="date" name="ends_on_date" id="">
-							</div>
+							<div class="repeat-type-container">
 
-							<div class="on-container">
-								<p>After</p>
-								<input type="number" name="repeat_after_numb" id="" min="1" max="100">
-								<p>occurences</p>
+								<div class="on-container">
+									<p>On</p>
+									<input type="date" name="ends_on_date" id="">
+								</div>
+
+								<p id="repeat-type-or">OR</p>
+
+								<div class="on-container">
+									<p>After</p>
+									<input type="number" name="repeat_after_numb" id="" min="1" max="100">
+									<p>occurences</p>
+								</div>
 							</div>
 						</div>
 
@@ -351,66 +355,37 @@
 						</div>
 	
 
-						<div class="a-task" draggable="true">
+						<div class="a-task unclaimed" draggable="true">
 							<div class="task-description-container">
 								<h3 class="task-title">
 									Slack Integration
 									<span id="reminder" class="material-symbols-rounded">notifications_active</span>
 								</h3>
+
 								<p class="task-description">
 									Add a filled in the portal to the let the user
 									connect to their Slack account.
 								</p>
 							</div>
+
 							<div class="task-priority-container">
 								<p class="task-priority-high">High Priority</p>
 								<div class="task-user-img"></div>
 							</div>
-							<hr class="task-horz-line">
-							<div class="task-stats">
-								<div class="task-stats-top">
-									<div class="task-points">
-										<span class="material-symbols-rounded">monetization_on</span>
-										<p>100</p>
-									</div>
-									<div class="task-sub-tasks">
-										<span class="material-symbols-rounded">add_task</span>
-										<div>3</div>
-									</div>
-								</div>
-								<div class="task-stats-bottom">
-									<div class="task-due-date">
-										<span class="material-symbols-rounded">calendar_month</span>
-										<p>October 23, 2022</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="a-task" draggable="true">
-
-							<div class="task-description-container">
-								<h3 class="task-title">Slack Integration</h3>
-								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
-								</p>
-							</div>
-
-							<div class="task-priority-container">
-								<p class="task-priority-low">Low Priority</p>
-								<div class="task-user-img"></div>
-							</div>
 
 							<hr class="task-horz-line">
 
 							<div class="task-stats">
 
 								<div class="task-stats-top">
+									
 									<div class="task-points">
 										<span class="material-symbols-rounded">monetization_on</span>
 										<p>100</p>
+
+										<button id="bit-btn">bh</button>
 									</div>
+
 									<div class="task-sub-tasks">
 										<span class="material-symbols-rounded">add_task</span>
 										<div>3</div>
@@ -423,7 +398,6 @@
 										<p>October 23, 2022</p>
 									</div>
 								</div>
-
 							</div>
 						</div>
 	
@@ -511,23 +485,38 @@
 							</div>
 						</div>
 
+					</div>
+	
+					<!-- in progress -->
+					<div class="column">
+
+						<div class="column-header-container">
+							<h4 class="column-header">
+								In Progress <span class="column-total">1</span>
+							</h4>
+						</div>
+
 						<div class="a-task" draggable="true">
+
 							<div class="task-description-container">
-								<h3 class="task-title">
-									Slack Integration
-									<span id="reminder" class="material-symbols-rounded">notifications_active</span>
-								</h3>
+								<h3 class="task-title">Slack Integration</h3>
 								<p class="task-description">
 									Add a filled in the portal to the let the user
 									connect to their Slack account.
 								</p>
 							</div>
+
 							<div class="task-priority-container">
-								<p class="task-priority-high">High Priority</p>
-								<div class="task-user-img"></div>
+								<p class="task-priority-low">Low Priority</p>
+								<div class="task-user-img">
+									<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								</div>
 							</div>
+
 							<hr class="task-horz-line">
+
 							<div class="task-stats">
+
 								<div class="task-stats-top">
 									<div class="task-points">
 										<span class="material-symbols-rounded">monetization_on</span>
@@ -538,24 +527,15 @@
 										<div>3</div>
 									</div>
 								</div>
+
 								<div class="task-stats-bottom">
 									<div class="task-due-date">
 										<span class="material-symbols-rounded">calendar_month</span>
 										<p>October 23, 2022</p>
 									</div>
 								</div>
+
 							</div>
-						</div>
-
-					</div>
-	
-					<!-- in progress -->
-					<div class="column">
-
-						<div class="column-header-container">
-							<h4 class="column-header">
-								In Progress <span class="column-total">1</span>
-							</h4>
 						</div>
 
 					</div>

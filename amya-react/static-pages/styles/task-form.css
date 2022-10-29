@@ -2,6 +2,7 @@
 /* =================== global variables =================== */
 :root {
 	--primary-form-colour: #005FCF;
+	--primary-input-colour: rgba(107, 175, 255, 50%);
 }
 
 /* =================== font styles =================== */
@@ -15,7 +16,7 @@ textarea,
 input[type=date], 
 input[type=number], 
 select {
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 	outline: none;
@@ -51,7 +52,7 @@ select:focus {
 	flex-direction: column;
 	right: 0;
 
-	max-width: 40vw;
+	min-width: 40vw;
 	max-height: 100vh;
 	background-color: var(--primary-form-colour);
 	box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 45%);
@@ -60,11 +61,11 @@ select:focus {
 
 	display: none;
 }
-/* TODO: figure out what colour for here */
+
+
 /* =================== exit button =================== */
 #exit-btn {
-	background-color: var(--primary-dark-blue);
-	/* background-color: var(--primary-form-colour); */
+	background-color: var(--primary-form-colour);
 	border-radius: var(--std-border-radius);
 	padding: .3rem;
 	display: flex;
@@ -80,7 +81,7 @@ select:focus {
 
 #exit-btn:hover {
 	cursor: pointer;
-	background-color: var(--primary-light-blue);
+	background-color: var(--primary-dark-blue);
 	transition: var(--std-transition);
 }
 
@@ -124,7 +125,7 @@ select:focus {
 
 .sub-task-list-container {
 	padding: 1rem;
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 }
@@ -144,51 +145,59 @@ select:focus {
 	align-self: center;
 }
 
-/* ---------- add sub task ---------- */
+/* ---------- add sub task button ---------- */
 .add-sub-task-container {
 	margin-top: 2rem;
 }
 
-/* TODO: figure out what colour for here */
 .add-sub-task-btn {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 
-	background-color: rgba(107, 175, 255, 50%);
-	background-color: var(--primary-white);
 	background-color: blue;
-
-
+	border: 2px solid blue;
 	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-card-colour);
-	border-color: blue;
 
-	padding: .3rem;
+	padding: .5rem;
 	transition: var(--std-transition);
 }
 
+.add-sub-task-btn span {
+	font-size: 12px;
+	margin-right: .3rem;
+}
+
 .add-sub-task-btn:hover {
-	background-color: red;
+	background-color: var(--primary-input-colour);
+	border-color: var(--primary-light-blue);
+	border-radius: var(--std-border-radius);
+
 	cursor: pointer;
 	transition: var(--std-transition);
 }
 
-/* ---------- start and end dates ---------- */
+/* ---------- due date container ---------- */
 .due-date-container {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 10px;
+	gap: 15px;
 	margin: 1rem 0;
 }
 
 .due-date-container div {
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 	padding: .5rem;
 	width: 100%;
 	text-align: center;
+}
+
+.created-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .due-container input[type=date] {
@@ -223,13 +232,13 @@ select:focus {
 }
 
 .repeat-toggle-container label {
-	margin-right: .3rem;
+	margin-right: .5rem;
 }
 
 /* =================== repeat expanded =================== */
 .repeat-expanded {
 	padding: 1rem;
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 
@@ -292,28 +301,42 @@ select:focus {
 	gap: 10px;
 
 	padding: 1rem;
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 }
 
-/* ---------- repeat on container ---------- */
+/* ---------- repeat ends container ---------- */
 .repeat-ends-container {
 	margin: 1rem 0 0;
 }
 
 .repeat-ends-container #ends-header {
-	margin-bottom: 1rem;
+	margin-bottom: .5rem;
 }
 
-.repeat-ends-container div:not(:last-child) {
-	margin-bottom: 1rem;
+.repeat-type-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+}
+
+#repeat-type-or {
+	font-weight: 500;
+	color:blue
 }
 
 .on-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	
+	padding: 1rem;
+	background-color: var(--primary-input-colour);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
 }
 
 .on-container *:not(:last-child) {
@@ -330,11 +353,11 @@ select:focus {
 /* ---------- submit form button ---------- */
 .submit-task-container {
 	text-align: center;
-	margin-top: 2rem;
+	margin-top: 1rem;
 }
 
 .submit-task-container button {
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 	background-color: var(--primary-white);
 	background-color: blue;
 
@@ -349,11 +372,8 @@ select:focus {
 
 .submit-task-container button:hover {
 	cursor: pointer;
-	background-color: rgba(107, 175, 255, 50%);
-
-
+	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-light-blue);
-
+	border-color: var(--primary-light-blue);
 	transition: var(--std-transition);
 }
