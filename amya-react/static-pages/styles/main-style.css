@@ -6,6 +6,7 @@
 :root {
 	/* primary colours */
 	--primary-white: white;
+	--primary-grey: #b0b0b0;
 
 	--primary-light-blue: #6bafff;
 	--primary-dark-blue: #006FF2;

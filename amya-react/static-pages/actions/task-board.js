@@ -10,10 +10,14 @@ $(document).ready(function () {
 			// if the task as the class 'unclaimed'
 			if ( $(this).hasClass("unclaimed") ) {
 				// show claim form
-				$("#overlay").show();
+				$("#overlay").show({
+					duration: '1000'
+				});
 			}
 			else { //else, hide claim form
-				$("#overlay").hide();
+				$("#overlay").hide({
+					duration: '1000'
+				});
 			}
 		}
 	);
@@ -21,7 +25,9 @@ $(document).ready(function () {
 	// if click on exit btn in claim form, hide claim form
 	$("#claim-exit-btn").click(function (e) { 
 		e.preventDefault();
-		$("#overlay").hide();
+		$("#overlay").hide({
+			duration: '1000'
+		});
 	});
 
 	/* =================== TASK CARD MOVE FUNCTIONS =================== */
@@ -71,14 +77,14 @@ $(document).ready(function () {
 				// alert ("Checkbox is checked.")
 				
 				// // scroll on overflow
-				// $(".task-form-container").css({"overflow-y":"scroll"});
+				$(".task-form-container").css({"overflow-y":"scroll"});
 				
 				// show the extra info regarding repeats
 				$(".repeat-expanded").show(); 
 			}
 			else {
 				// // else, remove scroll bar
-				// $(".task-form-container").css({"overflow-y":"visible"});
+				$(".task-form-container").css({"overflow-y":"visible"});
 				
 				// hide repeat extra information
 				$(".repeat-expanded").hide();

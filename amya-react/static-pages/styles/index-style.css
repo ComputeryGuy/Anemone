@@ -168,7 +168,7 @@
 	}
 
 	.user-post .notif-style {
-		color: grey
+		color: var(--primary-grey);
 	}
 
 	/* =================== right section =================== */
@@ -206,7 +206,7 @@
 	}
 
 	.a-event p {
-		color: grey;
+		color: var(--primary-grey);;
 	}
 
 	/* ---------- go to calendar btn ---------- */
@@ -382,7 +382,7 @@
 	}
 
 	.user-post .notif-style {
-		color: grey
+		color: var(--primary-grey);
 	}
 
 	/* =================== right section =================== */
@@ -414,7 +414,7 @@
 	}
 
 	.a-event p {
-		color: grey;
+		color: var(--primary-grey);;
 	}
 
 	/* ---------- go to calendar btn ---------- */
@@ -582,10 +582,10 @@
 	}
 
 	.user-post .notif-style {
-		color: grey
+		color: var(--primary-grey);
 	}
 
-	/* ---------- a notification ---------- */
+	/* ---------- notification buttton ---------- */
 	/* FIXME: button */
 
 	/* =================== right section =================== */
@@ -637,7 +637,7 @@
 	}
 
 	.a-event p {
-		color: grey;
+		color: var(--primary-grey);;
 	}
 
 	/* ---------- go to calendar btn ---------- */
