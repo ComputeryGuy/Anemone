@@ -66,7 +66,7 @@ class Event(models.Model):
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=32)
     body = models.TextField()
     due_date = models.DateTimeField(default=None, null=True, blank=True)
     points = models.IntegerField()

@@ -1,0 +1,10 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+		<form method="POST">
+			{% csrf_token %}
+            {{ form.pc_type  }}
+            <span class="radio">{{ choice.tag }}</span>
+		</form>
+{% endblock %}

@@ -9,11 +9,14 @@ from .forms.forms import *
 from .models import *
 
 from django.http import HttpResponse
+from django.http import JsonResponse
+
+from django.forms.models import model_to_dict
 
 def home(request):
     if request.user.is_authenticated:
-        if request.user.profile.household_set.all().count() != 0:
-            uuid = str(request.user.profile.household_set.all()[0].household_id)
+        if request.user.profile.household is not None:
+            uuid = str(request.user.profile.household.household_id)
             url = '/' + uuid
             return redirect(url)
         else:
@@ -42,6 +45,7 @@ def post_bulletin(request):
         if request.method == 'POST':
             form = BulletinForm(request.POST)
             if form.is_valid():
+                print("wah")
                 user = request.user.username
                 bulletin_body = form.cleaned_data['bulletin_body']
                 creation_time = datetime.now()
@@ -49,12 +53,64 @@ def post_bulletin(request):
                 bulletin = Bulletin.objects.create(user=user,
                                                    bulletin_body=bulletin_body,
                                                    creation_time=creation_time,
-                                                   expire_time=expire_time, )
-                request.user.profile.household_set.all()[0].bulletins.add(bulletin)
+                                                   expire_time=expire_time, 
+                                                   household = request.user.profile.household_set.all()[0])
                 return redirect('dashboard')
     form = BulletinForm()
     return render(request, 'users/bulletin.html', {'form': form})
 
+
+def create_task(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = request.POST
+            form_data = form.dict()
+            # Task information
+            profile_created = request.user.profile
+            task_title = form_data['task_title']
+            task_body = form_data['task_body']
+            due_datetime = form_data['due_date'] + " " + form_data['due_time']
+            due_datetime = datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
+            task = Task.objects.create(title = task_title,
+                                        body = task_body,
+                                        due_date = due_datetime,
+                                        points = 1000,
+                                        user_created = profile_created)
+            # Frequency information
+            if 'repeats' in form_data:
+                frequency = form_data['frequency']
+                if frequency == 'weekly':
+                    mo = tu = we = th = fr = sa = su = False
+                    if 'mo' in form_data:
+                        mo = True
+                    if 'tu' in form_data:
+                        tu = True
+                    if 'we' in form_data:
+                        we = True
+                    if 'th' in form_data:
+                        th = True
+                    if 'fr' in form_data:
+                        fr = True
+                    if 'sa' in form_data:
+                        sa = True
+                    if 'su' in form_data:
+                        su = True
+                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                               frequency = frequency,
+                                                               mo = mo,
+                                                               tu = tu,
+                                                               we = we,
+                                                               th = th,
+                                                               fr = fr,
+                                                               sa = sa,
+                                                               su = su,)
+                else:
+                    day_of_month = form_data['day_of_month']
+                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                               frequency = frequency,
+                                                               day_of_month = day_of_month)
+    datetimeform = DateTimeForm()
+    return render(request, 'users/create_task.html', {'datetimeform': datetimeform})
 
 def create_household(request):
     if request.user.is_authenticated:
@@ -69,6 +125,7 @@ def create_household(request):
     form = HouseholdCreateForm()
     return render(request, 'users/createHousehold.html', {'form': form})
 
+
 def join_household(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -77,7 +134,8 @@ def join_household(request):
             if form.is_valid():
                 enteredPin = form.cleaned_data['household_pin']
                 group = Household.objects.get(pin = enteredPin)
-                group.profiles.add(profile)
+                profile.household = group
+                profile.save()
                 return redirect('/')
     form = JoinGroupForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
@@ -86,18 +144,18 @@ def join_household(request):
 def dashboard(request, household_id):
     if request.user.is_authenticated:
         household = get_object_or_404(Household, pk=household_id)
-        chores = household.chores.all()
+        tasks = household.task_set.all()
         user_name = request.user.username
         total_points = None
         new_tasks = None
         completed_tasks = None
         points_earned_today = None
-        unclaimed_tasks = chores.filter(claimed=False)
+        unclaimed_tasks = tasks.filter(claimed=False)
         unclaimed_tasks_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
         if unclaimed_points == None:
             unclaimed_points = 0
-        bulletins = household.bulletins.all()
+        bulletins = household.bulletin_set.all()
         values = {'user_name': user_name,
                  'total_points': total_points,
                  'new_tasks': new_tasks,
@@ -107,3 +165,99 @@ def dashboard(request, household_id):
                  'unclaimed_points': unclaimed_points,
                  'bulletins': bulletins,}
         return render(request, 'users/dashboard.html', values) 
+
+
+##in current iteration creates a new chore
+    ## then credits that chore as complete to the desired user
+def bonus_points(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BonusPointsForm(request.POST)
+            uProfile = Profile.objects.get(user = request.user)
+            if form.is_valid():
+                uName = request.user.username
+                bonusMember = form.cleaned_data['member_name']
+                points = form.cleaned_data['bonus_points']
+
+                
+                bonusMember = User.objects.get(username = bonusMember)
+                bonusProfile = Profile.objects.get(user = bonusMember)
+
+
+                taskName = 'Kudos for {member}'.format(member = bonusMember)
+                taskBody = '{uName} thinks {member} deserves a {points} point bonus!'.format(uName = uName, member = bonusMember, points = points)
+
+                kudos = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                task_status=True, user_created=uProfile, user_claimed=bonusProfile, household=(uProfile.household))
+                bonusProfile.modify_points(points, kudos)
+
+                
+                return redirect('/')
+
+    form = BonusPointsForm()
+    return render(request, 'users/giveBonus.html', {'form': form})
+
+##in current iteration creates a new chore
+    ## then credits that chore as complete to the desired user
+def minus_points(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = MinusPointsForm(request.POST)
+            uProfile = Profile.objects.get(user = request.user)
+            if form.is_valid():
+                uName = request.user.username
+                minusMember = form.cleaned_data['member_name']
+                points = form.cleaned_data['minus_points']
+                points = -points
+
+                
+                minusMember = User.objects.get(username = minusMember)
+                minusProfile = Profile.objects.get(user = minusMember)
+
+
+                taskName = 'Bad for {member}'.format(member = minusMember)
+                taskBody = '{uName} thinks {member} deserves a {points} point reduction!'.format(uName = uName, member = minusMember, points = points)
+
+                minus = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                task_status=True, user_created=uProfile, user_claimed=minusProfile, household=(uProfile.household))
+                minusProfile.modify_points(points, minus)
+
+                
+                return redirect('/')
+
+    form = MinusPointsForm()
+    return render(request, 'users/joinHousehold.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+'''        household = request.user.profile.household
+        householdMembers = household.members.all()
+        mList = []
+        for queries in householdMembers:
+            mList.append(queries.user.username)
+            print(queries.user.username)
+        print(mList)
+
+        try:
+            selected_choice = household.member_set.get(pk=request.POST['choice'])
+        except (KeyError, User.DoesNotExist):
+            return render(request, 'users/listMembers.html', {
+                'household': household,
+                'error_message': "You didn't select a choice.",
+            })
+        else:
+            selected_choice.modify_points(self, )
+
+        return render(request, 'users/listMembers.html',{household.name:mList})
+        return JsonResponse({household.name:mList}, safe = False)
+
+        return HttpResponse("HOWDY!!")
+'''        

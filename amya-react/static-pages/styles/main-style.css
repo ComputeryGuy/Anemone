@@ -6,6 +6,7 @@
 :root {
 	/* primary colours */
 	--primary-white: white;
+	--primary-grey: #b0b0b0;
 
 	--primary-light-blue: #6bafff;
 	--primary-dark-blue: #006FF2;
@@ -20,20 +21,19 @@
 }
 
 /* ---------- global buttion styles ---------- */
+/* FIXME: fix these buttons */
 .button {
-	/* background-color: var(--primary-dark-blue);
-	border: none;
-	border-radius: 100px;
-	
-	font-size: 12px;
-	padding: calc(18px/2) calc(32px/2);
-	text-decoration: none;
-	transition: var(--std-transition); */
+	background-color: var(--primary-dark-blue);
+	border: 2px solid var(--primary-dark-blue);
+	border-radius: var(--std-border-radius);
+	padding: .5rem;
+	transition: var(--std-transition);
 }
 
 .button:hover {
-	/* cursor: pointer;
-	transform: scale(1.1); */
+	background-color: rgba(0, 111, 242, 50%);
+	transition: var(--std-transition);
+	cursor: pointer;
 }
 
 /* =================== reset default styles =================== */
