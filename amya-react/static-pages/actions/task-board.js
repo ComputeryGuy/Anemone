@@ -54,7 +54,17 @@ $(document).ready(function () {
 			duration: '1000'
 		});
 	});
-	
+
+	/* =================== ADD SUBTASK BUTTON =================== */
+	$("#sub-task-btn").click(
+		function (e) { 
+			e.preventDefault();
+			
+			$(".sub-task-list").append(
+				"<li class='sub-task-list-item'><input type='checkbox' class='sub_task'><label for='sub_task'>This is a sub task.</label></li>"
+			);
+		}
+	);
 	/* =================== RETURN TODAY'S DATE =================== */
 	// make 'Created: XX/XX/XXXX' is always set to today's date (note the following code is JS)
 

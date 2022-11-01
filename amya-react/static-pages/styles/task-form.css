@@ -216,22 +216,10 @@ select:focus {
 	font-weight: 600;
 }
 
-/* ---------- bid and priority container ---------- */
-.bid-and-priority-container {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 15px;
-}
-
 /* ---------- priority container ---------- */
 .priority-container select {
 	width: 100%;
 	padding: .3rem;
-}
-
-/* ---------- bid container ---------- */
-.bid-container input[type=number] {
-	width: 100%;
 }
 
 /* ---------- repeats container ---------- */
