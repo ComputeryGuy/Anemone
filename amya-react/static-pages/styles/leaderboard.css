@@ -1,7 +1,7 @@
 /* main grid ****************************************************************************/
 .middle-section {
 	grid-column: span 8;
-	margin: 1rem;
+	margin-top: 5rem;
 }
 
 .right-section {
@@ -11,11 +11,11 @@
 
 /* chart *******************************************************************************/
 .chart-container {
-	height: 80%;
+	/* height: 80%; */
 	display: flex;
 	flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	justify-content: center;
+	align-items: center;
 }
 
 #myChart {
@@ -32,13 +32,35 @@
 
 /* current point ***********************************************************************/
 .point {
-	background-color: #6bafff;
+	/* background-color: var(--primary-dark-blue); */
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	padding: 25px;
-	border-radius: var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
+	/* border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow); */
+
+	margin-bottom: 2rem;
 }
+
+.point-container,
+.score-container {
+	background-color: var(--primary-dark-blue);
+	padding: 1rem;
+	border: 2px solid var(--primary-dark-blue);
+	border-radius: var(--std-border-radius);
+	width: 40%;
+	box-shadow: var(--std-box-shadow);
+	transition: var(--std-transition);
+}
+
+.point-container:hover,
+.score-container:hover {
+	border-color: var(--primary-light-blue);
+	background-color: var(--primary-input-colour);
+	transition: var(--std-transition);
+}
+
+
 
 /* leaderboard **************************************************************************/
 .leaderboard {
@@ -61,31 +83,63 @@
 	color: snow;
 	font-size: 16px;
 }
+
 .leaderboard ol {
 	counter-reset: number;
 }
+
 .leaderboard li {
 	padding: 16px;
 	display: flex;
 }
+
 .leaderboard li mark {
 	flex-grow: 1;
 	color: snow;
 	background-color: transparent;
 }
+
 .leaderboard li:before {
-	counter-increment: number; 
-	content: counter(number) "."; 
+	counter-increment: number;
+	content: counter(number) ".";
 	margin-right: 4px;
 }
+
 .leaderboard li:nth-child(1) {
 	background: #6bafff;
+	background-color: var(--primary-light-blue);
 }
+
+
+
 .leaderboard li:nth-child(2) {
 	background: #BB86FC;
+	
 }
+
 .leaderboard li:nth-child(3) {
 	background: #03DAC6;
+	background-color: var(--primary-dark-blue);
 	border-bottom-left-radius: var(--std-border-radius);
 	border-bottom-right-radius: var(--std-border-radius);
+}
+
+/* history */
+
+.history {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	/* padding: .5rem; */
+	box-shadow: var(--std-box-shadow);
+}
+
+.history .head {
+	background-color: var(--primary-dark-blue);
+	padding: .5rem;
+	/* border-radius: var(--std-border-radius); */
+	border-radius: 10px 10px 0 0;
+}
+
+.history .body {
+	padding: .5rem;
 }

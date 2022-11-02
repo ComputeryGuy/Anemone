@@ -1,7 +1,7 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 // And for a doughnut chart
 var myDoughnutChart = new Chart(ctx, {
-  type: 'bar',
+  type: 'horizontalBar',
   data: {
     datasets: [
       {
@@ -24,7 +24,8 @@ var myDoughnutChart = new Chart(ctx, {
       }],
       xAxes: [{
         ticks: {
-          fontColor: "white"
+          fontColor: "white",
+          beginAtZero: true
         }
       }]
     }
