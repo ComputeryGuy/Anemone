@@ -1,3 +1,17 @@
+/* FIXME: fix these buttons */
+.button {
+	background-color: var(--primary-dark-blue);
+	border: 2px solid var(--primary-dark-blue);
+	border-radius: var(--std-border-radius);
+	padding: .5rem;
+	transition: var(--std-transition);
+}
+
+.button:hover {
+	background-color: rgba(0, 111, 242, 50%);
+	transition: var(--std-transition);
+	cursor: pointer;
+}
 /* =================== MEDIA QUERIES =================== */
 /* FIXME: see if I can make a constants header like I did in task-board.css */
 /* ---------- MOBILE ---------- */

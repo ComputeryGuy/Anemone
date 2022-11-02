@@ -2,32 +2,11 @@
 // TODO: make it so that you can only move cards on desktop
 $(document).ready(function () {
 
-	/* =================== SHOW AND HIDE CLAIM TASK FORM =================== */
-	$(".a-task").click(
-		function (e) { 
-			e.preventDefault();
-
-			// if the task as the class 'unclaimed'
-			if ( $(this).hasClass("unclaimed") ) {
-				// show claim form
-				$("#claim-overlay").show({
-					duration: '1000'
-				});
-			}
-			else { //else, hide claim form
-				$("#claim-overlay").hide({
-					duration: '1000'
-				});
-			}
-		}
-	);
-
-	// if click on exit btn in claim form, hide claim form
-	$("#claim-exit-btn").click(function (e) { 
-		e.preventDefault();
-		$("#claim-overlay").hide({
-			duration: '1000'
-		});
+	/* =================== MOVE TASK CARD =================== */
+	// tasks can only move between 'to do', 'in progress', and 'completed'
+	$(".column.move").sortable ({
+		cursor: 'move',
+		connectWith: '.column.move'
 	});
 
 	/* =================== SHOW AND HIDE TASK INFORMATION =================== */
@@ -42,17 +21,25 @@ $(document).ready(function () {
 		}
 	);
 
-	/* =================== TASK CARD MOVE FUNCTIONS =================== */
-	// make so I can move tasks around on the page
-	$(".column").sortable ({
-		cursor: 'move',
-		connectWith: '.column'
-	});
+	/* =================== GET USER BID =================== */
+	$("#bid").on("keypress", 
+		function (e) {
+			// on enter
+			if(e.which == 13) {
+				// if the input is NOT empty
+				if ( $("#bid").val().length != 0) {
 
-	/* =================== SHOW AND HIDE TASK FORM =================== */
+					var user_bid = $("#bid").val();
+					alert("User bid: " + user_bid)
+				}
+			}
+		}
+	);
+
+	/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
 	// make the Add Task button show the form (= slide in)
 	$(".right-buttons-container .button.right").click(
-		function (e) { 
+		function (e) {
 			e.preventDefault();
 			$("#form-container").show({
 				duration: '1000'
