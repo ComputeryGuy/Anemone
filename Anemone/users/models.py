@@ -23,12 +23,48 @@ class Profile(models.Model):
     )
     # tasks_finished = Chore.objects.filter(user_claimed=user).annotate(tasks_finished=Count('task_status').filter(task_status='True'))
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
+
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
     household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True, related_name = "members")
 
+
+    ## game aspects
+    xp = models.IntegerField(default=0, verbose_name="xp")
+    level = models.IntegerField(default=0)
+    nextLevelThresh = models.IntegerField(default=1000)
+    prevLevelThresh = models.IntegerField(default=0)
+    xpToNextLevel = models.IntegerField(default=1000)
+
+    def update_levelSystem(self, points):
+            self.xp += points
+            
+
+            while self.xp > self.nextLevelThresh:
+                self.level += 1
+                self.update_levelThresh(self.level, self.nextLevelThresh)
+            
+            self.update_xpToNextLevel(self.xp, self.nextLevelThresh)
+
+
+    def update_levelThresh(self, level, nextLevelThresh):
+        self.prevLevelThresh = nextLevelThresh
+        self.nextLevelThresh = 1000 * ((level)**2 + 2)
+    
+    def update_xpToNextLevel(self, xp, nextLevelThresh):
+        self.xpToNextLevel = nextLevelThresh - xp
+
+
+
+
     def modify_points(self, points, chore):  # add in views when task is marked as complete
         self.points += points
+        
+        self
+        ##update xp / level if necessary
+        if points > 0:
+            self.update_levelSystem( points)
+
         if chore.task_status:
             self.tasks_finished += 1
         else:

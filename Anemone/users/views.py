@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -126,11 +126,15 @@ def create_household(request):
     return render(request, 'users/createHousehold.html', {'form': form})
 
 
+#alternative heading if url join implemented
+#def join_household(request, household_id):
 def join_household(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = JoinGroupForm(request.POST)
             profile = Profile.objects.get(user = request.user)
+            ##possibly needed if url join implemented with above header
+            ##household = Household.objects.get(household_id)
             if form.is_valid():
                 enteredPin = form.cleaned_data['household_pin']
                 group = Household.objects.get(pin = enteredPin)
@@ -139,6 +143,18 @@ def join_household(request):
                 return redirect('/')
     form = JoinGroupForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
+
+##need to edit above view/ to make this usable
+####THIS WORKS
+def generate_household_link(request):
+    if request.user.is_authenticated:
+        if request.user.profile.household is not None:
+            uuid = str(request.user.profile.household.household_id)
+            url = 'http://127.0.0.1:8000//joinHousehold/' + uuid
+            print(url)
+            return HttpResponse(url)
+        
+    
 
 
 def dashboard(request, household_id):

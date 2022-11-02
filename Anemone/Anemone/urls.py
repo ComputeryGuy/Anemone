@@ -28,6 +28,14 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
+
+    ##used if url join is implemented
+    #path('joinHousehold/<uuid:household_id>/', user_views.join_household, name='joinGroup'),
+    
+    ##currently generates a link that will point to the above unimplimented url
+    path('generate_household_link/', user_views.generate_household_link, name="generateLink"),
+
+
     path('<uuid:household_id>', user_views.dashboard, name="dashboard"),
     path('bonus_points/', user_views.bonus_points, name="bonusPoints"),
     path('minus_points/', user_views.minus_points, name="minusPoints"),
