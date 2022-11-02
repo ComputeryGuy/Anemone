@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget
+from django.core.exceptions import ValidationError
 
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
+from django.utils.translation import gettext_lazy as _
+from users.models import Household, Profile, Task
 
-from users.models import Household, Profile
 
 class BulletinForm(forms.Form):
     bulletin_body = forms.CharField(max_length=500)
@@ -33,6 +35,17 @@ class BonusPointsForm(forms.Form):
 class MinusPointsForm(forms.Form):
     member_name = forms.CharField(max_length=32)
     minus_points = forms.IntegerField()
+
+class BiddingForm(forms.Form):
+    unclaimed_tasks = forms.ModelChoiceField(queryset=Task.objects.filter(task_status='False'))
+    bid = forms.IntegerField()
+
+    def clean_bid(self):
+        bid = self.cleaned_data["bid"]
+        task_bid = self.cleaned_data["unclaimed_tasks"]
+        if task_bid.user_claimed is not None and bid >= task_bid.points or task_bid.user_claimed is None and bid > task_bid.points:
+            raise ValidationError(_('Bid is too great. Bid lower.'), code='invalidBid')
+        return bid
 
 
 

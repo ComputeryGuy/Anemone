@@ -173,7 +173,7 @@ def bonus_points(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = BonusPointsForm(request.POST)
-            uProfile = Profile.objects.get(user = request.user)
+            uProfile = Profile.objects.get(user=request.user)
             if form.is_valid():
                 uName = request.user.username
                 bonusMember = form.cleaned_data['member_name']
@@ -227,6 +227,29 @@ def minus_points(request):
 
     form = MinusPointsForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
+
+
+def bidding(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BiddingForm(request.POST)
+            uProfile = Profile.objects.get(user=request.user)
+            if form.is_valid():
+                uName = request.user.username
+                bid = form.clean_bid()
+                task_bid = form.cleaned_data['unclaimed_tasks']
+
+                task_bid = Task.objects.get(pk=task_bid.id)
+                task_bid.points = bid
+                task_bid.user_claimed = uProfile
+                task_bid.save()
+
+                return redirect('/')
+
+
+
+    form = BiddingForm()
+    return render(request, 'users/bidding.html', {'form': form})
 
 
 
