@@ -33,14 +33,12 @@
 <body>
 
 	<div class="main-grid">
+		<div class="logo-container">
+			<img class="logo" src="./assets/icons/logo-round.png" alt="logo">
+		</div>
+		<section class="sign-in-section">
 
-		<section class="left-section">
-
-			<div class="logo-container">
-				<img src="./assets/icons/logo-round.png" alt="logo">
-			</div>
-
-			<div class="sign-in-container">
+			<div class="form-container">
 
 				<h1>Sign in to Roommate</h1>
 
@@ -71,6 +69,31 @@
 
 		</section>
 
+		<section class="sign-up-section none">
+			<div class="form-container">
+
+				<h1>Sign up to Roommate</h1>
+
+				<form action="" class="sign-in-form">
+
+					<div class="input-container">
+						<label for="username"></label>
+						<input type="email" name="" id="username2" placeholder="Email">
+						<input type="text" name="" id="username" placeholder="Username" requried>
+						
+						<label for="password"></label>
+						<input type="password" name="" id="password" placeholder="Password" required>
+					</div>
+
+					<div class="forgot-submit-container">
+						<button type="submit" id="sign-in-btn">Sign Up</button>
+					</div>
+				</form>
+				
+			</div>
+
+		</section>
+
 		<section class="right-section">
 
 			<div class="new-user-container">
@@ -79,10 +102,19 @@
 					Enter your personal details and start your journey with us
 				</h4>
 				<div class="sign-up-btn-container">
-					<button type="button">Sign Up</button>
+					<button class="signupBtn" type="button">Sign Up</button>
 				</div>
 			</div>
 
+			<div class="old-user-container">
+				<h1>Already Have An Account?</h1>
+				<h4>
+					Log in to have your journey with us
+				</h4>
+				<div class="sign-up-btn-container">
+					<button class="signinBtn" type="button">Sign In</button>
+				</div>
+			</div>
 			
 		</section>
 	</div>

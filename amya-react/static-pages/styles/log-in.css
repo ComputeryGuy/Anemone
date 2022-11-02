@@ -1,21 +1,44 @@
+body {
+	background-color: var(--primary-background-colour);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	transition: 0.5s;
+}
 
 /* =================== CONSTANTS =================== */
 .main-grid {
-	grid-template-columns: repeat(12, 1fr);
 	gap: 0;
-	height: 100vh;
-
-	background-color: var(--primary-background-colour);
-	padding: 1rem 7rem;
+	position: relative;
+	height: 80vh;
+	width: 128vh;
+	background-color: var(--primary-card-colour);
+	border-radius: 10px;
+	box-shadow: var(--std-box-shadow);
 }
 
-/* =================== left section =================== */
-.left-section {
-	grid-column: span 8;
-	border-radius: 10px 0 0 10px;
-	background-color: var(--primary-card-colour);
+/* =================== sign-up section && sign-in section =================== */
+.sign-up-section {
+	position: absolute;
+	right: 0;
+	width: 66%;
+	height: 100%;
+	display: flex;
+	justify-items: center;
+	align-items: center;
 	padding: .5rem;
-	box-shadow: var(--std-box-shadow);
+}
+
+.sign-in-section {
+	position: absolute;
+	left: 0;
+	width: 66%;
+	height: 100%;
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	padding: .5rem;
 }
 
 /* ---------- logo container ---------- */
@@ -28,15 +51,17 @@
 .logo-container img {
 	width: 4rem;
 	height: 4rem;
+	z-index: 10;
 }
 
-/* ---------- sign in container ---------- */
-.sign-in-container {
+/* ---------- form container ---------- */
+.form-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 	margin-top: 3rem;
+	width: 100%;
 }
 
 /* ---------- the form ---------- */
@@ -129,6 +154,10 @@ input[type=password]:focus, input[type=email]:focus {
 }
 /* =================== right section =================== */
 .right-section {
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 33%;
 	grid-column: span 4;
 	background-color: var(--primary-dark-blue);
 	border-radius: 0 10px 10px 0;
@@ -136,10 +165,29 @@ input[type=password]:focus, input[type=email]:focus {
 
 	padding: .5rem;
 	text-align: center;
+	transition: 0.5s ease-in-out;
+	overflow: hidden;
+}
+
+.right-section.active {
+	border-radius: 10px 0 0 10px;
+	transform: translateX(-203%)
+}
+
+.right-section.active .new-user-container {
+	right: -200%;
+}
+
+.right-section.active .old-user-container {
+	transform: translateX(200%);
+	transition-delay: 0.55s;
 }
 
 .new-user-container {
+	width: 100%;
+	position: absolute;
 	padding: 12rem 0;
+	padding-right: 8px;
 }
 
 .new-user-container h1 {
@@ -147,6 +195,22 @@ input[type=password]:focus, input[type=email]:focus {
 }
 
 .new-user-container h4 {
+	width: 30ch;
+	margin: 0 auto 2rem;
+}
+
+.old-user-container {
+	width: 100%;
+	position: absolute;
+	padding: 12rem 0;
+	left: -200%;
+}
+
+.old-user-container h1 {
+	margin-bottom: 1rem;
+}
+
+.old-user-container h4 {
 	width: 30ch;
 	margin: 0 auto 2rem;
 }
@@ -167,4 +231,8 @@ input[type=password]:focus, input[type=email]:focus {
 	border: 3px solid var(--primary-light-blue);
 	box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
 	transition: var(--std-transition);
+}
+
+.none {
+	display: none;
 }
