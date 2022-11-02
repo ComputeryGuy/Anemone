@@ -63,6 +63,7 @@
 					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
 				</div>
 
+				<!-- TODO: each time button is clicked, inject sub-task-list-item; I think you can do that with jquery -->
 				<div class="sub-task-container">
 
 					<h4>Subtasks</h4>
@@ -73,17 +74,17 @@
 
 							<li class="sub-task-list-item">
 								<input type="checkbox" class="sub_task">
-								<label for="sub_task">This is a sub task.</label>
+								<label for="sub_task">This is a sub task. 1</label>
 							</li>
 
-							<li class="sub-task-list-item">
+							<!-- <li class="sub-task-list-item">
 								<input type="checkbox" class="sub_task">
 								<label for="sub_task">This is a sub task.</label>
-							</li>
+							</li> -->
 						</ol>
 
 						<div class="add-sub-task-container">
-							<button class="add-sub-task-btn">
+							<button id="sub-task-btn" class="add-sub-task-btn">
 								<span class="material-symbols-rounded">add</span>
 								<p>Add Subtask</p>
 							</button>
@@ -105,29 +106,21 @@
 						<input type="date" id="end_date">
 						<p>
 							You have 
-							<span id="total-days">5</span>
+							<!-- TODO: calculate create - due date. insert below -->
+							<span id="total-days">X</span>
 								days till this task is due.
 						</p>
 					</div>
 
 				</div>
-				
-				<div class="bid-and-priority-container">
 
-					<div class="bid-container">
-						<label for="user_bid"></label>
-						<input type="number" name="" id="user-bid" min="1" max="100" placeholder="Your Bid" required>
-					</div>
-					
-					<div class="priority-container">
-						<label for="priority_select"></label>
-						<select id="priority_select">
-							<option value="low">Low Priority</option>
-							<option value="medium">Medium Priority</option>
-							<option value="high">High Priority</option>
-						</select>
-					</div>
-
+				<div class="priority-container">
+					<label for="priority_select"></label>
+					<select id="priority_select">
+						<option value="low">Low Priority</option>
+						<option value="medium">Medium Priority</option>
+						<option value="high">High Priority</option>
+					</select>
 				</div>
 
 				<div class="repeats-container">

@@ -36,30 +36,33 @@
 		<section class="left-section">
 
 			<div class="logo-container">
-				<img src="./assets/icons/logo-no-outline.png" alt="">
+				<img src="./assets/icons/logo-round.png" alt="logo">
 				<h3>Roommate</h3>
 			</div>
 
 			<div class="sign-in-container">
+
 				<h1>Sign in to Roommate</h1>
 
 				<form action="" class="sign-in-form">
 
-					<div class="username-container">
-						<input type="text" name="username" id="" placeholder="Enter username" requried>
-					</div>
-
-					<div class="password-container">
-						<input type="text" name="password" id="" placeholder="Enter password" required>
+					<div class="input-container">
+						<label for="username"></label>
+						<input type="text" name="" id="username" placeholder="Username" requried>
+						
+						<label for="password"></label>
+						<input type="password" name="" id="password" placeholder="Password" required>
 					</div>
 
 					<div class="submit-container">
 
-						<a href="" class="forgot-link">
-							<h3>Forgot your password?</h3>
-						</a>
+						<div class="forgot-container underlineEffect">
+							<a href="" class="forgot-pass-link">
+								<h3>Forgot your password?</h3>
+							</a>
+						</div>
 
-						<button type="submit">Sign In</button>
+						<button type="submit" id="sign-in-btn">Sign In</button>
 					</div>
 				</form>
 				
@@ -77,7 +80,7 @@
 			</div>
 
 			<div class="sign-up-btn-container">
-				<button>Sign Up</button>
+				<button type="button">Sign Up</button>
 			</div>
 			
 		</section>
