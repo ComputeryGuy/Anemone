@@ -63,6 +63,7 @@
 					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
 				</div>
 
+				<!-- TODO: may remove if not relevant -->
 				<div class="sub-task-container">
 
 					<h4>Subtasks</h4>
@@ -98,7 +99,6 @@
 						<input type="date" id="end_date">
 						<p>
 							You have 
-							<!-- TODO: calculate create - due date. insert below -->
 							<span id="total-days">X</span>
 								days till this task is due.
 						</p>
@@ -216,7 +216,7 @@
 		</div>
 
 		<!-- claim task form -->
-		<div id="overlay" class="overlay-container">
+		<div id="claim-overlay">
 
 			<div id="claim-container" class="claim-task-container">
 
@@ -246,6 +246,24 @@
 
 				</form>
 			</div>
+		</div>
+
+		<!-- task information -->
+		<div id="task-info-overlay" style="display: none;">
+
+			<div class="task-information-container">
+
+				<!-- name -->
+
+				<!-- description -->
+
+				<!-- sub tasks -- as list -->
+
+				<!-- due date -->
+
+				<!-- if repeats in sentence show how repeats -->
+			</div>
+
 		</div>
 
 		<section class="left-section">
@@ -321,7 +339,7 @@
 						</li>
 
 						<li class="list-item">
-							<a href="." class="nav-link">
+							<a href="./log-in.html" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
@@ -358,7 +376,6 @@
 				</div>
 				
 				<div class="right-buttons-container">
-					<!-- TODO: link to modal -->
 					<button class="button right" type="button" data-toggle="modal" data-target="#form-container">
 						<span class="material-symbols-rounded">add</span>
 						<p>Add Task</p>
@@ -444,7 +461,107 @@
 							</h4>
 						</div>
 
+						<!-- a task -->
+						<div class="a-task" draggable="true">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									Do Something Important
+								</h3>
 
+								<p class="task-description">
+									Something important is happening here.
+								</p>
+							</div>
+
+							<div class="task-priority-container">
+								<p class="task-priority-medium">Medium Priority</p>
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">100</span>
+										</p>
+
+									</div>
+
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">November 2, 2022</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- a task -->
+						<div class="a-task" draggable="true">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									Do Something 2
+								</h3>
+
+								<p class="task-description">
+									He needs something to do here.
+								</p>
+							</div>
+
+							<div class="task-priority-container">
+								<p class="task-priority-low">Low Priority</p>
+								<div class="task-user-img">
+									<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">10</span>
+										</p>
+
+									</div>
+
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">0</span>
+										</p>
+									</div>
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">November 5, 2022</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 	

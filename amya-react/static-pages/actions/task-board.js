@@ -10,12 +10,12 @@ $(document).ready(function () {
 			// if the task as the class 'unclaimed'
 			if ( $(this).hasClass("unclaimed") ) {
 				// show claim form
-				$("#overlay").show({
+				$("#claim-overlay").show({
 					duration: '1000'
 				});
 			}
 			else { //else, hide claim form
-				$("#overlay").hide({
+				$("#claim-overlay").hide({
 					duration: '1000'
 				});
 			}
@@ -25,10 +25,22 @@ $(document).ready(function () {
 	// if click on exit btn in claim form, hide claim form
 	$("#claim-exit-btn").click(function (e) { 
 		e.preventDefault();
-		$("#overlay").hide({
+		$("#claim-overlay").hide({
 			duration: '1000'
 		});
 	});
+
+	/* =================== SHOW AND HIDE TASK INFORMATION =================== */
+	$(".a-task").click(
+		function (e) { 
+			e.preventDefault();
+			
+			// if the task does NOT have the class 'unclaimed'
+			if ( !$(this).hasClass("unclaimed")){
+				alert("this does not have the class 'unclaimed' ")
+			}
+		}
+	);
 
 	/* =================== TASK CARD MOVE FUNCTIONS =================== */
 	// make so I can move tasks around on the page
@@ -57,6 +69,33 @@ $(document).ready(function () {
 	});
 
 	/* =================== ADD SUB TASK =================== */
+	// if the user presses the 'enter' key
+	$("#sub_task_text").on("keypress", 
+		function (e) {
+			e.preventDefault();
+
+			// in ascii the 'enter' key is 13
+			if (e.which == 13) {
+				
+				// if the input is not empty
+				if ( $("#sub_task_text").val().length != 0 ) {
+
+					// show sub-task container
+					$(".task-container").show();
+	
+					var x = $(".task-container").html();
+					var y = '<div class="sub-task">' 
+								+ $("#sub_task_text").val()
+							+ '</div>';
+	
+					$(".task-container").html(x + y);
+					$("#sub_task_text").val("");
+				}
+			}
+		}
+	);
+
+	// if the user clicks on the add subtask btn
 	$(".add-sub-task-btn").click(
 		function (e) { 
 			e.preventDefault();
