@@ -1,0 +1,91 @@
+/* main grid ****************************************************************************/
+.middle-section {
+	grid-column: span 8;
+	margin: 1rem;
+}
+
+.right-section {
+	grid-column: span 3;
+	margin: 1rem;
+}
+
+/* chart *******************************************************************************/
+.chart-container {
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#myChart {
+	width: 100%;
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+	padding: 25px;
+}
+
+.chart {
+	width: 100%;
+}
+
+/* current point ***********************************************************************/
+.point {
+	background-color: #6bafff;
+	display: flex;
+	justify-content: space-evenly;
+	padding: 25px;
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+}
+
+/* leaderboard **************************************************************************/
+.leaderboard {
+	background: linear-gradient(to bottom, #3a404d, #181c26);
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+	margin-bottom: 50px;
+}
+
+/* leaderboard head */
+.leaderboard .head {
+	padding: 20px 16px;
+	color: snow;
+	font-size: 20px;
+	text-align: center;
+}
+
+/* leaderboard body */
+.leaderboard .body {
+	color: snow;
+	font-size: 16px;
+}
+.leaderboard ol {
+	counter-reset: number;
+}
+.leaderboard li {
+	padding: 16px;
+	display: flex;
+}
+.leaderboard li mark {
+	flex-grow: 1;
+	color: snow;
+	background-color: transparent;
+}
+.leaderboard li:before {
+	counter-increment: number; 
+	content: counter(number) "."; 
+	margin-right: 4px;
+}
+.leaderboard li:nth-child(1) {
+	background: #6bafff;
+}
+.leaderboard li:nth-child(2) {
+	background: #BB86FC;
+}
+.leaderboard li:nth-child(3) {
+	background: #03DAC6;
+	border-bottom-left-radius: var(--std-border-radius);
+	border-bottom-right-radius: var(--std-border-radius);
+}
