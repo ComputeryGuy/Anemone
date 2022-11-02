@@ -63,32 +63,24 @@
 					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
 				</div>
 
-				<!-- TODO: each time button is clicked, inject sub-task-list-item; I think you can do that with jquery -->
 				<div class="sub-task-container">
 
 					<h4>Subtasks</h4>
 
-					<div class="sub-task-list-container">
+					<div class="sub-task-container">
 
-						<ol class="sub-task-list">
+						<div class="input-container">
 
-							<li class="sub-task-list-item">
-								<input type="checkbox" class="sub_task">
-								<label for="sub_task">This is a sub task. 1</label>
-							</li>
+							<input type="text" name="" id="sub_task_text" placeholder="Add subtask">
 
-							<!-- <li class="sub-task-list-item">
-								<input type="checkbox" class="sub_task">
-								<label for="sub_task">This is a sub task.</label>
-							</li> -->
-						</ol>
-
-						<div class="add-sub-task-container">
-							<button id="sub-task-btn" class="add-sub-task-btn">
-								<span class="material-symbols-rounded">add</span>
-								<p>Add Subtask</p>
-							</button>
+							<div class="add-sub-task-btn-container">
+								<button class="add-sub-task-btn">
+									<span class="material-symbols-rounded">add</span>
+								</button>
+							</div>
 						</div>
+
+						<div class="task-container"></div>
 
 					</div>
 				</div>

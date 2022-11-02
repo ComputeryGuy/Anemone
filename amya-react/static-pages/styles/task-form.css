@@ -1,10 +1,4 @@
 
-/* =================== global variables =================== */
-:root {
-	--primary-form-colour: #005FCF;
-	--primary-input-colour: rgba(107, 175, 255, 50%);
-}
-
 /* =================== font styles =================== */
 label {
 	font-size: 12px;
@@ -59,6 +53,8 @@ select:focus {
 	border-radius: 10px 0px 0px 10px;
 	padding: 1.5rem;
 
+	overflow-y: auto;
+	
 	display: none;
 }
 
@@ -92,6 +88,7 @@ select:focus {
 }
 
 /* =================== form =================== */
+
 /* ---------- task name ---------- */
 .task-name-container {
 	display: flex;
@@ -116,68 +113,62 @@ select:focus {
 
 /* ---------- sub task container ---------- */
 .sub-task-container {
-	margin: 1rem 0;
+	margin: .5rem 0;
 }
-
-.sub-task-container h4 {
-	margin-bottom: .5rem;
-}
-
-.sub-task-list-container {
-	padding: 1rem;
-	background-color: var(--primary-input-colour);
-	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-light-blue);
-}
-
-.sub-task-list {
-	list-style: none;
-}
-
-.sub-task-list li {
+.input-container {
 	display: flex;
 	flex-direction: row;
-	margin-bottom: .5rem;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.sub-task-list li input {
-	margin-right: .5rem;
-	align-self: center;
+.input-container input[type=text] {
+	padding: .5rem;
+	width: 100%;
 }
 
 /* ---------- add sub task button ---------- */
-.add-sub-task-container {
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
+.add-sub-task-btn-container {
+	margin-left: .5rem;
 }
 
 .add-sub-task-btn {
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+	vertical-align: middle;
 
 	background-color: blue;
 	border: 2px solid blue;
 	border-radius: var(--std-border-radius);
+	padding: .5rem;
 
-	padding: .4rem;
+	transition: var(--std-transition);
+}
+
+.add-sub-task-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour); 
+	border-color: var(--primary-light-blue);
 	transition: var(--std-transition);
 }
 
 .add-sub-task-btn span {
-	font-size: 12px;
-	margin-right: .3rem;
+	font-size: 20px;
 }
 
-.add-sub-task-btn:hover {
-	background-color: var(--primary-input-colour);
-	border-color: var(--primary-light-blue);
-	border-radius: var(--std-border-radius);
+/* ---------- task container ---------- */
+.task-container {
+	margin-top: .5rem;
 
-	cursor: pointer;
-	transition: var(--std-transition);
+	background-color: var(--primary-input-colour);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+	padding: .5rem;
+
+	display: none;
+}
+
+.sub-task {
+	font-size: 14px;
 }
 
 /* ---------- due date container ---------- */

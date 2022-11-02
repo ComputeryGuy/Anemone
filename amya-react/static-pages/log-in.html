@@ -29,6 +29,7 @@
 	<script src="./actions/log-in.js"></script>
 
 </head>
+
 <body>
 
 	<div class="main-grid">
@@ -37,7 +38,6 @@
 
 			<div class="logo-container">
 				<img src="./assets/icons/logo-round.png" alt="logo">
-				<h3>Roommate</h3>
 			</div>
 
 			<div class="sign-in-container">
@@ -48,13 +48,14 @@
 
 					<div class="input-container">
 						<label for="username"></label>
+						<input type="email" name="" id="username2" placeholder="Email">
 						<input type="text" name="" id="username" placeholder="Username" requried>
 						
 						<label for="password"></label>
 						<input type="password" name="" id="password" placeholder="Password" required>
 					</div>
 
-					<div class="submit-container">
+					<div class="forgot-submit-container">
 
 						<div class="forgot-container underlineEffect">
 							<a href="" class="forgot-pass-link">
@@ -74,14 +75,14 @@
 
 			<div class="new-user-container">
 				<h1>New to Roommate?</h1>
-				<h3>
+				<h4>
 					Enter your personal details and start your journey with us
-				</h3>
+				</h4>
+				<div class="sign-up-btn-container">
+					<button type="button">Sign Up</button>
+				</div>
 			</div>
 
-			<div class="sign-up-btn-container">
-				<button type="button">Sign Up</button>
-			</div>
 			
 		</section>
 	</div>
