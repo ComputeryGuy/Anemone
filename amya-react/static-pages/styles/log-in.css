@@ -1,33 +1,72 @@
 
 /* =================== CONSTANTS =================== */
+/* =================== main grid =================== */
 .main-grid {
 	grid-template-columns: repeat(12, 1fr);
-	gap: 0;
 	height: 100vh;
-
-	background-color: var(--primary-background-colour);
 	padding: 1rem 7rem;
 }
 
-/* =================== left section =================== */
-.left-section {
-	grid-column: span 8;
-	border-radius: 10px 0 0 10px;
-	background-color: var(--primary-card-colour);
-	padding: .5rem;
+/* =================== overall container =================== */
+.log-in-container {
+	grid-column: span 12;
+	position: relative;
 	box-shadow: var(--std-box-shadow);
 }
 
 /* ---------- logo container ---------- */
 .logo-container {
 	display: flex;
-	flex-direction: row;
-	justify-content: start;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	/* from main style */
+	padding: 0;
 }
 
-.logo-container img {
+.log-in-container img {
 	width: 4rem;
 	height: 4rem;
+}
+
+/* ---------- input styles ---------- */
+.input-container {
+	margin: 1rem 0 2rem;
+}
+
+.input-container input {
+	padding: .8rem;
+	width: 50%;
+	border-radius: var(--std-border-radius);
+	background-color: var(--primary-input-colour);
+	border: 2px solid var(--primary-light-blue);
+	outline: none;
+}
+
+.input-container input::placeholder {
+	color: var(--primary-white);
+}
+
+.input-container input:focus {
+	border-color: var(--primary-white);
+}
+
+.input-container input:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+/* =================== left side =================== */
+.left-side {
+	position: absolute;
+	background-color: var(--primary-card-colour);
+	border-radius: 10px 0 0 10px;
+	padding: 1rem;
+	
+	
+	left: 0;
+
+	width: 50rem;
+	height: 100%;
 }
 
 /* ---------- sign in container ---------- */
@@ -38,60 +77,23 @@
 	text-align: center;
 	margin-top: 3rem;
 }
-
 /* ---------- the form ---------- */
-.sign-in-form {
+#sign-in-form {
 	padding: 1rem 0;
 }
 
-/* ---------- input styles ---------- */
-input[type=text],
-input[type=password], input[type=email] {
-	padding: .8rem;
-	width: 50%;
-	border-radius: var(--std-border-radius);
-	background-color: var(--primary-input-colour);
-	border: 2px solid var(--primary-light-blue);
-	outline: none;
-}
-
-input[type=text]::placeholder,
-input[type=password]::placeholder, input[type=email]::placeholder {
-	color: var(--primary-white)
-}
-
-input[type=text]:focus,
-input[type=password]:focus, input[type=email]:focus {
-	border-color: var(--primary-dark-blue);
-	border-color: var(--primary-white);
-}
-
-/* ---------- input contaner ---------- */
-.input-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	margin: 1rem 0;
-}
-
-.input-container input:not(:last-child) {
-	margin-bottom: 1rem;
-}
-
-/* ---------- forgot and submit container ---------- */
-/* underline effect  */
-.underlineEffect a {
+/* ---------- forgot container ---------- */
+.underline-effect a {
 	color: var(--primary-white);
 	text-decoration: none;
 	font-size: 12px;
+	font-style: italic;
 	display: inline-block;
-	padding: .3rem 1rem;
+	padding: .5rem 1rem;
 	position: relative;
 }
 
-.underlineEffect a:after {    
+.underline-effect a::after {
 	background: none repeat scroll 0 0 transparent;
 	bottom: 0;
 	content: "";
@@ -104,42 +106,54 @@ input[type=password]:focus, input[type=email]:focus {
 	width: 0;
 }
 
-.underlineEffect a:hover:after { 
+.underline-effect a:hover::after {
 	width: 100%; 
 	left: 0; 
 }
 
-/* ---------- sign in button ---------- */
-#sign-in-btn {
-	margin-top: 1.5rem;
+/* ---------- submit button ---------- */
+.submit-container {
+	margin: 2rem 0 0;
+}
+
+#sign-in-submit-btn {
 	background-color: var(--primary-dark-blue);
 	border: 3px solid var(--primary-dark-blue);
 	border-radius: 100px;
-	width: 14rem;
-	padding: 1rem 2rem;
+	width: 12rem;
+	padding: 1rem 1.5rem;
 	text-transform: uppercase;
 	transition: var(--std-transition);
 }
 
-#sign-in-btn:hover {
+#sign-in-submit-btn:hover {
 	cursor: pointer;
-	border: 3px solid var(--primary-light-blue);
 	box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
 	transition: var(--std-transition);
 }
-/* =================== right section =================== */
-.right-section {
-	grid-column: span 4;
+
+/* =================== right side =================== */
+.right-side {
+	position: absolute;
 	background-color: var(--primary-dark-blue);
 	border-radius: 0 10px 10px 0;
-	box-shadow: var(--std-box-shadow);
+	padding: 1rem;
+	
+	right: 0;
 
-	padding: .5rem;
-	text-align: center;
+	width: 26rem;
+	height: 100%;
 }
 
+/* ---------- logo container ---------- */
+.logo-container.right * {
+	display: none;
+}
+
+/* ---------- new user container ---------- */
 .new-user-container {
 	padding: 12rem 0;
+	text-align: center;
 }
 
 .new-user-container h1 {
@@ -151,7 +165,8 @@ input[type=password]:focus, input[type=email]:focus {
 	margin: 0 auto 2rem;
 }
 
-.sign-up-btn-container button {
+/* ---------- go to sign up button ---------- */
+#go-to-sign-up-btn {
 	background-color: var(--primary-dark-blue);
 	border: 3px solid var(--primary-light-blue);
 	padding: 1rem 2rem;
@@ -161,7 +176,80 @@ input[type=password]:focus, input[type=email]:focus {
 	transition: var(--std-transition);
 }
 
-.sign-up-btn-container button:hover {
+#go-to-sign-up-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour);
+	border: 3px solid var(--primary-light-blue);
+	box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+	transition: var(--std-transition);
+}
+
+/* =================== ON SWITCH =================== */
+/* ---------- on left ---------- */
+/* ---------- sign up container ---------- */
+.sign-up-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin-top: 3rem;
+
+	display: none;
+}
+
+/* ---------- the form ---------- */
+#sign-up-form {
+	padding: 1rem 0;
+}
+
+/* ---------- submit button ---------- */
+#sign-up-submit-btn {
+	background-color: var(--primary-dark-blue);
+	border: 3px solid var(--primary-dark-blue);
+	border-radius: 100px;
+	width: 12rem;
+	padding: 1rem 1.5rem;
+	text-transform: uppercase;
+	transition: var(--std-transition);
+}
+
+#sign-up-submit-btn:hover {
+	cursor: pointer;
+	box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+	transition: var(--std-transition);
+}
+
+
+/* ---------- on right---------- */
+/* ---------- old user container ---------- */
+.old-user-container {
+	padding: 12rem 0;
+	text-align: center;
+
+	display: none;
+}
+
+.old-user-container h1 {
+	margin-bottom: 1rem;	
+}
+
+.old-user-container h4 {
+	width: 30ch;
+	margin: 0 auto 2rem;
+}
+
+/* ---------- go to sign in button ---------- */
+#go-to-sign-in-btn {
+	background-color: var(--primary-dark-blue);
+	border: 3px solid var(--primary-light-blue);
+	padding: 1rem 2rem;
+	border-radius: 100px;
+	width: 14rem;
+	text-transform: uppercase;
+	transition: var(--std-transition);
+}
+
+#go-to-sign-in-btn:hover {
 	cursor: pointer;
 	background-color: var(--primary-input-colour);
 	border: 3px solid var(--primary-light-blue);
