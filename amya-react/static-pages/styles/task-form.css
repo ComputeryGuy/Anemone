@@ -35,7 +35,7 @@ textarea:focus,
 input[type=date]:focus, 
 input[type=number]:focus, 
 select:focus {
-	border: 2px solid var(--primary-white);
+	border-color: var(--primary-white);
 }
 
 /* =================== form container =================== */
