@@ -16,7 +16,7 @@
 
 	--std-border-radius: 10px;
 	--std-left-border: 3px solid var(--primary-light-blue);
-	--std-transition: .3s;
+	--std-transition: all .3s ease-in-out;
 	--std-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 45%);
 
 	--primary-form-colour: #005FCF;
@@ -77,7 +77,7 @@ p {
 	gap: 10px;
 }
 
-/* =================== global navigation -- desktop =================== */
+/* =================== global: navigation -- desktop =================== */
 #nav-sidebar {
 	background-color: var(--primary-background-colour);
 	margin: 1rem;
