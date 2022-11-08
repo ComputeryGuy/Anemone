@@ -272,8 +272,8 @@ def bidding(request):
     return render(request, 'users/bidding.html', {'form': form})
 
 
-
-
+def tasks(request, household_id):
+    return render(request, 'users/task-board.html', {})
 
 
 
