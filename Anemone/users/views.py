@@ -1,5 +1,6 @@
 import datetime
 import calendar
+import json
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
@@ -276,7 +277,6 @@ def bidding(request):
 def tasks(request, household_id):
     lfn = last_fortnight()
     
-    url = str(household_id) + "/tasks"
     household = get_object_or_404(Household, pk=household_id)
     tasks = household.task_set.all()
     unclaimed_tasks = list(tasks.filter(claimed=False))
@@ -284,12 +284,22 @@ def tasks(request, household_id):
     in_prog_tasks = list(tasks.filter(in_progress=True))
     complete_tasks = tasks.filter(task_status=True)
     complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
-    values = {'url': url,
+    values = {'household_id': household_id,
               'unclaimed_tasks': unclaimed_tasks,
               'todo_tasks': todo_tasks,
               'in_prog_tasks': in_prog_tasks,
               'complete_tasks': complete_tasks,}
-    return render(request, 'users/task-board.html', values)
+
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            payload = json.loads(request.body)
+            if payload.get("type") == "user_bid":
+                task_id = payload.get("id")
+                task = Task.objects.get(pk=task_id)
+                task.points = payload.get("bid")
+                task.save()
+
+        return render(request, 'users/task-board.html', values)
 
 
 def last_fortnight():   

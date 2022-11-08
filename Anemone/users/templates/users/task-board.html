@@ -10,7 +10,7 @@
 	{% load static %}
 
 	<!-- link favicon -->
-	<link rel="stylesheet" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+	<link rel="icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
 
 	<!-- main style -->
 	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
@@ -371,6 +371,9 @@
 								<p class="task-description">
 									{{ task.body }}
 								</p>
+								<p class="task-description">
+									Current bid: {{ task.points }}
+								</p>
 							</div>
 
 							<div class="task-priority-container">
@@ -414,29 +417,7 @@
 								</div>
 							</div>
 						</div>
-	
-						<script type="text/javascript">
-							$(document).ready(function () {
-								<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
-								<!-- make sure that the class name 'unclaimed' is added -->
-								/* =================== GET USER BID =================== */
-								$("#bid{{ task.id }}").on("keypress", 
-									function (e) {
-										// on enter
-										if(e.which == 13) {
-											// if the input is NOT empty
-											if ( $("#bid{{ task.id }}").val().length != 0) {
-
-												var user_bid = $("#bid{{ task.id }}").val();
-												alert("User bid: " + user_bid)
-											}
-										}
-									}
-								);
-							}
-						</script>
 						{% endfor %}
-	
 					</div>
 	
 					<!-- to do -->
@@ -651,7 +632,25 @@
         -->
 	<script type="text/javascript">
 	// TODO: make it so that you can only move cards on desktop
-	$(document).ready(function () {
+	$( document ).ready(function() {
+
+
+		function getCookie(name) {
+			var cookieValue = null;
+			if (document.cookie && document.cookie != '') {
+				var cookies = document.cookie.split(';');
+				for (var i = 0; i < cookies.length; i++) {
+					var cookie = jQuery.trim(cookies[i]);
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) == (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
 
 		/* =================== MOVE TASK CARD =================== */
 		// tasks can only move between 'to do', 'in progress', and 'completed'
@@ -683,7 +682,7 @@
 			function (e) {
 				// on enter
 				if(e.which == 13) {
-					// if the input is NOT empty
+					//Ensure input is valid
 					user_bid = parseInt($("#bid{{ task.id }}").val());
 					if ( !Number.isInteger(user_bid) ) {
 						alert("Your bid must be an integer.")
@@ -691,12 +690,19 @@
 						alert("Your bid must be lower than the current bid.");
 					} else if ( user_bid < 1 ) {
 						alert("Your bid must be greater than 0")
-					} else {
-						$.post("{{ url }}",
-						{
-							test: "Test",
-						},
-						function(data, status){
+					} else { //Send payload
+						var data = new Object();
+						data.type = "user_bid";
+						data.id = {{ task.id }};
+						data.bid = user_bid;
+						var jsonData = JSON.stringify(data);
+						$.ajax({
+							type: "POST",
+							url: "{% url 'taskboard' household_id %}",
+							headers: { 'X-CSRFToken': csrftoken },
+							dataType: "json",
+							data: jsonData,
+							contentType: "application/json"
 						});
 					}
 				}
