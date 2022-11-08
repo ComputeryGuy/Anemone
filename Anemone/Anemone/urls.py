@@ -39,4 +39,5 @@ urlpatterns = [
     path('<uuid:household_id>', user_views.dashboard, name="dashboard"),
     path('bonus_points/', user_views.bonus_points, name="bonusPoints"),
     path('minus_points/', user_views.minus_points, name="minusPoints"),
+    path('bidding/',  user_views.bidding, name='bidding'),
 ]

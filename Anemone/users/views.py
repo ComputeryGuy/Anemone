@@ -169,6 +169,8 @@ def dashboard(request, household_id):
         unclaimed_tasks = tasks.filter(claimed=False)
         unclaimed_tasks_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
+        unstarted_count = None
+        in_progress_count = None
         if unclaimed_points == None:
             unclaimed_points = 0
         bulletins = household.bulletin_set.all()
@@ -179,6 +181,8 @@ def dashboard(request, household_id):
                  'points_earned_today': points_earned_today,
                  'unclaimed_tasks_count': unclaimed_tasks_count,
                  'unclaimed_points': unclaimed_points,
+                 'unstarted_count': unstarted_count,
+                 'in_progress_count': in_progress_count,
                  'bulletins': bulletins,}
         return render(request, 'users/dashboard.html', values) 
 
@@ -245,7 +249,27 @@ def minus_points(request):
     return render(request, 'users/joinHousehold.html', {'form': form})
 
 
+def bidding(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BiddingForm(request.POST)
+            uProfile = Profile.objects.get(user=request.user)
+            if form.is_valid():
+                uName = request.user.username
+                bid = form.clean_bid()
+                task_bid = form.cleaned_data['unclaimed_tasks']
 
+                task_bid = Task.objects.get(pk=task_bid.id)
+                task_bid.points = bid
+                task_bid.user_claimed = uProfile
+                task_bid.save()
+
+                return redirect('/')
+
+
+
+    form = BiddingForm()
+    return render(request, 'users/bidding.html', {'form': form})
 
 
 
