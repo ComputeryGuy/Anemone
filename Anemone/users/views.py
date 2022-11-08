@@ -1,4 +1,5 @@
-from datetime import datetime
+import datetime
+import calendar
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
@@ -273,10 +274,35 @@ def bidding(request):
 
 
 def tasks(request, household_id):
-    return render(request, 'users/task-board.html', {})
+    lfn = last_fortnight()
+
+    household = get_object_or_404(Household, pk=household_id)
+    tasks = household.task_set.all()
+    unclaimed_tasks = list(tasks.filter(claimed=False))
+    todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
+    in_prog_tasks = list(tasks.filter(in_progress=True))
+    complete_tasks = tasks.filter(task_status=True)
+    complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
+    values = {'unclaimed_tasks': unclaimed_tasks,
+              'todo_tasks': todo_tasks,
+              'in_prog_tasks': in_prog_tasks,
+              'complete_tasks': complete_tasks,}
+    return render(request, 'users/task-board.html', values)
 
 
-
+def last_fortnight():   
+    #Calculates first and third monday of current month chooses most recent of two slowly
+    c = calendar.Calendar(firstweekday=calendar.SUNDAY)
+    year = datetime.date.today().year
+    month = datetime.date.today().month
+    monthcal = c.monthdatescalendar(year, month)
+    first_third_mon = [day for week in monthcal for day in week if \
+                       day.weekday() == calendar.MONDAY and \
+                       day.month == month]
+    del first_third_mon[1] #Deletes second Monday
+    del first_third_mon[2] #Deletes fourth Monday
+    last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
+    return last_fortnight
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()

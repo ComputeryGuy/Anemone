@@ -356,22 +356,22 @@
 						<div class="column-header-container">
 							<h4 class="column-header">
 								Unclaimed 
-								<span class="column-total">X</span>
+								<span class="column-total">{{ unclaimed_tasks|length }}</span>
 							</h4>
 						</div>
 	
 						<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
 						<!-- make sure that the class name 'unclaimed' is added -->
-						<div class="a-task unclaimed">
+						{% for task in unclaimed_tasks %}
+						<div class="a-task unclaimed" id="{{ task.id }}">
 							<div class="task-description-container">
 								<h3 class="task-title">
-									Slack Integration
+									{{ task.title }}
 									<!-- <span id="reminder" class="material-symbols-rounded">notifications_active</span> -->
 								</h3>
 
 								<p class="task-description">
-									Add a filled in the portal to the let the user
-									connect to their Slack account.
+									{{ task.body }}
 								</p>
 							</div>
 
@@ -390,20 +390,21 @@
 									<div class="bid-container">
 										<input type="number" name="" id="bid" placeholder="Your Bid">
 									</div>
-
+                                                                        <!-- not currently in scope
 									<div class="task-sub-tasks">
 										<p>Subtasks:
 											<span id="total-sub-tasks">3</span>
 										</p>
 
 									</div>
+                                                                        -->
 								</div>
 								
 								<div class="task-stats-bottom">
 									<div class="task-due-date">
 										<p>
 											Due: 
-											<span id="due-date">October 23, 2022</span>
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
 										</p>
 									</div>
 
@@ -413,6 +414,7 @@
 								</div>
 							</div>
 						</div>
+						{% endfor %}
 	
 					</div>
 	
@@ -421,26 +423,29 @@
 
 						<div class="column-header-container">
 							<h4 class="column-header">
-								To Do <span class="column-total">X</span>
+								To Do <span class="column-total">{{ todo_tasks|length }}</span>
 							</h4>
 						</div>
 
 						<!-- a task -->
-						<div class="a-task claimed" draggable="true">
+						{% for task in todo_tasks %}
+						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
 							<div class="task-description-container">
 								<h3 class="task-title">
-									Do Something Important
-								</h3>
+									{{ task.title }}
+ 								</h3>
 
 								<p class="task-description">
-									Something important is happening here.
+									{{ task.body }}
 								</p>
 							</div>
-
 							<div class="task-priority-container">
+								<!-- not currently in scope
 								<p class="task-priority-medium">Medium Priority</p>
+								-->
 								<div class="task-user-img">
 									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
 								</div>
 							</div>
 
@@ -453,92 +458,97 @@
 									<div class="task-points">
 										<p>
 											Points:
-											<span id="current-points">100</span>
+											<span id="current-points">{{ task.points }}</span>
 										</p>
 
 									</div>
-
+									<!-- not currently in scope
 									<div class="task-sub-tasks">
 										<p>Subtasks:
 											<span id="total-sub-tasks">1</span>
 										</p>
 									</div>
+									-->
 								</div>
 
 								<div class="task-stats-bottom">
 									<div class="task-due-date">
 										<p>
 											Due: 
-											<span id="due-date">November 2, 2022</span>
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
 										</p>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<!-- a task -->
-						<div class="a-task claimed" draggable="true">
-							<div class="task-description-container">
-								<h3 class="task-title">
-									Do Something 2
-								</h3>
-
-								<p class="task-description">
-									He needs something to do here.
-								</p>
-							</div>
-
-							<div class="task-priority-container">
-								<p class="task-priority-low">Low Priority</p>
-								<div class="task-user-img">
-									<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-								</div>
-							</div>
-
-							<hr class="task-horz-line">
-
-							<div class="task-stats">
-
-								<div class="task-stats-top">
-									
-									<div class="task-points">
-										<p>
-											Points:
-											<span id="current-points">10</span>
-										</p>
-
-									</div>
-
-									<div class="task-sub-tasks">
-										<p>Subtasks:
-											<span id="total-sub-tasks">0</span>
-										</p>
-									</div>
-								</div>
-
-								<div class="task-stats-bottom">
-									<div class="task-due-date">
-										<p>
-											Due: 
-											<span id="due-date">November 5, 2022</span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
+						{% endfor %}
 					</div>
+
 	
 					<!-- in progress -->
 					<div class="column move" id="in-prog-column">
 
 						<div class="column-header-container">
 							<h4 class="column-header">
-								In Progress <span class="column-total">X</span>
+								In Progress <span class="column-total">{{ in_prog_tasks|length }}</span>
 							</h4>
 						</div>
 
+						<!-- a task -->
+						{% for task in in_prog_tasks %}
+						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+ 								</h3>
 
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+							</div>
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-medium">Medium Priority</p>
+								-->
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
+									</div>
+									<!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+									-->
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 					</div>
 					
 					<!-- completed -->
@@ -546,10 +556,65 @@
 
 						<div class="column-header-container">
 							<h4 class="column-header">
-								Completed <span class="column-total">X</span>
+								Completed <span class="column-total">{{ complete_tasks|length }}</span>
 							</h4>
 						</div>
 
+						<!-- a task -->
+						{% for task in complete_tasks %}
+						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+ 								</h3>
+
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+							</div>
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-medium">Medium Priority</p>
+								-->
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
+									</div>
+									<!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+									-->
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 					</div>
 				
 				</div>

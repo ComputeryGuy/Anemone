@@ -107,6 +107,7 @@ class Task(models.Model):
     due_date = models.DateTimeField(default=None, null=True, blank=True)
     points = models.IntegerField()
     claimed = models.BooleanField(default=False)
+    in_progress = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not
     user_created = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='task_user_created')
