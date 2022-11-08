@@ -656,7 +656,29 @@
 		// tasks can only move between 'to do', 'in progress', and 'completed'
 		$(".column.move").sortable ({
 			cursor: 'move',
-			connectWith: '.column.move'
+			connectWith: '.column.move',
+			update: function(event, ui) {
+				if (this === ui.item.parent()[0]) {
+					var data = new Object();
+					data.type = "task_move";
+					data.id = ui.item.attr("id");
+					data.new_pos = ui.item.parent().attr("id");
+					var jsonData = JSON.stringify(data);
+					$.ajax({
+						type: "POST",
+						url: "{% url 'taskboard' household_id %}",
+						headers: { 'X-CSRFToken': csrftoken },
+						//dataType: "json",
+						data: jsonData,
+						contentType: "application/json",
+						success: function(result) {
+						},
+						error: function(response) {
+							alert("Something went wrong in processing your move.");
+						}
+					});
+				}
+			},
 		});
 
 		/* =================== SHOW AND HIDE TASK INFORMATION =================== */

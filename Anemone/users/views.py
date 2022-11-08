@@ -284,11 +284,13 @@ def tasks(request, household_id):
     in_prog_tasks = list(tasks.filter(in_progress=True))
     complete_tasks = tasks.filter(task_status=True)
     complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
+    movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
     values = {'household_id': household_id,
               'unclaimed_tasks': unclaimed_tasks,
               'todo_tasks': todo_tasks,
               'in_prog_tasks': in_prog_tasks,
-              'complete_tasks': complete_tasks,}
+              'complete_tasks': complete_tasks,
+              'movable_tasks': movable_tasks}
 
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -297,6 +299,25 @@ def tasks(request, household_id):
                 task_id = payload.get("id")
                 task = Task.objects.get(pk=task_id)
                 task.points = payload.get("bid")
+                task.save()
+            if payload.get("type") == "task_move":
+                task_id = payload.get("id")
+                task = Task.objects.get(pk=task_id)
+                task_status = payload.get("new_pos")
+                print("\n\n")
+                print(task_status)
+                print("\n\n")
+                if task_status == "to-do-column":
+                    task.in_progress = False
+                    task.task_status = False
+                elif task_status == "in-prog-column":
+                    task.in_progress = True
+                    task.task_status = False
+                elif task_status == "complete-column":
+                    task.in_progress = False
+                    task.task_status = True
+                else:
+                    pass
                 task.save()
 
         return render(request, 'users/task-board.html', values)
