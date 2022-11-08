@@ -304,9 +304,6 @@ def tasks(request, household_id):
                 task_id = payload.get("id")
                 task = Task.objects.get(pk=task_id)
                 task_status = payload.get("new_pos")
-                print("\n\n")
-                print(task_status)
-                print("\n\n")
                 if task_status == "to-do-column":
                     task.in_progress = False
                     task.task_status = False
