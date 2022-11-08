@@ -371,7 +371,7 @@
 								<p class="task-description">
 									{{ task.body }}
 								</p>
-								<p class="task-description">
+								<p class="task-description", id="bidtext{{ task.id }}">
 									Current bid: {{ task.points }}
 								</p>
 							</div>
@@ -634,7 +634,7 @@
 	// TODO: make it so that you can only move cards on desktop
 	$( document ).ready(function() {
 
-
+		/* =================== GETS CSRF TOKEN =================== */
 		function getCookie(name) {
 			var cookieValue = null;
 			if (document.cookie && document.cookie != '') {
@@ -700,9 +700,15 @@
 							type: "POST",
 							url: "{% url 'taskboard' household_id %}",
 							headers: { 'X-CSRFToken': csrftoken },
-							dataType: "json",
+							//dataType: "json",
 							data: jsonData,
-							contentType: "application/json"
+							contentType: "application/json",
+							success: function(result) {
+								$("#bidtext{{ task.id }}").text("Current bid: " + user_bid)
+							},
+							error: function(response) {
+								alert("Something went wrong in processing your bid.");
+							}
 						});
 					}
 				}
