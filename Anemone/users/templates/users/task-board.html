@@ -431,7 +431,7 @@
 
 						<!-- a task -->
 						{% for task in todo_tasks %}
-						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 							<div class="task-description-container">
 								<h3 class="task-title">
 									{{ task.title }}
@@ -498,7 +498,7 @@
 
 						<!-- a task -->
 						{% for task in in_prog_tasks %}
-						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 							<div class="task-description-container">
 								<h3 class="task-title">
 									{{ task.title }}
@@ -564,7 +564,7 @@
 
 						<!-- a task -->
 						{% for task in complete_tasks %}
-						<div class="a-task claimed" draggable="true" id="{{ task.id }}">
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 							<div class="task-description-container">
 								<h3 class="task-title">
 									{{ task.title }}
@@ -657,6 +657,7 @@
 		$(".column.move").sortable ({
 			cursor: 'move',
 			connectWith: '.column.move',
+			items: ".{{ user.pk }}",
 			update: function(event, ui) {
 				if (this === ui.item.parent()[0]) {
 					var data = new Object();
