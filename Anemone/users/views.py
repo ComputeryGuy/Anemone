@@ -275,7 +275,8 @@ def bidding(request):
 
 def tasks(request, household_id):
     lfn = last_fortnight()
-
+    
+    url = str(household_id) + "/tasks"
     household = get_object_or_404(Household, pk=household_id)
     tasks = household.task_set.all()
     unclaimed_tasks = list(tasks.filter(claimed=False))
@@ -283,7 +284,8 @@ def tasks(request, household_id):
     in_prog_tasks = list(tasks.filter(in_progress=True))
     complete_tasks = tasks.filter(task_status=True)
     complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
-    values = {'unclaimed_tasks': unclaimed_tasks,
+    values = {'url': url,
+              'unclaimed_tasks': unclaimed_tasks,
               'todo_tasks': todo_tasks,
               'in_prog_tasks': in_prog_tasks,
               'complete_tasks': complete_tasks,}

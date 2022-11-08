@@ -684,7 +684,7 @@
 				// on enter
 				if(e.which == 13) {
 					// if the input is NOT empty
-					user_bid = $("#bid{{ task.id }}").val()
+					user_bid = parseInt($("#bid{{ task.id }}").val());
 					if ( !Number.isInteger(user_bid) ) {
 						alert("Your bid must be an integer.")
 					} else if ( user_bid >= {{ task.points }} && user_bid) {
@@ -692,7 +692,12 @@
 					} else if ( user_bid < 1 ) {
 						alert("Your bid must be greater than 0")
 					} else {
-						alert("Wah!")
+						$.post("{{ url }}",
+						{
+							test: "Test",
+						},
+						function(data, status){
+						});
 					}
 				}
 			}
