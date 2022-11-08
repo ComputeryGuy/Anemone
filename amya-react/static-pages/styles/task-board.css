@@ -40,13 +40,13 @@
 /* ---------- current button ---------- */
 .button.current {
 	border: 2px solid var(--primary-light-blue);
-	background-color: rgba(107, 175, 255, 50%);
+	background-color: var(--primary-input-colour);
 }
 
 /* ---------- right button ---------- */
 .button.right {
 	background-color: var(--primary-dark-blue);
-	border: 2px solid rgba(0, 111, 242, 50%);
+	border-color: var(--primary-dark-blue);
 }
 
 /* ---------- bottom container ---------- */
@@ -66,341 +66,87 @@
 	border-radius: var(--std-border-radius);
 }
 
-/* ---------- task ---------- */
-.a-task {
-	background-color: var(--primary-card-colour);
-	padding: .8rem;
-	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-card-colour);
-	box-shadow: var(--std-box-shadow);
-	margin-bottom: 1rem;
-}
-
-.a-task:hover {
-	cursor: pointer;
-}
-
-.task-description-container {
-	margin-bottom: 1rem;
-}
-
-.task-description-container h3 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-/* bell icon */
-.task-description-container #reminder {
-	font-size: 20px;
-	color: var(--primary-light-blue);
-}
-
-.task-description-container *:not(:last-child) {
-	margin-bottom: .5rem;
-}
-
-.task-priority-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 1rem;
-}
-
-/* ---------- task priority colours ---------- */
-.task-priority-high {
-	background-color: rgba(255, 0, 0, 30%);
-	color: rgb(255, 0, 0);
-	padding: .4rem .5rem;
-	border-radius: var(--std-border-radius);
-}
-
-.task-priority-medium {
-	background-color: rgba(255, 165, 0, 30%);
-	color: rgb(255, 165, 0);
-	padding: .4rem .5rem;
-	border-radius: var(--std-border-radius);
-}
-
-.task-priority-low {
-	background-color: rgba(0, 128, 0, 30%);
-	color: rgb(0, 128, 0);
-	padding: .4rem .5rem;
-	border-radius: var(--std-border-radius);
-}
-
-.task-priority-none {
-	background-color: rgba(128, 128, 128, 50%);
-	color: rgb(128, 128, 128);
-	padding: .4rem .5rem;
-	border-radius: var(--std-border-radius);
-}
-
-/* ---------- task user image ---------- */
-.task-user-img img {
-	width: 2rem;
-	height: 2rem;
-	border-radius: 100%;
-}
-
-/* =================== task stats =================== */
-.task-stats {
-	margin-top: 1rem;
-}
-
-.task-stats * {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	font-size: 12px;
-	color: #b0b0b0;
-}
-
-.task-stats-top {
-	margin-bottom: .5rem;
-}
-
-.task-stats-top div span,
-.task-stats-bottom div span {
-	margin-left: .3rem;
-	color: white;
-}
-
-.task-stats-top {
-	justify-content: space-between;
-}
 
 
 /* =================== media queries =================== */
 
-/* ---------- MOBILE ---------- */
-@media only screen and (max-width: 40em) {
-
-	body {
-		margin-bottom: 60px;
-	}
-
-	/* =================== main grid =================== */
-	.main-grid {
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: auto auto;
-		padding: 2rem;
-	}
-	
-	/* =================== left section =================== */
-	/* navigation sidebar to bottom of page */
-	.left-section {
-		grid-column: span 4;
-		grid-row: 2;
-	}
-	
-	/* =================== middle section =================== */
-	.middle-section {
-		grid-column: span 4;
-		grid-row: 1;
-
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: min-content min-content;
-		gap: 10px;
-	}
-
-	/* ---------- top container ---------- */
-	.top-button-container {
-		grid-row: span 1;
-
-		margin-top: 3rem;
-		margin-bottom: 1rem;
-
-		display: flex;
-		flex-direction: row;
-	}
-
-	.left-buttons-container {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.right-buttons-container {
-		display: none;
-	}
-
-	/* ---------- bottom container ---------- */
-	.bottom-container {
-		grid-row: span 1;
-	}
-
-	.task-column-container {
-		display: grid;
-
-		/* 1 column 4 rows */
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(4, max-content);
-		gap: 40px;
-	}
-
-}
-
-/* ---------- TABLET ---------- */
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {
-
-	body {
-		margin-bottom: 60px;
-	}
-
-	/* =================== main grid =================== */
-	.main-grid {
-		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: auto auto;
-		padding: 2rem;
-	}
-	
-	/* =================== left section =================== */
-	/* navigation sidebar to bottom of page */
-	.left-section {
-		grid-column: span 6;
-		grid-row: 2;
-	}
-	
-	/* =================== middle section =================== */
-	.middle-section {
-		grid-column: span 6;
-		grid-row: 1;
-
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: min-content min-content;
-		gap: 10px;
-	}
-
-	/* ---------- top container ---------- */
-	.top-button-container {
-		grid-row: span 1;
-
-		margin-top: 3rem;
-		margin-bottom: 1rem;
-
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-	
-	.right-buttons-container {
-		display: none;
-	}
-
-	/* ---------- bottom container ---------- */
-	.bottom-container {
-		grid-row: span 1;
-	}
-
-	.task-column-container {
-		display: grid;
-
-		/* 2 columns 2 rows */
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: max-content max-content;
-		gap: 15px;
-	}
-
-}
-
 /* ---------- DESKTOP ---------- */
-@media only screen and (min-width: 64.063em) {
+/* =================== left section =================== */
+.left-section {
+	grid-column: span 1;
+}
 
-	/* =================== left section =================== */
-	.left-section {
-		grid-column: span 1;
-	}
+/* =================== middle section =================== */
+.middle-section {
+	grid-column: span 11;
+	margin: 1rem;
 
-	/* =================== middle section =================== */
-	.middle-section {
-		grid-column: span 11;
-		margin: 1rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: min-content min-content;
+	gap: 10px;
+}
 
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: min-content min-content;
-		gap: 10px;
-	}
+/* ---------- top button container ---------- */
+.top-button-container {
+	grid-row: span 1;
 
-	/* ---------- top button container ---------- */
-	.top-button-container {
-		grid-row: span 1;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
 
-		margin-top: 3rem;
-		margin-bottom: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
+/* ---------- buttons ---------- */
+.button {
+	transition: var(--std-transition);
+}
 
-	/* ---------- buttons ---------- */
-	.button {
-		transition: var(--std-transition);
-	}
+/* right buttons hover */
+.button.right:hover {
+	cursor: pointer;
+	/* 50% of primary-dark-blue */
+	background-color: rgba(0, 111, 242, 50%);
+	border: 2px solid var(--primary-dark-blue);
+}
+
+/* ---------- bottom container ---------- */
+.bottom-container {
+	grid-row: span 1;
+}
+
+.task-column-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 15px;
+}
+
+/* add task button in column */
+.new-task-btn-col {
+	margin: 1rem 0;
+	width: 100%;
+
+	border: 2px solid var(--primary-dark-blue);
 	
-	/* left buttons hover */
-	.button:hover {
-		cursor: pointer;
-		transition: var(--std-transition);
-		border: 2px solid var(--primary-light-blue);
-		background-color: rgb(107, 175, 255, 50%);
-	}
-
-	/* right buttons hover */
-	.button.right:hover {
-		background-color: rgba(0, 111, 242, 50%);
-		border: 2px solid var(--primary-dark-blue);
-	}
-
-	/* ---------- bottom container ---------- */
-	.bottom-container {
-		grid-row: span 1;
-	}
-
-	.task-column-container {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 15px;
-	}
-
-	/* add task button in column */
-	.new-task-btn-col {
-		margin: 1rem 0;
-		width: 100%;
-
-		border: 2px solid var(--primary-dark-blue);
-		
-		background-color:  rgba(0, 111, 242, 50%);
-		border-radius: var(--std-border-radius);
-		padding: .5rem 0;
-		
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		
-		transition: var(--std-transition);
-	}
+	background-color:  rgba(0, 111, 242, 50%);
+	border-radius: var(--std-border-radius);
+	padding: .5rem 0;
 	
-	.new-task-btn-col * {
-		margin: auto 0;
-	}
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	
-	.new-task-btn-col:hover {
-		cursor: pointer;
-		background-color: var(--primary-dark-blue);
-		transition: var(--std-transition);
-	}
+	transition: var(--std-transition);
+}
 
-	/* ---------- task ---------- */
-	.a-task:hover {
-		/* dark blue */
-		border: 2px dashed rgba(0, 111, 242, 50%);
+.new-task-btn-col * {
+	margin: auto 0;
+}
 
-		/* light blue */
-		/* border: 2px dashed rgba(107, 175, 255, 50%); */
-	}	
+.new-task-btn-col:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
 }

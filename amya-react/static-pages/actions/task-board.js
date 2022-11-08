@@ -2,50 +2,50 @@
 // TODO: make it so that you can only move cards on desktop
 $(document).ready(function () {
 
-	/* =================== SHOW AND HIDE CLAIM TASK FORM =================== */
+	/* =================== MOVE TASK CARD =================== */
+	// tasks can only move between 'to do', 'in progress', and 'completed'
+	$(".column.move").sortable ({
+		cursor: 'move',
+		connectWith: '.column.move'
+	});
+
+	/* =================== SHOW AND HIDE TASK INFORMATION =================== */
 	$(".a-task").click(
 		function (e) { 
 			e.preventDefault();
-
-			// if the task as the class 'unclaimed'
-			if ( $(this).hasClass("unclaimed") ) {
-				// show claim form
-				$("#overlay").show({
-					duration: '1000'
-				});
-			}
-			else { //else, hide claim form
-				$("#overlay").hide({
-					duration: '1000'
-				});
+			
+			// if the task does NOT have the class 'unclaimed'
+			if ( !$(this).hasClass("unclaimed")){
+				alert("this does not have the class 'unclaimed' ")
 			}
 		}
 	);
 
-	// if click on exit btn in claim form, hide claim form
-	$("#claim-exit-btn").click(function (e) { 
-		e.preventDefault();
-		$("#overlay").hide({
-			duration: '1000'
-		});
-	});
+	/* =================== GET USER BID =================== */
+	$("#bid").on("keypress", 
+		function (e) {
+			// on enter
+			if(e.which == 13) {
+				// if the input is NOT empty
+				if ( $("#bid").val().length != 0) {
 
-	/* =================== TASK CARD MOVE FUNCTIONS =================== */
-	// make is so I can move tasks around on the page
-	$(".column").sortable ({
-		cursor: 'move',
-		connectWith: '.column'
-	});
+					var user_bid = $("#bid").val();
+					alert("User bid: " + user_bid)
+				}
+			}
+		}
+	);
 
-	/* =================== SHOW AND HIDE TASK FORM =================== */
+	/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
 	// make the Add Task button show the form (= slide in)
-	$(".right-buttons-container .button.right").click(function (e) { 
-		e.preventDefault();
-		$("#form-container").show({
-			duration: '1000'
-		});
-
-	});
+	$(".right-buttons-container .button.right").click(
+		function (e) {
+			e.preventDefault();
+			$("#form-container").show({
+				duration: '1000'
+			});
+		}
+	);
 
 	// make the x on the form close the form (= slide out)
 	$("#exit-btn").click(function (e) { 
@@ -55,16 +55,57 @@ $(document).ready(function () {
 		});
 	});
 
-	/* =================== ADD SUBTASK BUTTON =================== */
-	$("#sub-task-btn").click(
-		function (e) { 
+	/* =================== ADD SUB TASK =================== */
+	// if the user presses the 'enter' key
+	$("#sub_task_text").on("keypress", 
+		function (e) {
 			e.preventDefault();
-			
-			$(".sub-task-list").append(
-				"<li class='sub-task-list-item'><input type='checkbox' class='sub_task'><label for='sub_task'>This is a sub task.</label></li>"
-			);
+
+			// in ascii the 'enter' key is 13
+			if (e.which == 13) {
+				
+				// if the input is not empty
+				if ( $("#sub_task_text").val().length != 0 ) {
+
+					// show sub-task container
+					$(".task-container").show();
+	
+					var x = $(".task-container").html();
+					var y = '<div class="sub-task">' 
+								+ $("#sub_task_text").val()
+							+ '</div>';
+	
+					$(".task-container").html(x + y);
+					$("#sub_task_text").val("");
+				}
+			}
 		}
 	);
+
+	// if the user clicks on the add subtask btn
+	$(".add-sub-task-btn").click(
+		function (e) { 
+			e.preventDefault();
+
+			// show sub-task container
+			$(".task-container").show();
+			
+			if ( $("#sub_task_text").val().length != 0 ) {
+
+				var x = $(".task-container").html();
+				var y = '<div class="sub-task">' 
+							+ $("#sub_task_text").val()
+						+ '</div>';
+
+				$(".task-container").html(x + y);
+				$("#sub_task_text").val("");
+			}
+			// else {
+			// 	alert ("Enter some text!!!");
+			// }
+		}
+	);
+
 	/* =================== RETURN TODAY'S DATE =================== */
 	// make 'Created: XX/XX/XXXX' is always set to today's date (note the following code is JS)
 
@@ -76,9 +117,36 @@ $(document).ready(function () {
 	((''+day).length<2 ? '0' : '') + day  + '/' +
 	d.getFullYear();
 
+
 	// returns the variable. If the output is not working would show 'today's date here'
 	$("#todays-date").html(newOutput);
 	
+	/* =================== SHOW NUMBER OF DAYS LEFT BEFORE DUE DATE =================== */
+	// TODO: here
+
+	$("#end_date").change(
+		function (e) { 
+			e.preventDefault();
+			var due_date = $("#end_date").val();
+
+			var input_date = new Date(due_date);
+
+			// calcuate the difference in number of days between
+
+			// To calculate the time difference of two dates
+			var Difference_In_Time = input_date.getTime() - d.getTime();
+			
+			// To calculate the no. of days between two dates
+			var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+			// round up then +1
+			var result = Math.ceil(Difference_In_Days) + 1;
+			
+			$("#total-days").html(result);
+		}
+	);
+	
+
 	/* =================== SHOW AND HIDE REPEAT INFORMATION ON FORM =================== */
 	// if "Repeats?" is checked then show the expaned info about repeat
 	$(".repeat-toggle-container #repeat_toggle").click(
@@ -86,16 +154,10 @@ $(document).ready(function () {
 			if ( $(this).prop("checked") == true) {
 				// alert ("Checkbox is checked.")
 				
-				// // scroll on overflow
-				$(".task-form-container").css({"overflow-y":"scroll"});
-				
 				// show the extra info regarding repeats
 				$(".repeat-expanded").show(); 
 			}
-			else {
-				// // else, remove scroll bar
-				$(".task-form-container").css({"overflow-y":"visible"});
-				
+			else {			
 				// hide repeat extra information
 				$(".repeat-expanded").hide();
 			}

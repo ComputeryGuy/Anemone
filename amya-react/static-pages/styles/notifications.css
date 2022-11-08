@@ -45,14 +45,114 @@
 	border-bottom: 2px solid var(--primary-dark-blue);
 }
 
-/* =================== MEDIA QUERIES =================== */
-
-/* =================== main grid =================== */
+/* ---------- DESKTOP ---------- */
+/* =================== LEFT SECTION =================== */
 .left-section {
 	grid-column: span 1;
 }
 
+/* =================== MIDDLE SECTION =================== */
 .middle-section {
 	grid-column: span 11;
 	padding: 1.5rem;
+
+	display: grid;
+	grid-template-rows: repeat(3, min-content);
+	gap: 10px;
+}
+
+/* ---------- button container ---------- */
+.button-container {
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+}
+
+.button-container button {
+    background-color: var(--primary-dark-blue);
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: var(--std-border-radius);
+    padding: .8rem 1.5rem;
+	transition: var(--std-transition);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.button-container button span,
+.button-container button p {
+	font-size: 14px;
+}
+
+.button-container button *:not(:last-child) {
+    margin-right: 0.3rem;
+}
+
+.button-container button:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour);
+	transition: var(--std-transition);
+}
+
+/* ---------- top container ---------- */
+.top-container h2 {
+	margin-bottom:1rem;
+}
+
+/* ---------- bottom container ---------- */
+.bottom-container h2 {
+	margin-bottom: 1rem;
+}
+
+.completed-tasks-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	
+	gap: 10px;
+}
+
+
+.comp-task {
+	display: grid;
+	grid-template-columns: min-content repeat(2, 1fr);
+	gap: 10px;
+}
+
+.comp-task div:not(:last-child) {
+	border-right: 1px solid var(--primary-light-blue);
+}
+
+.task-user-profile {
+	text-align: center;
+    padding: 1rem;
+	/* padding-right: 4rem; */
+}
+
+.task-user-profile img {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 100%;
+	border: 3px solid var(--primary-dark-blue);
+	margin-bottom: .3rem;
+}
+
+.task-name-container p {
+	color: var(--primary-light-blue);
+}
+
+.task-name {
+	font-size: 1.5rem;
+}
+
+.task-point-container p {
+	color: var(--primary-light-blue);
+}
+
+.for-points {
+	font-size: 1.5rem;
 }

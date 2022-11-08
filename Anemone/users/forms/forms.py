@@ -27,10 +27,10 @@ class DateTimeForm(forms.Form):
     due_time = forms.DateField(widget=AdminTimeWidget())
 
 
-
 class BonusPointsForm(forms.Form):
     member_name = forms.CharField(max_length=32)
     bonus_points = forms.IntegerField()
+
 
 class MinusPointsForm(forms.Form):
     member_name = forms.CharField(max_length=32)
@@ -48,7 +48,16 @@ class BiddingForm(forms.Form):
         return bid
 
 
+class BiddingForm(forms.Form):
+    unclaimed_tasks = forms.ModelChoiceField(queryset=Task.objects.filter(task_status='False'))
+    bid = forms.IntegerField()
 
+    def clean_bid(self):
+        bid = self.cleaned_data["bid"]
+        task_bid = self.cleaned_data["unclaimed_tasks"]
+        if task_bid.user_claimed is not None and bid >= task_bid.points or task_bid.user_claimed is None and bid > task_bid.points:
+            raise ValidationError(_('Bid is too great. Bid lower.'), code='invalidBid')
+        return bid
 
     '''    member_selected = forms.CharField(label = 'Which user deserves extra points this week?',
         widget = forms.RadioSelect(choices = ))

@@ -98,7 +98,7 @@
 							</a>
 						</li>
 						<li class="list-item">
-							<a href="." class="nav-link">
+							<a href="./log-in.html" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
@@ -119,47 +119,47 @@
 
 				<div class="info-square-container">
 
-					<!-- FIXME: what happens if the points earned is larger than 3 digits -->
-					<div class="small-info-squares">
-
-						<!-- <div class="info-square">
-							<h1>100</h1>
-							<h3>Total Points</h3>
-						</div> -->
-
-						<div class="info-square">
-							<h1>3</h1>
-							<h3>New Tasks</h3>
-						</div>
-
-						<div class="info-square">
-							<h1>5</h1>
-							<h3>Completed Tasks</h3>
-						</div>
-
-						<div class="info-square">
-							<h1>40</h1>
-							<h3>Points Earned Today</h3>
-						</div>
-
+					<!-- unclaimed -- there are X new tasks -->
+					<div class="info-square">
+						<h1>3</h1>
+						<h3>Unclaimed Tasks</h3>
 					</div>
+					
+					<!-- to do -- you have not completed X tasks -->
+					<div class="info-square">
+						<h1>2</h1>
+						<h3>Tasks Not Started </h3>
+					</div>
+					
+					<!-- in progress -->
+					<div class="info-square">
+						<h1>1</h1>
+						<h3>Tasks In Progress</h3>
+					</div>
+
+					<!-- completed -- you have complexted X tasks -->
+					<div class="info-square">
+						<h1>5</h1>
+						<h3>Completed Tasks</h3>
+					</div>
+
 
 				</div>
 
-				<div class="task-avail-container">
+				<div class="todays-total-container">
 
 					<p>You have earned</p>
 
-					<h1 id="current-points-avil">40pts</h1>
+					<h1 id="todays-points">40pts</h1>
 		
 					<p>today</p>
 
-					<a href="./task-board.html" class="button-container">
-						<buttton class="button">
-							<p>go to tasks</p>
-						</buttton>
-					</a>
-
+					
+					<div class="go-to-tasks-container">
+						<button id="go-to-tasks-btn">
+							<a href="./task-board.html">Go to Tasks</a>
+						</button>
+					</div>
 				</div>
 
 				<div class="recent-notifs-container">
@@ -167,13 +167,13 @@
 					<div class="notifs-header">
 
 						<h2>Recent Notifications</h2>
-
-						<a href="./notifications.html" class="button-container">
-							<button class="button">
-								<p>go to notification</p>
+						
+						<div class="go-to-notifs-container">
+							<button id="go-to-notifs-btn">
+								<a href="./notifications.html">Go to Notifications</a>
 							</button>
-						</a>
-
+						</div>
+						
 					</div>
 
 					<div class="a-notification-container">
@@ -205,10 +205,6 @@
 							</div>
 						</div>
 		
-					</div>
-
-					<div class="button-container mobile">
-						<a class="button" href="#">go to notifications</a>
 					</div>
 
 				</div>
@@ -243,11 +239,11 @@
 
 			</div>
 
-			<a href="./calendar.html" class="button-container">
-				<button class="button">
-					<p>go to calendar</p>
+			<div class="go-to-cal-container">
+				<button id="go-to-cal-btn">
+					<a href="./calendar.html">Go to Calendar</a>
 				</button>
-			</a>
+			</div>
 
 		</section>
 

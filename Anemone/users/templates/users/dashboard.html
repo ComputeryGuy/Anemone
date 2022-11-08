@@ -18,18 +18,14 @@
 	<!-- link the index specific stylesheet -->
 	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-style.css' %}">
 
-	<!-- link the media queries sheet -->
-	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-queries.css' %}">
-
 	<!-- link google icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
 
-	<!-- helps with react organisation -->
 	<div class="main-grid">
-		<!-- TODO: on current page highlight the menu icon -->
+		
 		<section class="left-section">
 
 			<nav id="nav-sidebar">
@@ -116,54 +112,60 @@
 
 				<div class="info-square-container">
 
-					<!-- TODO: what happens if the points earned is larger than 3 digits -->
-					<div class="small-info-squares">
-
-						<div class="info-square">
-							<h1>{{ total_points }}</h1>
-							<h3>Total Points</h3>
-						</div>
-
-						<div class="info-square">
-							<h1>{{ new_tasks }}</h1>
-							<h3>New Tasks</h3>
-						</div>
-
-						<div class="info-square">
-							<h1>{{ completed_tasks }}</h1>
-							<h3>Completed Tasks</h3>
-						</div>
-
-						<div class="info-square">
-							<h1>{{ points_earned_today }}</h1>
-							<h3>Points Earned Today</h3>
-						</div>
-
+					<!-- unclaimed -->
+					<div class="info-square">
+						<h1>{{ new_tasks }}</h1>
+						<h3>Unclaimed Tasks</h3>
 					</div>
 
+					<!-- FIXME: todo -->
+					<div class="info-square">
+						<h1>{{ unstarted_count }}</h1>
+						<h3>Tasks Not Started</h3>
+					</div>
+					
+					<!-- FIXME: in progress -->
+					<div class="info-square">
+						<h1>{{ in_progress_count }}</h1>
+						<h3>Tasks In Progress</h3>
+					</div>
+					
+					<!-- completed -->
+					<div class="info-square">
+						<h1>{{ completed_tasks }}</h1>
+						<h3>Completed Tasks</h3>
+					</div>
 				</div>
 
-				<div class="task-avail-container">
+				<div class="todays-total-containerr">
 
-					<h1 id="current-points-avil">{{ unclaimed_points }} pts</h1>
+					<p>You have earned</p>
+
+					<h1 id="todays-points">{{ points_earned_today }} pts</h1>
 		
-					<p>
-						available</br>
-						from {{ unclaimed_tasks_count }} <span class="add-blue">unclaimed</span> tasks
-					</p>
-		
-					<div class="button-container">
-						<a class="button" href="./tasks.html">go to tasks</a>
+					<p>today</p>
+
+					<div class="go-to-tasks-container">
+						<button id="go-to-tasks-btn">
+							<a href="./task-board.html">Go to Tasks</a>
+						</button>
 					</div>
 				</div>
 
 				<div class="recent-notifs-container">
+
 					<div class="notifs-header">
+
 						<h2>Recent Notifications</h2>
-						<div class="button-container">
-							<a class="button" href="#">go to notifications</a>
+
+						<div class="go-to-notifs-container">
+							<button id="go-to-notifs-btn">
+								<a href="./notifications.html">Go to Notifications</a>
+							</button>
 						</div>
+
 					</div>
+
 					<div class="a-notification-container">
 						
 						{% for bulletin in bulletins %}
@@ -172,6 +174,7 @@
 								<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
 								<p class="user-name">{{ bulletin.user }}</p>
 							</div>
+
 							<div class="user-post">
 								<p class="time-date-header">Posted: <span class="notif-style">{{ bulletin.creation_time|date:'h:i A | l, F d, Y' }}</span></p>
 								<h3 class="notif-title">{{ bulletin.title }}</h3>
@@ -179,6 +182,7 @@
 									{{ bulletin.body }}
 								</p>
 							</div>
+
 						</div>
 						{% endfor %}
                         <!-- 
@@ -195,9 +199,6 @@
 						</div>
 						-->
 					</div>
-					<div class="button-container mobile">
-						<a class="button" href="#">go to notifications</a>
-					</div>
 				</div>
 
 			</div>
@@ -207,30 +208,31 @@
 
 			<div class="calendar">I am a calendar</div>
 
+			<!-- A max of 3 events onlty -->
 			<div class="event-container">
 				<h2>Today's Events</h2>
 
-				<!-- TODO: when clicked on the event information appears -->
 				<div class="a-event">
 					<h4>Group Event 1</h4>
 					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
 				</div>
+
 				<div class="a-event">
 					<h4>Group Event 1</h4>
 					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
 				</div>
+
 				<div class="a-event">
 					<h4>Group Event 1</h4>
 					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
 				</div>
-				<div class="a-event">
-					<h4>Group Event 1</h4>
-					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
-				</div>
+
 			</div>
 
-			<div class="button-container">
-				<a href="#" class="button">go to calendar</a>
+			<div class="go-to-cal-container">
+				<button id="go-to-cal-btn">
+					<a href="./calendar.html">Go to Calendar</a>
+				</button>
 			</div>
 
 		</section>

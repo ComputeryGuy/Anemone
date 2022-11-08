@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -126,11 +126,15 @@ def create_household(request):
     return render(request, 'users/createHousehold.html', {'form': form})
 
 
+#alternative heading if url join implemented
+#def join_household(request, household_id):
 def join_household(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = JoinGroupForm(request.POST)
             profile = Profile.objects.get(user = request.user)
+            ##possibly needed if url join implemented with above header
+            ##household = Household.objects.get(household_id)
             if form.is_valid():
                 enteredPin = form.cleaned_data['household_pin']
                 group = Household.objects.get(pin = enteredPin)
@@ -139,6 +143,18 @@ def join_household(request):
                 return redirect('/')
     form = JoinGroupForm()
     return render(request, 'users/joinHousehold.html', {'form': form})
+
+##need to edit above view/ to make this usable
+####THIS WORKS
+def generate_household_link(request):
+    if request.user.is_authenticated:
+        if request.user.profile.household is not None:
+            uuid = str(request.user.profile.household.household_id)
+            url = 'http://127.0.0.1:8000//joinHousehold/' + uuid
+            print(url)
+            return HttpResponse(url)
+        
+    
 
 
 def dashboard(request, household_id):
@@ -153,6 +169,8 @@ def dashboard(request, household_id):
         unclaimed_tasks = tasks.filter(claimed=False)
         unclaimed_tasks_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
+        unstarted_count = None
+        in_progress_count = None
         if unclaimed_points == None:
             unclaimed_points = 0
         bulletins = household.bulletin_set.all()
@@ -163,6 +181,8 @@ def dashboard(request, household_id):
                  'points_earned_today': points_earned_today,
                  'unclaimed_tasks_count': unclaimed_tasks_count,
                  'unclaimed_points': unclaimed_points,
+                 'unstarted_count': unstarted_count,
+                 'in_progress_count': in_progress_count,
                  'bulletins': bulletins,}
         return render(request, 'users/dashboard.html', values) 
 
@@ -173,7 +193,7 @@ def bonus_points(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = BonusPointsForm(request.POST)
-            uProfile = Profile.objects.get(user=request.user)
+            uProfile = Profile.objects.get(user = request.user)
             if form.is_valid():
                 uName = request.user.username
                 bonusMember = form.cleaned_data['member_name']
@@ -250,9 +270,6 @@ def bidding(request):
 
     form = BiddingForm()
     return render(request, 'users/bidding.html', {'form': form})
-
-
-
 
 
 

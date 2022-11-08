@@ -1,9 +1,6 @@
-/* =================== imported fonts =================== */
-
-/* ---------- sub-header ---------- */
 
 /* =================== overlay container =================== */
-#overlay {
+#claim-overlay {
 	position: absolute;
 	background-color: rgba(33, 34, 41, 50%);
 	width: 100vw;
