@@ -359,9 +359,7 @@
 								<span class="column-total">{{ unclaimed_tasks|length }}</span>
 							</h4>
 						</div>
-	
-						<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
-						<!-- make sure that the class name 'unclaimed' is added -->
+						
 						{% for task in unclaimed_tasks %}
 						<div class="a-task unclaimed" id="{{ task.id }}">
 							<div class="task-description-container">
@@ -390,7 +388,7 @@
 									
 									
 									<div class="bid-container">
-										<input type="number" name="" id="bid" placeholder="Your Bid">
+										<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
 									</div>
                                                                         <!-- not currently in scope
 									<div class="task-sub-tasks">
@@ -416,6 +414,27 @@
 								</div>
 							</div>
 						</div>
+	
+						<script type="text/javascript">
+							$(document).ready(function () {
+								<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
+								<!-- make sure that the class name 'unclaimed' is added -->
+								/* =================== GET USER BID =================== */
+								$("#bid{{ task.id }}").on("keypress", 
+									function (e) {
+										// on enter
+										if(e.which == 13) {
+											// if the input is NOT empty
+											if ( $("#bid{{ task.id }}").val().length != 0) {
+
+												var user_bid = $("#bid{{ task.id }}").val();
+												alert("User bid: " + user_bid)
+											}
+										}
+									}
+								);
+							}
+						</script>
 						{% endfor %}
 	
 					</div>
@@ -655,20 +674,23 @@
 		);
 		*/
 
+
+		<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
+		<!-- make sure that the class name 'unclaimed' is added -->
 		/* =================== GET USER BID =================== */
-		$("#bid").on("keypress", 
+		{% for task in unclaimed_tasks %}
+		$("#bid{{ task.id }}").on("keypress", 
 			function (e) {
 				// on enter
 				if(e.which == 13) {
 					// if the input is NOT empty
-					if ( $("#bid").val().length != 0) {
-
-						var user_bid = $("#bid").val();
-						alert("User bid: " + user_bid)
+					if ( $("#bid{{ task.id }}").val() >= {{ task.points }}) {
+						alert("Your bid must be lower than the current bid.");
 					}
 				}
 			}
 		);
+		{% endfor %}
 
 		/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
 		// make the Add Task button show the form (= slide in)
