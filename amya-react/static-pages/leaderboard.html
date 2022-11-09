@@ -20,6 +20,18 @@
 	<link rel="stylesheet" 
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+	<!-- Chart.js CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	
@@ -96,8 +108,91 @@
 
 		<section class="middle-section">
 
+			<div class="leaderboard-container">
+				<h2 id="leaderboard-title">Leaderboard</h2>
+
+				<div class="table-container">
+
+					<div class="table-row header">
+						<h4>Rank</h4>
+						<h4>Name</h4>
+						<h4>Score</h4>
+					</div>
+				
+					<div class="table-row data">
+						<p class="rank">01</p>
+						<p class="name">My Name</p>
+						<p class="score">10000</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">02</p>
+						<p class="name">Name</p>
+						<p class="score">1000</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">03</p>
+						<p class="name">Name</p>
+						<p class="score">100</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">04</p>
+						<p class="name">Name</p>
+						<p class="score">10</p>
+					</div>
+						
+					<div class="table-row data">
+						<p class="rank">05</p>
+						<p class="name">Name</p>
+						<p class="score">1</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">06</p>
+						<p class="name">Name</p>
+						<p class="score">1</p>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="bar-chart-container">
+				<h2 id="bar-chart-title">Progress Chart</h2>
+
+				<div class="chart-container">
+					<canvas id="chart"></canvas>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="right-section">
+
+			<div class="user-container">
+				<div class="user-image-container">
+					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+					<h4 id="user-nme">David</h4>
+				</div>
+
+				<div class="user-stats-container">
+					<h4 id="my-level">Level: <span id="my-level-numb">1</span></h4>
+					<h4 id="my-rank">Rank: <span id="my-rank-numb">1</span></h4>
+					<h4 id="my-score">Score: <span id="my-score-numb">600pts</span></h4>
+				</div>
+			</div>
+
+			<div class="my-labels">
+				<h4>My Labels:</h4>
+
+				<div class="labels-table">
+					<p>"The Best Cleaner" </p>
+					<p>"The Greatest Roommate"</p>
+					<p>"Trash Thrower" </p>
+					<p>"Legendary Swifer"</p>
+
+				</div>
+			</div>
+			
 		</section>
 	</div>
-	
+	<script src="./actions/leaderboard.js"></script>
 </body>
 </html>
