@@ -28,7 +28,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
-
+    path('log/', user_views.log, name='log'),
     ##used if url join is implemented
     #path('joinHousehold/<uuid:household_id>/', user_views.join_household, name='joinGroup'),
     
