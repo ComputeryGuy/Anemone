@@ -1,4 +1,6 @@
 import uuid
+from datetime import datetime, timedelta
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import CharField
@@ -104,6 +106,7 @@ class Event(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
+    creation_time = models.DateTimeField(default=datetime.now)
     due_date = models.DateTimeField(default=None, null=True, blank=True)
     points = models.IntegerField()
     claimed = models.BooleanField(default=False)
@@ -144,6 +147,9 @@ def cache_previous_status(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
+    if datetime.now() >= timezone.make_naive((instance.creation_time + timedelta(days=1))) and not instance.claimed and instance.user_claimed is not None:
+        instance.claimed = 'True'
+        instance.save()
     if instance.task_status != instance.__original_status and instance.user_claimed is not None and instance.__original_status is not None:
         profile = instance.user_claimed
         if instance.task_status:

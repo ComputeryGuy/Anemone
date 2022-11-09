@@ -305,6 +305,7 @@ def create_task(request, household_id):
     due_datetime = datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
     task = Task.objects.create(title = task_title,
                                 body = task_body,
+                                creation_time = datetime.now(),
                                 due_date = due_datetime,
                                 points = 1000,
                                 user_created = profile_created,
@@ -342,6 +343,21 @@ def create_task(request, household_id):
             recurrence = TaskRecurrence.objects.create(task_to_clone = task,
                                                        frequency = frequency,
                                                        day_of_month = day_of_month)
+
+def log(request):
+    if request.user.is_authenticated:
+        bidEnd = datetime.now() + timedelta(days=-1)  # bids end after this amount of days
+        unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
+        for object in unclaimed_tasks:
+            object.save()
+        uHousehold = Profile.objects.get(user=request.user).household
+        tasks_finished = Task.objects.filter(household=uHousehold, claimed='True', task_status='True')
+        tasks_in_progress = Task.objects.filter(household=uHousehold, claimed='True', task_status='False')
+        tasks_unclaimed = Task.objects.filter(claimed='False')
+        values = {'tasks_finished': tasks_finished,
+                  'tasks_in_progress': tasks_in_progress,
+                  'tasks_unclaimed': tasks_unclaimed, }
+        return render(request, 'users/log.html', values)
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()
