@@ -62,57 +62,6 @@ def post_bulletin(request):
     return render(request, 'users/bulletin.html', {'form': form})
 
 
-def create_task(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = request.POST
-            form_data = form.dict()
-            # Task information
-            profile_created = request.user.profile
-            task_title = form_data['task_title']
-            task_body = form_data['task_body']
-            due_datetime = form_data['due_date'] + " " + form_data['due_time']
-            due_datetime = datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
-            task = Task.objects.create(title = task_title,
-                                        body = task_body,
-                                        due_date = due_datetime,
-                                        points = 1000,
-                                        user_created = profile_created)
-            # Frequency information
-            if 'repeats' in form_data:
-                frequency = form_data['frequency']
-                if frequency == 'weekly':
-                    mo = tu = we = th = fr = sa = su = False
-                    if 'mo' in form_data:
-                        mo = True
-                    if 'tu' in form_data:
-                        tu = True
-                    if 'we' in form_data:
-                        we = True
-                    if 'th' in form_data:
-                        th = True
-                    if 'fr' in form_data:
-                        fr = True
-                    if 'sa' in form_data:
-                        sa = True
-                    if 'su' in form_data:
-                        su = True
-                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
-                                                               frequency = frequency,
-                                                               mo = mo,
-                                                               tu = tu,
-                                                               we = we,
-                                                               th = th,
-                                                               fr = fr,
-                                                               sa = sa,
-                                                               su = su,)
-                else:
-                    day_of_month = form_data['day_of_month']
-                    recurrence = TaskRecurrence.objects.create(task_to_clone = task,
-                                                               frequency = frequency,
-                                                               day_of_month = day_of_month)
-    datetimeform = DateTimeForm()
-    return render(request, 'users/create_task.html', {'datetimeform': datetimeform})
 
 def create_household(request):
     if request.user.is_authenticated:
@@ -296,28 +245,12 @@ def tasks(request, household_id):
 
     if request.user.is_authenticated:
         if request.method == "POST":
-            payload = json.loads(request.body)
-            if payload.get("type") == "user_bid":
-                task_id = payload.get("id")
-                task = Task.objects.get(pk=task_id)
-                task.points = payload.get("bid")
-                task.save()
-            if payload.get("type") == "task_move":
-                task_id = payload.get("id")
-                task = Task.objects.get(pk=task_id)
-                task_status = payload.get("new_pos")
-                if task_status == "to-do-column":
-                    task.in_progress = False
-                    task.task_status = False
-                elif task_status == "in-prog-column":
-                    task.in_progress = True
-                    task.task_status = False
-                elif task_status == "complete-column":
-                    task.in_progress = False
-                    task.task_status = True
-                else:
-                    pass
-                task.save()
+            try: 
+                payload = json.loads(request.body)
+                handle_task_ajax(payload)
+            except:
+                create_task(request, household_id)
+                return redirect('taskboard', household_id=household_id)
 
         return render(request, 'users/task-board.html', values)
 
@@ -335,6 +268,80 @@ def last_fortnight():
     del first_third_mon[2] #Deletes fourth Monday
     last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
     return last_fortnight
+
+
+def handle_task_ajax(payload):
+    if payload.get("type") == "user_bid":
+        task_id = payload.get("id")
+        task = Task.objects.get(pk=task_id)
+        task.points = payload.get("bid")
+        task.save()
+    if payload.get("type") == "task_move":
+        task_id = payload.get("id")
+        task = Task.objects.get(pk=task_id)
+        task_status = payload.get("new_pos")
+        if task_status == "to-do-column":
+            task.in_progress = False
+            task.task_status = False
+        elif task_status == "in-prog-column":
+            task.in_progress = True
+            task.task_status = False
+        elif task_status == "complete-column":
+            task.in_progress = False
+            task.task_status = True
+        else:
+            pass
+        task.save()
+
+
+def create_task(request, household_id):
+    form = request.POST
+    form_data = form.dict()
+    # Task information
+    profile_created = request.user.profile
+    task_title = form_data['task_title']
+    task_body = form_data['task_body']
+    due_datetime = form_data['due_date'] + " " + "12:00:00"  # currently we have no way to use a given dateform_data['due_time']
+    due_datetime = datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
+    task = Task.objects.create(title = task_title,
+                                body = task_body,
+                                due_date = due_datetime,
+                                points = 1000,
+                                user_created = profile_created,
+                                household = Household.objects.get(pk=household_id))
+    # Frequency information
+    if 'repeats' in form_data:
+        frequency = form_data['repeat-type-radio']
+        if frequency == 'weekly':
+            mo = tu = we = th = fr = sa = su = False
+            if 'mo' in form_data:
+                mo = True
+            if 'tu' in form_data:
+                tu = True
+            if 'we' in form_data:
+                we = True
+            if 'th' in form_data:
+                th = True
+            if 'fr' in form_data:
+                fr = True
+            if 'sa' in form_data:
+                sa = True
+            if 'su' in form_data:
+                su = True
+            recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                       frequency = frequency,
+                                                       mo = mo,
+                                                       tu = tu,
+                                                       we = we,
+                                                       th = th,
+                                                       fr = fr,
+                                                       sa = sa,
+                                                       su = su,)
+        else:
+            day_of_month = form_data['day_of_month']
+            recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                       frequency = frequency,
+                                                       day_of_month = day_of_month)
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()

@@ -57,18 +57,20 @@
 			</div>
 
 			<form action="" method="post" class="task-form">
+				{% csrf_token %}
 
 				<div class="task-name-container">
 					<label for="task_name"></label>
-					<input type="text" id="task_name" placeholder="Name" required>
+					<input type="text" id="task_name" placeholder="Name" name="task_title" required>
 				</div>
 
 				<div class="task-detail-container">
 					<label for="task_detail"></label>
-					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details"></textarea>
+					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details" name="task_body"></textarea>
 				</div>
 
 				<!-- TODO: may remove if not relevant -->
+				<!-- Not currently in scope
 				<div class="sub-task-container">
 
 					<h4>Subtasks</h4>
@@ -90,6 +92,7 @@
 
 					</div>
 				</div>
+				-->
 
 				<!-- TODO: add reminder container (if needed) -->
 				<div class="due-date-container">
@@ -102,7 +105,7 @@
 
 					<div class="due-container">
 						<label for="end_date">Due:</label>
-						<input type="date" id="end_date">
+						<input type="date" id="end_date" name="due_date">
 						<p>
 							You have 
 							<span id="total-days">X</span>
@@ -112,6 +115,7 @@
 
 				</div>
 
+				<!-- Not currently in scope
 				<div class="priority-container">
 					<label for="priority_select"></label>
 					<select id="priority_select">
@@ -120,13 +124,14 @@
 						<option value="high">High Priority</option>
 					</select>
 				</div>
+				-->
 
 				<div class="repeats-container">
 
 					<div class="repeat-toggle-container">
 
 						<label for="repeat_toggle">Repeats?</label>
-						<input type="checkbox" name="" id="repeat_toggle">
+						<input type="checkbox" name="repeats" id="repeat_toggle" checked="false">
 
 					</div>
 
@@ -134,26 +139,30 @@
 						
 						<div class="every-container">
 
+							<!--
 							<div class="repeat-every-container">
 								<label for="repeat_number">Repeat every</label>
 								<input type="number" id="repeat_number" min="1" max="100">
 							</div>
+							-->
 
 							<div class="radio-container">
 
+								<!--
 								<div class="radio-btn">
 									<input type="radio" name="repeat-type-radio" id="day">
 									<label for="repeat_type">Day</label>
 								</div>
+								-->
 
 								<div class="radio-btn">
-									<input type="radio" name="repeat-type-radio" id="week">
-									<label for="repeat_type">Week</label>
+									<input type="radio" name="repeat-type-radio" id="week" value="weekly">
+									<label for="repeat_type">Weekly</label>
 								</div>
 
 								<div class="radio-btn">
-									<input type="radio" name="repeat-type-radio" id="month">
-									<label for="repeat_type">Month</label>
+									<input type="radio" name="repeat-type-radio" id="month" value="montly">
+									<label for="repeat_type">Monthly</label>
 								</div>
 
 							</div>
@@ -166,30 +175,34 @@
 							<div class="days-of-the-week-container">
 
 								<label for="mon">Monday</label>
-								<input type="checkbox" id="mon">
+								<input type="checkbox" id="mon" name="mo">
 							
 								<label for="tue">Tuesday</label>
-								<input type="checkbox" id="tue">
+								<input type="checkbox" id="tue" name="tu">
 
 								<label for="wed">Wednesday</label>
-								<input type="checkbox" id="wed">
+								<input type="checkbox" id="wed" name="we">
 								
 								<label for="thu">Thursday</label>
-								<input type="checkbox" id="thu">
+								<input type="checkbox" id="thu" name="th">
 
 								<label for="fri">Friday</label>
-								<input type="checkbox" id="fri">
+								<input type="checkbox" id="fri" name="fr">
 
 								<label for="sat">Saturday</label>
-								<input type="checkbox" id="sat">
+								<input type="checkbox" id="sat" name="sa">
 
 								<label for="sun">Sunday</label>
-								<input type="checkbox" id="sun">
+								<input type="checkbox" id="sun" name="su">
 								
 							</div>
+							</br>
+							<label for="day_of_month">Monthly (day of month): </label>
+							<input type="number" name="day_of_month" min="1" max="31"><br>
 
 						</div>
 
+						<!-- Not currently in scope
 						<div class="repeat-ends-container">
 							<p id="ends-header">Ends</p>
 
@@ -209,6 +222,7 @@
 								</div>
 							</div>
 						</div>
+						-->
 
 					</div>
 				</div>
