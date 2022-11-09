@@ -1,0 +1,152 @@
+
+/* =================== CONSTANT STYLES =================== */
+/* ---------- top button container ---------- */
+/* ---------- left buttons ---------- */
+.left-buttons-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.btns-link {
+	text-decoration: none;
+}
+
+.left-buttons-container .btns-link:not(:last-child) {
+	margin-right: 1rem;
+}
+
+/* ---------- buttons (both left and right) ---------- */
+.button {
+	background-color: var(--primary-card-colour);
+	border: 2px solid var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	padding: .6rem 2rem;
+
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+}
+
+.button span, .button p {
+	margin: auto 0;
+	font-size: 14px;
+}
+
+.button *:not(:last-child) {
+	margin-right: .3rem;
+	display: inline-block;
+}
+
+/* ---------- current button ---------- */
+.button.current {
+	border: 2px solid var(--primary-light-blue);
+	background-color: var(--primary-input-colour);
+}
+
+/* ---------- right button ---------- */
+.button.right {
+	background-color: var(--primary-dark-blue);
+	border-color: var(--primary-dark-blue);
+}
+
+/* ---------- bottom container ---------- */
+/* ---------- task-column-container ---------- */
+/* ---------- column ---------- */
+.column-header-container {
+	padding: 1rem;
+	border-bottom: 2px solid #9BA8BC;
+	margin-bottom: 1rem;
+}
+
+/* the span */
+.column-total {
+	background-color: var(--primary-light-blue);
+	margin-left: .5rem;
+	padding: .3rem .4rem;
+	border-radius: var(--std-border-radius);
+}
+
+
+
+/* =================== media queries =================== */
+
+/* ---------- DESKTOP ---------- */
+/* =================== left section =================== */
+.left-section {
+	grid-column: span 1;
+}
+
+/* =================== middle section =================== */
+.middle-section {
+	grid-column: span 11;
+	margin: 1rem;
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: min-content min-content;
+	gap: 10px;
+}
+
+/* ---------- top button container ---------- */
+.top-button-container {
+	grid-row: span 1;
+
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+/* ---------- buttons ---------- */
+.button {
+	transition: var(--std-transition);
+}
+
+/* right buttons hover */
+.button.right:hover {
+	cursor: pointer;
+	/* 50% of primary-dark-blue */
+	background-color: rgba(0, 111, 242, 50%);
+	border: 2px solid var(--primary-dark-blue);
+}
+
+/* ---------- bottom container ---------- */
+.bottom-container {
+	grid-row: span 1;
+}
+
+.task-column-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 15px;
+}
+
+/* add task button in column */
+.new-task-btn-col {
+	margin: 1rem 0;
+	width: 100%;
+
+	border: 2px solid var(--primary-dark-blue);
+	
+	background-color:  rgba(0, 111, 242, 50%);
+	border-radius: var(--std-border-radius);
+	padding: .5rem 0;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+	transition: var(--std-transition);
+}
+
+.new-task-btn-col * {
+	margin: auto 0;
+}
+
+.new-task-btn-col:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
+}

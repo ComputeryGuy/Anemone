@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Roommate</title>
+
+	{% load static %}
+
+	<!-- link favicon -->
+	<link rel="icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
+
+	<!-- task board style -->
+	<link rel="stylesheet" href="{% static 'users/styles/task-board.css' %}">
+
+	<!-- task form style -->
+	<link rel="stylesheet" href="{% static 'users/styles/task-form.css' %}">
+
+	<!-- claim task form -->
+	<link rel="stylesheet" href="{% static 'users/styles/claim-task-form.css' %}">
+
+	<!-- task style -->
+	<link rel="stylesheet" href="{% static 'users/styles/task.css' %}">
+	
+	<!-- google icons -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<div class="main-grid">
+
+		<!-- create task form -->
+		<div id="form-container" class="task-form-container">
+
+			<div class="exit-btn-container">
+				<button id="exit-btn">
+					<span class="material-symbols-rounded">close</span>
+				</button>
+			</div>
+
+			<div class="header-container">
+				<h2>Let's Create a Task!</h2>
+			</div>
+
+			<form action="" method="post" class="task-form">
+				{% csrf_token %}
+
+				<div class="task-name-container">
+					<label for="task_name"></label>
+					<input type="text" id="task_name" placeholder="Name" name="task_title" required>
+				</div>
+
+				<div class="task-detail-container">
+					<label for="task_detail"></label>
+					<textarea id="task_detail" id="" cols="40" rows="3" placeholder="Details" name="task_body"></textarea>
+				</div>
+
+				<!-- TODO: may remove if not relevant -->
+				<!-- Not currently in scope
+				<div class="sub-task-container">
+
+					<h4>Subtasks</h4>
+
+					<div class="sub-task-container">
+
+						<div class="input-container">
+
+							<input type="text" name="" id="sub_task_text" placeholder="Add subtask">
+
+							<div class="add-sub-task-btn-container">
+								<button class="add-sub-task-btn">
+									<span class="material-symbols-rounded">add</span>
+								</button>
+							</div>
+						</div>
+
+						<div class="task-container"></div>
+
+					</div>
+				</div>
+				-->
+
+				<!-- TODO: add reminder container (if needed) -->
+				<div class="due-date-container">
+
+					<div class="created-container">
+						<p>Created:
+							<span id="todays-date">today's date here</span>
+						</p>
+					</div>
+
+					<div class="due-container">
+						<label for="end_date">Due:</label>
+						<input type="date" id="end_date" name="due_date">
+						<p>
+							You have 
+							<span id="total-days">X</span>
+								days till this task is due.
+						</p>
+					</div>
+
+				</div>
+
+				<!-- Not currently in scope
+				<div class="priority-container">
+					<label for="priority_select"></label>
+					<select id="priority_select">
+						<option value="low">Low Priority</option>
+						<option value="medium">Medium Priority</option>
+						<option value="high">High Priority</option>
+					</select>
+				</div>
+				-->
+
+				<div class="repeats-container">
+
+					<div class="repeat-toggle-container">
+
+						<label for="repeat_toggle">Repeats?</label>
+						<input type="checkbox" name="repeats" id="repeat_toggle" checked="false">
+
+					</div>
+
+					<div class="repeat-expanded">
+						
+						<div class="every-container">
+
+							<!--
+							<div class="repeat-every-container">
+								<label for="repeat_number">Repeat every</label>
+								<input type="number" id="repeat_number" min="1" max="100">
+							</div>
+							-->
+
+							<div class="radio-container">
+
+								<!--
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="day">
+									<label for="repeat_type">Day</label>
+								</div>
+								-->
+
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="week" value="weekly">
+									<label for="repeat_type">Weekly</label>
+								</div>
+
+								<div class="radio-btn">
+									<input type="radio" name="repeat-type-radio" id="month" value="montly">
+									<label for="repeat_type">Monthly</label>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="repeat-on-container">
+							<p>Repeat on:</p>
+
+							<div class="days-of-the-week-container">
+
+								<label for="mon">Monday</label>
+								<input type="checkbox" id="mon" name="mo">
+							
+								<label for="tue">Tuesday</label>
+								<input type="checkbox" id="tue" name="tu">
+
+								<label for="wed">Wednesday</label>
+								<input type="checkbox" id="wed" name="we">
+								
+								<label for="thu">Thursday</label>
+								<input type="checkbox" id="thu" name="th">
+
+								<label for="fri">Friday</label>
+								<input type="checkbox" id="fri" name="fr">
+
+								<label for="sat">Saturday</label>
+								<input type="checkbox" id="sat" name="sa">
+
+								<label for="sun">Sunday</label>
+								<input type="checkbox" id="sun" name="su">
+								
+							</div>
+							</br>
+							<label for="day_of_month">Monthly (day of month): </label>
+							<input type="number" name="day_of_month" min="1" max="31"><br>
+
+						</div>
+
+						<!-- Not currently in scope
+						<div class="repeat-ends-container">
+							<p id="ends-header">Ends</p>
+
+							<div class="repeat-type-container">
+
+								<div class="on-container">
+									<p>On</p>
+									<input type="date" name="ends_on_date" id="">
+								</div>
+
+								<p id="repeat-type-or">OR</p>
+
+								<div class="on-container">
+									<p>After</p>
+									<input type="number" name="repeat_after_numb" id="" min="1" max="100">
+									<p>occurences</p>
+								</div>
+							</div>
+						</div>
+						-->
+
+					</div>
+				</div>
+
+				<div class="submit-task-container">
+					<button type="submit" id="submit-btn">
+						<p>Create Task</p>
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<!-- TODO: task information -->
+		<div id="task-info-overlay" style="display: none;">
+
+			<div class="task-information-container">
+
+				<!-- name -->
+
+				<!-- description -->
+
+				<!-- sub tasks -- as list -->
+
+				<!-- due date -->
+
+				<!-- if repeats in sentence show how repeatsl;kj., -->
+			</div>
+
+		</div>
+
+		<section class="left-section">
+
+			<nav id="nav-sidebar">
+
+				<div class="logo-container">
+					<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+				</div>
+
+				<div class="nav-sidebar-content">
+
+					<ul class="list">
+
+						<li class="list-item">
+							<a href="./index.html" class="nav-link">
+								<span class="material-symbols-rounded">dashboard</span>
+								<span class="link">Dashboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./task-board.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">task_alt</span>
+								<span class="link">Tasks</span>
+							</a>
+						</li>
+		
+						<li class="list-item">
+							<a href="./calendar.html" class="nav-link">
+								<span class="material-symbols-rounded">calendar_month</span>
+								<span class="link">Calendar</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./notifications.html" class="nav-link">
+								<span class="material-symbols-rounded">notifications</span>
+								<span class="link">Notifications <span id="notif-number">5</span></span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./leaderboard.html" class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
+								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+						<li class="list-item mobile">
+							<a href="./settings.html" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+
+						<li class="list-item mobile">
+							<a href="." class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+
+					</ul>
+
+					<div class="list-bottom-content">
+
+						<li class="list-item">
+							<a href="./settings.html" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./log-in.html" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+
+					</div>
+					
+				</div>
+
+			</nav>
+
+		</section>
+
+		<section class="middle-section">
+
+			<div class="top-button-container">
+			
+				<div class="left-buttons-container">	
+					<button class="button left current">
+						<span class="material-symbols-rounded">grid_view</span>
+						<p>Board</p>
+					</button>
+				</div>
+				
+				<div class="right-buttons-container">
+					<button class="button right" type="button" data-toggle="modal" data-target="#form-container">
+						<span class="material-symbols-rounded">add</span>
+						<p>Add Task</p>
+					</button>
+				</div>
+
+			</div>
+
+			<div class="bottom-container">
+				
+				<div class="task-column-container">
+					
+					<!-- unclaimed -- doesn't move -->
+					<div class="column" id="unclaimed-column">
+
+						<div class="column-header-container">
+							<h4 class="column-header">
+								Unclaimed 
+								<span class="column-total">{{ unclaimed_tasks|length }}</span>
+							</h4>
+						</div>
+						
+						{% for task in unclaimed_tasks %}
+						<div class="a-task unclaimed" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+									<!-- <span id="reminder" class="material-symbols-rounded">notifications_active</span> -->
+								</h3>
+
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+								<p class="task-description", id="bidtext{{ task.id }}">
+									Current bid: {{ task.points }}
+								</p>
+							</div>
+
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-high">High Priority</p>
+								-->
+								<div class="task-user-img"></div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									
+									<div class="bid-container">
+										<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
+									</div>
+                                                                        <!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">3</span>
+										</p>
+
+									</div>
+                                                                        -->
+								</div>
+								
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+
+									<!-- TODO: currently hiding the button -->
+									<button type="submit" id="submit-bid-btn" style="display: none;">Submit</button>
+
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+	
+					<!-- to do -->
+					<div class="column move" id="to-do-column">
+
+						<div class="column-header-container">
+							<h4 class="column-header">
+								To Do <span class="column-total" id="to-do-total">{{ todo_tasks|length }}</span>
+							</h4>
+						</div>
+
+						<!-- a task -->
+						{% for task in todo_tasks %}
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+ 								</h3>
+
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+							</div>
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-medium">Medium Priority</p>
+								-->
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
+									</div>
+									<!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+									-->
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+
+	
+					<!-- in progress -->
+					<div class="column move" id="in-prog-column">
+
+						<div class="column-header-container">
+							<h4 class="column-header">
+								In Progress <span class="column-total" id="in-prog-total">{{ in_prog_tasks|length }}</span>
+							</h4>
+						</div>
+
+						<!-- a task -->
+						{% for task in in_prog_tasks %}
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+ 								</h3>
+
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+							</div>
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-medium">Medium Priority</p>
+								-->
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
+									</div>
+									<!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+									-->
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					
+					<!-- completed -->
+					<div class="column move" id="complete-column">
+
+						<div class="column-header-container">
+							<h4 class="column-header">
+								Completed <span class="column-total" id="complete-total">{{ complete_tasks|length }}</span>
+							</h4>
+						</div>
+
+						<!-- a task -->
+						{% for task in complete_tasks %}
+						<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
+							<div class="task-description-container">
+								<h3 class="task-title">
+									{{ task.title }}
+ 								</h3>
+
+								<p class="task-description">
+									{{ task.body }}
+								</p>
+							</div>
+							<div class="task-priority-container">
+								<!-- not currently in scope
+								<p class="task-priority-medium">Medium Priority</p>
+								-->
+								<div class="task-user-img">
+									<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+									<p> {{ task.user_claimed }} </p>
+								</div>
+							</div>
+
+							<hr class="task-horz-line">
+
+							<div class="task-stats">
+
+								<div class="task-stats-top">
+									
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
+									</div>
+									<!-- not currently in scope
+									<div class="task-sub-tasks">
+										<p>Subtasks:
+											<span id="total-sub-tasks">1</span>
+										</p>
+									</div>
+									-->
+								</div>
+
+								<div class="task-stats-bottom">
+									<div class="task-due-date">
+										<p>
+											Due: 
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				
+				</div>
+				
+			</div>
+
+		</section>
+
+	</div>
+
+	<!-- link jquery file 
+	<script src="{% static 'users/actions/task-board.js' %}"></script>
+        -->
+	<script type="text/javascript">
+	// TODO: make it so that you can only move cards on desktop
+	$( document ).ready(function() {
+
+		/* =================== GETS CSRF TOKEN =================== */
+		function getCookie(name) {
+			var cookieValue = null;
+			if (document.cookie && document.cookie != '') {
+				var cookies = document.cookie.split(';');
+				for (var i = 0; i < cookies.length; i++) {
+					var cookie = jQuery.trim(cookies[i]);
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) == (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+
+		/* =================== MOVE TASK CARD =================== */
+		// tasks can only move between 'to do', 'in progress', and 'completed'
+		$(".column.move").sortable ({
+			cursor: 'move',
+			connectWith: '.column.move',
+			items: ".{{ user.pk }}",
+			update: function(event, ui) {
+				if (this === ui.item.parent()[0]) {
+					var data = new Object();
+					data.type = "task_move";
+					data.id = ui.item.attr("id");
+					data.new_pos = ui.item.parent().attr("id");
+					var jsonData = JSON.stringify(data);
+					$.ajax({
+						type: "POST",
+						url: "{% url 'taskboard' household_id %}",
+						headers: { 'X-CSRFToken': csrftoken },
+						//dataType: "json",
+						data: jsonData,
+						contentType: "application/json",
+						success: function(result) {
+		//	$("#bidtext{{ task.id }}").text("Current bid: " + user_bid)
+							var toDoCount = $("#to-do-column").children(".a-task").length;
+							$("#to-do-total").text(toDoCount)
+							var inProgCount = $("#in-prog-column").children(".a-task").length;
+							$("#in-prog-total").text(inProgCount)
+							var completeCount = $("#complete-column").children(".a-task").length;
+							$("#complete-total").text(completeCount)
+						},
+						error: function(response) {
+							alert("Something went wrong in processing your move.");
+						}
+					});
+				}
+			},
+		});
+
+		/* =================== SHOW AND HIDE TASK INFORMATION =================== */
+		/*
+		$(".a-task").click(
+			function (e) { 
+				e.preventDefault();
+				
+				// if the task does NOT have the class 'unclaimed'
+				if ( !$(this).hasClass("unclaimed")){
+					alert("this does not have the class 'unclaimed' ")
+				}
+			}
+		);
+		*/
+
+
+		<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
+		<!-- make sure that the class name 'unclaimed' is added -->
+		/* =================== GET USER BID =================== */
+		{% for task in unclaimed_tasks %}
+		$("#bid{{ task.id }}").on("keypress", 
+			function (e) {
+				// on enter
+				if(e.which == 13) {
+					//Ensure input is valid
+					user_bid = parseInt($("#bid{{ task.id }}").val());
+					if ( !Number.isInteger(user_bid) ) {
+						alert("Your bid must be an integer.")
+					} else if ( user_bid >= {{ task.points }} && user_bid) {
+						alert("Your bid must be lower than the current bid.");
+					} else if ( user_bid < 1 ) {
+						alert("Your bid must be greater than 0")
+					} else { //Send payload
+						var data = new Object();
+						data.type = "user_bid";
+						data.id = {{ task.id }};
+						data.bid = user_bid;
+						var jsonData = JSON.stringify(data);
+						$.ajax({
+							type: "POST",
+							url: "{% url 'taskboard' household_id %}",
+							headers: { 'X-CSRFToken': csrftoken },
+							//dataType: "json",
+							data: jsonData,
+							contentType: "application/json",
+							success: function(result) {
+								$("#bidtext{{ task.id }}").text("Current bid: " + user_bid)
+							},
+							error: function(response) {
+								alert("Something went wrong in processing your bid.");
+							}
+						});
+					}
+				}
+			}
+		);
+		{% endfor %}
+
+		/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
+		// make the Add Task button show the form (= slide in)
+		$(".right-buttons-container .button.right").click(
+			function (e) {
+				e.preventDefault();
+				$("#form-container").show({
+					duration: '1000'
+				});
+			}
+		);
+
+		// make the x on the form close the form (= slide out)
+		$("#exit-btn").click(function (e) { 
+			e.preventDefault();
+			$("#form-container").hide({
+				duration: '1000'
+			});
+		});
+
+		/* =================== ADD SUB TASK =================== */
+		// if the user presses the 'enter' key
+		$("#sub_task_text").on("keypress", 
+			function (e) {
+				e.preventDefault();
+
+				// in ascii the 'enter' key is 13
+				if (e.which == 13) {
+					
+					// if the input is not empty
+					if ( $("#sub_task_text").val().length != 0 ) {
+
+						// show sub-task container
+						$(".task-container").show();
+		
+						var x = $(".task-container").html();
+						var y = '<div class="sub-task">' 
+									+ $("#sub_task_text").val()
+								+ '</div>';
+		
+						$(".task-container").html(x + y);
+						$("#sub_task_text").val("");
+					}
+				}
+			}
+		);
+
+		// if the user clicks on the add subtask btn
+		$(".add-sub-task-btn").click(
+			function (e) { 
+				e.preventDefault();
+
+				// show sub-task container
+				$(".task-container").show();
+				
+				if ( $("#sub_task_text").val().length != 0 ) {
+
+					var x = $(".task-container").html();
+					var y = '<div class="sub-task">' 
+								+ $("#sub_task_text").val()
+							+ '</div>';
+
+					$(".task-container").html(x + y);
+					$("#sub_task_text").val("");
+				}
+				// else {
+				// 	alert ("Enter some text!!!");
+				// }
+			}
+		);
+
+		/* =================== RETURN TODAY'S DATE =================== */
+		// make 'Created: XX/XX/XXXX' is always set to today's date (note the following code is JS)
+
+		var d = new Date(); // creates a date object
+		var month = d.getMonth()+1; // gets the month
+		var day = d.getDate(); // gets the day
+		// concats them together
+		var newOutput =  ((''+month).length<2 ? '0' : '') + month + '/' +
+		((''+day).length<2 ? '0' : '') + day  + '/' +
+		d.getFullYear();
+
+
+		// returns the variable. If the output is not working would show 'today's date here'
+		$("#todays-date").html(newOutput);
+		
+		/* =================== SHOW NUMBER OF DAYS LEFT BEFORE DUE DATE =================== */
+		// TODO: here
+
+		$("#end_date").change(
+			function (e) { 
+				e.preventDefault();
+				var due_date = $("#end_date").val();
+
+				var input_date = new Date(due_date);
+
+				// calcuate the difference in number of days between
+
+				// To calculate the time difference of two dates
+				var Difference_In_Time = input_date.getTime() - d.getTime();
+				
+				// To calculate the no. of days between two dates
+				var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+				// round up then +1
+				var result = Math.ceil(Difference_In_Days) + 1;
+				
+				$("#total-days").html(result);
+			}
+		);
+		
+
+		/* =================== SHOW AND HIDE REPEAT INFORMATION ON FORM =================== */
+		// if "Repeats?" is checked then show the expaned info about repeat
+		$(".repeat-toggle-container #repeat_toggle").click(
+			function () {
+				if ( $(this).prop("checked") == true) {
+					// alert ("Checkbox is checked.")
+					
+					// show the extra info regarding repeats
+					$(".repeat-expanded").show(); 
+				}
+				else {			
+					// hide repeat extra information
+					$(".repeat-expanded").hide();
+				}
+		});
+
+		/* =================== CLOSE FORM ON SUBMIT =================== */
+		// make the submit button on the form close the form
+		
+	});
+	</script>
+</body>
+</html>
