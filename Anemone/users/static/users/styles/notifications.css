@@ -1,5 +1,6 @@
 
 /* =================== CONSTANTS =================== */
+
 /* ---------- notification style---------- */
 .a-notification {
 	background-color: var(--primary-card-colour);
@@ -56,17 +57,12 @@
 	padding: 1.5rem;
 
 	display: grid;
-	grid-template-rows: repeat(2, min-content) ;
+	grid-template-rows: repeat(3, min-content);
 	gap: 10px;
-
 }
 
 /* ---------- button container ---------- */
 .button-container {
-	grid-row: 1;
-
-	margin-top: 3rem;
-
 	display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -103,77 +99,60 @@
 	transition: var(--std-transition);
 }
 
-
-.left-right-container {
-	grid-row: 2;
-
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 30px;
+/* ---------- top container ---------- */
+.top-container h2 {
+	margin-bottom:1rem;
 }
 
-/* ---------- left container ---------- */
-.left-container {
-	grid-column: span 1;
-}
-
-.left-container h2 {
+/* ---------- bottom container ---------- */
+.bottom-container h2 {
 	margin-bottom: 1rem;
 }
 
-/* ---------- right container ---------- */
-.right-container {
-	grid-column: span 1;
-}
-
-.right-container h2 {
-	margin-bottom: 1rem;
-}
-
-/* ---------- table ---------- */
-.table {
-    display: grid;
-    grid-template-rows: min-content;
-    gap: 15px;
-
-	text-align: center;
-}
-
-.row {
+.completed-tasks-container {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: 1fr;
+	
 	gap: 10px;
-
-	border-radius: var(--std-border-radius);
 }
 
-.row.header h4 {
-	background-color: var(--primary-card-colour);
-	border-radius: var(--std-border-radius);
-	padding: 1rem 0;
-}
 
-.row div {
-	margin: auto 0;
-}
-
-.row-data-container {
+.comp-task {
 	display: grid;
-    grid-template-rows: auto;
-    gap: 15px;
+	grid-template-columns: min-content repeat(2, 1fr);
+	gap: 10px;
 }
 
-
-.row.data {
-	/* --primary-grey at 5% */
-	background-color: rgba(176, 176, 176, 5%);
-	padding: .5rem 0;
+.comp-task div:not(:last-child) {
+	border-right: 1px solid var(--primary-light-blue);
 }
 
-.user-prof img {
+.task-user-profile {
+	text-align: center;
+    padding: 1rem;
+	/* padding-right: 4rem; */
+}
+
+.task-user-profile img {
 	width: 3rem;
 	height: 3rem;
 	border-radius: 100%;
 	border: 3px solid var(--primary-dark-blue);
 	margin-bottom: .3rem;
+}
+
+.task-name-container p {
+	color: var(--primary-light-blue);
+}
+
+.task-name {
+	font-size: 1.5rem;
+}
+
+.task-point-container p {
+	color: var(--primary-light-blue);
+}
+
+.for-points {
+	font-size: 1.5rem;
 }
