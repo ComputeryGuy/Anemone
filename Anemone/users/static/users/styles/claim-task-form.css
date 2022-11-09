@@ -1,0 +1,90 @@
+
+/* =================== overlay container =================== */
+#claim-overlay {
+	position: absolute;
+	background-color: rgba(33, 34, 41, 50%);
+	width: 100vw;
+	height: 100vh;
+
+	display: none;
+}
+
+/* =================== claim task form container =================== */
+.claim-task-container {
+	position: absolute;
+
+	left: 0;
+	right: 0;
+	margin: 8rem auto;
+
+	width: 30rem;
+	height: 12rem;
+
+	background-color: var(--primary-form-colour);
+	border-radius: var(--std-border-radius);
+	
+	padding: 1rem;
+}
+
+/* ---------- exit button ---------- */
+.claim-exit-container {
+	margin-bottom: .5rem;
+}
+
+#claim-exit-btn {
+	background-color: var(--primary-form-colour);
+	border-radius: var(--std-border-radius);
+	padding: .3rem;
+	display: flex;
+	align-self: center;
+	border: none;
+	transition: var(--std-transition);
+}
+
+#claim-exit-btn span {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+#claim-exit-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
+}
+
+/* ---------- form container ---------- */
+#question {
+	margin-bottom: .5rem;
+}
+
+#question,
+.claim-form {
+	margin-left: 3rem;
+}
+
+.selections-container {
+	margin-left: 1rem;
+}
+
+/* ---------- submit button ---------- */
+.claim-submit-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.claim-submit-container button {
+	background-color: blue;
+	border: 2px solid blue;
+	border-radius: var(--std-border-radius);
+
+	padding: .5rem;
+	transition: var(--std-transition);
+}
+
+.claim-submit-container button:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour);
+	border-color: var(--primary-light-blue);
+	transition: var(--std-transition);
+}
