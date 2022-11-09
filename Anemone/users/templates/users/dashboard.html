@@ -37,6 +37,8 @@
 				<div class="nav-sidebar-content">
 
 					<ul class="list">
+
+						<!-- dashboard -->
 						<li class="list-item">
 							<a href="." class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">dashboard</span>
@@ -44,6 +46,7 @@
 							</a>
 						</li>
 
+						<!-- tasks -->
 						<li class="list-item">
 							<a href="./tasks.html" class="nav-link">
 								<span class="material-symbols-rounded">task_alt</span>
@@ -51,6 +54,7 @@
 							</a>
 						</li>
 		
+						<!-- calendar -->
 						<li class="list-item">
 							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">calendar_month</span>
@@ -58,39 +62,36 @@
 							</a>
 						</li>
 
+						<!-- notifications/bulletin -->
 						<li class="list-item">
 							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">notifications</span>
-								<!-- TODO: increase in # makes hover colour expand too. Is that annoying? -->
 								<span class="link">Notifications <span id="notif-number">5</span></span>
 							</a>
 						</li>
+
+						<!-- leaderboard -->
 						<li class="list-item">
 							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">leaderboard</span>
 								<span class="link">Leaderboard</span>
 							</a>
 						</li>
-						<li class="list-item mobile">
-							<a href="#" class="nav-link">
-								<span class="material-symbols-rounded">settings</span>
-								<span class="link">Settings</span>
-							</a>
-						</li>
-						<li class="list-item mobile">
-							<a href="{% url 'logout' %}" class="nav-link">
-								<span class="material-symbols-rounded">logout</span>
-								<span class="link">Logout</span>
-							</a>
-						</li>
+
 					</ul>
+
+
 					<div class="list-bottom-content">
+
+						<!-- settings -->
 						<li class="list-item">
 							<a href="#" class="nav-link">
 								<span class="material-symbols-rounded">settings</span>
 								<span class="link">Settings</span>
 							</a>
 						</li>
+
+						<!-- logout -->
 						<li class="list-item">
 							<a href="{% url 'logout' %}" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
@@ -100,6 +101,7 @@
 					</div>
 				</div>
 			</nav>
+
 		</section>
 
 		<section class="middle-section">
@@ -118,13 +120,13 @@
 						<h3>Unclaimed Tasks</h3>
 					</div>
 
-					<!-- FIXME: todo -->
+					<!-- FIXME: implement -->
 					<div class="info-square">
 						<h1>{{ unstarted_count }}</h1>
 						<h3>Tasks Not Started</h3>
 					</div>
 					
-					<!-- FIXME: in progress -->
+					<!-- FIXME: implement -->
 					<div class="info-square">
 						<h1>{{ in_progress_count }}</h1>
 						<h3>Tasks In Progress</h3>
@@ -135,19 +137,20 @@
 						<h1>{{ completed_tasks }}</h1>
 						<h3>Completed Tasks</h3>
 					</div>
+
 				</div>
 
-				<div class="todays-total-containerr">
+				<div class="todays-total-container">
 
 					<p>You have earned</p>
 
-					<h1 id="todays-points">{{ points_earned_today }} pts</h1>
+					<h1 id="todays-points">{{ points_earned_today }}pts</h1>
 		
 					<p>today</p>
 
 					<div class="go-to-tasks-container">
 						<button id="go-to-tasks-btn">
-							<a href="./task-board.html">Go to Tasks</a>
+							<a href=".">Go to Tasks</a>
 						</button>
 					</div>
 				</div>
@@ -160,7 +163,7 @@
 
 						<div class="go-to-notifs-container">
 							<button id="go-to-notifs-btn">
-								<a href="./notifications.html">Go to Notifications</a>
+								<a href=".">Go to Notifications</a>
 							</button>
 						</div>
 
