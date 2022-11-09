@@ -1,0 +1,14 @@
+/* =================== CONSTANTS =================== */
+
+/* ---------- sub-header ---------- */
+
+/* =================== GRIDS =================== */
+.left-section {
+	grid-column: span 1;
+}
+
+.middle-section {
+	grid-column: span 11;
+
+	display: grid;
+}
