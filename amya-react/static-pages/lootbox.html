@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Roommate</title>
+
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="./assets/icons/logo-favicon.png" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="./styles/main-style.css">
+
+	<!-- lootbox style -->
+	<link rel="stylesheet" href="./styles/lootbox.css">
+
+	<!-- google icons -->
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="main-grid">
+
+		<section class="left-section">
+			<!-- the navigation -->
+			<nav id="nav-sidebar">
+
+				<div class="logo-container">
+					<img id="logo" src="./assets/icons/logo-round.png" alt="logo">
+				</div>
+
+				<div class="nav-sidebar-content">
+
+					<ul class="list">
+
+						<li class="list-item">
+							<a href="./index.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
+								<span class="link">Dashboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./task-board.html" class="nav-link">
+								<span class="material-symbols-rounded">task_alt</span>
+								<span class="link">Tasks</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./calendar.html" class="nav-link">
+								<span class="material-symbols-rounded">calendar_month</span>
+								<span class="link">Calendar</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./notifications.html" class="nav-link">
+								<span class="material-symbols-rounded">notifications</span>
+								<span class="link">
+									Notifications 
+									<span id="notif-number">5</span>
+								</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./leaderboard.html" class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
+								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+					</ul>
+
+					<div class="list-bottom-content">
+						<li class="list-item">
+							<a href="./settings.html" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+						<li class="list-item">
+							<a href="./log-in.html" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+					</div>
+					
+				</div>
+			</nav>
+		</section>
+
+		<section class="middle-section">
+
+			<div class="lootbox-container">
+				<h1>Slot Machine</h1>
+				<a href="https://indamix.github.io/">Check my Portolio Webapp for other shiny things</a>
+
+				<!-- slot machine -->
+				<div id="sm">
+					<div class="group lever">
+						<button>Start</button>
+					</div>
+
+					<div class="group">
+						<div class="reel"></div>
+						<div class="reel"></div>
+						<div class="reel"></div>
+					</div>
+					<p class="msg">Press Start</p>
+				</div>
+			</div>
+
+			<div class="lootbox-container-two">
+
+				<input type="radio" id="whirl" autocomplete="off">
+
+				<div class="pane">
+					<!-- slot machine -->
+					<div class="disc">
+						<div class="part">a gift from the heart</div>
+						<div class="part">free trip</div>
+						<div class="part">nice words</div>
+						<div class="part">smooch</div>
+						<div class="part">$1kk</div>
+						<div class="part">none</div>
+						<div class="part">PlayStation4</div>
+						<div class="part">Tesla</div>
+						<div class="part">1 kg of carrots</div>
+						<div class="part">€1kk</div>
+						<div class="part">Grandma's socks</div>
+						<div class="part">execution of three wishes</div>
+					</div>
+
+					<!-- lever -->
+					<div class="lever-hole">
+						<label for="whirl" class="lever">
+							<span class="ball"></span>
+						</label>
+					</div>
+				</div>
+
+				<!-- <span class="btn-wrapper">
+					<a href="#" class="get-gift">Get Gift!</a>
+				</span> -->
+			</div>
+
+		</section>
+	</div>
+	
+	<script src="./actions/lootbox.js"></script>
+</body>
+</html>
