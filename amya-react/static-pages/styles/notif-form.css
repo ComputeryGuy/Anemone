@@ -18,6 +18,11 @@ textarea:focus {
 	border-color: var(--primary-white);
 }
 
+input[type=date] {
+	padding: .3rem;
+	padding-left: .8rem;
+}
+
 /* ---------- notification form style---------- */
 #add-notif-form-container {
 	position: absolute;
@@ -36,7 +41,7 @@ textarea:focus {
 	border-radius: 10px 0px 0px 10px;
 	padding: 1.5rem;
 	
-	display: none;
+	/* display: none; */
 }
 
 
@@ -80,6 +85,21 @@ textarea:focus {
 
 .submit-notif-container {
 	text-align: center;
+}
+
+.notif-deadline-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.notif-deadline-container p {
+	margin-right: .5rem;
+}
+
+.notif-deadline-container input {
+	width: 100%;
 }
 
 #submit-btn {
