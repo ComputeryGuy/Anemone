@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from users import views as user_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
     path('log/', user_views.log, name='log'),
+    path('profilePicture/', user_views.profilePicture, name='profilePicture'),
     ##used if url join is implemented
     #path('joinHousehold/<uuid:household_id>/', user_views.join_household, name='joinGroup'),
     
@@ -41,4 +44,4 @@ urlpatterns = [
     path('minus_points/', user_views.minus_points, name="minusPoints"),
     path('bidding/',  user_views.bidding, name='bidding'),
     path('<uuid:household_id>/tasks', user_views.tasks, name="taskboard"),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

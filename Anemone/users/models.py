@@ -1,9 +1,11 @@
 import uuid
-from datetime import datetime, timedelta
+import datetime
+from random import randint
+
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import CharField
+from django.db.models import CharField, Count
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
@@ -25,7 +27,7 @@ class Profile(models.Model):
     )
     # tasks_finished = Chore.objects.filter(user_claimed=user).annotate(tasks_finished=Count('task_status').filter(task_status='True'))
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
-
+    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/")
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
     household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True, related_name = "members")
@@ -106,7 +108,7 @@ class Event(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    creation_time = models.DateTimeField(default=datetime.now)
+    creation_time = models.DateTimeField()
     due_date = models.DateTimeField(default=None, null=True, blank=True)
     points = models.IntegerField()
     claimed = models.BooleanField(default=False)
@@ -147,8 +149,16 @@ def cache_previous_status(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
-    if datetime.now() >= timezone.make_naive((instance.creation_time + timedelta(days=1))) and not instance.claimed and instance.user_claimed is not None:
+    if datetime.datetime.now(timezone.utc) >= instance.creation_time + datetime.timedelta(days=1) and not instance.claimed and instance.user_claimed is not None:
         instance.claimed = 'True'
+        instance.save()
+    if datetime.datetime.now(timezone.utc) >= instance.creation_time + datetime.timedelta(days=1) and not instance.claimed and instance.user_claimed is None:
+        profiles = Profile.objects.filter(household=instance.household)
+        count = profiles.aggregate(count=Count('user'))['count']
+        random_index = randint(0, count - 1)
+        instance.user_claimed = profiles[random_index]
+        instance.claimed = 'True'
+        instance.points = int(instance.points / 2)
         instance.save()
     if instance.task_status != instance.__original_status and instance.user_claimed is not None and instance.__original_status is not None:
         profile = instance.user_claimed

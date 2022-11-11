@@ -1,6 +1,7 @@
 import datetime
 import calendar
 import json
+from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
@@ -50,7 +51,7 @@ def post_bulletin(request):
                 print("wah")
                 user = request.user.username
                 bulletin_body = form.cleaned_data['bulletin_body']
-                creation_time = datetime.now()
+                creation_time = datetime.datetime.now(datetime.timezone.utc)
                 expire_time = form.cleaned_data['expire_time']
                 bulletin = Bulletin.objects.create(user=user,
                                                    bulletin_body=bulletin_body,
@@ -110,7 +111,7 @@ def generate_household_link(request):
 
 def dashboard(request, household_id):
     if request.user.is_authenticated:
-        bidEnd = datetime.now() + timedelta(days=-1)  # bids end after this amount of days
+        bidEnd = datetime.datetime.now() + datetime.timedelta(days=-1)  # bids end after this amount of days
         unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
         for object in unclaimed_tasks:
             object.save()
@@ -228,7 +229,7 @@ def bidding(request):
 
 
 def tasks(request, household_id):
-    bidEnd = datetime.now() + timedelta(days=-1)  # bids end after this amount of days
+    bidEnd = datetime.datetime.now() + datetime.timedelta(days=-1)  # bids end after this amount of days
     unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
     for object in unclaimed_tasks:
         object.save()
@@ -313,7 +314,7 @@ def create_task(request, household_id):
     due_datetime = datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
     task = Task.objects.create(title = task_title,
                                 body = task_body,
-                                creation_time = datetime.now(),
+                                creation_time = datetime.now,
                                 due_date = due_datetime,
                                 points = 1000,
                                 user_created = profile_created,
@@ -354,7 +355,7 @@ def create_task(request, household_id):
 
 def log(request):
     if request.user.is_authenticated:
-        bidEnd = datetime.now() + timedelta(days=-1)  # bids end after this amount of days
+        bidEnd = datetime.datetime.now() + datetime.timedelta(days=-1)  # bids end after this amount of days
         unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
         for object in unclaimed_tasks:
             object.save()
@@ -366,6 +367,28 @@ def log(request):
                   'tasks_in_progress': tasks_in_progress,
                   'tasks_unclaimed': tasks_unclaimed, }
         return render(request, 'users/log.html', values)
+
+def profilePicture(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = profilePictureForm(request.POST,request.FILES)
+            if form.is_valid():
+                print('profilePicture starts')
+                uProfile = Profile.objects.get(user=request.user)
+                '''if ImageFieldFile is not None:
+                    print('1')
+                    if Path.exists(uProfile.profile_picture.url):
+                        Path.unlink(uProfile.profile_picture.url)'''
+                profilePicture = form.cleaned_data['profilePicture']
+                uProfile.profile_picture = profilePicture
+                uProfile.save()
+                print('profilePicture ends')
+                return redirect('/')
+
+
+
+    form = profilePictureForm()
+    return render(request, 'users/profilePicture.html', {'form': form})
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()

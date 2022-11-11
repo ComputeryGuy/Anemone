@@ -59,6 +59,9 @@ class BiddingForm(forms.Form):
             raise ValidationError(_('Bid is too great. Bid lower.'), code='invalidBid')
         return bid
 
+class profilePictureForm(forms.Form):
+    profilePicture = forms.ImageField()
+
     '''    member_selected = forms.CharField(label = 'Which user deserves extra points this week?',
         widget = forms.RadioSelect(choices = ))
 
