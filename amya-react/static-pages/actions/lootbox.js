@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+	// reference: https://codepen.io/indamix/pen/AJNazx
+
 	/* requestAnimationFrame polyfill */
 	(function(w) {
 		var lastTime = 0,
@@ -26,16 +29,23 @@ $(document).ready(function () {
 	})(this);
 
 	/* Slot Machine */
+	var noun = 'noun';
+	$(noun).css({
+		"color":"transparent",
+		"text-shadow": "0 0 8px #000",
+	});
+	
+	var adjective = 'adjective'
 	var sm = (function (undefined) {
 
 		var tMax = 3000, // animation time, ms
 			height = 210,
-			speeds = [],
+			speeds = [100],
 			r = [],
 			reels = [
-				['coffee maker',   'teapot',       'espresso machine'],
-				['coffee filter',  'tea strainer', 'espresso tamper'],
-				['coffee grounds', 'loose tea',    'ground espresso beans']
+				['a', noun ],
+				['d', adjective],
+				['g', 'h']
 			],
 			$reels, $msg,
 			start;
@@ -45,45 +55,42 @@ $(document).ready(function () {
 				el.innerHTML = '<div><p>' + reels[i].join('</p><p>') + '</p></div><div><p>' + reels[i].join('</p><p>') + '</p></div>'
 			});
 
-			$msg = $('.msg');
+			// $msg = $('.msg');
 
 			$('button').click(action);
 		}
 
-		function action(){
+		function action() {
 			if (start !== undefined) return;
 
-			for (var i = 0; i < 3; ++i) {
-				speeds[i] = Math.random() + .5;	
-				r[i] = (Math.random() * 3 | 0) * height / 3;
-			}
+			for (var i = 0; i < 2; ++i) {
+				// actually randomises the result
+				// speeds[i] = Math.random() + .5;	
+				// r[i] = (Math.random() * 3 | 0) * height / 3;
 
-			$msg.html('Spinning...');
+				// will always land on the same text (just changes the speed)
+				speeds[i] = 2 + .5;	
+				r[i] = (2 * 2 | 0) * height / 2;
+			}
+			// $msg.html('Spinning...');
 			animate();
 		}
 
-		function animate(now){
-			if (!start) start = now;
+		function animate (now) {
+			if (!start) {start = now;}
 			var t = now - start || 0;
 
-			for (var i = 0; i < 3; ++i)
+			for (var i = 0; i < 2; ++i) {
 				$reels[i].scrollTop = (speeds[i] / tMax / 2 * (tMax - t) * (tMax - t) + r[i]) % height | 0;
-
-			if (t < tMax)
+			}
+			if (t < tMax) {
 				requestAnimationFrame(animate);
+			}
+
 			else {
 				start = undefined;
 				check();
 			}
-		}
-
-		function check(){
-			$msg.html(
-				r[0] === r[1] && r[1] === r[2] ?
-					'You won! Enjoy your ' + reels[1][ (r[0] / 70 + 1) % 3 | 0 ].split(' ')[0]
-				:
-					'Try again'
-			);
 		}
 
 		return {init: init}
