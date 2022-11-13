@@ -266,14 +266,14 @@
 					<ul class="list">
 
 						<li class="list-item">
-							<a href="./index.html" class="nav-link">
+							<a href="{% url 'dashboard' household_id %}" class="nav-link">
 								<span class="material-symbols-rounded">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./task-board.html" class="nav-link desktop-current">
+							<a href="{% url 'taskboard' household_id %}" class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">task_alt</span>
 								<span class="link">Tasks</span>
 							</a>

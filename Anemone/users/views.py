@@ -126,6 +126,7 @@ def dashboard(request, household_id):
             unclaimed_points = 0
         bulletins = household.bulletin_set.all()
         values = {'user_name': user_name,
+		 'household_id': household_id,
                  'total_points': total_points,
                  'new_tasks': new_tasks,
                  'completed_tasks': completed_tasks,
