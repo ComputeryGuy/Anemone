@@ -46,6 +46,10 @@ def login_reg(request):
             
             user = User.objects.create_user(username, password=password)
             if user is not None:
+                profile = Profile.objects.get(user=user)
+                profile.first_name = first_name
+                profile.last_name = last_name
+                profile.save()
                 return redirect('login')
             else:
                 print("OOPS")

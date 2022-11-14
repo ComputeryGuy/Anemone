@@ -23,6 +23,8 @@ class Profile(models.Model):
     )
     # tasks_finished = Chore.objects.filter(user_claimed=user).annotate(tasks_finished=Count('task_status').filter(task_status='True'))
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
+    first_name = models.CharField(max_length=20, null=True)
+    last_name = models.CharField(max_length=20, null=True)
 
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
