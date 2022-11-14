@@ -26,6 +26,36 @@ def home(request):
     return redirect('login')
 
 
+def login_reg(request):
+    if request.method == 'POST':
+        if request.POST.get('submit') == 'sign_in':
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                print("Oops")
+        if request.POST.get('submit') == 'sign_up':
+            first_name = request.POST.get('first_name', '')
+            last_name = request.POST.get('last_name', '')
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            
+            user = User.objects.create_user(username, password=password)
+            if user is not None:
+                return redirect('login')
+            else:
+                print("OOPS")
+                return redirect('login')
+
+    user_creation_form = UserCreationForm()
+    context = {'user_creation_form': user_creation_form}
+    return render(request, 'users/log-in.html', context)
+
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
