@@ -1,46 +1,45 @@
 
-// TODO: make it so that you can only move cards on desktop
+
 $(document).ready(function () {
 
-	/* =================== SHOW AND HIDE CLAIM TASK FORM =================== */
+	/* =================== MOVE TASK CARD =================== */
+	// tasks can only move between 'to do', 'in progress', and 'completed'
+	$(".column.move").sortable ({
+		cursor: 'move',
+		connectWith: '.column.move'
+	});
+
+	/* =================== SHOW AND HIDE TASK INFORMATION =================== */
 	$(".a-task").click(
 		function (e) { 
 			e.preventDefault();
-
-			// if the task as the class 'unclaimed'
-			if ( $(this).hasClass("unclaimed") ) {
-				// show claim form
-				$("#overlay").show({
-					duration: '1000'
-				});
-			}
-			else { //else, hide claim form
-				$("#overlay").hide({
-					duration: '1000'
-				});
+			
+			// if the task does NOT have the class 'unclaimed'
+			if ( !$(this).hasClass("unclaimed")){
+				alert("this does not have the class 'unclaimed' ")
 			}
 		}
 	);
 
-	// if click on exit btn in claim form, hide claim form
-	$("#claim-exit-btn").click(function (e) { 
-		e.preventDefault();
-		$("#overlay").hide({
-			duration: '1000'
-		});
-	});
+	/* =================== GET USER BID =================== */
+	$("#bid").on("keypress", 
+		function (e) {
+			// on enter
+			if(e.which == 13) {
+				// if the input is NOT empty
+				if ( $("#bid").val().length != 0) {
 
-	/* =================== TASK CARD MOVE FUNCTIONS =================== */
-	// make so I can move tasks around on the page
-	$(".column").sortable ({
-		cursor: 'move',
-		connectWith: '.column'
-	});
+					var user_bid = $("#bid").val();
+					alert("User bid: " + user_bid)
+				}
+			}
+		}
+	);
 
-	/* =================== SHOW AND HIDE TASK FORM =================== */
+	/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
 	// make the Add Task button show the form (= slide in)
 	$(".right-buttons-container .button.right").click(
-		function (e) { 
+		function (e) {
 			e.preventDefault();
 			$("#form-container").show({
 				duration: '1000'
@@ -57,6 +56,33 @@ $(document).ready(function () {
 	});
 
 	/* =================== ADD SUB TASK =================== */
+	// if the user presses the 'enter' key
+	$("#sub_task_text").on("keypress", 
+		function (e) {
+			e.preventDefault();
+
+			// in ascii the 'enter' key is 13
+			if (e.which == 13) {
+				
+				// if the input is not empty
+				if ( $("#sub_task_text").val().length != 0 ) {
+
+					// show sub-task container
+					$(".task-container").show();
+	
+					var x = $(".task-container").html();
+					var y = '<div class="sub-task">' 
+								+ $("#sub_task_text").val()
+							+ '</div>';
+	
+					$(".task-container").html(x + y);
+					$("#sub_task_text").val("");
+				}
+			}
+		}
+	);
+
+	// if the user clicks on the add subtask btn
 	$(".add-sub-task-btn").click(
 		function (e) { 
 			e.preventDefault();

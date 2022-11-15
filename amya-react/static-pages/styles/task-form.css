@@ -5,10 +5,8 @@ label {
 }
 
 /* =================== CONSTANTS =================== */
-input[type=text], 
-textarea, 
-input[type=date], 
-input[type=number], 
+input, 
+textarea,
 select {
 	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
@@ -22,20 +20,16 @@ input[type=number] {
 }
 
 /* change the place holder colour */
-input[type=text]::placeholder, 
-textarea::placeholder, 
-input[type=date]::placeholder, 
-input[type=number]::placeholder, 
+input::placeholder, 
+textarea::placeholder,
 select::placeholder {
 	color: white;
 }
 
-input[type=text]:focus, 
+input:focus, 
 textarea:focus, 
-input[type=date]:focus, 
-input[type=number]:focus, 
 select:focus {
-	border: 2px solid var(--primary-white);
+	border-color: var(--primary-white);
 }
 
 /* =================== form container =================== */

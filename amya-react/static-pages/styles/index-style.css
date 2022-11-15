@@ -1,645 +1,253 @@
-/* =================== MEDIA QUERIES =================== */
-/* FIXME: see if I can make a constants header like I did in task-board.css */
-/* ---------- MOBILE ---------- */
-@media only screen and (max-width: 40em) {
-
-	body {
-		margin-bottom: 60px;
-	}
-
-	/* =================== grids =================== */
-	.main-grid {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: auto auto auto;
-		gap: 10px;
-	}
-
-	/* navigation sidebar to bottom of page */
-	.left-section {
-		grid-column: span 4;
-		grid-row: 3;
-	}
-
-	.middle-section {
-		grid-column: span 4;
-		grid-row: 1;
-	}
-
-	.right-section {
-		grid-column: span 4;
-		grid-row: 2;
-	}
-	/* =================== left section =================== */
-
-	/* =================== middle section =================== */
-	.middle-section {
-		padding: 1rem 1rem 0;
-	}
-
-	/* ---------- welcome ---------- */
-	.welcome-container h1 {
-		font-size: 24px;
-	}
-
-	.info-square-container,
-	.task-avail-container,
-	.recent-notifs-container {
-		margin-top: 1rem;
-	}
-
-	/* ---------- info square ---------- */
-	.small-info-squares {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 10px;
-	}
-
-	.info-square {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		text-align: center;
-		width: 80%;
-		height: 8rem;
-		padding: 0.5rem;
-		margin: 0 auto;
-	}
-
-	.info-square h1 {
-		font-size: 54px;
-	}
-
-	.info-square h3 {
-		font-size: 12px;
-		color: var(--primary-light-blue);
-	}
-
-	/* ---------- tasks available ---------- */
-	.task-avail-container {
-		padding: 1rem;
-
-		display: grid;
-		grid-template-rows: auto auto auto;
-		gap: 10px;
-
-		text-align: center;
-
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-	}
-
-	.task-avail-container *:not(:last-child) {
-		margin-bottom: .5rem;
-	}
-
-	.task-avail-container #current-points-avil {
-		font-size: 60px;
-	}
-
-	.task-avail-container p {
-		font-size: 16px;
-	}
-
-	/* the span */
-	.task-avail-container .add-blue {
-		color: var(--primary-light-blue);
-		font-weight: 500;
-		font-size: 20px;
-	}
-
-	/* FIXME: button */
-
-	/* ---------- recent notifications ---------- */
-	.recent-notifs-container {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
-	}
-
-	.notifs-header {
-		margin-bottom: 1rem;
-	}
-
-	/* do not display button */
-	.notifs-header .button-container {
-		display: none;
-	}
-
-	/* ---------- a notification ---------- */
-	.a-notification-container {
-		margin-bottom: 1rem;
-	}
-
-	.a-notification {
-		display: grid;
-		grid-template-columns: min-content auto;
-		gap: 10px;
-
-		padding: .3rem .5rem;
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		margin-left: 1rem;
-	}
-
-	/* gives bottom margin to all elements except the last child */
-	.a-notification:not(:last-child) {
-		margin-bottom: 1rem;
-	}
-
-	.user-profile {
-		margin: auto auto;
-		padding: .3rem;
-		text-align: center;
-	}
-
-	.user-profile img {
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 100%;
-		border: 3px solid var(--primary-dark-blue);
-		margin-bottom: .3rem;
-	}
-
-	.user-post .time-date-header {
-		color: var(--primary-dark-blue);
-	}
-
-	.user-post .notif-style {
-		color: var(--primary-grey);
-	}
-
-	/* =================== right section =================== */
-	.right-section {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
-
-		/* each card is 16px between eachother, 
-			b/c right section is in separate grid column 
-			it already has a 10px margin.
-			therefore 16px (=1rem) - 10px = 6px
-		*/
-		margin: calc(1rem - 10px) 1rem;
-	}
-
-	/* ---------- calendar ---------- */
-	.calendar {
-		display: none;
-	}
-
-	/* ---------- today's events ---------- */
-	.right-section h2 {
-		margin-bottom: 1rem;
-	}
-
-	.a-event {
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		padding: 0.3rem;
-		padding-left: .5rem;
-		margin-bottom: 1rem;
-		margin-left: 1rem;
-	}
-
-	.a-event p {
-		color: var(--primary-grey);;
-	}
-
-	/* ---------- go to calendar btn ---------- */
-	/* FIXME: button */
+/* =================== CONSTANTS =================== */
+button {
+	background-color: var(--primary-dark-blue);
+	padding: .5rem 1rem;
+	border: 2px solid var(--primary-dark-blue);
+	border-radius: var(--std-border-radius);
+	transition: var(--std-transition);
 }
 
-/* ---------- TABLET ---------- */
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+button:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour);
+	border-color: var(--primary-light-blue);
+	transition: var(--std-transition);
+}
 
-	body {
-		margin-bottom: 60px;
-	}
-
-	/* =================== grids =================== */
-	.main-grid {
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: auto auto auto;
-		gap: 10px;
-	}
-
-	/* navigation sidebar to bottom of page */
-	.left-section {
-		grid-column: span 6;
-		grid-row: 3;
-	}
-
-	.middle-section {
-		grid-column: span 6;
-		grid-row: 1;
-	}
-
-	.right-section {
-		grid-column: span 6;
-		grid-row: 2;
-	}
-
-	/* =================== left section =================== */
-
-	/* =================== middle section =================== */
-	.middle-section {
-		padding: 1rem 1rem 0;
-	}
-
-	/* ---------- welcome ---------- */
-	.welcome-container h1 {
-		font-size: 24px;
-	}
-
-	.info-square-container,
-	.task-avail-container,
-	.recent-notifs-container {
-		margin-top: 1rem;
-	}
-
-	/* ---------- info square ---------- */
-	.small-info-squares {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 10px;
-	}
-
-	.info-square {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		text-align: center;
-		width: 80%;
-		height: 8rem;
-		padding: 0.5rem;
-		margin: 0 auto;
-	}
-
-	.info-square h1 {
-		font-size: 54px;
-	}
-
-	.info-square h3 {
-		font-size: 12px;
-		color: var(--primary-light-blue);
-	}
-
-	/* ---------- tasks available ---------- */
-	.task-avail-container {
-		padding: 1rem;
-
-		display: grid;
-		grid-template-rows: auto auto auto;
-		gap: 10px;
-
-		text-align: center;
-
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-	}
-
-	.task-avail-container *:not(:last-child) {
-		margin-bottom: .5rem;
-	}
-
-	.task-avail-container #current-points-avil {
-		font-size: 60px;
-	}
-
-	.task-avail-container p {
-		font-size: 16px;
-	}
-
-	/* the span */
-	.task-avail-container .add-blue {
-		color: var(--primary-light-blue);
-		font-weight: 500;
-		font-size: 20px;
-	}
-
-	/* FIXME: button */
-
-	/* ---------- recent notifications ---------- */
-	.recent-notifs-container {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
-	}
-
-	.notifs-header {
-		margin-bottom: 1rem;
-	}
-
-	/* do not display button */
-	.notifs-header .button-container {
-		display: none;
-	}
-
-	/* ---------- a notification ---------- */
-	.a-notification-container {
-		margin-bottom: 1rem;
-	}
-
-	.a-notification {
-		display: grid;
-		grid-template-columns: min-content auto;
-		gap: 10px;
-
-		padding: .3rem .5rem;
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		margin-left: 1rem;
-	}
-
-	/* gives bottom margin to all elements except the last child */
-	.a-notification:not(:last-child) {
-		margin-bottom: 1rem;
-	}
-
-	.user-profile {
-		margin: auto auto;
-		padding: .3rem;
-		text-align: center;
-	}
-
-	.user-profile img {
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 100%;
-		border: 3px solid var(--primary-dark-blue);
-		margin-bottom: .3rem;
-	}
-
-	.user-post .time-date-header {
-		color: var(--primary-dark-blue);
-	}
-
-	.user-post .notif-style {
-		color: var(--primary-grey);
-	}
-
-	/* =================== right section =================== */
-	.right-section {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
-		margin: calc(1rem - 10px) 1rem;
-	}
-
-	/* ---------- calendar ---------- */
-	.calendar {
-		display: none;
-	}
-
-	/* ---------- today's events ---------- */
-	.right-section h2 {
-		margin-bottom: 1rem;
-	}
-
-	.a-event {
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		padding: 0.3rem;
-		padding-left: .5rem;
-		margin-bottom: 1rem;
-		margin-left: 1rem;
-	}
-
-	.a-event p {
-		color: var(--primary-grey);;
-	}
-
-	/* ---------- go to calendar btn ---------- */
-	/* FIXME: button */
+button a {
+	text-decoration: none;
 }
 
 /* ---------- DESKTOP ---------- */
-@media only screen and (min-width: 64.063em) {
+/* =================== GRID SECTIONS =================== */
+.left-section {
+	grid-column: span 1;
+}
 
-	/* =================== section grids =================== */
-	.left-section {
-		grid-column: span 1;
-	}
+.middle-section {
+	grid-column: span 8;
+}
 
-	.middle-section {
-		grid-column: span 8;
-	}
+.right-section {
+	grid-column: span 3;
+}
 
-	.right-section {
-		grid-column: span 3;
-	}
+/* =================== middle section =================== */
+.middle-section {
+	padding: 1rem;
+}
 
-	/* =================== middle section =================== */
-	.middle-section {
-		padding: 1rem;
-	}
+/* ---------- containers ---------- */
+.info-square-container,
+.todays-total-container,
+.recent-notifs-container {
+	margin-top: 1rem;
+}
 
-	/* ---------- welcome ---------- */
-	.info-square-container,
-	.task-avail-container,
-	.recent-notifs-container {
-		margin-top: 1rem;
-	}
+/* ---------- info square container ---------- */
+.info-square-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
 
-	/* ---------- info square ---------- */
-	.small-info-squares {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 10px;
-	}
-	
-	.info-square {
-		margin: 0 auto;
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		text-align: center;
-		width: 8rem;
-		height: 8rem;
-		transition: var(--std-transition);
-		padding: 0.5rem;
-		box-shadow: var(--std-box-shadow);
-	}
+.info-square {
+	margin: 0 auto;
+	padding: 1rem;
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	text-align: center;
+	min-width: 8rem;
+	height: 8rem;
+	transition: var(--std-transition);
+	box-shadow: var(--std-box-shadow);
+}
 
-	.info-square:hover {
-		transform: translateY(-.5rem);
-		transition: var(--std-transition);
-	}
+.info-square:hover {
+	transform: translateY(-0.5rem);
+	transition: var(--std-transition);
+}
 
-	.info-square h1 {
-		font-size: 54px;
-	}
+.info-square h1 {
+	font-size: 54px;
+}
 
-	.info-square h3 {
-		font-size: 12px;
-		color: var(--primary-light-blue);
-	}
+.info-square h3 {
+	font-size: 12px;
+	color: var(--primary-light-blue);
+}
 
-	/* ---------- tasks available ---------- */
-	.task-avail-container {
-		padding: 1rem;
+/* ---------- tasks available ---------- */
+.todays-total-container {
+	padding: 1rem;
 
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: auto min-content;
-		gap: 10px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr) max-content;
+	gap: 10px;
 
-		text-align: center;
+	text-align: center;
 
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-	}
-	
-	.task-avail-container p {
-		grid-column: span 1;
-		grid-row: 1;
-		
-		font-size: 16px;
-		margin: auto auto;
-	}
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+}
 
-	.task-avail-container #current-points-avil {
-		grid-column: span 1;
-		grid-row: 1;
-		font-size: 60px;
-	}
+.todays-total-container p {
+	grid-column: span 1;
+	font-size: 16px;
+	margin: auto auto;
+}
 
-	.task-avail-container a {
-		grid-column: span 1;
-		grid-row: 2;
-	}
+#todays-points {
+	grid-column: span 1;
+	font-size: 60px;
+	font-weight: 500;
+	color: var(--primary-light-blue);
+}
 
-	/* the span */
-	.task-avail-container .add-blue {
-		color: var(--primary-light-blue);
-		font-weight: 500;
-		font-size: 20px;
-	}
+.go-to-tasks-container {
+	grid-column: span 1;
+	display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+}
 
-	/* FIXME: button edits */
+#go-to-tasks-btn {
+	font-size: 12px;
+}
 
-	/* ---------- recent notifications ---------- */
-	.recent-notifs-container {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
-	}
+/* ---------- recent notifications ---------- */
+.recent-notifs-container {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+	padding: 1rem;
+}
 
-	.notifs-header {
-		display: grid;
-		grid-template-columns: .4fr auto;
-		margin-bottom: .5rem;
-	}
+.notifs-header {
+	display: grid;
+	grid-template-columns: .4fr auto;
+	margin-bottom: .5rem;
+}
 
-	/* ---------- a notification ---------- */
-	.a-notification-container {
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto;
-		gap: 16px;
-	}
+.go-to-notifs-container {
+	display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+}
 
-	.a-notification {
-		display: grid;
-		grid-template-columns: min-content auto;
-		gap: 10px;
-		padding: .3rem .5rem;
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		margin-left: 1rem;
-		transition: var(--std-transition);
-	}
+#go-to-notifs-btn {
+	font-size: 12px;
+}
 
-	.user-profile {
-		margin: auto auto;
-		padding: .3rem;
-		text-align: center;
-	}
+/* ---------- a notification ---------- */
+.a-notification-container {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto;
+	gap: 16px;
+}
 
-	.user-profile img {
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 100%;
-		border: 3px solid var(--primary-dark-blue);
-		margin-bottom: .3rem;
-	}
+.a-notification {
+	display: grid;
+	grid-template-columns: min-content auto;
+	gap: 10px;
+	padding: .3rem .5rem;
+	border-left: var(--std-left-border);
+	border-radius: 0 10px 10px 0;
+	margin-left: 1rem;
+	transition: var(--std-transition);
+}
 
-	.user-post {
-		max-width: 44rem;
-	}
+.user-profile {
+	margin: auto auto;
+	padding: .3rem;
+	text-align: center;
+}
 
-	.user-post .time-date-header {
-		color: var(--primary-dark-blue);
-	}
+.user-profile img {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 100%;
+	border: 3px solid var(--primary-dark-blue);
+	margin-bottom: .3rem;
+}
 
-	.user-post .notif-style {
-		color: var(--primary-grey);
-	}
+.user-post {
+	max-width: 44rem;
+}
 
-	/* ---------- notification buttton ---------- */
-	/* FIXME: button */
+.user-post .time-date-header {
+	color: var(--primary-dark-blue);
+}
 
-	/* =================== right section =================== */
-	.right-section {
-		background-color: var(--primary-card-colour);
-		border-radius: var(--std-border-radius) 0px 0px var(--std-border-radius);
-		padding: 1rem;
+.user-post .notif-style {
+	color: var(--primary-grey);
+}
 
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: min-content auto auto;
-		gap: 20px;
+/* =================== right section =================== */
+.right-section {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius) 0px 0px var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+	padding: 1rem;
 
-		height: 100vh;
-	}
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: min-content auto auto;
+	gap: 20px;
 
-	/* ---------- calendar ---------- */
-	.calendar {
-		background-color: green;
-		border-radius: var(--std-border-radius);
-		width: 15rem;
-		height: 15rem;
-		margin: 0 auto;
-	}
+	height: 100vh;
+}
 
-	/* ---------- today's events ---------- */
-	.event-container h2 {
-		margin-bottom: 1rem;
-	}
+/* ---------- calendar ---------- */
+.calendar {
+	background-color: green;
+	border-radius: var(--std-border-radius);
+	width: 15rem;
+	height: 15rem;
+	margin: 0 auto;
+}
 
-	.a-event {
-		border-left: var(--std-left-border);
-		border-radius: 0 10px 10px 0;
-		padding: 0.3rem;
-		padding-left: .5rem;
-		transition: var(--std-transition);
-		margin-left: 1rem;
-	}
+/* ---------- today's events ---------- */
+.event-container h2 {
+	margin-bottom: 1rem;
+}
 
-	/* selects all elements except the last one */
-	.a-event:not(:last-child) {
-		margin-bottom: 1rem;
-	}
+.a-event {
+	border-left: var(--std-left-border);
+	border-radius: 0 10px 10px 0;
+	padding: 0.3rem;
+	padding-left: .5rem;
+	transition: var(--std-transition);
+	margin-left: 1rem;
+}
 
-	.a-event:hover {
-		cursor: pointer;
-		background-color: var(--primary-background-colour);
-		transition: var(--std-transition);
-	}
+/* selects all elements except the last one */
+.a-event:not(:last-child) {
+	margin-bottom: 1rem;
+}
 
-	.a-event p {
-		color: var(--primary-grey);;
-	}
+.a-event:hover {
+	cursor: pointer;
+	background-color: var(--primary-background-colour);
+	transition: var(--std-transition);
+}
 
-	/* ---------- go to calendar btn ---------- */
-	/* FIXME: button */
+.a-event p {
+	color: var(--primary-grey);;
+}
+
+/* ---------- go to calendar btn ---------- */
+.go-to-cal-container {
+	display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+}
+
+#go-to-cal-btn {
+	font-size: 12px;
 }

@@ -9,6 +9,12 @@
 {% endblock %}
 
 {% block content %}
+{% comment %} <form method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="cyan waves-effect waves-light btn" type="submit">post</button>
+</form> {% endcomment %}
+
 <div id="add-notif-form-container">
 
 	<div class="exit-btn-container">
@@ -63,19 +69,19 @@
 				<div class="todays-notification-container">
 
 					<!-- a notification -->
-					{% comment %} {% for notif in notifs %} {% endcomment %}
+					{% for bulletin in bulletins %}
 						<div class="a-notification">
 							<div class="user-profile">
-								<img src="{{ user_img }}" alt="">
-								<p class="user-name">{{ user_name }}</p>
+								<img src="{% static '/users/assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg' %}" alt="">
+								<p class="user-name">{{ bulletin.user }}</p>
 							</div>
 							<div class="user-post">
-								<p class="time-date-header">Posted: <span class="notif-style">{{ time }} | {{ date }}</span></p>
-								<h3 class="notif-title">{{ title }}</h3>
-								<p class="notif-body">{{ body }}</p>
+								<p class="time-date-header">Posted: <span class="notif-style">{{ bulletin.creation_time|date:'h:ia' }} | {{ bulletin.creation_time|date:'D, F j, Y'}}</span></p>
+								<h3 class="notif-title">{{ bulletin.title }}</h3>
+								<p class="notif-body">{{ bulletin.bulletin_body }}</p>
 							</div>
 						</div>
-					{% comment %} {% endfor %} {% endcomment %}
+					{% endfor %}
 
 				</div>
 			</div>

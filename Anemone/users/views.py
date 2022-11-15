@@ -41,10 +41,6 @@ def register(request):
     context = {'form': form}
     return render(request, 'users/register.html', context)
 
-notifs = {
-    "1":{"user_img": None, "user_name": "Daren", "time": "07:50 AM", "date": "Wednesday, October 5, 2022", "title": "My Parents are Coming", "body": "My parents are coming in from Oregon this weekend. We'll be visiting the apartment around noon to drop by and say hello."}
-}
-
 def post_bulletin(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -62,14 +58,10 @@ def post_bulletin(request):
                                                    household = request.user.profile.household_set.all()[0])
                 return redirect('dashboard')
     form = BulletinForm()
+    bulletins = Bulletin.objects.all()
     return render(request, 'users/bulletin.html', {
         'form': form,
-        "user_img": None, 
-        "user_name": "Daren", 
-        "time": "07:50 AM", 
-        "date": "Wednesday, October 5, 2022", 
-        "title": "My Parents are Coming", 
-        "body": "My parents are coming in from Oregon this weekend. We'll be visiting the apartment around noon to drop by and say hello."
+        'bulletins': bulletins
     })
 
 
@@ -321,38 +313,41 @@ def create_task(request, household_id):
                                 user_created = profile_created,
                                 household = Household.objects.get(pk=household_id))
     # Frequency information
-    if 'repeats' in form_data:
-        frequency = form_data['repeat-type-radio']
-        if frequency == 'weekly':
-            mo = tu = we = th = fr = sa = su = False
-            if 'mo' in form_data:
-                mo = True
-            if 'tu' in form_data:
-                tu = True
-            if 'we' in form_data:
-                we = True
-            if 'th' in form_data:
-                th = True
-            if 'fr' in form_data:
-                fr = True
-            if 'sa' in form_data:
-                sa = True
-            if 'su' in form_data:
-                su = True
-            recurrence = TaskRecurrence.objects.create(task_to_clone = task,
-                                                       frequency = frequency,
-                                                       mo = mo,
-                                                       tu = tu,
-                                                       we = we,
-                                                       th = th,
-                                                       fr = fr,
-                                                       sa = sa,
-                                                       su = su,)
-        else:
-            day_of_month = form_data['day_of_month']
-            recurrence = TaskRecurrence.objects.create(task_to_clone = task,
-                                                       frequency = frequency,
-                                                       day_of_month = day_of_month)
+    try:
+        if 'repeats' in form_data:
+            frequency = form_data['repeat-type-radio']
+            if frequency == 'weekly':
+                mo = tu = we = th = fr = sa = su = False
+                if 'mo' in form_data:
+                    mo = True
+                if 'tu' in form_data:
+                    tu = True
+                if 'we' in form_data:
+                    we = True
+                if 'th' in form_data:
+                    th = True
+                if 'fr' in form_data:
+                    fr = True
+                if 'sa' in form_data:
+                    sa = True
+                if 'su' in form_data:
+                    su = True
+                recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                           frequency = frequency,
+                                                           mo = mo,
+                                                           tu = tu,
+                                                           we = we,
+                                                           th = th,
+                                                           fr = fr,
+                                                           sa = sa,
+                                                           su = su,)
+            else:
+                day_of_month = form_data['day_of_month']
+                recurrence = TaskRecurrence.objects.create(task_to_clone = task,
+                                                           frequency = frequency,
+                                                           day_of_month = day_of_month)
+    except:
+        print("Something went wrong")
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()

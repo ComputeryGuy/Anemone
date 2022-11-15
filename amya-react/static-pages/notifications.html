@@ -12,14 +12,63 @@
 	<!-- main style -->
 	<link rel="stylesheet" href="./styles/main-style.css">
 
-	<!-- link to notifications styel -->
+	<!-- link to notifications style -->
 	<link rel="stylesheet" href="./styles/notifications.css">
+
+	<!-- link to notification form -->
+	<link rel="stylesheet" href="./styles/notif-form.css">
 
 	<!-- google icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
 
 </head>
 <body>
+
+	<div id="add-notif-form-container">
+
+		<div class="exit-btn-container">
+			<button id="exit-btn">
+				<span class="material-symbols-rounded">close</span>
+			</button>
+		</div>
+
+		<div class="header-container">
+			<h2>Let's Create a Notification!</h2>
+		</div>
+
+		<form action="" method="post" class="notif-form">
+			<div class="notif-title-container">
+				<label for="notif_title"></label>
+				<input type="text" name="" id="notif_title" placeholder="Title">
+			</div>
+
+			<div class="notif-detail-container">
+				<label for="notif_detail"></label>
+				<textarea name="" id="notif_detail" cols="70" maxlength="60" rows="3" placeholder="Details"></textarea>
+			</div>
+
+			<div class="notif-deadline-container">
+				<label for="notif_deadline"><p>Deadline:</p> </label>
+				<input type="date" name="" id="notif_deadline">
+			</div>
+
+			<div class="submit-notif-container">
+				<button type="submit" id="submit-btn">
+					<p>Create Notification</p>
+				</button>
+			</div>
+		</form>
+	</div>
+
 	
 	<div class="main-grid">
 
@@ -96,7 +145,7 @@
 						</li>
 
 						<li class="list-item">
-							<a href="." class="nav-link">
+							<a href="./log-in.html" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
@@ -112,64 +161,120 @@
 
 		<section class="middle-section">
 
-			<div class="date-container">
-				<h4>3 Weeks ago</h4>
+			<div class="button-container">
+				<button id="add-notif-btn">
+					<span class="material-symbols-rounded">add</span>
+					<p>Add Notification</p>
+				</button>
 			</div>
 
-			<!-- a notification -->
-			<div class="a-notification">
-				<div class="user-profile">
-					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-					<p class="user-name">Daren</p>
-				</div>
-				<div class="user-post">
-					<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
-					<h3 class="notif-title">My Parents are Coming</h3>
-					<p class="notif-body">
-						My parents are coming in from Oregon this weekend.
-						We'll be visiting the apartment around noon to drop by and say hello.
-					</p>
-				</div>
-			</div>
+			<div class="left-right-container">
 
-			<!-- a notification -->
-			<div class="a-notification">
-				<div class="user-profile">
-					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-					<p class="user-name">Daren</p>
-				</div>
-				<div class="user-post">
-					<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
-					<h3 class="notif-title">My Parents are Coming</h3>
-					<p class="notif-body">
-						My parents are coming in from Oregon this weekend.
-						We'll be visiting the apartment around noon to drop by and say hello.
-					</p>
-				</div>
-			</div>
+				<div class="left-container">
 
-			<div class="date-container">
-				<h4>Today</h4>
-			</div>
+					<h2>Notifications</h2>
 
-			<!-- a notification -->
-			<div class="a-notification">
-				<div class="user-profile">
-					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-					<p class="user-name">Daren</p>
+					<div class="todays-notification-container">
+
+						<!-- a notification -->
+						<div class="a-notification">
+							<div class="user-profile">
+								<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								<p class="user-name">Daren</p>
+							</div>
+							<div class="user-post">
+								<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
+								<h3 class="notif-title">My Parents are Coming</h3>
+								<p class="notif-body">
+									My parents are coming in from Oregon this weekend.
+									We'll be visiting the apartment around noon to drop by and say hello.
+								</p>
+							</div>
+						</div>
+
+						<!-- a notification -->
+						<div class="a-notification">
+							<div class="user-profile">
+								<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								<p class="user-name">Daren</p>
+							</div>
+							<div class="user-post">
+								<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
+								<h3 class="notif-title">My Parents are Coming</h3>
+								<p class="notif-body">
+									My parents are coming in from Oregon this weekend.
+									We'll be visiting the apartment around noon to drop by and say hello.
+								</p>
+							</div>
+						</div>
+
+						<!-- a notification -->
+						<div class="a-notification">
+							<div class="user-profile">
+								<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+								<p class="user-name">Daren</p>
+							</div>
+							<div class="user-post">
+								<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
+								<h3 class="notif-title">My Parents are Coming</h3>
+								<p class="notif-body">
+									My parents are coming in from Oregon this weekend.
+									We'll be visiting the apartment around noon to drop by and say hello.
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="user-post">
-					<p class="time-date-header">Posted: <span class="notif-style">07:50 AM | Wednesday, October 5, 2022</span></p>
-					<h3 class="notif-title">My Parents are Coming</h3>
-					<p class="notif-body">
-						My parents are coming in from Oregon this weekend.
-						We'll be visiting the apartment around noon to drop by and say hello.
-					</p>
+
+				<div class="right-container">
+					<h2>Completed Tasks</h2>
+				
+					<div class="table-container">
+							<div class="table">
+
+								<!-- table header -->
+								<div class="row header">
+									<h4>User</h4>
+									<h4>Task Completed</h4>
+									<h4>Earned Points</h4>
+								</div>
+				
+								<div class="row-data-container">
+									<!-- table data -->
+									<div class="row data">
+										<div class="user-prof">
+											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											<p>Rapheal</p>
+										</div>
+										<div class="comp-task">
+											<h4>Wash the dishes</h4>
+										</div>
+										<div class="earned-pts">
+											<h4>100pts</h4>
+										</div>
+									</div>
+									<!-- table data -->
+									<div class="row data">
+										<div class="user-prof">
+											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											<p>Rapheal</p>
+										</div>
+										<div class="comp-task">
+											<h4>Do the laundry</h4>
+										</div>
+										<div class="earned-pts">
+											<h4>10pts</h4>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				
 			</div>
-			
 		</section>
 	</div>
 
+	<script src="./actions/notifications.js"></script>
 </body>
 </html>

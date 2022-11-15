@@ -7,8 +7,8 @@
 	
 	<title>Roommate</title>
 
-	<!-- link favicon -->
-	<link rel="stylesheet" href="./assets/icons/logo-favicon.png" type="image/png">
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="./assets/icons/logo-favicon.png" type="image/png">
 
 	<!-- main style -->
 	<link rel="stylesheet" href="./styles/main-style.css">
@@ -17,17 +17,26 @@
 	<link rel="stylesheet" href="./styles/leaderboard.css">
 
 	<!-- google icons -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+	<!-- Chart.js CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
 
 </head>
 <body>
-
+	
 	<div class="main-grid">
-
 		<section class="left-section">
-
 			<nav id="nav-sidebar">
 
 				<div class="logo-container">
@@ -39,8 +48,8 @@
 					<ul class="list">
 
 						<li class="list-item">
-							<a href="./index.html" class="nav-link">
-								<span class="material-symbols-rounded">dashboard</span>
+							<a href="./index.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
@@ -62,133 +71,128 @@
 						<li class="list-item">
 							<a href="./notifications.html" class="nav-link">
 								<span class="material-symbols-rounded">notifications</span>
-								<!-- TODO: increase in # makes hover colour expand too. Is that annoying? -->
-								<span class="link">Notifications <span id="notif-number">5</span></span>
+								<span class="link">
+									Notifications 
+									<span id="notif-number">5</span>
+								</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./leaderboard.html" class="nav-link desktop-current">
-								<span class="material-symbols-rounded mobile-current">leaderboard</span>
+							<a href="./leaderboard.html" class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
 								<span class="link">Leaderboard</span>
-							</a>
-						</li>
-
-						<li class="list-item mobile">
-							<a href="./settings.html" class="nav-link">
-								<span class="material-symbols-rounded">settings</span>
-								<span class="link">Settings</span>
-							</a>
-						</li>
-
-						<li class="list-item mobile">
-							<a href="." class="nav-link">
-								<span class="material-symbols-rounded">logout</span>
-								<span class="link">Logout</span>
 							</a>
 						</li>
 
 					</ul>
 
 					<div class="list-bottom-content">
-
 						<li class="list-item">
 							<a href="./settings.html" class="nav-link">
 								<span class="material-symbols-rounded">settings</span>
 								<span class="link">Settings</span>
 							</a>
 						</li>
-
 						<li class="list-item">
-							<a href="." class="nav-link">
+							<a href="./log-in.html" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
 						</li>
-
 					</div>
 					
 				</div>
-
 			</nav>
-
 		</section>
 
 		<section class="middle-section">
 
-			<div class="point">
+			<div class="leaderboard-container">
+				<h2 id="leaderboard-title">Leaderboard</h2>
 
-				<div class="point-container">
-					<h2>My Rank: 1st</h2>
-				</div>
+				<div class="table-container">
+
+					<div class="table-row header">
+						<h4>Rank</h4>
+						<h4>Name</h4>
+						<h4>Score</h4>
+					</div>
 				
-				<div class="score-container">
-					<h2>My Score: 600 pts</h2>
+					<div class="table-row data">
+						<p class="rank">01</p>
+						<p class="name">My Name</p>
+						<p class="score">10000</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">02</p>
+						<p class="name">Name</p>
+						<p class="score">1000</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">03</p>
+						<p class="name">Name</p>
+						<p class="score">100</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">04</p>
+						<p class="name">Name</p>
+						<p class="score">10</p>
+					</div>
+						
+					<div class="table-row data">
+						<p class="rank">05</p>
+						<p class="name">Name</p>
+						<p class="score">1</p>
+					</div>
+					<div class="table-row data">
+						<p class="rank">06</p>
+						<p class="name">Name</p>
+						<p class="score">1</p>
+					</div>
+					
 				</div>
-				
 			</div>
 
-			<div class="chart-container">
-				<div class="chart">
-					<canvas id="myChart"></canvas>
+			<div class="bar-chart-container">
+				<h2 id="bar-chart-title">Progress Chart</h2>
+
+				<div class="chart-container">
+					<canvas id="chart"></canvas>
 				</div>
 			</div>
+
 		</section>
 
 		<section class="right-section">
 
-			<div class="leaderboard">
-
-				<!-- leaderboard title -->
-				<div class="head">
-					<h2>Leaderboard</h2>
+			<div class="user-container">
+				<div class="user-image-container">
+					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
+					<h4 id="user-nme">David</h4>
 				</div>
 
-				<div class="body">
-					<ol>
-						<li>
-							<mark>User2</mark>
-							<small>600</small>
-						</li>
-						<li>
-							<mark>User1</mark>
-							<small>400</small>
-						</li>
-						<li>
-							<mark>User3</mark>
-							<small>200</small>
-						</li>
-					</ol>
+				<div class="user-stats-container">
+					<h4 id="my-level">Level: <span id="my-level-numb">1</span></h4>
+					<h4 id="my-rank">Rank: <span id="my-rank-numb">1</span></h4>
+					<h4 id="my-score">Score: <span id="my-score-numb">600pts</span></h4>
 				</div>
 			</div>
-			<div class="history">
-				<div class="head">
-					<h2>History</h2>
-				</div>
-				<div class="body">
-					<table>
-						<tr>
-						  <th>Date</th>
-						  <th>User</th>
-						  <th>Point</th>
-						</tr>
-						<tr>
-						  <td>10/20</td>
-						  <td>User1</td>
-						  <td>200</td>
-						</tr>
-						<tr>
-						  <td>10/22</td>
-						  <td>User2</td>
-						  <td>100</td>
-						</tr>
-					  </table>
+
+			<div class="my-labels">
+				<h4>My Labels:</h4>
+
+				<div class="labels-table">
+					<p>"The Best Cleaner" </p>
+					<p>"The Greatest Roommate"</p>
+					<p>"Trash Thrower" </p>
+					<p>"Legendary Swifer"</p>
+
 				</div>
 			</div>
+			
 		</section>
 	</div>
-
 	<script src="./actions/leaderboard.js"></script>
-	
 </body>
 </html>
