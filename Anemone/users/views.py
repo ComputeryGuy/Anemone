@@ -1,6 +1,7 @@
 import datetime
 import calendar
 import json
+import os
 from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
@@ -373,16 +374,13 @@ def profilePicture(request):
         if request.method == 'POST':
             form = profilePictureForm(request.POST,request.FILES)
             if form.is_valid():
-                print('profilePicture starts')
                 uProfile = Profile.objects.get(user=request.user)
-                '''if ImageFieldFile is not None:
-                    print('1')
-                    if Path.exists(uProfile.profile_picture.url):
-                        Path.unlink(uProfile.profile_picture.url)'''
+                image_path = uProfile.profile_picture.path
+                if os.path.exists(image_path):
+                    os.remove(image_path)
                 profilePicture = form.cleaned_data['profilePicture']
                 uProfile.profile_picture = profilePicture
                 uProfile.save()
-                print('profilePicture ends')
                 return redirect('/')
 
 
