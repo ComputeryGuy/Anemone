@@ -10,9 +10,8 @@ class Household(models.Model):
     household_id = models.UUIDField(primary_key=True,
                                     default = uuid.uuid4,
                                     editable = False)
-    name = models.CharField(max_length = 30, default = "NO NAME!")
 
-    pin = models.IntegerField(unique = True)
+    pin = models.CharField(unique=True, max_length=6)
 
 
 class Profile(models.Model):
@@ -28,7 +27,7 @@ class Profile(models.Model):
 
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
-    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True, related_name = "members")
+    household = models.ForeignKey(Household, default=None, on_delete=models.SET_NULL, null=True, related_name = "members")
 
 
     ## game aspects
