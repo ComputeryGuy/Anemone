@@ -5,6 +5,10 @@ from django.db.models import CharField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
+import wonderwords
+from wonderwords import RandomWord
+# from 
+# https://pypi.org/project/wonderwords/
 
 class Household(models.Model):
     household_id = models.UUIDField(primary_key=True,
@@ -36,12 +40,20 @@ class Profile(models.Model):
     prevLevelThresh = models.IntegerField(default=0)
     xpToNextLevel = models.IntegerField(default=1000)
 
+    ##lootbox/ lootbox rewards
+    lootboxes = models.IntegerField(default=0, verbose_name="lootboxes")
+    def open_lootbox(self):
+        self.lootboxes -= 1
+        self.save()
+
+
     def update_levelSystem(self, points):
             self.xp += points
             
 
             while self.xp > self.nextLevelThresh:
                 self.level += 1
+                self.lootboxes += 1
                 self.update_levelThresh(self.level, self.nextLevelThresh)
             
             self.update_xpToNextLevel(self.xp, self.nextLevelThresh)
@@ -130,6 +142,8 @@ class TaskRecurrence(models.Model):
     day_of_month = models.IntegerField(null=True, blank=True)
 
 
+
+
 @receiver(pre_save, sender=Task)
 def cache_previous_status(sender, instance, *args, **kwargs):
     if not instance._state.adding:
@@ -151,6 +165,21 @@ def point_updater(sender, instance, **kwargs):
         else:
             profile.modify_points(-instance.points, instance)
 
+class LootBox(models.Model):
+    owner = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
+                                     null=True, blank=True, related_name='lootbox_owner')
+
+
+    adjective = models.CharField(max_length=55, null=True, blank=True)
+    noun = models.CharField(max_length=55, null=True, blank=True)
+
+
+    def generateNounAdjectivePair(self):
+        r = RandomWord()
+
+        self.adjective = r.word(include_parts_of_speech=["adjective"])
+        self.noun = r.word(include_parts_of_speech=["nouns"])
+        self.save()
 
 
 #class Pin(models.Model):

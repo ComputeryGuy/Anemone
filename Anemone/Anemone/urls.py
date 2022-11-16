@@ -41,4 +41,7 @@ urlpatterns = [
     path('minus_points/', user_views.minus_points, name="minusPoints"),
     path('bidding/',  user_views.bidding, name='bidding'),
     path('<uuid:household_id>/tasks', user_views.tasks, name="taskboard"),
+    
+    
+    path('openLootbox', user_views.open_Lootbox, name="lootbox"),
 ]

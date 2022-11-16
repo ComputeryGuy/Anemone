@@ -13,6 +13,10 @@ from .models import *
 from django.http import HttpResponse
 from django.http import JsonResponse
 
+import wonderwords
+from wonderwords import RandomWord
+
+
 from django.forms.models import model_to_dict
 
 def home(request):
@@ -346,6 +350,52 @@ def create_task(request, household_id):
                                                            day_of_month = day_of_month)
     except:
         print("Something went wrong")
+
+
+
+
+def open_Lootbox(request):
+    if request.user.is_authenticated:
+
+        if request.method == 'POST':
+
+
+            uName = request.user.username
+            uMember = User.objects.get(username=uName)
+            uProfile = Profile.objects.get(user=uMember)
+
+
+            if uProfile.lootboxes > 0:
+
+                uProfile.open_lootbox()
+                newBox = LootBox.objects.create(owner=uProfile)
+                newBox.generateNounAdjectivePair()
+
+                messages.info(
+                    request, 'You have opened the lootbox!'
+                )
+
+                '''
+                uName = request.user.username
+                minusMember = form.cleaned_data['member_name']
+                points = form.cleaned_data['minus_points']
+                points = -points
+
+                
+                minusMember = User.objects.get(username = minusMember)
+                minusProfile = Profile.objects.get(user = minusMember)
+
+
+                taskName = 'Bad for {member}'.format(member = minusMember)
+                taskBody = '{uName} thinks {member} deserves a {points} point reduction!'.format(uName = uName, member = minusMember, points = points)
+
+                minus = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                task_status=True, user_created=uProfile, user_claimed=minusProfile, household=(uProfile.household))
+                minusProfile.modify_points(points, minus)
+                '''
+            return redirect('/')
+
+        return render(request, 'users/openLootbox.html')
 
 
 '''        household = request.user.profile.household
