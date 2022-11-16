@@ -166,7 +166,7 @@ def point_updater(sender, instance, **kwargs):
         else:
             profile.modify_points(-instance.points, instance)
 
-class LootBox(models.Model):
+class Lootbox(models.Model):
     owner = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='lootbox_owner')
 

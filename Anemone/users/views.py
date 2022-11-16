@@ -432,7 +432,7 @@ def open_Lootbox(request):
             if uProfile.lootboxes > 0:
 
                 uProfile.open_lootbox()
-                newBox = LootBox.objects.create(owner=uProfile)
+                newBox = Lootbox.objects.create(owner=uProfile)
                 newBox.generateNounAdjectivePair()
 
                 messages.info(
