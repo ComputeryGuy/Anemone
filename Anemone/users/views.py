@@ -42,23 +42,27 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 def post_bulletin(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = BulletinForm(request.POST)
-            if form.is_valid():
-                print("wah")
-                user = request.user.username
-                bulletin_body = form.cleaned_data['bulletin_body']
-                creation_time = datetime.now()
-                expire_time = form.cleaned_data['expire_time']
-                bulletin = Bulletin.objects.create(user=user,
-                                                   bulletin_body=bulletin_body,
-                                                   creation_time=creation_time,
-                                                   expire_time=expire_time, 
-                                                   household = request.user.profile.household_set.all()[0])
-                return redirect('dashboard')
-    form = BulletinForm()
-    bulletins = Bulletin.objects.all()
+    # if request.user.is_authenticated:
+    if request.method == 'POST':
+        form = BulletinForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['expire_date'].date() >= datetime.date.today():
+                bulletin = Bulletin(
+                    user=request.user.username,
+                    title=form.cleaned_data['title'],
+                    bulletin_body=form.cleaned_data['bulletin_body'], 
+                    expire_date=form.cleaned_data['expire_date'], 
+                    household = request.user.profile.household)
+                bulletin.save()
+            else:
+                messages.error(request, "Failed: Expire date cannot be in the past")
+                return redirect('bulletin')
+        else:
+            messages.error(request, "Failed: Title or Detail should be filled out")
+            return redirect('bulletin')
+    else:
+        form = BulletinForm()
+    bulletins = Bulletin.objects.filter(household=request.user.profile.household)
     return render(request, 'users/bulletin.html', {
         'form': form,
         'bulletins': bulletins

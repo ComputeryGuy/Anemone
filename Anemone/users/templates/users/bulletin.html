@@ -9,14 +9,7 @@
 {% endblock %}
 
 {% block content %}
-{% comment %} <form method="POST">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button class="cyan waves-effect waves-light btn" type="submit">post</button>
-</form> {% endcomment %}
-
 <div id="add-notif-form-container">
-
 	<div class="exit-btn-container">
 		<button id="exit-btn">
 			<span class="material-symbols-rounded">close</span>
@@ -27,16 +20,9 @@
 		<h2>Let's Create a Notification!</h2>
 	</div>
 
-	<form action="" method="post" class="notif-form">
-		<div class="notif-title-container">
-			<label for="notif_title"></label>
-			<input type="text" name="" id="notif_title" placeholder="Title">
-		</div>
-
-		<div class="notif-detail-container">
-			<label for="notif_detail"></label>
-			<textarea name="" id="notif_detail" cols="70" maxlength="60" rows="3" placeholder="Details"></textarea>
-		</div>
+	<form method="post" class="notif-form">
+		{% csrf_token %}
+		{{ form.as_p }}
 		<div class="submit-notif-container">
 			<button type="submit" id="submit-btn">
 				<p>Create Notification</p>
@@ -52,8 +38,12 @@
 	{% include 'users/includes/nav.html'%}
 
 	<section class="middle-section">
-
 		<div class="button-container">
+			{% for message in messages %}
+    			<div class="alert alert-success">
+           			<h2>{{ message }}</h2>
+    			</div>
+			{% endfor %}
 			<button id="add-notif-btn">
 				<span class="material-symbols-rounded">add</span>
 				<p>Add Notification</p>

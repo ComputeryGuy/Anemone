@@ -90,8 +90,8 @@ class Bulletin(models.Model):
     user = models.CharField(max_length=500)
     title = models.CharField(max_length=100)
     bulletin_body = models.CharField(max_length=500)
-    creation_time = models.DateTimeField()
-    expire_time = models.DateTimeField()
+    creation_time = models.DateTimeField(auto_now_add=True)
+    expire_date = models.DateTimeField()
     household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True)
 
 

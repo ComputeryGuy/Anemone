@@ -5,6 +5,9 @@ textarea {
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
 	outline: none;
+	width: 100%;
+	margin-bottom: 1rem;
+	padding: .5rem;
 }
 
 /* change the place holder colour */
@@ -67,17 +70,6 @@ textarea:focus {
 	text-align: center;
 }
 /* =================== title container =================== */
-.notif-title-container input[type=text] {
-	width: 100%;
-	padding: .5rem;
-	margin-bottom: 1rem;
-}
-
-.notif-detail-container textarea {
-	padding: .5rem;
-	margin-bottom: 1rem;
-}
-
 .submit-notif-container {
 	text-align: center;
 }
@@ -98,4 +90,13 @@ textarea:focus {
 	background-color: var(--primary-input-colour);
 	border-color: var(--primary-light-blue);
 	transition: var(--std-transition);
+}
+/* error message */
+.alert{
+	padding: 1rem;
+	position: absolute;
+	top:0;
+	right: 0;
+	border-radius: 0 0 0 10px;
+	background-color: var(--primary-card-colour);
 }

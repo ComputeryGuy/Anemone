@@ -6,10 +6,10 @@ from django.forms import ModelForm, ValidationError
 from django.utils.translation import gettext_lazy as _
 from users.models import Household, Profile, Task
 
-
 class BulletinForm(forms.Form):
-    bulletin_body = forms.CharField(max_length=500)
-    expire_time = forms.DateTimeField()
+    title = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Title'}))
+    bulletin_body = forms.CharField(max_length=500, label="", widget=forms.Textarea(attrs={'placeholder':'Detail', 'rows':3}))
+    expire_date = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date'}))
 
 
 class HouseholdCreateForm(forms.Form):
