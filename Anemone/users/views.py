@@ -1,6 +1,7 @@
 import datetime
 import calendar
 import json
+from random import randint
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
@@ -26,8 +27,71 @@ def home(request):
             url = '/' + uuid
             return redirect(url)
         else:
-            return redirect('joinGroup')
+            return redirect('join')
     return redirect('login')
+
+
+def login_reg(request):
+    if request.method == 'POST':
+        if request.POST.get('submit') == 'sign_in':
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                print("Oops")
+        if request.POST.get('submit') == 'sign_up':
+            first_name = request.POST.get('first_name', '')
+            last_name = request.POST.get('last_name', '')
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            
+            user = User.objects.create_user(username, password=password)
+            if user is not None:
+                profile = Profile.objects.get(user=user)
+                profile.first_name = first_name
+                profile.last_name = last_name
+                profile.save()
+                return redirect('login')
+            else:
+                print("OOPS")
+                return redirect('login')
+
+    user_creation_form = UserCreationForm()
+    context = {'user_creation_form': user_creation_form}
+    return render(request, 'users/log-in.html', context)
+
+
+def join(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            profile = Profile.objects.get(user=request.user)
+            try: 
+                payload = json.loads(request.body)
+                household = Household.objects.create(pin=payload.get("house_pin"))
+                profile.household = household
+                profile.save()
+                household.save()
+            except:
+                household_pin = request.POST.get('house_pin', '')
+                try:
+                    household = Household.objects.get(pin=household_pin)
+                    profile.household = household
+                    profile.save()
+                    household.save()
+                except:
+                    pass
+                return redirect('home')
+
+        collides = True
+        while collides:
+            household_pin = randint(100000, 999999)
+            if Household.objects.filter(pin=household_pin).count() == 0:
+                collides = False
+        return render(request, 'users/join.html', {'household_pin': household_pin})
 
 
 def register(request):

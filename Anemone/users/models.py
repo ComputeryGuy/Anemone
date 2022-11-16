@@ -14,9 +14,8 @@ class Household(models.Model):
     household_id = models.UUIDField(primary_key=True,
                                     default = uuid.uuid4,
                                     editable = False)
-    name = models.CharField(max_length = 30, default = "NO NAME!")
 
-    pin = models.IntegerField(unique = True)
+    pin = models.CharField(unique=True, max_length=6)
 
 
 class Profile(models.Model):
@@ -27,10 +26,12 @@ class Profile(models.Model):
     )
     # tasks_finished = Chore.objects.filter(user_claimed=user).annotate(tasks_finished=Count('task_status').filter(task_status='True'))
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
+    first_name = models.CharField(max_length=20, null=True)
+    last_name = models.CharField(max_length=20, null=True)
 
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
-    household = models.ForeignKey(Household, default=None, on_delete=models.CASCADE, null=True, related_name = "members")
+    household = models.ForeignKey(Household, default=None, on_delete=models.SET_NULL, null=True, related_name = "members")
 
 
     ## game aspects
