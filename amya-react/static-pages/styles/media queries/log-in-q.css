@@ -1,0 +1,51 @@
+
+/* =================== media query =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.log-in-container {
+		grid-column: span 4;
+	}
+
+	.left-side {
+
+	}
+
+	.right-side {
+
+	}
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	.log-in-container {
+		grid-column: span 6;
+		padding: 13rem 0;
+		box-shadow: none;
+	}
+
+	.left-side {
+		width: 55%;
+		height: 60%;
+	}
+
+	.right-side {
+		width: 45%;
+		height: 60%;
+	}
+}
+
+/* =================== LARGE DESKTOPS =================== */
+@media only screen and (min-width: 90.063em) {
+	.main-grid {
+		grid-template-columns: repeat(12, max-content);
+	}
+}

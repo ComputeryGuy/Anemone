@@ -15,7 +15,7 @@ $(document).ready(function () {
 			
 			// change position of .woops
 			$(".woops").css("right", "1.5rem");
-			$(".woops").css("left", "83%");
+			$(".woops").css("left", "80%");
 			
 			// show the container
 			$(".create-selected-container").show();
@@ -53,7 +53,7 @@ $(document).ready(function () {
 			$(".your-pin-container").hide().delay(5000).fadeIn();
 
 			// change position of .woops
-			$(".woops").css("right", "83%");
+			$(".woops").css("right", "80%");
 			$(".woops").css("left", "1.5rem");
 
 			$(".woops").hide().delay(6000).fadeIn();

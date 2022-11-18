@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Roommate</title>
+
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="./assets/icons/logo-favicon.png" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="./styles/main-style.css">
+
+	<!-- join style -->
+	<link rel="stylesheet" href="./styles/join.css">
+
+	<!-- google icons -->
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<div class="main-grid">
+
+		<div class="join-container">
+
+			<!-- starting form  -->
+			<form action="" id="select_form">
+				<h1>
+					Hey there! 
+					</br> Quick question, are you...
+				</h1>
+
+				<div class="opt-container">
+					<button id="create-sel">Creating a Household</button>
+					<button id="join-sel">Joining a Household</button>
+				</div>
+			</form>
+
+			<!-- creating a household -->
+			<div class="create-selected-container">
+				<h1>Welcome to Roommate!</h1>
+				<h4>
+					It seems you trying to create a household. <br>
+					Click the button below to generate a pin and share with your roommates.
+				</h4>
+				
+				<form action="" method="post">
+					<button type="submit" id="gen-pin-btn">Generate Pin</button>
+				</form>
+
+				<div class="load-animation-container">
+					<div class="load-animation">
+						<div class="circ"></div>
+						<div class="circ"></div>
+						<div class="circ"></div>
+					</div>
+				</div>
+
+				<div class="your-pin-container">
+					<h4>Thanks for waiting! <br> Your household pin is:</h4>
+					<h4><span id="your_house">{{ household_pin }}</span></h4>
+				</div>
+
+				<div class="go-to-dash">
+					<a href="./index.html">Go to Dashboard</a>
+				</div>
+				
+				<div class="woops">
+					<button>Go Back</button>
+				</div>
+			</div>
+
+			<!-- joining a household -->
+			<div class="join-selected-container">
+				<h1>Welcome to Roommate!</h1>
+				<h4>
+					It seems you are trying to join a household. <br>
+					To join your house, type in your house pin below.
+				</h4>
+
+				<form action="" method="post" id="house-pin-form">
+					{% csrf_token %}
+					<input type="number" name="house_pin" id="house_pin" placeholder="Your House Pin">
+					<button type="submit" id="house_pin_submit_btn">Submit</button>
+				</form>
+
+				<div class="woops">
+					<button>Go Back</button>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="./actions/join.js"></script>
+</body>
+</html>

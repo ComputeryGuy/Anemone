@@ -128,6 +128,7 @@
 /* go back button */
 .woops {
 	position: absolute;
+	width: 10%;
 	right: 1.5rem;
 	bottom: 1.5rem;
 }
