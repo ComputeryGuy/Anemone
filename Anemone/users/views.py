@@ -296,27 +296,27 @@ def bidding(request):
 
 
 def tasks(request, household_id):
-    task_assign(request)
-    lfn = last_fortnight()
-    
-    household = get_object_or_404(Household, pk=household_id)
-    user = request.user
-    tasks = household.task_set.all()
-    unclaimed_tasks = list(tasks.filter(claimed=False))
-    todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
-    in_prog_tasks = list(tasks.filter(in_progress=True))
-    complete_tasks = tasks.filter(task_status=True)
-    complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
-    movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
-    values = {'household_id': household_id,
-              'user': user,
-              'unclaimed_tasks': unclaimed_tasks,
-              'todo_tasks': todo_tasks,
-              'in_prog_tasks': in_prog_tasks,
-              'complete_tasks': complete_tasks,
-              'movable_tasks': movable_tasks}
-
     if request.user.is_authenticated:
+        task_assign(request)
+        lfn = last_fortnight()
+        
+        household = get_object_or_404(Household, pk=household_id)
+        user = request.user
+        tasks = household.task_set.all()
+        unclaimed_tasks = list(tasks.filter(claimed=False))
+        todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
+        in_prog_tasks = list(tasks.filter(in_progress=True))
+        complete_tasks = tasks.filter(task_status=True)
+        complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
+        movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
+        values = {'household_id': household_id,
+                  'user': user,
+                  'unclaimed_tasks': unclaimed_tasks,
+                  'todo_tasks': todo_tasks,
+                  'in_prog_tasks': in_prog_tasks,
+                  'complete_tasks': complete_tasks,
+                  'movable_tasks': movable_tasks}
+
         if request.method == "POST":
             try: 
                 payload = json.loads(request.body)
