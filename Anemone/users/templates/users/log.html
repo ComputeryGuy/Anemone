@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Finished Tasks</h2>
+    {% for instance in tasks_finished %}
+        {{instance.user_claimed.user}} completed {{instance.title}} for {{instance.points}} points by the deadline {{instance.due_date}} <br>
+    {% endfor %}
+    <h2>Tasks in Progress</h2>
+    {% for instance in tasks_in_progress %}
+        {{instance.user_claimed.user}} is working on {{instance.title}} for {{instance.points}} points by the deadline {{instance.due_date}}<br>
+    {% endfor %}
+    <h2>Unclaimed Tasks</h2>
+    {% for instance in tasks_unclaimed %}
+        {%if instance.user_claimed.user%}
+            {{instance.user_claimed.user}} has the top bid of {{instance.points}} on the task: {{instance.title}} with the deadline {{instance.due_date}}<br>
+        {%else%}
+            The task: {{instance.title}} with the deadline {{instance.due_date}} has no bidder, claim the top bid for {{instance.points}} points.<br>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

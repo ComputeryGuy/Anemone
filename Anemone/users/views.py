@@ -1,13 +1,16 @@
 import datetime
 import calendar
 import json
-from random import randint
+import random
+import os
+from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
+from django.utils import timezone
 from .forms.forms import *
 from .models import *
 
@@ -88,7 +91,7 @@ def join(request):
 
         collides = True
         while collides:
-            household_pin = randint(100000, 999999)
+            household_pin = random.randint(100000, 999999)
             if Household.objects.filter(pin=household_pin).count() == 0:
                 collides = False
         return render(request, 'users/join.html', {'household_pin': household_pin})
@@ -115,10 +118,9 @@ def post_bulletin(request):
         if request.method == 'POST':
             form = BulletinForm(request.POST)
             if form.is_valid():
-                print("wah")
                 user = request.user.username
                 bulletin_body = form.cleaned_data['bulletin_body']
-                creation_time = datetime.now()
+                creation_time = timezone.now(datetime.timezone.utc)
                 expire_time = form.cleaned_data['expire_time']
                 bulletin = Bulletin.objects.create(user=user,
                                                    bulletin_body=bulletin_body,
@@ -178,6 +180,7 @@ def generate_household_link(request):
 
 def dashboard(request, household_id):
     if request.user.is_authenticated:
+        task_assign(request)
         household = get_object_or_404(Household, pk=household_id)
         tasks = household.task_set.all()
         user_name = request.user.username
@@ -293,30 +296,31 @@ def bidding(request):
 
 
 def tasks(request, household_id):
-    lfn = last_fortnight()
-    
-    household = get_object_or_404(Household, pk=household_id)
-    user = request.user
-    tasks = household.task_set.all()
-    unclaimed_tasks = list(tasks.filter(claimed=False))
-    todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
-    in_prog_tasks = list(tasks.filter(in_progress=True))
-    complete_tasks = tasks.filter(task_status=True)
-    complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
-    movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
-    values = {'household_id': household_id,
-              'user': user,
-              'unclaimed_tasks': unclaimed_tasks,
-              'todo_tasks': todo_tasks,
-              'in_prog_tasks': in_prog_tasks,
-              'complete_tasks': complete_tasks,
-              'movable_tasks': movable_tasks}
-
     if request.user.is_authenticated:
+        task_assign(request)
+        lfn = last_fortnight()
+        
+        household = get_object_or_404(Household, pk=household_id)
+        user = request.user
+        tasks = household.task_set.all()
+        unclaimed_tasks = list(tasks.filter(claimed=False))
+        todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
+        in_prog_tasks = list(tasks.filter(in_progress=True))
+        complete_tasks = tasks.filter(task_status=True)
+        complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
+        movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
+        values = {'household_id': household_id,
+                  'user': user,
+                  'unclaimed_tasks': unclaimed_tasks,
+                  'todo_tasks': todo_tasks,
+                  'in_prog_tasks': in_prog_tasks,
+                  'complete_tasks': complete_tasks,
+                  'movable_tasks': movable_tasks}
+
         if request.method == "POST":
             try: 
                 payload = json.loads(request.body)
-                handle_task_ajax(payload)
+                handle_task_ajax(request, payload)
             except:
                 create_task(request, household_id)
                 return redirect('taskboard', household_id=household_id)
@@ -324,11 +328,24 @@ def tasks(request, household_id):
         return render(request, 'users/task-board.html', values)
 
 
+def task_assign(request):
+    bid_end = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
+    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__gte=bid_end)
+    for task in unclaimed_tasks:
+        if task.user_claimed is not None:
+            task.claimed = True
+        else:
+            profiles = request.user.profile.household.members.all()
+            selected_profile = random.choice(list(profiles))
+            task.user_claimed = selected_profile
+        task.save()
+
+
 def last_fortnight():   
     #Calculates first and third monday of current month chooses most recent of two slowly
     c = calendar.Calendar(firstweekday=calendar.SUNDAY)
-    year = datetime.date.today().year
-    month = datetime.date.today().month
+    year = datetime.datetime.now().year
+    month = datetime.datetime.now().month
     monthcal = c.monthdatescalendar(year, month)
     first_third_mon = [day for week in monthcal for day in week if \
                        day.weekday() == calendar.MONDAY and \
@@ -339,11 +356,12 @@ def last_fortnight():
     return last_fortnight
 
 
-def handle_task_ajax(payload):
+def handle_task_ajax(request, payload):
     if payload.get("type") == "user_bid":
         task_id = payload.get("id")
         task = Task.objects.get(pk=task_id)
         task.points = payload.get("bid")
+        task.user_claimed = request.user.profile
         task.save()
     if payload.get("type") == "task_move":
         task_id = payload.get("id")
@@ -371,9 +389,10 @@ def create_task(request, household_id):
     task_title = form_data['task_title']
     task_body = form_data['task_body']
     due_datetime = form_data['due_date'] + " " + "12:00:00"  # currently we have no way to use a given dateform_data['due_time']
-    due_datetime = datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
+    due_datetime = timezone.make_aware(datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S'))
     task = Task.objects.create(title = task_title,
                                 body = task_body,
+                                creation_time = timezone.now(),
                                 due_date = due_datetime,
                                 points = 1000,
                                 user_created = profile_created,
@@ -461,6 +480,37 @@ def open_Lootbox(request):
 
         return render(request, 'users/openLootbox.html')
 
+
+def log(request):
+    if request.user.is_authenticated:
+        task_assign(request)
+        uHousehold = Profile.objects.get(user=request.user).household
+        tasks_finished = Task.objects.filter(household=uHousehold, claimed='True', task_status='True')
+        tasks_in_progress = Task.objects.filter(household=uHousehold, claimed='True', task_status='False')
+        tasks_unclaimed = Task.objects.filter(claimed='False')
+        values = {'tasks_finished': tasks_finished,
+                  'tasks_in_progress': tasks_in_progress,
+                  'tasks_unclaimed': tasks_unclaimed, }
+        return render(request, 'users/log.html', values)
+
+def profilePicture(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = profilePictureForm(request.POST,request.FILES)
+            if form.is_valid():
+                uProfile = Profile.objects.get(user=request.user)
+                image_path = uProfile.profile_picture.path
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                profilePicture = form.cleaned_data['profilePicture']
+                uProfile.profile_picture = profilePicture
+                uProfile.save()
+                return redirect('/')
+
+
+
+    form = profilePictureForm()
+    return render(request, 'users/profilePicture.html', {'form': form})
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()
