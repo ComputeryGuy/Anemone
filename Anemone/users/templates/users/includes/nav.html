@@ -13,28 +13,28 @@
             <ul class="list">
 
                 <li class="list-item">
-                    <a href="./index.html" class="nav-link">
+                    <a href="{% url 'dashboard' %}" class="nav-link">
                         <span class="material-symbols-rounded">dashboard</span>
                         <span class="link">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="list-item">
-                    <a href="./task-board.html" class="nav-link">
+                    <a href="{% url 'taskboard' %}" class="nav-link">
                         <span class="material-symbols-rounded">task_alt</span>
                         <span class="link">Tasks</span>
                     </a>
                 </li>
 
                 <li class="list-item">
-                    <a href="./calendar.html" class="nav-link">
+                    <a href="." class="nav-link">
                         <span class="material-symbols-rounded">calendar_month</span>
                         <span class="link">Calendar</span>
                     </a>
                 </li>
 
                 <li class="list-item">
-                    <a href="./notifications.html" class="nav-link desktop-current">
+                    <a href="{% url 'bulletin' %}" class="nav-link desktop-current">
                         <span class="material-symbols-rounded mobile-current">notifications</span>
                         <span class="link">Notifications</span>
                     </a>
@@ -52,14 +52,14 @@
             <div class="list-bottom-content">
 
                 <li class="list-item">
-                    <a href="./settings.html" class="nav-link">
+                    <a href="." class="nav-link">
                         <span class="material-symbols-rounded">settings</span>
                         <span class="link">Settings</span>
                     </a>
                 </li>
 
                 <li class="list-item">
-                    <a href="./log-in.html" class="nav-link">
+                    <a href="{% url 'logout' %}" class="nav-link">
                         <span class="material-symbols-rounded">logout</span>
                         <span class="link">Logout</span>
                     </a>

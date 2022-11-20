@@ -281,16 +281,16 @@
 						</li>
 		
 						<li class="list-item">
-							<a href="./calendar.html" class="nav-link">
+							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">calendar_month</span>
 								<span class="link">Calendar</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./notifications.html" class="nav-link">
+							<a href="{% url 'bulletin' %}" class="nav-link">
 								<span class="material-symbols-rounded">notifications</span>
-								<span class="link">Notifications <span id="notif-number">5</span></span>
+								<span class="link">Notifications</span>
 							</a>
 						</li>
 
@@ -309,7 +309,7 @@
 						</li>
 
 						<li class="list-item mobile">
-							<a href="." class="nav-link">
+							<a href="{% url 'logout' %}" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
@@ -327,7 +327,7 @@
 						</li>
 
 						<li class="list-item">
-							<a href="/logout" class="nav-link">
+							<a href="{% url 'logout' %}" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
