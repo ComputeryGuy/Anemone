@@ -1,5 +1,9 @@
 
 /* =================== CONSTANTS =================== */
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 /* ---------- notification style---------- */
 .a-notification {
 	background-color: var(--primary-card-colour);
@@ -56,17 +60,25 @@
 	padding: 1.5rem;
 
 	display: grid;
+<<<<<<< HEAD
 	grid-template-rows: repeat(2, min-content) ;
 	gap: 10px;
 
+=======
+	grid-template-rows: repeat(3, min-content);
+	gap: 10px;
+>>>>>>> master
 }
 
 /* ---------- button container ---------- */
 .button-container {
+<<<<<<< HEAD
 	grid-row: 1;
 
 	margin-top: 3rem;
 
+=======
+>>>>>>> master
 	display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -103,6 +115,7 @@
 	transition: var(--std-transition);
 }
 
+<<<<<<< HEAD
 
 .left-right-container {
 	grid-row: 2;
@@ -171,9 +184,65 @@
 }
 
 .user-prof img {
+=======
+/* ---------- top container ---------- */
+.top-container h2 {
+	margin-bottom:1rem;
+}
+
+/* ---------- bottom container ---------- */
+.bottom-container h2 {
+	margin-bottom: 1rem;
+}
+
+.completed-tasks-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	
+	gap: 10px;
+}
+
+
+.comp-task {
+	display: grid;
+	grid-template-columns: min-content repeat(2, 1fr);
+	gap: 10px;
+}
+
+.comp-task div:not(:last-child) {
+	border-right: 1px solid var(--primary-light-blue);
+}
+
+.task-user-profile {
+	text-align: center;
+    padding: 1rem;
+	/* padding-right: 4rem; */
+}
+
+.task-user-profile img {
+>>>>>>> master
 	width: 3rem;
 	height: 3rem;
 	border-radius: 100%;
 	border: 3px solid var(--primary-dark-blue);
 	margin-bottom: .3rem;
+<<<<<<< HEAD
+=======
+}
+
+.task-name-container p {
+	color: var(--primary-light-blue);
+}
+
+.task-name {
+	font-size: 1.5rem;
+}
+
+.task-point-container p {
+	color: var(--primary-light-blue);
+}
+
+.for-points {
+	font-size: 1.5rem;
+>>>>>>> master
 }

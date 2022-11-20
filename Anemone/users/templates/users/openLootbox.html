@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+   
+  <head>
+    <title>Open LootBox</title>
+  </head>
+   
+  <body>
+   
+  <!--showing success message-->
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {{ message }}</li>
+        {% endfor %}
+    </ul>
+   {% endif %}
+     
+   <!--Form with multiple submit buttons-->
+   <form action="" method="POST">
+
+    {% csrf_token %}
+
+     <button type="submit" name="Open Lootbox!">Open Loot Box!</button>
+   </form>
+   
+  </body>
+</html>

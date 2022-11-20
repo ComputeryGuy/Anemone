@@ -1,0 +1,12 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ post.profile_picture.url }}
+			<img src="{{ post.profile_picture.url }}">
+			{{ form.as_p }}
+			<button class="cyan waves-effect waves-light btn" type="submit">post</button>
+		</form>
+{% endblock %}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Roommate</title>
+
+	{% load static %}
+
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
+
+	<!-- log in style -->
+	<link rel="stylesheet" href="{% static 'users/styles/log-in.css' %}">
+
+	<!-- google icons -->
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="main-grid">
+		
+		<div class="log-in-container">
+
+			<div class="left-side">
+
+				<div class="logo-container left">
+					<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+				</div>
+
+				<div class="sign-in-container">
+					<h1>Sign in to Roommate</h1>
+
+					<form action="" id="sign-in-form" method="post">
+						{% csrf_token %}
+						<div class="input-container">
+							<input type="text" name="username" id="username" placeholder="Username*" required>
+							<input type="password" name="password" id="password" placeholder="Password*" required>
+						</div>
+
+						<div class="forget-container underline-effect">
+							<a href="#">
+								<h3>Forgot your password?</h3>
+							</a>
+						</div>
+
+						<div class="submit-container">
+							<button type="submit" name="submit" id="sign-in-submit-btn" value="sign_in">Sign In</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="old-user-container">
+					<h1>Have an account?</h1>
+					<h4>Welcome back! Log in to get back to productivity</h4>
+					<button id="go-to-sign-in-btn">Go to Sign In</button>
+				</div>
+
+
+			</div>
+
+			<div class="right-side">
+
+				<div class="logo-container right">
+					<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+				</div>
+
+				<div class="sign-up-container">
+					<h1>Create Account</h1>
+
+					<form action="" id="sign-up-form" method="post">
+						{% csrf_token %}
+
+						<div class="input-container">
+							<input type="text" name="first_name" id="first_name" placeholder="First Name*" required>
+							<input type="text" name="last_name" id="last_name" placeholder="Last Name*" required>
+							<input type="text" name="username" id="username" placeholder="Username*" required>
+							<input type="password" name="password" id="password" placeholder="Password*" required>
+
+						</div>
+
+						<div class="submit-container">
+							<button type="submit" name="submit" id="sign-up-submit-btn" value="sign_up">Sign Up</button>
+						</div>
+
+					</form>
+					
+				</div>
+
+				<div class="new-user-container">
+					<h1>New to Roommate?</h1>
+					<h4>Enter your personal details to start your journey with us</h4>
+					<button id="go-to-sign-up-btn">Go to Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="{% static 'users/actions/log-in.js' %}"></script>
+</body>
+</html>

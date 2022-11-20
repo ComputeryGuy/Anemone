@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from users import views as user_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,11 +26,13 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('bulletin/', user_views.post_bulletin, name='bulletin'),
     path('createTask/', user_views.create_task, name='createTask'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', user_views.login_reg, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('join/', user_views.join, name='join'),
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
-
+    path('log/', user_views.log, name='log'),
+    path('profilePicture/', user_views.profilePicture, name='profilePicture'),
     ##used if url join is implemented
     #path('joinHousehold/<uuid:household_id>/', user_views.join_household, name='joinGroup'),
     
@@ -41,4 +45,5 @@ urlpatterns = [
     path('minus_points/', user_views.minus_points, name="minusPoints"),
     path('bidding/',  user_views.bidding, name='bidding'),
     path('<uuid:household_id>/tasks', user_views.tasks, name="taskboard"),
+    path('openLootbox', user_views.open_Lootbox, name="lootbox"),
 ]

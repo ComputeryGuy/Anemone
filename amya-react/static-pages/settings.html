@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Roommate</title>
+
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="./assets/icons/logo-favicon.png" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="./styles/main-style.css">
+
+	<!-- index style -->
+	<link rel="stylesheet" href="./styles/index-style.css">
+
+	<!-- google icons -->
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+</head>
+<body>
+	
+	<div class="main-grid">
+		<section class="left-section">
+			<!-- the navigation -->
+			<nav id="nav-sidebar">
+
+				<div class="logo-container">
+					<img id="logo" src="./assets/icons/logo-round.png" alt="logo">
+				</div>
+
+				<div class="nav-sidebar-content">
+
+					<ul class="list">
+
+						<li class="list-item">
+							<a href="./index.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
+								<span class="link">Dashboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./task-board.html" class="nav-link">
+								<span class="material-symbols-rounded">task_alt</span>
+								<span class="link">Tasks</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./calendar.html" class="nav-link">
+								<span class="material-symbols-rounded">calendar_month</span>
+								<span class="link">Calendar</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./notifications.html" class="nav-link">
+								<span class="material-symbols-rounded">notifications</span>
+								<span class="link">
+									Notifications 
+									<span id="notif-number">5</span>
+								</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./leaderboard.html" class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
+								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./lootbox.html" class="nav-link">
+								<span class="material-symbols-rounded">redeem</span>
+								<span class="link">Lootbox</span>
+							</a>
+						</li>
+
+					</ul>
+
+					<div class="list-bottom-content">
+						<li class="list-item">
+							<a href="./settings.html" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+						<li class="list-item">
+							<a href="./log-in.html" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+					</div>
+					
+				</div>
+			</nav>
+		</section>
+
+		<section class="middle-section">
+			<div class="user-settings-container">
+				<h1>Account Information</h1>
+				
+				<!-- current user image -->
+				<img src="." alt="">
+
+				<!-- change user image form -->
+				<form action="" method="post">
+					<input type="file" name="" id="" placeholder="">
+					<button type="submit">Save Changes</button>
+				</form>
+
+				<!-- change display name form -->
+				<form action="" method="post">
+					<h3>Display Name: <span>Curr Name HERE</span></h3>
+					<p>Your display name is visible to all other users in the household.</p>
+					<input type="text" name="" id="" placeholder="First Name">
+					<input type="text" name="" id="" placeholder="Last Name">
+					<button type="submit">Update Display Name</button>
+				</form>
+
+				<h3>House Pin: <span>XXXX</span></h3>
+
+				<!-- leave household form -->
+				<form action="" method="post">
+					<h3>Leave Household?</h3>
+					<p>By leaving your household, you will no longer have access to this household's tasks and events (information)</p>
+					<button>Leave Household</button>
+				</form>
+
+				<!-- change username form -->
+				<form action="" method="post">
+					<h3>Username</h3>
+					<p>someusername</p>
+					<button type="submit">Update username</button>
+				</form>
+
+				<!-- change password form -->
+				<form action="" method="post">
+					<h3>Password</h3>
+					<p>*******</p>
+					<button type="submit">Change password</button>
+				</form>
+
+				
+				<h2>Danger!</h2>
+
+				<form action="" method="post">
+					<h3>Delete Household?</h3>
+					<p>By deleting your household you will lose all of your data</p>
+					<button type="submit">Delete Household</button>
+				</form>
+
+				<h3>Delete Account?</h3>
+				<p>By deleting your account you will lose all of your data and access to your current houshold</p>
+				<button>Delete Account</button>
+
+				<button type="submit">Save Changes</button>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

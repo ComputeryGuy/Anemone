@@ -52,6 +52,10 @@ button a {
 }
 
 .info-square {
+<<<<<<< HEAD
+=======
+	grid-column: span 1;
+>>>>>>> master
 	margin: 0 auto;
 	padding: 1rem;
 	background-color: var(--primary-card-colour);
