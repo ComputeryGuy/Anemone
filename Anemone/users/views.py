@@ -1,7 +1,7 @@
 import datetime
 import calendar
 import json
-from random import randint
+import random
 import os
 from pathlib import Path
 
@@ -91,7 +91,7 @@ def join(request):
 
         collides = True
         while collides:
-            household_pin = randint(100000, 999999)
+            household_pin = random.randint(100000, 999999)
             if Household.objects.filter(pin=household_pin).count() == 0:
                 collides = False
         return render(request, 'users/join.html', {'household_pin': household_pin})
@@ -180,10 +180,7 @@ def generate_household_link(request):
 
 def dashboard(request, household_id):
     if request.user.is_authenticated:
-        bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
-        unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
-        for object in unclaimed_tasks:
-            object.save()
+        task_assign(request)
         household = get_object_or_404(Household, pk=household_id)
         tasks = household.task_set.all()
         user_name = request.user.username
@@ -299,10 +296,7 @@ def bidding(request):
 
 
 def tasks(request, household_id):
-    bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
-    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
-    for object in unclaimed_tasks:
-        object.save()
+    task_assign(request)
     lfn = last_fortnight()
     
     household = get_object_or_404(Household, pk=household_id)
@@ -326,12 +320,25 @@ def tasks(request, household_id):
         if request.method == "POST":
             try: 
                 payload = json.loads(request.body)
-                handle_task_ajax(payload)
+                handle_task_ajax(request, payload)
             except:
                 create_task(request, household_id)
                 return redirect('taskboard', household_id=household_id)
 
         return render(request, 'users/task-board.html', values)
+
+
+def task_assign(request):
+    bid_end = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
+    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__gte=bid_end)
+    for task in unclaimed_tasks:
+        if task.user_claimed is not None:
+            task.claimed = True
+        else:
+            profiles = request.user.profile.household.members.all()
+            selected_profile = random.choice(list(profiles))
+            task.user_claimed = selected_profile
+        task.save()
 
 
 def last_fortnight():   
@@ -343,18 +350,18 @@ def last_fortnight():
     first_third_mon = [day for week in monthcal for day in week if \
                        day.weekday() == calendar.MONDAY and \
                        day.month == month]
-    print("\n\n")
     del first_third_mon[1] #Deletes second Monday
     del first_third_mon[2] #Deletes fourth Monday
     last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
     return last_fortnight
 
 
-def handle_task_ajax(payload):
+def handle_task_ajax(request, payload):
     if payload.get("type") == "user_bid":
         task_id = payload.get("id")
         task = Task.objects.get(pk=task_id)
         task.points = payload.get("bid")
+        task.user_claimed = request.user.profile
         task.save()
     if payload.get("type") == "task_move":
         task_id = payload.get("id")
@@ -476,10 +483,7 @@ def open_Lootbox(request):
 
 def log(request):
     if request.user.is_authenticated:
-        bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
-        unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
-        for object in unclaimed_tasks:
-            object.save()
+        task_assign(request)
         uHousehold = Profile.objects.get(user=request.user).household
         tasks_finished = Task.objects.filter(household=uHousehold, claimed='True', task_status='True')
         tasks_in_progress = Task.objects.filter(household=uHousehold, claimed='True', task_status='False')
