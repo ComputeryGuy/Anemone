@@ -9,8 +9,9 @@ from users.models import Household, Profile, Task
 
 
 class BulletinForm(forms.Form):
-    bulletin_body = forms.CharField(max_length=500)
-    expire_time = forms.DateTimeField()
+    title = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Title'}))
+    bulletin_body = forms.CharField(max_length=500, label="", widget=forms.Textarea(attrs={'placeholder':'Detail', 'rows':3}))
+    expire_date = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date'}))
 
 
 class HouseholdCreateForm(forms.Form):
@@ -47,6 +48,9 @@ class BiddingForm(forms.Form):
             raise ValidationError(_('Bid is too great. Bid lower.'), code='invalidBid')
         return bid
 
+class BiddingForm(forms.Form):
+    unclaimed_tasks = forms.ModelChoiceField(queryset=Task.objects.filter(task_status='False'))
+    bid = forms.IntegerField()
 
 class BiddingForm(forms.Form):
     unclaimed_tasks = forms.ModelChoiceField(queryset=Task.objects.filter(task_status='False'))

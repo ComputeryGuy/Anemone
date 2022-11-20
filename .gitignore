@@ -1,2 +1,8 @@
 #ignore db
 *.sqlite3
+
+#ignore IDE specific files
+*.DS_Store
+
+#ignore cpython files
+*.pyc

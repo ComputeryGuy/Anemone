@@ -37,7 +37,11 @@
 		<div class="join-container">
 
 			<!-- starting form  -->
+<<<<<<< HEAD
+			<form action="" method="post" id="select_form">
+=======
 			<form action="" id="select_form">
+>>>>>>> master
 				<h1>
 					Hey there! 
 					</br> Quick question, are you...
@@ -56,10 +60,15 @@
 					It seems you trying to create a household. <br>
 					Click the button below to generate a pin and share with your roommates.
 				</h4>
+<<<<<<< HEAD
+
+				<button id="gen-pin-btn">Generate Pin</button>
+=======
 				
 				<form action="" method="post">
 					<button type="submit" id="gen-pin-btn">Generate Pin</button>
 				</form>
+>>>>>>> master
 
 				<div class="load-animation-container">
 					<div class="load-animation">
@@ -71,7 +80,11 @@
 
 				<div class="your-pin-container">
 					<h4>Thanks for waiting! <br> Your household pin is:</h4>
+<<<<<<< HEAD
+					<h4><span id="your_house">XXXX</span></h4>
+=======
 					<h4><span id="your_house">{{ household_pin }}</span></h4>
+>>>>>>> master
 				</div>
 
 				<div class="go-to-dash">
@@ -92,8 +105,12 @@
 				</h4>
 
 				<form action="" method="post" id="house-pin-form">
+<<<<<<< HEAD
+					<input type="number" name="" id="house_pin" placeholder="Your House Pin">
+=======
 					{% csrf_token %}
 					<input type="number" name="house_pin" id="house_pin" placeholder="Your House Pin">
+>>>>>>> master
 					<button type="submit" id="house_pin_submit_btn">Submit</button>
 				</form>
 

@@ -1,0 +1,102 @@
+/* =================== CONSTANTS =================== */
+input, 
+textarea {
+	background-color: var(--primary-input-colour);
+	border-radius: var(--std-border-radius);
+	border: 2px solid var(--primary-light-blue);
+	outline: none;
+	width: 100%;
+	margin-bottom: 1rem;
+	padding: .5rem;
+}
+
+/* change the place holder colour */
+input::placeholder, 
+textarea::placeholder {
+	color: white;
+}
+
+input:focus, 
+textarea:focus {
+	border-color: var(--primary-white);
+}
+
+/* ---------- notification form style---------- */
+#add-notif-form-container {
+	position: absolute;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	right: 0;
+
+	min-width: 40vw;
+	max-height: 100vh;
+	
+	background-color: var(--primary-form-colour);
+	box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 45%);
+	border-radius: 10px 0px 0px 10px;
+	padding: 1.5rem;
+	
+	display: none;
+}
+
+
+/* =================== exit button =================== */
+#exit-btn {
+	background-color: var(--primary-form-colour);
+	border-radius: var(--std-border-radius);
+	padding: .3rem;
+	display: flex;
+	align-self: center;
+	border: none;
+	transition: var(--std-transition);
+}
+
+#exit-btn span {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#exit-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-blue);
+	transition: var(--std-transition);
+}
+
+.header-container {
+	margin-bottom: 1rem;
+	text-align: center;
+}
+/* =================== title container =================== */
+.submit-notif-container {
+	text-align: center;
+}
+
+#submit-btn {
+	background-color: blue;
+	border: 2px solid blue;
+	border-radius: var(--std-border-radius);
+
+	padding: .5rem;
+	width: 100%;
+
+	transition: var(--std-transition);
+}
+
+#submit-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-input-colour);
+	border-color: var(--primary-light-blue);
+	transition: var(--std-transition);
+}
+/* error message */
+.alert{
+	padding: 1rem;
+	position: absolute;
+	top:0;
+	right: 0;
+	border-radius: 0 0 0 10px;
+	background-color: var(--primary-card-colour);
+}

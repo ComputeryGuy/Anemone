@@ -1,6 +1,9 @@
 
 /* =================== CONSTANTS =================== */
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 /* ---------- notification style---------- */
 .a-notification {
 	background-color: var(--primary-card-colour);
@@ -57,12 +60,25 @@
 	padding: 1.5rem;
 
 	display: grid;
+<<<<<<< HEAD
+	grid-template-rows: repeat(2, min-content) ;
+	gap: 10px;
+
+=======
 	grid-template-rows: repeat(3, min-content);
 	gap: 10px;
+>>>>>>> master
 }
 
 /* ---------- button container ---------- */
 .button-container {
+<<<<<<< HEAD
+	grid-row: 1;
+
+	margin-top: 3rem;
+
+=======
+>>>>>>> master
 	display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -99,6 +115,76 @@
 	transition: var(--std-transition);
 }
 
+<<<<<<< HEAD
+
+.left-right-container {
+	grid-row: 2;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 30px;
+}
+
+/* ---------- left container ---------- */
+.left-container {
+	grid-column: span 1;
+}
+
+.left-container h2 {
+	margin-bottom: 1rem;
+}
+
+/* ---------- right container ---------- */
+.right-container {
+	grid-column: span 1;
+}
+
+.right-container h2 {
+	margin-bottom: 1rem;
+}
+
+/* ---------- table ---------- */
+.table {
+    display: grid;
+    grid-template-rows: min-content;
+    gap: 15px;
+
+	text-align: center;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+
+	border-radius: var(--std-border-radius);
+}
+
+.row.header h4 {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	padding: 1rem 0;
+}
+
+.row div {
+	margin: auto 0;
+}
+
+.row-data-container {
+	display: grid;
+    grid-template-rows: auto;
+    gap: 15px;
+}
+
+
+.row.data {
+	/* --primary-grey at 5% */
+	background-color: rgba(176, 176, 176, 5%);
+	padding: .5rem 0;
+}
+
+.user-prof img {
+=======
 /* ---------- top container ---------- */
 .top-container h2 {
 	margin-bottom:1rem;
@@ -134,11 +220,14 @@
 }
 
 .task-user-profile img {
+>>>>>>> master
 	width: 3rem;
 	height: 3rem;
 	border-radius: 100%;
 	border: 3px solid var(--primary-dark-blue);
 	margin-bottom: .3rem;
+<<<<<<< HEAD
+=======
 }
 
 .task-name-container p {
@@ -155,4 +244,5 @@
 
 .for-points {
 	font-size: 1.5rem;
+>>>>>>> master
 }
