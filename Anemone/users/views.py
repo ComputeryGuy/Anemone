@@ -2,12 +2,15 @@ import datetime
 import calendar
 import json
 from random import randint
+import os
+from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
+from django.utils import timezone
 from .forms.forms import *
 from .models import *
 
@@ -115,10 +118,9 @@ def post_bulletin(request):
         if request.method == 'POST':
             form = BulletinForm(request.POST)
             if form.is_valid():
-                print("wah")
                 user = request.user.username
                 bulletin_body = form.cleaned_data['bulletin_body']
-                creation_time = datetime.now()
+                creation_time = timezone.now(datetime.timezone.utc)
                 expire_time = form.cleaned_data['expire_time']
                 bulletin = Bulletin.objects.create(user=user,
                                                    bulletin_body=bulletin_body,
@@ -178,6 +180,10 @@ def generate_household_link(request):
 
 def dashboard(request, household_id):
     if request.user.is_authenticated:
+        bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
+        unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
+        for object in unclaimed_tasks:
+            object.save()
         household = get_object_or_404(Household, pk=household_id)
         tasks = household.task_set.all()
         user_name = request.user.username
@@ -293,6 +299,10 @@ def bidding(request):
 
 
 def tasks(request, household_id):
+    bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
+    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
+    for object in unclaimed_tasks:
+        object.save()
     lfn = last_fortnight()
     
     household = get_object_or_404(Household, pk=household_id)
@@ -327,12 +337,13 @@ def tasks(request, household_id):
 def last_fortnight():   
     #Calculates first and third monday of current month chooses most recent of two slowly
     c = calendar.Calendar(firstweekday=calendar.SUNDAY)
-    year = datetime.date.today().year
-    month = datetime.date.today().month
+    year = datetime.datetime.now().year
+    month = datetime.datetime.now().month
     monthcal = c.monthdatescalendar(year, month)
     first_third_mon = [day for week in monthcal for day in week if \
                        day.weekday() == calendar.MONDAY and \
                        day.month == month]
+    print("\n\n")
     del first_third_mon[1] #Deletes second Monday
     del first_third_mon[2] #Deletes fourth Monday
     last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
@@ -371,9 +382,10 @@ def create_task(request, household_id):
     task_title = form_data['task_title']
     task_body = form_data['task_body']
     due_datetime = form_data['due_date'] + " " + "12:00:00"  # currently we have no way to use a given dateform_data['due_time']
-    due_datetime = datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S')
+    due_datetime = timezone.make_aware(datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S'))
     task = Task.objects.create(title = task_title,
                                 body = task_body,
+                                creation_time = timezone.now(),
                                 due_date = due_datetime,
                                 points = 1000,
                                 user_created = profile_created,
@@ -461,6 +473,40 @@ def open_Lootbox(request):
 
         return render(request, 'users/openLootbox.html')
 
+
+def log(request):
+    if request.user.is_authenticated:
+        bidEnd = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
+        unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bidEnd)
+        for object in unclaimed_tasks:
+            object.save()
+        uHousehold = Profile.objects.get(user=request.user).household
+        tasks_finished = Task.objects.filter(household=uHousehold, claimed='True', task_status='True')
+        tasks_in_progress = Task.objects.filter(household=uHousehold, claimed='True', task_status='False')
+        tasks_unclaimed = Task.objects.filter(claimed='False')
+        values = {'tasks_finished': tasks_finished,
+                  'tasks_in_progress': tasks_in_progress,
+                  'tasks_unclaimed': tasks_unclaimed, }
+        return render(request, 'users/log.html', values)
+
+def profilePicture(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = profilePictureForm(request.POST,request.FILES)
+            if form.is_valid():
+                uProfile = Profile.objects.get(user=request.user)
+                image_path = uProfile.profile_picture.path
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                profilePicture = form.cleaned_data['profilePicture']
+                uProfile.profile_picture = profilePicture
+                uProfile.save()
+                return redirect('/')
+
+
+
+    form = profilePictureForm()
+    return render(request, 'users/profilePicture.html', {'form': form})
 
 '''        household = request.user.profile.household
         householdMembers = household.members.all()
