@@ -267,14 +267,14 @@
 
 						<li class="list-item">
 
-							<a href="{% url 'dashboard' household_id %}" class="nav-link">
+							<a href="{% url 'dashboard' %}" class="nav-link">
 								<span class="material-symbols-rounded">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="{% url 'taskboard' household_id %}" class="nav-link desktop-current">
+							<a href="{% url 'taskboard' %}" class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">task_alt</span>
 								<span class="link">Tasks</span>
 							</a>
@@ -682,7 +682,7 @@
 					var jsonData = JSON.stringify(data);
 					$.ajax({
 						type: "POST",
-						url: "{% url 'taskboard' household_id %}",
+						url: "{% url 'taskboard' %}",
 						headers: { 'X-CSRFToken': csrftoken },
 						//dataType: "json",
 						data: jsonData,
@@ -743,7 +743,7 @@
 						var jsonData = JSON.stringify(data);
 						$.ajax({
 							type: "POST",
-							url: "{% url 'taskboard' household_id %}",
+							url: "{% url 'taskboard' %}",
 							headers: { 'X-CSRFToken': csrftoken },
 							//dataType: "json",
 							data: jsonData,
