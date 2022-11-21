@@ -42,9 +42,11 @@ class Profile(models.Model):
     ## game aspects
     xp = models.IntegerField(default=0, verbose_name="xp")
     level = models.IntegerField(default=0)
-    nextLevelThresh = models.IntegerField(default=1000)
+    nextLevelThresh = models.IntegerField(default=200)
     prevLevelThresh = models.IntegerField(default=0)
-    xpToNextLevel = models.IntegerField(default=1000)
+    xpToNextLevel = models.IntegerField(default=200)
+
+    highestLevelReached = models.IntegerField(default=0)
 
     ##lootbox/ lootbox rewards
     lootboxes = models.IntegerField(default=0, verbose_name="lootboxes")
@@ -56,18 +58,34 @@ class Profile(models.Model):
     def update_levelSystem(self, points):
             self.xp += points
             
+            if points > 0:
+                while self.xp > self.nextLevelThresh:
+                    self.level += 1
+                    if(self.level > self.highestLevelReached):
+                        self.lootboxes += 1
+                        self.highestLevelReached +=1
+                    self.update_levelThresh(self.level, self.nextLevelThresh)
+                
+                self.update_xpToNextLevel(self.xp, self.nextLevelThresh)
 
-            while self.xp > self.nextLevelThresh:
-                self.level += 1
-                self.lootboxes += 1
-                self.update_levelThresh(self.level, self.nextLevelThresh)
-            
-            self.update_xpToNextLevel(self.xp, self.nextLevelThresh)
-
+            ### only update levels if level positive
+            ##### 0 lowest level
+            elif points <= 0:
+                while self.xp <= self.prevLevelThresh and self.level > 0:
+                    self.level -=1
+                    self.demotion_update_levelThresh(self.level, self.prevLevelThresh)
+                    
+                self.update_xpToNextLevel(self.xp, self.nextLevelThresh)
+                
+    def demotion_update_levelThresh(self, level, prevLevelThresh):
+        self.nextLevelThresh = prevLevelThresh
+        self.prevLevelThresh = 100 * ((level - 1)**2 + 2)
+        if self.level == 0:
+            self.prevLevelThresh = 0
 
     def update_levelThresh(self, level, nextLevelThresh):
         self.prevLevelThresh = nextLevelThresh
-        self.nextLevelThresh = 1000 * ((level)**2 + 2)
+        self.nextLevelThresh = 100 * ((level)**2 + 2)
     
     def update_xpToNextLevel(self, xp, nextLevelThresh):
         self.xpToNextLevel = nextLevelThresh - xp
@@ -79,9 +97,8 @@ class Profile(models.Model):
         self.points += points
         
         self
-        ##update xp / level if necessary
-        if points > 0:
-            self.update_levelSystem( points)
+        ##update xp
+        self.update_levelSystem(points)
 
         if chore.task_status:
             self.tasks_finished += 1

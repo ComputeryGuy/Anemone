@@ -238,7 +238,7 @@ def bonus_points(request):
                 taskName = 'Kudos for {member}'.format(member = bonusMember)
                 taskBody = '{uName} thinks {member} deserves a {points} point bonus!'.format(uName = uName, member = bonusMember, points = points)
 
-                kudos = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                kudos = Task.objects.create(title=taskName, body=taskBody, creation_time=timezone.now(), points=points, claimed=True,
                 task_status=True, user_created=uProfile, user_claimed=bonusProfile, household=(uProfile.household))
                 bonusProfile.modify_points(points, kudos)
 
@@ -269,7 +269,7 @@ def minus_points(request):
                 taskName = 'Bad for {member}'.format(member = minusMember)
                 taskBody = '{uName} thinks {member} deserves a {points} point reduction!'.format(uName = uName, member = minusMember, points = points)
 
-                minus = Task.objects.create(title=taskName, body=taskBody, points=points, claimed=True,
+                minus = Task.objects.create(title=taskName, body=taskBody, creation_time=timezone.now(), points=points, claimed=True,
                 task_status=True, user_created=uProfile, user_claimed=minusProfile, household=(uProfile.household))
                 minusProfile.modify_points(points, minus)
 
