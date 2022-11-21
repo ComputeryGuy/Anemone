@@ -4,7 +4,7 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		// hide the shadow
-		$(".log-in-container").css("box-shadow", "none");
+		$(".log-in-container.desktop").css("box-shadow", "none");
 
 		// hide elements 
 		$(".sign-in-container").hide();
@@ -13,8 +13,8 @@ $(document).ready(function () {
 
 		// slide transformation
 		$(".right-side").animate({
-			right: '26rem',
-			width: '50rem',
+			right: '30%',
+			width: '70%',
 			backgroundColor: '#30353f',
 			borderTopLeftRadius: '10px',
 			borderTopRightRadius: '0px',
@@ -23,8 +23,8 @@ $(document).ready(function () {
 		}, 550);
 
 		$(".left-side").animate({
-			left: '50rem',
-			width: '26rem',
+			left: '70%',
+			width: '30%',
 			backgroundColor: '#006FF2',
 			borderTopLeftRadius: '0px',
 			borderTopRightRadius: '10px',
@@ -33,12 +33,16 @@ $(document).ready(function () {
 		}, 550);
 
 		// show elements
-		$(".logo-container.right *").fadeIn(550);
-		$(".sign-up-container").fadeIn(550);
-		$(".old-user-container").fadeIn(550);
+		$(".logo-container.right *").fadeIn(551);
+
+		$(".sign-up-container").css("display", "flex");
+		$(".old-user-container").css("display", "flex");
+
+		$(".sign-up-container").fadeIn(551);
+		$(".old-user-container").fadeIn(551);
 
 		// show box shadow after 550 delay
-		$(".log-in-container").delay(550).fadeIn( 
+		$(".log-in-container.desktop").delay(550).fadeIn( 
 			function(e) {
 				$(this).css("box-shadow"," 0px 4px 20px 0px rgba(0, 0, 0, 45%)");
 			}
@@ -50,7 +54,7 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		// hide the shadow
-		$(".log-in-container").css("box-shadow", "none");
+		$(".log-in-container.desktop").css("box-shadow", "none");
 
 		// hide elements
 		$(".logo-container.right *").hide();
@@ -59,8 +63,8 @@ $(document).ready(function () {
 
 		// slide transformation
 		$(".right-side").animate({
-			width: '26rem',
-			right: '0rem',
+			width: '30%',
+			right: '0',
 			backgroundColor: '#006FF2',
 			borderTopLeftRadius: '0px',
 			borderTopRightRadius: '10px',
@@ -69,8 +73,8 @@ $(document).ready(function () {
 		}, 550);
 
 		$(".left-side").animate({
-			left: '0rem',
-			width: '50rem',
+			left: '0',
+			width: '70%',
 			backgroundColor: '#30353f',
 			borderTopLeftRadius: '10px',
 			borderTopRightRadius: '0px',
@@ -79,12 +83,16 @@ $(document).ready(function () {
 		}, 550);
 
 		// show elements
-		$(".logo-container.left *").fadeIn(550);
-		$(".sign-in-container").fadeIn(550);
-		$(".new-user-container").fadeIn(550);
+		$(".logo-container.left *").fadeIn(551);
+
+		$(".sign-in-container").css("diplay", "flex");
+		$(".new-container").css("diplay", "flex");
+
+		$(".sign-in-container").fadeIn(551);
+		$(".new-user-container").fadeIn(551);
 
 		// show box shadow after 550 delay
-		$(".log-in-container").delay(550).fadeIn( 
+		$(".log-in-container.desktop").delay(550).fadeIn( 
 			function(e) {
 				$(this).css("box-shadow"," 0px 4px 20px 0px rgba(0, 0, 0, 45%)");
 			}

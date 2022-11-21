@@ -1,33 +1,22 @@
-
 /* =================== CONSTANTS =================== */
-/* =================== main grid =================== */
-.main-grid {
-	grid-template-columns: repeat(12, 1fr);
-	height: 100vh;
-	padding: 1rem 7rem;
-}
-
-/* =================== overall container =================== */
-.log-in-container {
-	grid-column: span 12;
-	position: relative;
-	box-shadow: var(--std-box-shadow);
-}
 
 /* ---------- logo container ---------- */
+/* 
 .logo-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 
-	/* from main style */
+	
 	padding: 0;
+	
 }
 
-.log-in-container img {
+.logo-container img {
 	width: 4rem;
 	height: 4rem;
-}
+} 
+*/
 
 /* ---------- input styles ---------- */
 .input-container {
@@ -55,65 +44,9 @@
 	margin-bottom: 1rem;
 }
 
-/* =================== left side =================== */
-.left-side {
-	position: absolute;
-	background-color: var(--primary-card-colour);
-	border-radius: 10px 0 0 10px;
-	padding: 1rem;
-	
-	
-	left: 0;
-
-	width: 50rem;
-	height: 100%;
-}
-
-/* ---------- sign in container ---------- */
-.sign-in-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	margin-top: 3rem;
-}
-/* ---------- the form ---------- */
-#sign-in-form {
-	padding: 1rem 0;
-}
-
-/* ---------- forgot container ---------- */
-.underline-effect a {
-	color: var(--primary-white);
-	text-decoration: none;
-	font-size: 12px;
-	font-style: italic;
-	display: inline-block;
-	padding: .5rem 1rem;
-	position: relative;
-}
-
-.underline-effect a::after {
-	background: none repeat scroll 0 0 transparent;
-	bottom: 0;
-	content: "";
-	display: block;
-	height: 2px;
-	left: 50%;
-	position: absolute;
-	background: var(--primary-light-blue);
-	transition: width 0.3s ease 0s, left 0.3s ease 0s;
-	width: 0;
-}
-
-.underline-effect a:hover::after {
-	width: 100%; 
-	left: 0; 
-}
-
 /* ---------- submit button ---------- */
 .submit-container {
-	margin: 2rem 0 0;
+	margin: 2rem 0;
 }
 
 #sign-in-submit-btn {
@@ -124,45 +57,6 @@
 	padding: 1rem 1.5rem;
 	text-transform: uppercase;
 	transition: var(--std-transition);
-}
-
-#sign-in-submit-btn:hover {
-	cursor: pointer;
-	box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
-	transition: var(--std-transition);
-}
-
-/* =================== right side =================== */
-.right-side {
-	position: absolute;
-	background-color: var(--primary-dark-blue);
-	border-radius: 0 10px 10px 0;
-	padding: 1rem;
-	
-	right: 0;
-
-	width: 26rem;
-	height: 100%;
-}
-
-/* ---------- logo container ---------- */
-.logo-container.right * {
-	display: none;
-}
-
-/* ---------- new user container ---------- */
-.new-user-container {
-	padding: 12rem 0;
-	text-align: center;
-}
-
-.new-user-container h1 {
-	margin-bottom: 1rem;
-}
-
-.new-user-container h4 {
-	width: 30ch;
-	margin: 0 auto 2rem;
 }
 
 /* ---------- go to sign up button ---------- */
@@ -176,83 +70,256 @@
 	transition: var(--std-transition);
 }
 
-#go-to-sign-up-btn:hover {
-	cursor: pointer;
-	background-color: var(--primary-input-colour);
-	border: 3px solid var(--primary-light-blue);
-	box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
-	transition: var(--std-transition);
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+	/* =================== hide desktop =================== */
+	.log-in-container.desktop {
+		display: none;
+	}
+
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		height: 100%;
+		padding: 1rem;
+	}
+
 }
 
-/* =================== ON SWITCH =================== */
-/* ---------- on left ---------- */
-/* ---------- sign up container ---------- */
-.sign-up-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	margin-top: 3rem;
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	/* =================== hide mobile =================== */
+	.log-in-container.desktop {
+		display: none;
+	}
 
-	display: none;
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+		min-height: 100%;
+	}
+	
 }
 
-/* ---------- the form ---------- */
-#sign-up-form {
-	padding: 1rem 0;
-}
+/* =================== DESKTOP =================== */
+@media only screen and (min-width: 64.063em) {
 
-/* ---------- submit button ---------- */
-#sign-up-submit-btn {
-	background-color: var(--primary-dark-blue);
-	border: 3px solid var(--primary-dark-blue);
-	border-radius: 100px;
-	width: 12rem;
-	padding: 1rem 1.5rem;
-	text-transform: uppercase;
-	transition: var(--std-transition);
-}
+	/* =================== hide mobile =================== */
+	.log-in-container.mobile {
+		display: none;
+	}
 
-#sign-up-submit-btn:hover {
-	cursor: pointer;
-	box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
-	transition: var(--std-transition);
-}
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(12, 1fr);
+		height: 100vh;
+
+		padding: 3rem 7rem;
+	}
+
+	/* =================== login container =================== */
+	.log-in-container.desktop {
+		grid-column: span 12;
+		position: relative;
+		height: 100%;
+		box-shadow: var(--std-box-shadow);
+	}
 
 
-/* ---------- on right---------- */
-/* ---------- old user container ---------- */
-.old-user-container {
-	padding: 12rem 0;
-	text-align: center;
 
-	display: none;
-}
+	/* =================== LEFT AND RIGHT SIDES =================== */
+	/* =================== left side =================== */
+	.left-side {
+		position: absolute;
 
-.old-user-container h1 {
-	margin-bottom: 1rem;	
-}
+		left: 0;
+		width: 70%;
+		height: calc(100vh - 6rem);
 
-.old-user-container h4 {
-	width: 30ch;
-	margin: 0 auto 2rem;
-}
+		background-color: var(--primary-card-colour);
+		padding: 1rem;
+		border-radius: 10px 0px 0px 10px;
+	}
 
-/* ---------- go to sign in button ---------- */
-#go-to-sign-in-btn {
-	background-color: var(--primary-dark-blue);
-	border: 3px solid var(--primary-light-blue);
-	padding: 1rem 2rem;
-	border-radius: 100px;
-	width: 14rem;
-	text-transform: uppercase;
-	transition: var(--std-transition);
-}
+	/* =================== right side =================== */
+	.right-side {
+		position: absolute;
 
-#go-to-sign-in-btn:hover {
-	cursor: pointer;
-	background-color: var(--primary-input-colour);
-	border: 3px solid var(--primary-light-blue);
-	box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
-	transition: var(--std-transition);
+		right: 0;
+		width: 30%;
+		height: calc(100vh - 6rem);
+
+		background-color: var(--primary-dark-blue);
+		padding: 1rem;
+		border-radius: 0px 10px 10px 0px;
+	}
+
+
+
+	/* =================== ON LOAD =================== */
+	/* ---------- sign in container ---------- */
+	.sign-in-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		margin: auto;
+		height: 100%;
+	}
+
+	/* ---------- new user container ---------- */
+	.new-user-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		height: 100%;
+		text-align: center;
+	}
+
+
+
+	/* =================== ON SWITCH =================== */
+	/* ---------- sign up container (left) ---------- */
+	.sign-up-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		margin: auto;
+		height: 100%;
+
+		display: none;
+	}
+
+	/* ---------- old user container (right) ---------- */
+	.old-user-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		height: 100%;
+		text-align: center;
+		display: none;
+	}
+
+
+	/* =================== STYLES =================== */
+	/* ---------- sign in form ---------- */
+	#sign-in-form {
+		padding: 1rem 0;
+	}
+
+	/* ---------- forgot container ---------- */
+	.underline-effect a {
+		color: var(--primary-white);
+		text-decoration: none;
+		font-size: 12px;
+		font-style: italic;
+		display: inline-block;
+		padding: .5rem 1rem;
+		position: relative;
+	}
+
+	.underline-effect a::after {
+		background: none repeat scroll 0 0 transparent;
+		bottom: 0;
+		content: "";
+		display: block;
+		height: 2px;
+		left: 50%;
+		position: absolute;
+		background: var(--primary-light-blue);
+		transition: width 0.3s ease 0s, left 0.3s ease 0s;
+		width: 0;
+	}
+
+	.underline-effect a:hover::after {
+		width: 100%; 
+		left: 0; 
+	}
+
+	#sign-in-submit-btn:hover {
+		cursor: pointer;
+		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- logo container ---------- */
+	/* .logo-container.right * {
+		display: none;
+	} */
+
+	/* ---------- new user container ---------- */
+	.new-user-container h1 {
+		margin-bottom: 1rem;
+	}
+
+	.new-user-container h4 {
+		width: 30ch;
+		margin: 0 auto 2rem;
+	}
+
+	#go-to-sign-up-btn:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		border: 3px solid var(--primary-light-blue);
+		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	/* =================== ON SWITCH =================== */
+	/* ---------- sign up form ---------- */
+	#sign-up-form {
+		padding: 1rem 0;
+	}
+
+	/* ---------- submit button ---------- */
+	#sign-up-submit-btn {
+		background-color: var(--primary-dark-blue);
+		border: 3px solid var(--primary-dark-blue);
+		border-radius: 100px;
+		width: 12rem;
+		padding: 1rem 1.5rem;
+		text-transform: uppercase;
+		transition: var(--std-transition);
+	}
+
+	#sign-up-submit-btn:hover {
+		cursor: pointer;
+		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- old user container ---------- */
+	.old-user-container h1 {
+		margin-bottom: 1rem;	
+	}
+
+	.old-user-container h4 {
+		width: 30ch;
+		margin: 0 auto 2rem;
+	}
+
+	/* ---------- go to sign in button ---------- */
+	#go-to-sign-in-btn {
+		background-color: var(--primary-dark-blue);
+		border: 3px solid var(--primary-light-blue);
+		padding: 1rem 2rem;
+		border-radius: 100px;
+		width: 14rem;
+		text-transform: uppercase;
+		transition: var(--std-transition);
+	}
+
+	#go-to-sign-in-btn:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		border: 3px solid var(--primary-light-blue);
+		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
 }
