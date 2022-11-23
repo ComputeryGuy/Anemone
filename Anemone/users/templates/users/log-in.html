@@ -37,15 +37,66 @@
 
 		<div class="log-in-container mobile">
 
-			<div class="sign-in-container">
-
+			<div class="menu-list mobile">
+				<button id="sign-in-btn" class="current">
+					<p>Sign In</p>
+				</button>
+				
+				<button id="sign-up-btn">
+					<p>Sign Up</p>
+				</button>
 			</div>
 
-			<div class="sign-up-container">
-
+			<div class="triangle mobile">
+				<div></div>
 			</div>
+
+			<section class="sign-in-section mobile">
+				<h1>Welcome back!</h1>
+				<h4>Log in to get back to productivity</h4>
+
+				<div class="sign-in-container">
+
+					<form action="" id="sign-in-form" method="post">
+						{% csrf_token %}
+						<div class="input-container">
+							<input type="text" name="username" id="username" placeholder="Username*" required>
+							<input type="password" name="password" id="password" placeholder="Password*" required>
+						</div>
+						<div class="forget-container underline-effect">
+							<a href="#">
+								<h3>Forgot your password?</h3>
+							</a>
+						</div>
+						<div class="submit-container">
+							<button type="submit" name="submit" id="sign-in-submit-btn" value="sign_in">Sign In</button>
+						</div>
+					</form>
+				</div>
+			</section>
+			
+			<section class="create-account-section mobile">
+				<h1>Welcome!</h1>
+				<h4>Enter your personal details to start your journey with us</h4>
+				
+				<div class="sign-up-container">
+					<form action="" id="sign-up-form" method="post">
+						{% csrf_token %}
+						<div class="input-container">
+							<input type="text" name="first_name" id="first_name" placeholder="First Name*" required>
+							<input type="text" name="last_name" id="last_name" placeholder="Last Name*" required>
+							<input type="text" name="username" id="username" placeholder="Username*" required>
+							<input type="password" name="password" id="password" placeholder="Password*" required>
+						</div>
+						<div class="submit-container">
+							<button type="submit" name="submit" id="sign-up-submit-btn" value="sign_up">Sign Up</button>
+						</div>
+					</form>
+				</div>
+			</section>
 
 		</div>
+
 		
 		<div class="log-in-container desktop">
 
@@ -80,7 +131,7 @@
 				<div class="old-user-container">
 					<h1>Have an account?</h1>
 					<h4>Welcome back! Log in to get back to productivity</h4>
-					<button id="go-to-sign-in-btn">Go to Sign In</button>
+					<button id="go-to-sign-in-btn">Sign In to Your Account</button>
 				</div>
 
 
@@ -116,8 +167,8 @@
 
 				<div class="new-user-container">
 					<h1>New to Phourtnight?</h1>
-					<h4>Enter your personal details to start your journey with us</h4>
-					<button id="go-to-sign-up-btn">Go to Sign Up</button>
+					<h4>Welcome! Enter your personal details to start your journey with us</h4>
+					<button id="go-to-sign-up-btn">Create an Account</button>
 				</div>
 			</div>
 		</div>
