@@ -43,7 +43,7 @@ $(document).ready(function () {
 			speeds = [100],
 			r = [],
 			reels = [
-				['a', noun ],
+				['a', noun],
 				['d', adjective],
 				['g', 'h']
 			],

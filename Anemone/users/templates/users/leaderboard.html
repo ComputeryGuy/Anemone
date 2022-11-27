@@ -7,14 +7,16 @@
 	
 	<title>Roommate</title>
 
+	{% load static %}
+
 	<!-- link to favicon -->
-	<link rel="shortcut icon" href="./assets/icons/logo-favicon.png" type="image/png">
+	<link rel="shortcut icon" href="{% 'users/assets/icons/logo-favicon.png' %}" type="image/png">
 
 	<!-- main style -->
-	<link rel="stylesheet" href="./styles/main-style.css">
+	<link rel="stylesheet" href="{% 'users/styles/main-style.css' %}">
 
 	<!-- leaderboard style -->
-	<link rel="stylesheet" href="./styles/leaderboard.css">
+	<link rel="stylesheet" href="{% 'users/styles/leaderboard.css' %}">
 
 	<!-- google icons -->
 	<link rel="stylesheet" 
