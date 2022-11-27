@@ -538,6 +538,34 @@ def leaderboard(request):
         return render(request, 'users/leaderboard.html', context)
 
 
+def lootbox(request):
+    if request.user.is_authenticated:
+        rw = RandomWord()
+        profile = request.user.profile
+        if request.method == 'POST':
+            if profile.lootboxes > 0:
+                profile.open_lootbox()
+                new_box = Lootbox.objects.create(owner=profile)
+                new_box.generateNounAdjectivePair()
+                random_adjs = rw.random_words(3, include_parts_of_speech=["adjectives"])
+                random_nouns = rw.random_words(3, include_parts_of_speech=["nouns"])
+                adj = new_box.adjective
+                noun = new_box.noun
+                context = {'random_adjs': random_adjs,
+                           'random_nouns': random_nouns,
+                           'adj': adj,
+                           'noun': noun,
+                           'lootboxes': profile.lootboxes,}
+                return JsonResponse(context)
+
+        random_adjs = rw.random_words(3, include_parts_of_speech=["adjectives"])
+        random_nouns = rw.random_words(3, include_parts_of_speech=["nouns"])
+        context = {'random_adjs': random_adjs,
+                   'random_nouns': random_nouns,
+                   'lootboxes': profile.lootboxes,}
+        return render(request, 'users/lootbox.html', context)
+
+
 '''        household = request.user.profile.household
         householdMembers = household.members.all()
         mList = []

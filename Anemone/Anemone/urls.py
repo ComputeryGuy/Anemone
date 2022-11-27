@@ -45,6 +45,7 @@ urlpatterns = [
     path('minus_points/', user_views.minus_points, name="minusPoints"),
     path('bidding/',  user_views.bidding, name='bidding'),
     path('tasks/', user_views.tasks, name="taskboard"),
-    path('openLootbox/', user_views.open_Lootbox, name="lootbox"),
+    #path('openLootbox/', user_views.open_Lootbox, name="lootbox"),
     path('leaderboard/', user_views.leaderboard, name="leaderboard"),
+    path('lootbox/', user_views.lootbox, name="lootbox"),
 ]

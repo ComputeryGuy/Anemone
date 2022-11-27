@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Roommate</title>
+
+	{% load static %}
+
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+
+	<!-- main style -->
+	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
+
+	<!-- lootbox style -->
+	<link rel="stylesheet" href="{% static 'users/styles/lootbox.css' %}">
+
+	<!-- google icons -->
+	<link rel="stylesheet" 
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<!-- jquery cdns -->
+	<!-- import jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js" 
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<!-- import jquery ui -->
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" 
+	integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div class="main-grid">
+
+		<section class="left-section">
+			<!-- the navigation -->
+			<nav id="nav-sidebar">
+
+				<div class="logo-container">
+					<img id="logo" src="./assets/icons/logo-round.png" alt="logo">
+				</div>
+
+				<div class="nav-sidebar-content">
+
+					<ul class="list">
+
+						<li class="list-item">
+							<a href="./index.html" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
+								<span class="link">Dashboard</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./task-board.html" class="nav-link">
+								<span class="material-symbols-rounded">task_alt</span>
+								<span class="link">Tasks</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./calendar.html" class="nav-link">
+								<span class="material-symbols-rounded">calendar_month</span>
+								<span class="link">Calendar</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./notifications.html" class="nav-link">
+								<span class="material-symbols-rounded">notifications</span>
+								<span class="link">
+									Notifications 
+									<span id="notif-number">5</span>
+								</span>
+							</a>
+						</li>
+
+						<li class="list-item">
+							<a href="./leaderboard.html" class="nav-link">
+								<span class="material-symbols-rounded">leaderboard</span>
+								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+					</ul>
+
+					<div class="list-bottom-content">
+						<li class="list-item">
+							<a href="./settings.html" class="nav-link">
+								<span class="material-symbols-rounded">settings</span>
+								<span class="link">Settings</span>
+							</a>
+						</li>
+						<li class="list-item">
+							<a href="./log-in.html" class="nav-link">
+								<span class="material-symbols-rounded">logout</span>
+								<span class="link">Logout</span>
+							</a>
+						</li>
+					</div>
+					
+				</div>
+			</nav>
+		</section>
+
+		<section class="middle-section">
+
+			<div class="lootbox-container">
+				<h1><span id="lootboxes">{{ lootboxes }}</span> Lootboxes Remaining</h1>
+
+				<!-- slot machine -->
+				<div id="slot-machine">
+
+					<div class="group lever">
+						<button>Roll</button>
+					</div>
+
+					<div class="group">
+						<div class="reel">
+						</div>
+						<div class="reel">
+						</div>
+						<!-- <div class="reel"></div> -->
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			/* =================== GETS CSRF TOKEN =================== */
+			function getCookie(name) {
+				var cookieValue = null;
+				if (document.cookie && document.cookie != '') {
+					var cookies = document.cookie.split(';');
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = jQuery.trim(cookies[i]);
+						// Does this cookie string begin with the name we want?
+						if (cookie.substring(0, name.length + 1) == (name + '=')) {
+							cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+							break;
+						}
+					}
+				}
+				return cookieValue;
+			}
+			var csrftoken = getCookie('csrftoken');
+
+			// reference: https://codepen.io/indamix/pen/AJNazx
+
+			/* requestAnimationFrame polyfill */
+			(function(w) {
+				var lastTime = 0,
+					vendors = ['webkit', /*'moz',*/ 'o', 'ms'];
+
+				for (var i = 0; i < vendors.length && !w.requestAnimationFrame; ++i) {
+					w.requestAnimationFrame = w[vendors[i] + 'RequestAnimationFrame'];
+					w.cancelAnimationFrame = w[vendors[i] + 'CancelAnimationFrame']
+						|| w[vendors[i] + 'CancelRequestAnimationFrame'];
+				}
+
+				if (!w.requestAnimationFrame)
+					w.requestAnimationFrame = function(callback, element) {
+						var currTime = +new Date(),
+							timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+							id = w.setTimeout(function(){ callback(currTime + timeToCall) }, timeToCall);
+						lastTime = currTime + timeToCall;
+						return id;
+					};
+
+				if (!w.cancelAnimationFrame)
+					w.cancelAnimationFrame = function(id){
+					clearTimeout(id);
+				};
+			})(this);
+
+			/* Slot Machine */
+			var noun = 'noun';
+			$(noun).css({
+				"color":"transparent",
+				"text-shadow": "0 0 8px #000",
+			});
+			
+			var adjective = 'adjective'
+			var sm = (function (undefined) {
+
+				var lootboxes = {{ lootboxes }};
+				var tMax = 3000, // animation time, ms
+					height = 210,
+					speeds = [100],
+					r = [],
+					reels = [
+						[{% for adj in random_adjs %} '{{ adj }}', {% endfor %}, adjective],
+						[{% for noun in random_nouns %} '{{ noun }}', {% endfor %}, noun],
+					],
+					$reels, $msg,
+					start;
+
+				function init(){
+					$reels = $('.reel').each(function(i, el){
+						el.innerHTML = '<div><p>' + reels[i].join('</p><p>') + '</p></div><div><p>' + reels[i].join('</p><p>') + '</p></div>'
+					});
+
+					// $msg = $('.msg');
+
+					$('button').click(action);
+				}
+
+				function action() {
+					if (start !== undefined) return;
+					if (lootboxes < 1) return;
+					
+					$.ajax({
+						type: "POST",
+						url: "{% url 'lootbox' %}",
+						headers: { 'X-CSRFToken': csrftoken },
+						//dataType: "json",
+						//data: jsonData,
+						//contentType: "application/json",
+						success: function(result) {
+							reels = [
+								result.random_adjs,
+								result.random_nouns,
+							]
+							$reels = $('.reel').each(function(i, el){
+								el.innerHTML = '<div><p>' + reels[i].join('</p><p>') + '</p></div><div><p>' + reels[i].join('</p><p>') + '</p></div>'
+							});
+							adjective = result.adj;
+							noun = result.noun;
+							lootboxes = result.lootboxes;
+							$("#lootboxes").text(result.lootboxes)
+						},
+						error: function(response) {
+							alert("Something went wrong in processing your bid.");
+						}
+					});
+
+					for (var i = 0; i < 2; ++i) {
+						// actually randomises the result
+						// speeds[i] = Math.random() + .5;	
+						// r[i] = (Math.random() * 3 | 0) * height / 3;
+
+						// will always land on the same text (just changes the speed)
+						speeds[i] = 2 + .5;	
+						r[i] = (2 * 2 | 0) * height / 2;
+					}
+					// $msg.html('Spinning...');
+					animate();
+				}
+
+				function animate (now) {
+					if (!start) {start = now;}
+					var t = now - start || 0;
+
+					for (var i = 0; i < 2; ++i) {
+						$reels[i].scrollTop = (speeds[i] / tMax / 2 * (tMax - t) * (tMax - t) + r[i]) % height | 0;
+					}
+					if (t < tMax) {
+						if (t > tMax - tMax/10) {
+							reels = [
+								[adjective],
+								[noun],
+							]
+							$reels = $('.reel').each(function(i, el){
+								el.innerHTML = '<div><p>' + reels[i].join('</p><p>') + '</p></div><div><p>' + reels[i].join('</p><p>') + '</p></div>'
+							});
+						}
+						requestAnimationFrame(animate);
+					}
+
+					else {
+						start = undefined;
+						//check();
+					}
+				}
+
+				return {init: init}
+
+			})();
+
+			$(sm.init);
+		});
+	</script>
+</body>
+</html>
