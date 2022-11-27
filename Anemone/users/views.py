@@ -441,6 +441,7 @@ def create_task(request):
     form = BiddingForm()
     return render(request, 'users/bidding.html', {'form': form})
 
+
 def open_Lootbox(request):
     if request.user.is_authenticated:
 
@@ -497,6 +498,7 @@ def log(request):
                   'tasks_unclaimed': tasks_unclaimed, }
         return render(request, 'users/log.html', values)
 
+
 def profilePicture(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -510,6 +512,30 @@ def profilePicture(request):
                 uProfile.profile_picture = profilePicture
                 uProfile.save()
                 return redirect('/')
+
+
+def leaderboard(request):
+    if request.user.is_authenticated:
+        profile = request.user.profile
+        household = request.user.profile.household
+
+        household_members = household.members.all()
+        for member in household_members:
+            completed_tasks = member.task_user_claimed.all().filter(task_status=True)
+            this_fortnight = completed_tasks.filter(due_date__gte=last_fortnight())
+            pts_fortnight = this_fortnight.aggregate(Sum('points'))
+            if pts_fortnight['points__sum'] is not None:
+                member.fortnight_xp = pts_fortnight['points__sum']
+            else:
+                member.fortnight_xp = 0
+            member.save()
+
+        members_by_pts = household_members.order_by('-fortnight_xp')
+        members_by_name = household_members.order_by('first_name')
+        context = {'profile': profile,
+                   'members_by_pts': members_by_pts,
+                   'members_by_name': members_by_name,}
+        return render(request, 'users/leaderboard.html', context)
 
 
 '''        household = request.user.profile.household

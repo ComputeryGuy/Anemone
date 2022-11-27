@@ -48,6 +48,8 @@ class Profile(models.Model):
 
     ##lootbox/ lootbox rewards
     lootboxes = models.IntegerField(default=0, verbose_name="lootboxes")
+
+    fortnight_xp = models.IntegerField(default=0)
     def open_lootbox(self):
         self.lootboxes -= 1
         self.save()

@@ -10,13 +10,13 @@
 	{% load static %}
 
 	<!-- link to favicon -->
-	<link rel="shortcut icon" href="{% 'users/assets/icons/logo-favicon.png' %}" type="image/png">
+	<link rel="shortcut icon" href="{% static 'users/assets/icons/logo-favicon.png' %}" type="image/png">
 
 	<!-- main style -->
-	<link rel="stylesheet" href="{% 'users/styles/main-style.css' %}">
+	<link rel="stylesheet" href="{% static 'users/styles/main-style.css' %}">
 
 	<!-- leaderboard style -->
-	<link rel="stylesheet" href="{% 'users/styles/leaderboard.css' %}">
+	<link rel="stylesheet" href="{% static 'users/styles/leaderboard.css' %}">
 
 	<!-- google icons -->
 	<link rel="stylesheet" 
@@ -42,7 +42,7 @@
 			<nav id="nav-sidebar">
 
 				<div class="logo-container">
-					<img id="logo" src="./assets/icons/logo-round.png" alt="logo">
+					<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
 				</div>
 
 				<div class="nav-sidebar-content">
@@ -50,39 +50,38 @@
 					<ul class="list">
 
 						<li class="list-item">
-							<a href="./index.html" class="nav-link desktop-current">
-								<span class="material-symbols-rounded mobile-current">dashboard</span>
+							<a href="{% url 'dashboard' %}" class="nav-link">
+								<span class="material-symbols-rounded">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./task-board.html" class="nav-link">
+							<a href="{% url 'taskboard' %}" class="nav-link">
 								<span class="material-symbols-rounded">task_alt</span>
 								<span class="link">Tasks</span>
 							</a>
 						</li>
 		
 						<li class="list-item">
-							<a href="./calendar.html" class="nav-link">
+							<a href="." class="nav-link">
 								<span class="material-symbols-rounded">calendar_month</span>
 								<span class="link">Calendar</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./notifications.html" class="nav-link">
+							<a href="{% url 'bulletin' %}" class="nav-link">
 								<span class="material-symbols-rounded">notifications</span>
 								<span class="link">
 									Notifications 
-									<span id="notif-number">5</span>
 								</span>
 							</a>
 						</li>
 
 						<li class="list-item">
-							<a href="./leaderboard.html" class="nav-link">
-								<span class="material-symbols-rounded">leaderboard</span>
+							<a href="{% url 'leaderboard' %}" class="nav-link desktop-current">
+								<span class="material-symbols-rounded mobile-current">leaderboard</span>
 								<span class="link">Leaderboard</span>
 							</a>
 						</li>
@@ -97,7 +96,7 @@
 							</a>
 						</li>
 						<li class="list-item">
-							<a href="./log-in.html" class="nav-link">
+							<a href="{% url 'logout' %}" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
 								<span class="link">Logout</span>
 							</a>
@@ -120,12 +119,14 @@
 						<h4>Name</h4>
 						<h4>Score</h4>
 					</div>
-				
+					{% for member in members_by_pts %}
 					<div class="table-row data">
-						<p class="rank">01</p>
-						<p class="name">My Name</p>
-						<p class="score">10000</p>
+						<p class="rank">{{ forloop.counter }}</p>
+						<p class="name">{{ member.first_name }} "Nickname" {{ member.last_name }}</p>
+						<p class="score">{{ member.fortnight_xp }}</p>
 					</div>
+					{% endfor %}
+<!--
 					<div class="table-row data">
 						<p class="rank">02</p>
 						<p class="name">Name</p>
@@ -152,6 +153,7 @@
 						<p class="name">Name</p>
 						<p class="score">1</p>
 					</div>
+-->
 					
 				</div>
 			</div>
@@ -171,16 +173,16 @@
 			<div class="user-container">
 				<div class="user-image-container">
 					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-					<h4 id="user-nme">David</h4>
+					<h4 id="user-nme">{{ profile.first_name }}</h4>
 				</div>
 
 				<div class="user-stats-container">
-					<h4 id="my-level">Level: <span id="my-level-numb">1</span></h4>
+					<h4 id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></h4>
 					<h4 id="my-rank">Rank: <span id="my-rank-numb">1</span></h4>
-					<h4 id="my-score">Score: <span id="my-score-numb">600pts</span></h4>
+					<h4 id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></h4>
 				</div>
 			</div>
-
+			<!--
 			<div class="my-labels">
 				<h4>My Labels:</h4>
 
@@ -192,9 +194,72 @@
 
 				</div>
 			</div>
+			-->
 			
 		</section>
 	</div>
-	<script src="./actions/leaderboard.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			
+			var chart = $("#chart");
+			// var ls = chart.getContext('2d'); -- why does this break?
+
+
+			// labels for each data
+			const labels = [
+				{% for member in members_by_name %}
+					'{{ member.first_name }} "nickname" {{ member.last_name }}', 
+				{% endfor %}
+			];
+
+			// the data being displayed
+			const data = {
+				labels: labels,
+				datasets: [{
+					label: 'This Fortnight\'s Leaderboard',
+					backgroundColor: ['#BB86FC', '#6bafff', '#03DAC6', '#000000'],
+					data: [
+					       {% for member in members_by_name %}
+						{{ member.fortnight_xp }}, 
+					       {% endfor %}
+                                              ],
+				}]
+			};
+
+			// how the data should be configured/displayed
+			const config = {
+				type: 'horizontalBar',
+				data: data,
+				options: {
+
+					legend: {
+						display: false,
+					},
+
+					scales: {
+						yAxes: [{
+							ticks: {
+								fontColor: "white",
+								beginAtZero: true
+							}
+						}],
+
+						xAxes: [{
+							ticks: {
+								fontColor: "white",
+								beginAtZero: true
+							}
+						}]
+					}
+
+				}
+			};
+
+			// display the chart
+			const myChart = new Chart (chart, config);
+			
+		});
+	</script>
 </body>
 </html>

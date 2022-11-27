@@ -46,4 +46,5 @@ urlpatterns = [
     path('bidding/',  user_views.bidding, name='bidding'),
     path('tasks/', user_views.tasks, name="taskboard"),
     path('openLootbox/', user_views.open_Lootbox, name="lootbox"),
+    path('leaderboard/', user_views.leaderboard, name="leaderboard"),
 ]
