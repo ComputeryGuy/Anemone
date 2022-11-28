@@ -40,10 +40,12 @@ urlpatterns = [
     path('generate_household_link/', user_views.generate_household_link, name="generateLink"),
 
 
-    path('<uuid:household_id>', user_views.dashboard, name="dashboard"),
+    path('dash/', user_views.dashboard, name="dashboard"),
     path('bonus_points/', user_views.bonus_points, name="bonusPoints"),
     path('minus_points/', user_views.minus_points, name="minusPoints"),
     path('bidding/',  user_views.bidding, name='bidding'),
-    path('<uuid:household_id>/tasks', user_views.tasks, name="taskboard"),
-    path('openLootbox', user_views.open_Lootbox, name="lootbox"),
+    path('tasks/', user_views.tasks, name="taskboard"),
+    #path('openLootbox/', user_views.open_Lootbox, name="lootbox"),
+    path('leaderboard/', user_views.leaderboard, name="leaderboard"),
+    path('lootbox/', user_views.lootbox, name="lootbox"),
 ]

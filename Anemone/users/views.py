@@ -26,9 +26,7 @@ from django.forms.models import model_to_dict
 def home(request):
     if request.user.is_authenticated:
         if request.user.profile.household is not None:
-            uuid = str(request.user.profile.household.household_id)
-            url = '/' + uuid
-            return redirect(url)
+            return redirect('dashboard')
         else:
             return redirect('join')
     return redirect('login')
@@ -186,10 +184,10 @@ def generate_household_link(request):
     
 
 
-def dashboard(request, household_id):
+def dashboard(request):
     if request.user.is_authenticated:
         task_assign(request)
-        household = get_object_or_404(Household, pk=household_id)
+        household = request.user.profile.household
         tasks = household.task_set.all()
         user_name = request.user.username
         total_points = None
@@ -205,7 +203,6 @@ def dashboard(request, household_id):
             unclaimed_points = 0
         bulletins = household.bulletin_set.all()
         values = {'user_name': user_name,
-		 'household_id': household_id,
                  'total_points': total_points,
                  'new_tasks': new_tasks,
                  'completed_tasks': completed_tasks,
@@ -302,15 +299,12 @@ def bidding(request):
     return render(request, 'users/bidding.html', {'form': form})
 
 
-def tasks(request, household_id):
-    print("\n\n")
-    print("WAH")
-    print("\n\n")
+def tasks(request):
     if request.user.is_authenticated:
         task_assign(request)
         lfn = last_fortnight()
         
-        household = get_object_or_404(Household, pk=household_id)
+        household = request.user.profile.household
         user = request.user
         tasks = household.task_set.all()
         unclaimed_tasks = list(tasks.filter(claimed=False))
@@ -319,8 +313,7 @@ def tasks(request, household_id):
         complete_tasks = tasks.filter(task_status=True)
         complete_tasks = list(complete_tasks.filter(due_date__gte=lfn))
         movable_tasks = todo_tasks + in_prog_tasks + complete_tasks
-        values = {'household_id': household_id,
-                  'user': user,
+        values = {'user': user,
                   'unclaimed_tasks': unclaimed_tasks,
                   'todo_tasks': todo_tasks,
                   'in_prog_tasks': in_prog_tasks,
@@ -332,8 +325,8 @@ def tasks(request, household_id):
                 payload = json.loads(request.body)
                 handle_task_ajax(request, payload)
             except:
-                create_task(request, household_id)
-                return redirect('taskboard', household_id=household_id)
+                create_task(request)
+                return redirect('taskboard')
 
         return render(request, 'users/task-board.html', values)
 
@@ -391,7 +384,8 @@ def handle_task_ajax(request, payload):
         task.save()
 
 
-def create_task(request, household_id):
+def create_task(request):
+    household = request.user.profile.household
     form = request.POST
     form_data = form.dict()
     # Task information
@@ -400,17 +394,13 @@ def create_task(request, household_id):
     task_body = form_data['task_body']
     due_datetime = form_data['due_date'] + " " + "12:00:00"  # currently we have no way to use a given dateform_data['due_time']
     due_datetime = timezone.make_aware(datetime.datetime.strptime(due_datetime, '%Y-%m-%d %H:%M:%S'))
-    print("\n\n")
-    print("WAH")
-    print(timezone.now())
-    print("\n\n")
     task = Task.objects.create(title = task_title,
                                 body = task_body,
                                 creation_time = timezone.now(),
                                 due_date = due_datetime,
                                 points = 1000,
                                 user_created = profile_created,
-                                household = Household.objects.get(pk=household_id))
+                                household = household)
     # Frequency information
     try:
         if 'repeats' in form_data:
@@ -450,6 +440,7 @@ def create_task(request, household_id):
 
     form = BiddingForm()
     return render(request, 'users/bidding.html', {'form': form})
+
 
 def open_Lootbox(request):
     if request.user.is_authenticated:
@@ -507,6 +498,7 @@ def log(request):
                   'tasks_unclaimed': tasks_unclaimed, }
         return render(request, 'users/log.html', values)
 
+
 def profilePicture(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -520,6 +512,58 @@ def profilePicture(request):
                 uProfile.profile_picture = profilePicture
                 uProfile.save()
                 return redirect('/')
+
+
+def leaderboard(request):
+    if request.user.is_authenticated:
+        profile = request.user.profile
+        household = request.user.profile.household
+
+        household_members = household.members.all()
+        for member in household_members:
+            completed_tasks = member.task_user_claimed.all().filter(task_status=True)
+            this_fortnight = completed_tasks.filter(due_date__gte=last_fortnight())
+            pts_fortnight = this_fortnight.aggregate(Sum('points'))
+            if pts_fortnight['points__sum'] is not None:
+                member.fortnight_xp = pts_fortnight['points__sum']
+            else:
+                member.fortnight_xp = 0
+            member.save()
+
+        members_by_pts = household_members.order_by('-fortnight_xp')
+        members_by_name = household_members.order_by('first_name')
+        context = {'profile': profile,
+                   'members_by_pts': members_by_pts,
+                   'members_by_name': members_by_name,}
+        return render(request, 'users/leaderboard.html', context)
+
+
+def lootbox(request):
+    if request.user.is_authenticated:
+        rw = RandomWord()
+        profile = request.user.profile
+        if request.method == 'POST':
+            if profile.lootboxes > 0:
+                profile.open_lootbox()
+                new_box = Lootbox.objects.create(owner=profile)
+                new_box.generateNounAdjectivePair()
+                random_adjs = rw.random_words(3, include_parts_of_speech=["adjectives"])
+                random_nouns = rw.random_words(3, include_parts_of_speech=["nouns"])
+                adj = new_box.adjective
+                noun = new_box.noun
+                context = {'random_adjs': random_adjs,
+                           'random_nouns': random_nouns,
+                           'adj': adj,
+                           'noun': noun,
+                           'lootboxes': profile.lootboxes,}
+                return JsonResponse(context)
+
+        random_adjs = rw.random_words(3, include_parts_of_speech=["adjectives"])
+        random_nouns = rw.random_words(3, include_parts_of_speech=["nouns"])
+        context = {'random_adjs': random_adjs,
+                   'random_nouns': random_nouns,
+                   'lootboxes': profile.lootboxes,}
+        return render(request, 'users/lootbox.html', context)
 
 
 '''        household = request.user.profile.household
