@@ -1,170 +1,6 @@
-/* =================== MAIN GRID =================== */
-.main-grid {
-	grid-template-columns: repeat(12, 1fr);
-}
-
-/* =================== JOIN CONTAINER =================== */
-.join-container {
-	grid-column: span 12;
-	background-color: var(--primary-card-colour);
-	border-radius: var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
-
-	display: flex;
-	flex-direction: column;
-	justify-content: start;
-	align-items: center;
-
-	text-align: center;
-	padding: 1.5rem;
-
-	width: 30rem;
-	height: 30rem;
-
-	margin: 6rem auto;
-
-	position: relative;
-}
-
-/* ---------- select form ---------- */
-#select_form {
-	margin: 5rem 0 0;
-	text-align: center;
-}
-
-#select_form h1 {
-	margin-bottom: 2rem;
-}
-
-.opt-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.opt-container button {
-	padding: 1rem 2rem;
-	border-radius: 1000px;
-	background-color: var(--primary-dark-blue);
-	border: none;
-	transition: var(--std-transition);
-}
-
-.opt-container button:not(:last-child) {
-	margin-right: 1.5rem;
-}
-
-.opt-container button:hover {
-	cursor: pointer;
-	box-shadow: var(--std-box-shadow);
-	translate: 0 -4px ;
-	transition: var(--std-transition);
-}
-
-/* =================== CREATE HOUSEHOLD VIEW =================== */
-.create-selected-container {
-	margin-top: 5rem;
-	display: none;
-}
-
-.create-selected-container h1 {
-	color: var(--primary-dark-blue);
-	margin-bottom: .5rem;
-}
-
-.create-selected-container h4 {
-	margin: 0 auto 2rem;
-	width: 50ch;
-}
-
-/* generate pin button */
-#gen-pin-btn {
-	background-color: var(--primary-dark-blue);
-	border: none;
-	border-radius: 10000px;
-	padding: 1rem 2rem;
-	margin-bottom: 1rem;
-	transition: var(--std-transition);
-}
-
-#gen-pin-btn:hover {
-	cursor: pointer;
-	box-shadow: var(--std-box-shadow);
-	translate: 0 -4px ;
-	transition: var(--std-transition);
-}
-
-/* your pin container */
-.your-pin-container {
-	display: none;
-}
-
-.your-pin-container span {
-	font-size: 30px;
-	color: var(--primary-light-blue);
-}
-
-/* go to dashboard */
-.go-to-dash {
-	position: absolute;
-	right: 1.5rem;
-	bottom: 1.5rem;
-	display: none;
-}
-
-.go-to-dash a {
-	font-size: 14px;
-	text-decoration: none;
-	transition: var(--std-transition);
-}
-
-.go-to-dash a:hover {
-	cursor: pointer;
-	color: var(--primary-light-blue);
-	transition: var(--std-transition);
-}
-
-/* go back button */
-.woops {
-	position: absolute;
-<<<<<<< HEAD
-=======
-	width: 10%;
->>>>>>> master
-	right: 1.5rem;
-	bottom: 1.5rem;
-}
-
-.woops button {
-	background-color: var(--primary-card-colour);
-	border: none;
-	transition: var(--std-transition);
-}
-
-.woops button:hover {
-	cursor: pointer;
-	color: var(--primary-light-blue);
-	transition: var(--std-transition);
-}
-
-/* =================== JOIN HOUSEHOLD VIEW =================== */
-.join-selected-container {
-	margin-top: 5rem;
-	display: none;
-}
-
-.join-selected-container h1 {
-	color: var(--primary-dark-blue);
-	margin-bottom: .5rem;
-}
-
-.join-selected-container h4 {
-	margin: 0 auto 2rem;
-	width: 50ch;
-}
-
-#house-pin-form input[type=number] {
+/* =================== CONSTANTS =================== */
+/* ---------- input styles ---------- */
+input[type=number] {
 	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
@@ -176,31 +12,15 @@
 	margin-right: 1rem;
 }
 
-#house-pin-form input[type=number]::placeholder {
+input[type=number]::placeholder {
 	color: var(--primary-white)
 }
 
-#house-pin-form input[type=number]:focus {
+input[type=number]:focus {
 	border-color: var(--primary-white);
 }
 
-/* submit button */
-#house_pin_submit_btn {
-	background-color: var(--primary-dark-blue);
-	border: none;
-	border-radius: var(--std-border-radius);
-	padding: .43rem 1rem;
-	transition: var(--std-transition);
-}
-
-#house_pin_submit_btn:hover {
-	cursor: pointer;
-	box-shadow: var(--std-box-shadow);
-	translate: 0 -2px ;
-	transition: var(--std-transition);
-}
-
-/* =================== LOADING ANIMATION =================== */
+/* ---------- loading animation ---------- */
 .load-animation-container {
 	margin-bottom: 1rem;
 	display: none;
@@ -240,4 +60,289 @@
 	50% { transform: translate(0, 20px); }
 
 	100% { transform: translate(0, 0); }
+}
+
+/* ---------- join container ---------- */
+.join-container {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	box-shadow: var(--std-box-shadow);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+
+	padding: 1.5rem;
+}
+
+/* ---------- select form ---------- */
+/* creating a household or joining a household */
+#select_form h1 {
+	margin-bottom: 2rem;
+}
+
+.opt-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.opt-container button {
+	border-radius: 1000px;
+	background-color: var(--primary-dark-blue);
+	border: none;
+}
+
+.opt-container button:not(:last-child) {
+	margin-right: 1.5rem;
+}
+
+/* ---------- create household view ---------- */
+.create-selected-container {
+	display: none;
+}
+
+.create-selected-container h1 {
+	margin-bottom: .5rem;
+}
+
+.create-selected-container h4 {
+	margin: 0 auto 2rem;
+}
+
+/* generate pin button */
+#gen-pin-btn {
+	background-color: var(--primary-dark-blue);
+	border: none;
+	border-radius: 10000px;
+}
+
+/* your pin container */
+.your-pin-container {
+	display: none;
+}
+
+.your-pin-container span {
+	font-size: 30px;
+	color: var(--primary-light-blue);
+}
+.contain {
+	display: flex;
+	flex-direction: row;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	padding: 3rem 0 0;
+}
+
+/* go to dashboard */
+.go-to-dash {
+	display: flex;
+	justify-content: flex-end;
+	display: none;
+}
+
+.go-to-dash a {
+	font-size: 14px;
+	text-decoration: none;
+}
+
+/* go back button */
+.woops {
+	grid-row: 1;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.woops button {
+	background-color: var(--primary-card-colour);
+	border: none;
+}
+
+/* submit button */
+#house_pin_submit_btn {
+	background-color: var(--primary-dark-blue);
+	border: none;
+	border-radius: var(--std-border-radius);
+}
+
+/* ---------- join household view ---------- */
+.join-selected-container {
+	display: none;
+}
+
+.join-selected-container h1 {
+	margin-bottom: .5rem;
+}
+
+.join-selected-container h4 {
+	margin: 0 auto 2rem;
+	width: 50ch;
+}
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.join-container {
+		grid-column: span 4;
+		margin: 4rem auto;
+	}
+
+	/* ---------- select form ---------- */
+	#select_form h1 {
+		font-size: 25px;
+	}
+
+	.opt-container button {
+		padding: .5rem .8rem;
+	}
+	
+	/* ---------- create household view ---------- */
+	.create-selected-container h1 {
+		font-size: 28px;
+	}
+
+	.create-selected-container h4 {
+		width: 45ch;
+	}
+
+	#gen-pin-btn {
+		padding: .5rem 1rem;
+		margin-bottom: 1rem;
+		transition: var(--std-transition);
+	}
+
+	#house_pin_submit_btn {
+		padding: .43rem 1rem;
+	}
+
+	/* ---------- join household view ---------- */
+	.join-selected-container h1 {
+		font-size: 28px;
+	}
+
+	.join-selected-container h4 {
+		width: 45ch;
+	}
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	.join-container {
+		grid-column: span 6;
+		margin: 8rem auto;
+	}
+
+	/* ---------- select form ---------- */
+	.opt-container button {
+		padding: 1rem 2rem;
+	}
+	
+	/* ---------- create household view ---------- */
+	.create-selected-container h4 {
+		width: 50ch;
+	}
+
+	#gen-pin-btn {
+		padding: 1rem 2rem;
+		margin-bottom: 1rem;
+	}
+
+	#house_pin_submit_btn {
+		padding: .43rem 1rem;
+	}
+
+	/* ---------- join household view ---------- */
+
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+	.main-grid {
+		grid-template-columns: repeat(12, 1fr);
+	}
+
+	.join-container {
+		grid-column: span 12;
+		margin: 10rem auto;
+	}
+
+	/* ---------- select form ---------- */
+	.opt-container button {
+		padding: 1rem 2rem;
+		transition: var(--std-transition);
+	}
+	
+	.opt-container button:hover {
+		cursor: pointer;
+		box-shadow: var(--std-box-shadow);
+		translate: 0 -4px ;
+		transition: var(--std-transition);
+	}
+	/* ---------- create household view ---------- */
+	.create-selected-container h4 {
+		width: 50ch;
+	}
+
+	.create-selected-container h4 {
+		width: 50ch;
+	}
+
+	#gen-pin-btn {
+		padding: 1rem 2rem;
+		margin-bottom: 1rem;
+		transition: var(--std-transition);
+	}
+
+	#gen-pin-btn:hover {
+		cursor: pointer;
+		box-shadow: var(--std-box-shadow);
+		translate: 0 -4px ;
+		transition: var(--std-transition);
+	}
+
+	.go-to-dash a {
+		transition: var(--std-transition);
+	}
+
+	.go-to-dash a:hover {
+		cursor: pointer;
+		color: var(--primary-light-blue);
+		transition: var(--std-transition);
+	}
+
+	.woops button {
+		transition: var(--std-transition);
+	}
+
+	.woops button:hover {
+		cursor: pointer;
+		color: var(--primary-light-blue);
+		transition: var(--std-transition);
+	}
+
+	#house_pin_submit_btn {
+		padding: .43rem 1rem;
+		transition: var(--std-transition);
+	}
+
+	/* ---------- join household view ---------- */
+	#house_pin_submit_btn:hover {
+		cursor: pointer;
+		box-shadow: var(--std-box-shadow);
+		translate: 0 -2px ;
+		transition: var(--std-transition);
+	}
+
 }
