@@ -7,6 +7,7 @@
 	border: 2px solid var(--primary-card-colour);
 	box-shadow: var(--std-box-shadow);
 	margin-bottom: 1rem;
+	
 }
 
 /* for claimed tasks only */
@@ -100,6 +101,7 @@
 .task-stats-bottom div span {
 	margin-left: .3rem;
 	color: white;
+	font-size: 10px;
 }
 
 .task-stats-top {
