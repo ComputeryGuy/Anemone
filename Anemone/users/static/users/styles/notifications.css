@@ -1,9 +1,109 @@
 
 /* =================== CONSTANTS =================== */
-<<<<<<< HEAD
-=======
 
->>>>>>> master
+/* ---------- middle section ---------- */
+.middle-section {
+	grid-column: span 11;
+	display: grid;
+	grid-template-rows: repeat(2, min-content) ;
+	gap: 10px;
+}
+
+/* ---------- button container ---------- */
+.button-container {
+	grid-row: 1;
+
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+}
+
+.button-container button {
+    background-color: var(--primary-dark-blue);
+    border: 2px solid var(--primary-dark-blue);
+    border-radius: var(--std-border-radius);
+	transition: var(--std-transition);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.button-container button span,
+.button-container button p {
+	font-size: 14px;
+}
+
+.button-container button *:not(:last-child) {
+    margin-right: 0.3rem;
+}
+
+
+.left-right-container {
+	grid-row: 2;
+	display: grid;
+}
+
+/* ---------- left container ---------- */
+.left-container, .right-container {
+	grid-column: span 1;
+}
+
+.left-container h2, .right-container h2 {
+	margin-bottom: 1rem;
+}
+
+/* ---------- table ---------- */
+.table {
+    display: grid;
+    grid-template-rows: min-content;
+    gap: 15px;
+
+	text-align: center;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+
+	border-radius: var(--std-border-radius);
+}
+
+.row.header h4 {
+	background-color: var(--primary-card-colour);
+	border-radius: var(--std-border-radius);
+	padding: 1rem 0;
+}
+
+.row div {
+	margin: auto 0;
+}
+
+.row-data-container {
+	display: grid;
+    grid-template-rows: auto;
+    gap: 15px;
+}
+
+.row.data {
+	/* --primary-grey at 5% */
+	background-color: rgba(176, 176, 176, 5%);
+	padding: .5rem 0;
+}
+
+.user-prof img {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 100%;
+	border: 3px solid var(--primary-dark-blue);
+	margin-bottom: .3rem;
+}
+
 /* ---------- notification style---------- */
 .a-notification {
 	background-color: var(--primary-card-colour);
@@ -48,201 +148,93 @@
 	border-bottom: 2px solid var(--primary-dark-blue);
 }
 
-/* ---------- DESKTOP ---------- */
-/* =================== LEFT SECTION =================== */
-.left-section {
-	grid-column: span 1;
+/* =================== primary media query =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		padding: 1rem;
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.button-container {
+		margin-top: 2rem;
+	}
+
+	.button-container button {
+		padding: .5rem 1.2rem;
+	}
+
+	.left-right-container {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(2, min-content);
+		gap: 30px;
+	}
 }
 
-/* =================== MIDDLE SECTION =================== */
-.middle-section {
-	grid-column: span 11;
-	padding: 1.5rem;
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
 
-	display: grid;
-<<<<<<< HEAD
-	grid-template-rows: repeat(2, min-content) ;
-	gap: 10px;
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+		padding: 1rem;
+	}
 
-=======
-	grid-template-rows: repeat(3, min-content);
-	gap: 10px;
->>>>>>> master
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.button-container {
+		margin-top: 3rem;
+	}
+
+	.button-container button {
+		padding: .8rem 1.5rem;
+	}
+
+	.left-right-container {
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(2, min-content);
+		gap: 30px;
+	}
 }
 
-/* ---------- button container ---------- */
-.button-container {
-<<<<<<< HEAD
-	grid-row: 1;
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+	/* ---------- hide mobile nav ---------- */
 
-	margin-top: 3rem;
+	.left-section {
+		grid-column: span 1;
+	}
 
-=======
->>>>>>> master
-	display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-    align-content: center;
-}
+	.middle-section {
+		padding: 1.5rem;
+	}
 
-.button-container button {
-    background-color: var(--primary-dark-blue);
-    border: 2px solid var(--primary-dark-blue);
-    border-radius: var(--std-border-radius);
-    padding: .8rem 1.5rem;
-	transition: var(--std-transition);
+	.button-container {
+		margin-top: 3rem;
+	}
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-}
+	.button-container button {
+		padding: .8rem 1.5rem;
+	}
 
-.button-container button span,
-.button-container button p {
-	font-size: 14px;
-}
+	.button-container button:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		transition: var(--std-transition);
+	}
 
-.button-container button *:not(:last-child) {
-    margin-right: 0.3rem;
-}
-
-.button-container button:hover {
-	cursor: pointer;
-	background-color: var(--primary-input-colour);
-	transition: var(--std-transition);
-}
-
-<<<<<<< HEAD
-
-.left-right-container {
-	grid-row: 2;
-
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 30px;
-}
-
-/* ---------- left container ---------- */
-.left-container {
-	grid-column: span 1;
-}
-
-.left-container h2 {
-	margin-bottom: 1rem;
-}
-
-/* ---------- right container ---------- */
-.right-container {
-	grid-column: span 1;
-}
-
-.right-container h2 {
-	margin-bottom: 1rem;
-}
-
-/* ---------- table ---------- */
-.table {
-    display: grid;
-    grid-template-rows: min-content;
-    gap: 15px;
-
-	text-align: center;
-}
-
-.row {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 10px;
-
-	border-radius: var(--std-border-radius);
-}
-
-.row.header h4 {
-	background-color: var(--primary-card-colour);
-	border-radius: var(--std-border-radius);
-	padding: 1rem 0;
-}
-
-.row div {
-	margin: auto 0;
-}
-
-.row-data-container {
-	display: grid;
-    grid-template-rows: auto;
-    gap: 15px;
-}
-
-
-.row.data {
-	/* --primary-grey at 5% */
-	background-color: rgba(176, 176, 176, 5%);
-	padding: .5rem 0;
-}
-
-.user-prof img {
-=======
-/* ---------- top container ---------- */
-.top-container h2 {
-	margin-bottom:1rem;
-}
-
-/* ---------- bottom container ---------- */
-.bottom-container h2 {
-	margin-bottom: 1rem;
-}
-
-.completed-tasks-container {
-	display: grid;
-	grid-template-columns: 1fr;
+	.left-right-container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
 	
-	gap: 10px;
-}
-
-
-.comp-task {
-	display: grid;
-	grid-template-columns: min-content repeat(2, 1fr);
-	gap: 10px;
-}
-
-.comp-task div:not(:last-child) {
-	border-right: 1px solid var(--primary-light-blue);
-}
-
-.task-user-profile {
-	text-align: center;
-    padding: 1rem;
-	/* padding-right: 4rem; */
-}
-
-.task-user-profile img {
->>>>>>> master
-	width: 3rem;
-	height: 3rem;
-	border-radius: 100%;
-	border: 3px solid var(--primary-dark-blue);
-	margin-bottom: .3rem;
-<<<<<<< HEAD
-=======
-}
-
-.task-name-container p {
-	color: var(--primary-light-blue);
-}
-
-.task-name {
-	font-size: 1.5rem;
-}
-
-.task-point-container p {
-	color: var(--primary-light-blue);
-}
-
-.for-points {
-	font-size: 1.5rem;
->>>>>>> master
 }
