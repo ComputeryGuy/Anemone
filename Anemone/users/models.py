@@ -32,7 +32,7 @@ class Profile(models.Model):
     # points = Chore.objects.filter(user_claimed=user, task_status='True').annotate(points=Sum('points'))
     first_name = models.CharField(max_length=20, null=True)
     last_name = models.CharField(max_length=20, null=True)
-    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/")
+    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/", default='images/logo-round.jpg')
     
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
