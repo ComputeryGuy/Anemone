@@ -4,11 +4,8 @@
 	{% block css_files %}
 
 	<!-- link the index specific stylesheet -->
-	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-style.css' %}">
-
-	<!-- link to media query -->
-	<link rel="stylesheet" href="{% static 'users/styles/index styles/index-query.css' %}">
-
+	<link rel="stylesheet" href="{% static 'users/styles/index-style.css' %}">
+	
 	{% endblock %}
 </head>
 
@@ -16,6 +13,8 @@
 	<div class="main-grid">
 		
 		<section class="left-section">
+
+			<nav id="nav-mobile"></nav>
 
 			<nav id="nav-sidebar">
 
@@ -90,11 +89,6 @@
 					</div>
 				</div>
 			</nav>
-
-			<nav id="mobile">
-				snd
-			</nav>
-
 		</section>
 
 		<section class="middle-section">
@@ -107,25 +101,21 @@
 
 				<div class="info-square-container">
 
-					<!-- unclaimed -->
 					<div class="info-square">
 						<h1>{{ new_tasks }}</h1>
 						<h3>Unclaimed Tasks</h3>
 					</div>
 
-					<!-- FIXME: implement -->
 					<div class="info-square">
 						<h1>{{ unstarted_count }}</h1>
 						<h3>Tasks Not Started</h3>
 					</div>
 					
-					<!-- FIXME: implement -->
 					<div class="info-square">
 						<h1>{{ in_progress_count }}</h1>
 						<h3>Tasks In Progress</h3>
 					</div>
 					
-					<!-- completed -->
 					<div class="info-square">
 						<h1>{{ completed_tasks }}</h1>
 						<h3>Completed Tasks</h3>
@@ -202,9 +192,6 @@
 
 		<section class="right-section">
 
-			<div class="calendar">I am a calendar</div>
-
-			<!-- A max of 3 events onlty -->
 			<div class="event-container">
 				<h2>Today's Events</h2>
 

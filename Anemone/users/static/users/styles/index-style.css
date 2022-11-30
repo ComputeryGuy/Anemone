@@ -7,34 +7,8 @@ button {
 	transition: var(--std-transition);
 }
 
-button:hover {
-	cursor: pointer;
-	background-color: var(--primary-input-colour);
-	border-color: var(--primary-light-blue);
-	transition: var(--std-transition);
-}
-
 button a {
 	text-decoration: none;
-}
-
-/* ---------- DESKTOP ---------- */
-/* =================== GRID SECTIONS =================== */
-.left-section {
-	grid-column: span 1;
-}
-
-.middle-section {
-	grid-column: span 8;
-}
-
-.right-section {
-	grid-column: span 3;
-}
-
-/* =================== middle section =================== */
-.middle-section {
-	padding: 1rem;
 }
 
 /* ---------- containers ---------- */
@@ -47,11 +21,11 @@ button a {
 /* ---------- info square container ---------- */
 .info-square-container {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 10px;
 }
 
 .info-square {
+	grid-column: span 1;
+
 	margin: 0 auto;
 	padding: 1rem;
 	background-color: var(--primary-card-colour);
@@ -61,11 +35,6 @@ button a {
 	height: 8rem;
 	transition: var(--std-transition);
 	box-shadow: var(--std-box-shadow);
-}
-
-.info-square:hover {
-	transform: translateY(-0.5rem);
-	transition: var(--std-transition);
 }
 
 .info-square h1 {
@@ -80,13 +49,8 @@ button a {
 /* ---------- tasks available ---------- */
 .todays-total-container {
 	padding: 1rem;
-
 	display: grid;
-	grid-template-columns: repeat(3, 1fr) max-content;
-	gap: 10px;
-
 	text-align: center;
-
 	background-color: var(--primary-card-colour);
 	border-radius: var(--std-border-radius);
 	box-shadow: var(--std-box-shadow);
@@ -127,16 +91,15 @@ button a {
 
 .notifs-header {
 	display: grid;
-	grid-template-columns: .4fr auto;
+	grid-template-columns: repeat(2, 1fr);
 	margin-bottom: .5rem;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.go-to-notifs-container {
-	display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    flex-wrap: wrap;
-}
 
 #go-to-notifs-btn {
 	font-size: 12px;
@@ -145,12 +108,14 @@ button a {
 /* ---------- a notification ---------- */
 .a-notification-container {
 	display: grid;
-	grid-template-columns: auto;
+	grid-template-columns: 1fr;
 	grid-template-rows: auto;
 	gap: 16px;
 }
 
 .a-notification {
+	grid-column: span 1;
+
 	display: grid;
 	grid-template-columns: min-content auto;
 	gap: 10px;
@@ -196,19 +161,9 @@ button a {
 
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: min-content auto auto;
+	grid-template-rows: min-content min-content;
 	gap: 20px;
-
-	height: 100vh;
-}
-
-/* ---------- calendar ---------- */
-.calendar {
-	background-color: green;
-	border-radius: var(--std-border-radius);
-	width: 15rem;
-	height: 15rem;
-	margin: 0 auto;
+	height: 100%;
 }
 
 /* ---------- today's events ---------- */
@@ -217,6 +172,7 @@ button a {
 }
 
 .a-event {
+	grid-column: span 1;
 	border-left: var(--std-left-border);
 	border-radius: 0 10px 10px 0;
 	padding: 0.3rem;
@@ -230,18 +186,13 @@ button a {
 	margin-bottom: 1rem;
 }
 
-.a-event:hover {
-	cursor: pointer;
-	background-color: var(--primary-background-colour);
-	transition: var(--std-transition);
-}
-
 .a-event p {
 	color: var(--primary-grey);;
 }
 
 /* ---------- go to calendar btn ---------- */
 .go-to-cal-container {
+	grid-column: span 1;
 	display: flex;
     justify-content: flex-end;
     align-content: flex-end;
@@ -250,4 +201,134 @@ button a {
 
 #go-to-cal-btn {
 	font-size: 12px;
+}
+
+
+/* =================== primary media query =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(2, min-content);
+		padding: 1rem;
+	}
+
+	/* ---------- hide desktop navigation ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 4;
+	}
+	
+	.right-section {
+		grid-column: span 4;
+	}
+
+	.info-square-container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.todays-total-container {
+		display: grid;
+		grid-template-rows: repeat(4, min-content);
+	}
+	
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(2, min-content);
+		padding: 1rem;
+	}
+
+	/* ---------- hide desktop navigation ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 6;
+	}
+	
+	.right-section {
+		grid-column: span 6;
+	}
+
+	.info-square-container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.info-square {
+		min-width: 100%;
+	}
+
+	.todays-total-container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr) max-content;
+		gap: 10px;
+	}
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+
+	button:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		border-color: var(--primary-light-blue);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- hide mobile navigation ---------- */
+	nav.mobile {
+		display: none;
+	}
+
+	/* ---------- grid sections ---------- */
+	.left-section {
+		grid-column: span 1;
+	}
+	
+	.middle-section {
+		grid-column: span 8;
+		padding: 1rem;
+	}
+	
+	.right-section {
+		grid-column: span 3;
+		height: 100vh;
+	}
+
+	/* ---------- middle section ---------- */
+
+	.info-square-container {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px;
+	}
+
+	.info-square:hover {
+		transform: translateY(-0.5rem);
+		transition: var(--std-transition);
+	}
+
+	.todays-total-container {
+		grid-template-columns: repeat(3, 1fr) max-content;
+		gap: 10px;
+	}
+
+	/* ---------- right section ---------- */
+	.a-event:hover {
+		cursor: pointer;
+		background-color: var(--primary-background-colour);
+		transition: var(--std-transition);
+	}
 }
