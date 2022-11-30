@@ -1,20 +1,7 @@
 /* =================== CONSTANTS =================== */
-
-
-/* =================== left section =================== */
-.left-section {
-	grid-column: span 1;
-}
-
-/* =================== middle section =================== */
 .middle-section {
 	grid-column: span 8;
-
-	margin-top: 3rem;
-
 	display: grid;
-	grid-template-rows: repeat(2, min-content);
-	gap: 10px;
 }
 
 /* ---------- leaderboard container ---------- */
@@ -92,10 +79,8 @@
 }
 
 .chart-container {
-	position: absolute;
 	background-color: var(--primary-card-colour);
 	border-radius: var(--std-border-radius);
-	width: 100%;
 }
 
 #chart {
@@ -154,4 +139,90 @@
 }
 .labels-table p:not(:last-child) {
 	margin-bottom: .5rem;
+}
+
+
+/* =================== primary media query =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: auto;
+		padding: 1rem;
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	/* put user profile on top */
+	.right-section {
+		grid-row: 1;
+		grid-column: span 4;
+	}
+
+	.middle-section {
+		grid-row: 2;
+		grid-column: span 4;
+	}
+
+	.chart-container {
+		position: relative;
+		width: 99%;
+	}
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: auto;
+		padding: 1rem;
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	/* put user profile on top */
+	.right-section {
+		grid-row: 1;
+		grid-column: span 6;
+	}
+
+	.middle-section {
+		grid-row: 2;
+		grid-column: span 6;
+	}
+
+	.chart-container {
+		position: relative;
+		width: 99%;
+	}
+
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+
+	/* ---------- show desktop nav ---------- */
+	.left-section {
+		grid-column: span 1;
+	}
+
+	.middle-section {
+		grid-column: span 8;
+		margin-top: 3rem;
+		grid-template-rows: repeat(2, min-content);
+		gap: 10px;
+	}
+
+	.chart-container {
+		position: absolute;
+		width: 100%;
+	}
 }
