@@ -171,7 +171,7 @@ button a {
 }
 
 .user-post .notif-style {
-	color: var(--sub-shadow);
+	color: var(--accent-grey);
 }
 
 /* =================== primary media query =================== */
