@@ -40,9 +40,6 @@ $(document).ready(function () {
 		function (e) { 
 			e.preventDefault();
 
-			// hide the shadow
-			$(".log-in-container.desktop").css("box-shadow", "none");
-
 			// hide elements 
 			$(".sign-in-container").hide();
 			$(".new-user-container").hide();
@@ -77,13 +74,6 @@ $(document).ready(function () {
 
 			$(".sign-up-container").fadeIn(551);
 			$(".old-user-container").fadeIn(551);
-
-			// show box shadow after 550 delay
-			$(".log-in-container.desktop").delay(550).fadeIn( 
-				function(e) {
-					$(this).css("box-shadow"," 0px 4px 20px 0px rgba(0, 0, 0, 45%)");
-				}
-			);
 		}
 	);
 
@@ -91,9 +81,6 @@ $(document).ready(function () {
 	$("#go-to-sign-in-btn").click(
 		function (e) { 
 			e.preventDefault();
-
-			// hide the shadow
-			$(".log-in-container.desktop").css("box-shadow", "none");
 
 			// hide elements
 			$(".logo-container.right *").hide();
@@ -129,13 +116,6 @@ $(document).ready(function () {
 
 			$(".sign-in-container").fadeIn(551);
 			$(".new-user-container").fadeIn(551);
-
-			// show box shadow after 550 delay
-			$(".log-in-container.desktop").delay(550).fadeIn( 
-				function(e) {
-					$(this).css("box-shadow"," 0px 4px 20px 0px rgba(0, 0, 0, 45%)");
-				}
-			);
 		}
 	);
 });
