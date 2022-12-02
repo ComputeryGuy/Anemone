@@ -22,7 +22,7 @@
 }
 
 /* ---------- right button ---------- */
-.top-button-container button {
+.right-buttons-container button {
 	background-color: var(--accent-blue);
 	border: 2px solid var(--accent-blue);
 	border-radius: 1000px;
@@ -144,9 +144,10 @@ column ---------- */
 	}
 
 	/* right buttons hover */
-	.button.right:hover {
+	.top-button-container button:hover {
 		cursor: pointer;
-		border-color: var(--font-colour);
+		border-color: var(--accent-red);
+		background-color: var(--accent-red);
 		transition: var(--std-transition);
 	}
 

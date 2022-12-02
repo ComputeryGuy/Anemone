@@ -1,7 +1,7 @@
 
 /* =================== font styles =================== */
 label {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 /* =================== CONSTANTS =================== */
@@ -110,65 +110,6 @@ select:focus {
 	padding: .5rem;
 }
 
-/* ---------- sub task container ---------- */
-.sub-task-container {
-	margin: .5rem 0;
-}
-.input-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.input-container input[type=text] {
-	padding: .5rem;
-	width: 100%;
-}
-
-/* ---------- add sub task button ---------- */
-.add-sub-task-btn-container {
-	margin-left: .5rem;
-}
-
-.add-sub-task-btn {
-	display: flex;
-	vertical-align: middle;
-
-	background-color: var(--accent-red);
-	border: 2px solid var(--accent-red);
-	border-radius: 1000px;
-	padding: .5rem;
-
-	transition: var(--std-transition);
-}
-
-.add-sub-task-btn:hover {
-	cursor: pointer;
-	border-color: var(--font-colour);
-	transition: var(--std-transition);
-}
-
-.add-sub-task-btn span {
-	font-size: 20px;
-}
-
-/* ---------- task container ---------- */
-.task-container {
-	margin-top: .5rem;
-
-	background-color: var(--primary-input-colour);
-	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-light-blue);
-	padding: .5rem;
-
-	display: none;
-}
-
-.sub-task {
-	font-size: 14px;
-}
-
 /* ---------- due date container ---------- */
 .due-date-container {
 	display: grid;
@@ -185,6 +126,7 @@ select:focus {
 	text-align: center;
 }
 
+/* when task is created */
 .created-container {
 	display: flex;
 	justify-content: center;
@@ -195,8 +137,10 @@ select:focus {
 	font-size: 14px;
 }
 
+/* when task is due */
 .due-container input[type=date] {
 	padding: .3rem;
+	width: 75%;
 }
 
 .due-container p {
@@ -209,13 +153,13 @@ select:focus {
 }
 
 /* ---------- priority container ---------- */
-.priority-container select {
+/* .priority-container select {
 	width: 100%;
 	padding: .3rem;
-}
+} */
 
 /* ---------- repeats container ---------- */
-.repeat-toggle-container {
+/* .repeat-toggle-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -224,10 +168,10 @@ select:focus {
 
 .repeat-toggle-container label {
 	margin-right: .5rem;
-}
+} */
 
 /* =================== repeat expanded =================== */
-.repeat-expanded {
+/* .repeat-expanded {
 	padding: 1rem;
 	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
@@ -239,10 +183,10 @@ select:focus {
 .every-container {
 	display: flex;
 	flex-direction: row;
-}
+} */
 
 /* ---------- repeats every container ---------- */
-.repeat-every-container {
+/* .repeat-every-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -255,10 +199,10 @@ select:focus {
 
 .repeat-every-container input[type=number] {
 	width: 4rem;
-}
+} */
 
 /* ---------- radio buttons ---------- */
-.radio-container {
+/* .radio-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -274,10 +218,10 @@ select:focus {
 
 .radio-btn input[type=radio] {
 	margin-right: .5rem;
-}
+} */
 
 /* ---------- repeat on container ---------- */
-.repeat-on-container {
+/* .repeat-on-container {
 	margin: 1rem 0;
 }
 
@@ -295,10 +239,10 @@ select:focus {
 	background-color: var(--primary-input-colour);
 	border-radius: var(--std-border-radius);
 	border: 2px solid var(--primary-light-blue);
-}
+} */
 
 /* ---------- repeat ends container ---------- */
-.repeat-ends-container {
+/* .repeat-ends-container {
 	margin: 1rem 0 0;
 }
 
@@ -317,9 +261,9 @@ select:focus {
 #repeat-type-or {
 	font-weight: 500;
 	color:blue
-}
+} */
 
-.on-container {
+/* .on-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -340,7 +284,8 @@ select:focus {
 
 .on-container input[type=number] {
 	width: 4rem;
-}
+} */
+
 /* ---------- submit form button ---------- */
 .submit-task-container {
 	text-align: center;
@@ -351,14 +296,19 @@ select:focus {
 	background-color: var(--accent-blue);
 	border: 2px solid var(--accent-blue);
 	border-radius: var(--std-border-radius);
-
+	
 	padding: .5rem;
 	width: 100%;
 	transition: var(--std-transition);
 }
 
+.submit-task-container button p {
+	color: var(--primary-white);
+}
+
 .submit-task-container button:hover {
 	cursor: pointer;
-	border-color: var(--font-colour);
+	background-color: var(--accent-red);
+	border-color: var(--accent-red);
 	transition: var(--std-transition);
 }

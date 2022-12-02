@@ -1,5 +1,5 @@
 
-// TODO: make it so that you can only move cards on desktop
+// OLD
 $(document).ready(function () {
 
 	/* =================== MOVE TASK CARD =================== */

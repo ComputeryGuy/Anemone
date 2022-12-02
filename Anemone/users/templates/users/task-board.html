@@ -82,7 +82,7 @@
 	
 						<div class="due-container">
 							<label for="end_date">Due:</label>
-							<input type="date" id="end_date" name="due_date">
+							<input type="date" id="end_date" name="due_date" required>
 							<p>
 								You have
 								<span id="total-days">X</span>
@@ -92,7 +92,7 @@
 	
 					</div>
 	
-					<div class="repeats-container">
+					<!-- <div class="repeats-container">
 	
 						<div class="repeat-toggle-container">
 	
@@ -154,7 +154,7 @@
 	
 							</div>
 						</div>
-					</div>
+					</div> -->
 	
 					<div class="submit-task-container">
 						<button type="submit" id="submit-btn">
@@ -256,13 +256,6 @@
 	
 				<div class="top-button-container">
 	
-					<div class="left-buttons-container">
-						<button class="button left">
-							<span class="material-symbols-rounded">grid_view</span>
-							<p>Board</p>
-						</button>
-					</div>
-	
 					<div class="right-buttons-container">
 						<button class="button right" type="button" data-toggle="modal" data-target="#form-container">
 							<span class="material-symbols-rounded">add</span>
@@ -288,59 +281,39 @@
 	
 							{% for task in unclaimed_tasks %}
 							<div class="a-task unclaimed" id="{{ task.id }}">
-								<div class="task-description-container">
-									<h3 class="task-title">
-										{{ task.title }}
-										<!-- <span id="reminder" class="material-symbols-rounded">notifications_active</span> -->
-									</h3>
-	
-									<p class="task-description">
-										{{ task.body }}
-									</p>
-									<p class="task-description bid" , id="bidtext{{ task.id }}">
-										Current bid: {{ task.points }}
-									</p>
-								</div>
-	
+
 								<div class="task-priority-container">
-									<!-- not currently in scope
-									<p class="task-priority-high">High Priority</p>
-									-->
 									<div class="task-user-img"></div>
+								</div>
+								
+								<div class="task-description-container">
+									<h3 class="task-title">{{ task.title }}</h3>
+	
+									<p class="task-description">{{ task.body }}</p>
+
+									<p class="task-description bid" , id="bidtext{{ task.id }}">
+										Current bid:
+										<span id="curr-bid"> {{ task.points }}pts</span>
+									</p>
 								</div>
 	
 								<hr class="task-horz-line">
 	
 								<div class="task-stats">
 	
-									<div class="task-stats-top">
-	
-	
-										<div class="bid-container">
-											<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
-										</div>
-										<!-- not currently in scope
-										<div class="task-sub-tasks">
-											<p>Subtasks:
-												<span id="total-sub-tasks">3</span>
-											</p>
-	
-										</div>
-	                                                                        -->
+									<div class="bid-container">
+										<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
 									</div>
 	
-									<div class="task-stats-bottom">
-										<div class="task-due-date">
-											<p>
-												Due:
-												<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
-											</p>
-										</div>
-	
-										<!-- TODO: currently hiding the button -->
-										<button type="submit" id="submit-bid-btn" style="display: none;">Submit</button>
-	
+									<div class="task-due-date">
+										<p>
+											Due:
+											<span id="due-date">{{ task.due_date|date:'h:i A | F d, Y' }}</span>
+										</p>
 									</div>
+
+									<!-- hiding submit the button -->
+									<button type="submit" id="submit-bid-btn" style="display: none;">Submit</button>
 								</div>
 							</div>
 							{% endfor %}
@@ -359,48 +332,44 @@
 							{% for task in todo_tasks %}
 							<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 								<div class="task-description-container">
-									<h3 class="task-title">
-										{{ task.title }}
-									</h3>
+									<h3 class="task-title">{{ task.title }}</h3>
 	
-									<p class="task-description">
-										{{ task.body }}
-									</p>
-								</div>
-								<div class="task-priority-container">
-									<!-- not currently in scope
-									<p class="task-priority-medium">Medium Priority</p>
-									-->
-									<div class="task-user-img">
-										<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-										<p> {{ task.user_claimed }} </p>
-									</div>
+									<p class="task-description">{{ task.body }}</p>
 								</div>
 	
 								<hr class="task-horz-line">
 	
 								<div class="task-stats">
+
+									<div class="claimed-by">
+										<p>Claimed By:</p>
+
+										<div class="task-user-img">
+											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											<p id="user-name"> {{ task.user_claimed }} </p>
+										</div>
+
+									</div>
 	
 									<div class="task-points">
 										<p>
 											Points:
-											<span id="current-points">{{ task.points }}</span>
+											<span id="current-points">{{ task.points }}pts</span>
 										</p>
 
 									</div>
 									
-
 									<div class="task-bid-ends">
 										<p>
 											Bid Ends:
-											<span id="bid-ends">{{ task.due_date + 1|date:'l, F d, Y' }}</span>
+											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
 										</p>
 									</div>
 									
 									<div class="task-due-date">
 										<p>
 											Due:
-											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+											<span id="due-date">{{ task.due_date|date:'h:i A | F d, Y' }}</span>
 										</p>
 									</div>
 								</div>
@@ -421,53 +390,45 @@
 							{% for task in in_prog_tasks %}
 							<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 								<div class="task-description-container">
-									<h3 class="task-title">
-										{{ task.title }}
-									</h3>
+									<h3 class="task-title">{{ task.title }}</h3>
 	
-									<p class="task-description">
-										{{ task.body }}
-									</p>
-								</div>
-								<div class="task-priority-container">
-									<!-- not currently in scope
-									<p class="task-priority-medium">Medium Priority</p>
-									-->
-									<div class="task-user-img">
-										<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-										<p> {{ task.user_claimed }} </p>
-									</div>
+									<p class="task-description">{{ task.body }}</p>
 								</div>
 	
 								<hr class="task-horz-line">
 	
 								<div class="task-stats">
-	
-									<div class="task-stats-top">
-	
-										<div class="task-points">
-											<p>
-												Points:
-												<span id="current-points">{{ task.points }}</span>
-											</p>
-	
+
+									<div class="claimed-by">
+										<p>Claimed By:</p>
+
+										<div class="task-user-img">
+											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											<p id="user-name"> {{ task.user_claimed }} </p>
 										</div>
-										<!-- not currently in scope
-										<div class="task-sub-tasks">
-											<p>Subtasks:
-												<span id="total-sub-tasks">1</span>
-											</p>
-										</div>
-										-->
+
+									</div>
+
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}pts</span>
+										</p>
+
+									</div>
+
+									<div class="task-bid-ends">
+										<p>
+											Bid Ends:
+											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
+										</p>
 									</div>
 	
-									<div class="task-stats-bottom">
-										<div class="task-due-date">
-											<p>
-												Due:
-												<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
-											</p>
-										</div>
+									<div class="task-due-date">
+										<p>
+											Due:
+											<span id="due-date">{{ task.due_date|date:'h:i A | F d, Y' }}</span>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -487,54 +448,46 @@
 							{% for task in complete_tasks %}
 							<div class="a-task claimed {{ task.user_claimed.pk }}" draggable="true" id="{{ task.id }}">
 								<div class="task-description-container">
-									<h3 class="task-title">
-										{{ task.title }}
-									</h3>
+									<h3 class="task-title">{{ task.title }}</h3>
 	
-									<p class="task-description">
-										{{ task.body }}
-									</p>
-								</div>
-								<div class="task-priority-container">
-									<!-- not currently in scope
-									<p class="task-priority-medium">Medium Priority</p>
-									-->
-									<div class="task-user-img">
-										<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-										<p> {{ task.user_claimed }} </p>
-									</div>
+									<p class="task-description">{{ task.body }}</p>
 								</div>
 	
 								<hr class="task-horz-line">
 	
 								<div class="task-stats">
-	
-									<div class="task-stats-top">
-	
-										<div class="task-points">
-											<p>
-												Points:
-												<span id="current-points">{{ task.points }}</span>
-											</p>
-	
+
+									<div class="claimed-by">
+										<p>Claimed By:</p>
+
+										<div class="task-user-img">
+											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											<p id="user-name"> {{ task.user_claimed }} </p>
 										</div>
-										<!-- not currently in scope
-										<div class="task-sub-tasks">
-											<p>Subtasks:
-												<span id="total-sub-tasks">1</span>
-											</p>
-										</div>
-										-->
+
+									</div>
+
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}pts</span>
+										</p>
+									</div>
+
+									<div class="task-bid-ends">
+										<p>
+											Bid Ends:
+											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
+										</p>
 									</div>
 	
-									<div class="task-stats-bottom">
-										<div class="task-due-date">
-											<p>
-												Due:
-												<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
-											</p>
-										</div>
+									<div class="task-due-date">
+										<p>
+											Due:
+											<span id="due-date">{{ task.due_date|date:'h:i A | F d, Y' }}</span>
+										</p>
 									</div>
+
 								</div>
 							</div>
 							{% endfor %}
@@ -552,7 +505,7 @@
 	<script src="{% static 'users/actions/task-board.js' %}"></script>
         -->
 	<script type="text/javascript">
-	// TODO: make it so that you can only move cards on desktop
+	
 	$( document ).ready(function() {
 
 		/* =================== GETS CSRF TOKEN =================== */
@@ -610,61 +563,44 @@
 			},
 		});
 
-		/* =================== SHOW AND HIDE TASK INFORMATION =================== */
-		/*
-		$(".a-task").click(
-			function (e) { 
-				e.preventDefault();
-				
-				// if the task does NOT have the class 'unclaimed'
-				if ( !$(this).hasClass("unclaimed")){
-					alert("this does not have the class 'unclaimed' ")
-				}
-			}
-		);
-		*/
-
-
-		<!-- TODO: after submitting form all tasks are put in the unclaimed col -->
-		<!-- make sure that the class name 'unclaimed' is added -->
 		/* =================== GET USER BID =================== */
 		{% for task in unclaimed_tasks %}
-		$("#bid{{ task.id }}").on("keypress", 
-			function (e) {
-				// on enter
-				if(e.which == 13) {
-					//Ensure input is valid
-					user_bid = parseInt($("#bid{{ task.id }}").val());
-					if ( !Number.isInteger(user_bid) ) {
-						alert("Your bid must be an integer.")
-					} else if ( user_bid >= {{ task.points }} && user_bid) {
-						alert("Your bid must be lower than the current bid.");
-					} else if ( user_bid < 1 ) {
-						alert("Your bid must be greater than 0")
-					} else { //Send payload
-						var data = new Object();
-						data.type = "user_bid";
-						data.id = {{ task.id }};
-						data.bid = user_bid;
-						var jsonData = JSON.stringify(data);
-						$.ajax({
-							type: "POST",
-							url: "{% url 'taskboard' %}",
-							headers: { 'X-CSRFToken': csrftoken },
-							//dataType: "json",
-							data: jsonData,
-							contentType: "application/json",
-							success: function(result) {
-								$("#bidtext{{ task.id }}").text("Current bid: " + user_bid)
-							},
-							error: function(response) {
-								alert("Something went wrong in processing your bid.");
-							}
-						});
+			$("#bid{{ task.id }}").on("keypress", 
+				function (e) {
+					// on enter
+					if(e.which == 13) {
+						//Ensure input is valid
+						user_bid = parseInt($("#bid{{ task.id }}").val());
+						if ( !Number.isInteger(user_bid) ) {
+							alert("Your bid must be an integer.")
+						} else if ( user_bid >= {{ task.points }} && user_bid) {
+							alert("Your bid must be lower than the current bid.");
+						} else if ( user_bid < 1 ) {
+							alert("Your bid must be greater than 0")
+						} else { //Send payload
+							var data = new Object();
+							data.type = "user_bid";
+							data.id = {{ task.id }};
+							data.bid = user_bid;
+							var jsonData = JSON.stringify(data);
+							$.ajax({
+								type: "POST",
+								url: "{% url 'taskboard' %}",
+								headers: { 'X-CSRFToken': csrftoken },
+								//dataType: "json",
+								data: jsonData,
+								contentType: "application/json",
+								success: function(result) {
+									$("#bidtext{{ task.id }}").text("Current bid: " + user_bid)
+								},
+								error: function(response) {
+									alert("Something went wrong in processing your bid.");
+								}
+							});
+						}
 					}
 				}
-			}
-		);
+			);
 		{% endfor %}
 
 		/* =================== SHOW AND HIDE CREATE TASK FORM =================== */
@@ -672,6 +608,13 @@
 		$(".right-buttons-container .button.right").click(
 			function (e) {
 				e.preventDefault();
+
+				$(':input','#form-container')
+					.not(':button, :submit, :reset, :hidden')
+					.val('')
+					.prop('checked', false)
+					.prop('selected', false);
+
 				$("#form-container").show({
 					duration: '1000'
 				});
@@ -681,6 +624,13 @@
 		// make the x on the form close the form (= slide out)
 		$("#exit-btn").click(function (e) { 
 			e.preventDefault();
+
+			$(':input','#form-container')
+				.not(':button, :submit, :reset, :hidden')
+				.val('')
+				.prop('checked', false)
+				.prop('selected', false);
+				
 			$("#form-container").hide({
 				duration: '1000'
 			});
@@ -688,58 +638,57 @@
 
 		/* =================== ADD SUB TASK =================== */
 		// if the user presses the 'enter' key
-		$("#sub_task_text").on("keypress", 
-			function (e) {
-				e.preventDefault();
+		// $("#sub_task_text").on("keypress", 
+		// 	function (e) {
+		// 		e.preventDefault();
 
-				// in ascii the 'enter' key is 13
-				if (e.which == 13) {
+		// 		// in ascii the 'enter' key is 13
+		// 		if (e.which == 13) {
 					
-					// if the input is not empty
-					if ( $("#sub_task_text").val().length != 0 ) {
+		// 			// if the input is not empty
+		// 			if ( $("#sub_task_text").val().length != 0 ) {
 
-						// show sub-task container
-						$(".task-container").show();
+		// 				// show sub-task container
+		// 				$(".task-container").show();
 		
-						var x = $(".task-container").html();
-						var y = '<div class="sub-task">' 
-									+ $("#sub_task_text").val()
-								+ '</div>';
+		// 				var x = $(".task-container").html();
+		// 				var y = '<div class="sub-task">' 
+		// 							+ $("#sub_task_text").val()
+		// 						+ '</div>';
 		
-						$(".task-container").html(x + y);
-						$("#sub_task_text").val("");
-					}
-				}
-			}
-		);
+		// 				$(".task-container").html(x + y);
+		// 				$("#sub_task_text").val("");
+		// 			}
+		// 		}
+		// 	}
+		// );
 
 		// if the user clicks on the add subtask btn
-		$(".add-sub-task-btn").click(
-			function (e) { 
-				e.preventDefault();
+		// $(".add-sub-task-btn").click(
+		// 	function (e) { 
+		// 		e.preventDefault();
 
-				// show sub-task container
-				$(".task-container").show();
+		// 		// show sub-task container
+		// 		$(".task-container").show();
 				
-				if ( $("#sub_task_text").val().length != 0 ) {
+		// 		if ( $("#sub_task_text").val().length != 0 ) {
 
-					var x = $(".task-container").html();
-					var y = '<div class="sub-task">' 
-								+ $("#sub_task_text").val()
-							+ '</div>';
+		// 			var x = $(".task-container").html();
+		// 			var y = '<div class="sub-task">' 
+		// 						+ $("#sub_task_text").val()
+		// 					+ '</div>';
 
-					$(".task-container").html(x + y);
-					$("#sub_task_text").val("");
-				}
-				// else {
-				// 	alert ("Enter some text!!!");
-				// }
-			}
-		);
+		// 			$(".task-container").html(x + y);
+		// 			$("#sub_task_text").val("");
+		// 		}
+		// 		// else {
+		// 		// 	alert ("Enter some text!!!");
+		// 		// }
+		// 	}
+		// );
 
 		/* =================== RETURN TODAY'S DATE =================== */
-		// make 'Created: XX/XX/XXXX' is always set to today's date (note the following code is JS)
-
+		// return today's date as MM/DD/YYYY
 		var d = new Date(); // creates a date object
 		var month = d.getMonth()+1; // gets the month
 		var day = d.getDate(); // gets the day
@@ -748,9 +697,16 @@
 		((''+day).length<2 ? '0' : '') + day  + '/' +
 		d.getFullYear();
 
-
 		// returns the variable. If the output is not working would show 'today's date here'
 		$("#todays-date").html(newOutput);
+
+		// returns today's date as YYYY-MM-DD
+		var maxDate = d.getFullYear() + '-' 
+		+ ((''+month).length<2 ? '0' : '') + month + '-' +
+		((''+day).length<2 ? '0' : '') + day;
+		
+		// restricts due date input to only selecting dates after today's date
+		$('#end_date').attr('min', maxDate);
 		
 		/* =================== SHOW NUMBER OF DAYS LEFT BEFORE DUE DATE =================== */
 		$("#end_date").change(
@@ -778,19 +734,19 @@
 
 		/* =================== SHOW AND HIDE REPEAT INFORMATION ON FORM =================== */
 		// if "Repeats?" is checked then show the expaned info about repeat
-		$(".repeat-toggle-container #repeat_toggle").click(
-			function () {
-				if ( $(this).prop("checked") == true) {
-					// alert ("Checkbox is checked.")
+		// $(".repeat-toggle-container #repeat_toggle").click(
+		// 	function () {
+		// 		if ( $(this).prop("checked") == true) {
+		// 			// alert ("Checkbox is checked.")
 					
-					// show the extra info regarding repeats
-					$(".repeat-expanded").show(); 
-				}
-				else {			
-					// hide repeat extra information
-					$(".repeat-expanded").hide();
-				}
-		});
+		// 			// show the extra info regarding repeats
+		// 			$(".repeat-expanded").show(); 
+		// 		}
+		// 		else {			
+		// 			// hide repeat extra information
+		// 			$(".repeat-expanded").hide();
+		// 		}
+		// });
 
 		/* =================== CLOSE FORM ON SUBMIT =================== */
 		// make the submit button on the form close the form
