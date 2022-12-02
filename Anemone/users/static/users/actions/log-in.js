@@ -36,86 +36,84 @@ $(document).ready(function () {
 	);
 
 	/* =================== desktop sign in menu =================== */
-	$("#go-to-sign-up-btn").click(
-		function (e) { 
-			e.preventDefault();
+	$("#go-to-sign-up-btn").click(function (e) { 
+		e.preventDefault();
 
-			// hide elements 
-			$(".sign-in-container").hide();
-			$(".new-user-container").hide();
-			$(".logo-container.left *").hide();
+		// hide elements 
+		$(".sign-in-container").hide();
+		$(".new-user-container").hide();
+		$(".logo-container.left *").hide();
 
-			// slide transformation
-			$(".right-side").animate({
-				right: '30%',
-				width: '70%',
-				backgroundColor: '#30353f',
-				borderTopLeftRadius: '10px',
-				borderTopRightRadius: '0px',
-				borderBottomLeftRadius: '10px',
-				borderBottomRightRadius: '0px',
-			}, 550);
+		// slide transformation
+		$(".right-side").animate({
+			right: '30%',
+			width: '70%',
+			backgroundColor: '#BAC4E1',
+			borderTopLeftRadius: '50px',
+			borderTopRightRadius: '0px',
+			borderBottomLeftRadius: '50px',
+			borderBottomRightRadius: '0px',
+		}, 550);
 
-			$(".left-side").animate({
-				left: '70%',
-				width: '30%',
-				backgroundColor: '#006FF2',
-				borderTopLeftRadius: '0px',
-				borderTopRightRadius: '10px',
-				borderBottomLeftRadius: '0px',
-				borderBottomRightRadius: '10px',
-			}, 550);
+		$(".left-side").animate({
+			left: '70%',
+			width: '30%',
+			backgroundColor: '#6488E5',
+			borderTopLeftRadius: '0px',
+			borderTopRightRadius: '50px',
+			borderBottomLeftRadius: '0px',
+			borderBottomRightRadius: '50px',
+		}, 550);
 
-			// show elements
-			$(".logo-container.right *").fadeIn(551);
+		// show elements
+		$(".logo-container.right *").fadeIn(551);
 
-			$(".sign-up-container").css("display", "flex");
-			$(".old-user-container").css("display", "flex");
+		$(".sign-up-container").css("display", "flex");
+		$(".old-user-container").css("display", "flex");
 
-			$(".sign-up-container").fadeIn(551);
-			$(".old-user-container").fadeIn(551);
-		}
-	);
+		$(".sign-up-container").fadeIn(551);
+		$(".old-user-container").fadeIn(551);
+
+	});
 
 
-	$("#go-to-sign-in-btn").click(
-		function (e) { 
-			e.preventDefault();
+	$("#go-to-sign-in-btn").click(function (e) { 
+		e.preventDefault();
 
-			// hide elements
-			$(".logo-container.right *").hide();
-			$(".sign-up-container").hide();
-			$(".old-user-container").hide();
+		// hide elements
+		$(".logo-container.right *").hide();
+		$(".sign-up-container").hide();
+		$(".old-user-container").hide();
 
-			// slide transformation
-			$(".right-side").animate({
-				width: '30%',
-				right: '0',
-				backgroundColor: '#006FF2',
-				borderTopLeftRadius: '0px',
-				borderTopRightRadius: '10px',
-				borderBottomLeftRadius: '0px',
-				borderBottomRightRadius: '10px',
-			}, 550);
+		// slide transformation
+		$(".right-side").animate({
+			width: '30%',
+			right: '0',
+			backgroundColor: '#6488E5',
+			borderTopLeftRadius: '0px',
+			borderTopRightRadius: '50px',
+			borderBottomLeftRadius: '0px',
+			borderBottomRightRadius: '50px',
+		}, 550);
 
-			$(".left-side").animate({
-				left: '0',
-				width: '70%',
-				backgroundColor: '#30353f',
-				borderTopLeftRadius: '10px',
-				borderTopRightRadius: '0px',
-				borderBottomLeftRadius: '10px',
-				borderBottomRightRadius: '0px',
-			}, 550);
+		$(".left-side").animate({
+			left: '0',
+			width: '70%',
+			backgroundColor: '#BAC4E1',
+			borderTopLeftRadius: '50px',
+			borderTopRightRadius: '0px',
+			borderBottomLeftRadius: '50px',
+			borderBottomRightRadius: '0px',
+		}, 550);
 
-			// show elements
-			$(".logo-container.left *").fadeIn(551);
+		// show elements
+		$(".logo-container.left *").fadeIn(551);
 
-			$(".sign-in-container").css("diplay", "flex");
-			$(".new-container").css("diplay", "flex");
+		$(".sign-in-container").css("diplay", "flex");
+		$(".new-container").css("diplay", "flex");
 
-			$(".sign-in-container").fadeIn(551);
-			$(".new-user-container").fadeIn(551);
-		}
-	);
+		$(".sign-in-container").fadeIn(551);
+		$(".new-user-container").fadeIn(551);
+
+	});
 });
