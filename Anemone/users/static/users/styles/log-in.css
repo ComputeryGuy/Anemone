@@ -1,157 +1,441 @@
+/* =================== CONSTANTS =================== */
 
-/* =================== imported fonts =================== */
-/* Nunito Sans: Black, Bold, Semi-bold, Regular*/
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;900&display=swap');
-
-/* =================== global variables =================== */
-:root {
-	/* primary colours */
-	--primary-white: white;
-	--primary-grey: #b0b0b0;
-
-	--primary-light-blue: #6bafff;
-	--primary-dark-blue: #006FF2;
-
-	--primary-background-colour: #212229;
-	--primary-card-colour: #30353f;
-
-	--std-border-radius: 10px;
-	--std-left-border: 3px solid var(--primary-light-blue);
-	--std-transition: all .3s ease-in-out;
-	--std-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 45%);
-
-	--primary-form-colour: #005FCF;
-
-	/* 50% of the primary-light-blue */
-	--primary-input-colour: rgba(107, 175, 255, 50%);
-
-	/* =================== Re-Style =================== */
-	--background-colour: #FFF9ED;
-	--font-colour: #22254C;
-	--accent-blue: #6488E5;
-	--accent-orange: #F9BE7D;
-	--accent-red: #E56372;
-	--accent-light-blue: #BAC4E1;
-	--sub-shadow: #D1D1D6;
-
-}
-
-/* =================== reset default styles =================== */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	
-	font-family: 'Nunito Sans', sans-serif;
-	color: var(--font-colour);
-}
-
-/* =================== base page styles =================== */
-body {
-	background-color: var(--background-colour);
-}
-
-button {
-	font-family: 'Nunito Sans', sans-serif;
-}
-
-/* =================== font styles =================== */
-h1 {
-	/* black */
-	font-weight: 900;
-	font-size: 30px;
-}
-
-h2 {
-	/* bold */
-	font-weight: 700;
-	font-size: 20px;
-}
-
-h3 {
-	/* semi bold */
-	font-weight: 600;
-	font-size: 18px;
-}
-
-p {
-	/* regular */
-	font-weight: 400;
-	font-size: 16px;
-}
-
-/* =================== main grid global =================== */
-.main-grid {
-	display: grid;
-	grid-template-columns: max-content repeat(11, 1fr);
-	gap: 10px;
-}
-
-/* =================== global: navigation -- desktop =================== */
-#nav-sidebar {
-	background-color: var(--primary-background-colour);
-	margin: 1rem;
-}
-
+/* ---------- logo container ---------- */
+/* 
 .logo-container {
-	padding: 1rem;
-	text-align: center;
-}
-
-.logo-container #logo {
-	width: 5rem;
-}
-
-.nav-sidebar-content {
 	display: flex;
-	height: calc(100vh - 9.5rem);
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
+
+	
+	padding: 0;
+	
+}
+
+.logo-container img {
+	width: 4rem;
+	height: 4rem;
+} 
+*/
+
+/* ---------- input styles ---------- */
+.input-container {
+	margin: 1rem 0 2rem;
+}
+
+.input-container input {
 	padding: .8rem;
-}
-
-.nav-sidebar-content .list-item {
-	list-style: none;
-}
-
-.list-item.mobile {
-	display: none;
-}
-
-.list-item .nav-link {
-	display: flex;
-	align-items: center;
-	margin: .5rem 0;
-	padding: .8rem;
-	text-decoration: none;
+	width: 50%;
 	border-radius: var(--std-border-radius);
-	transition: var(--std-transition);
+	background-color: var(--primary-input-colour);
+	border: 2px solid var(--primary-light-blue);
+	outline: none;
 }
 
-.desktop-current {
-	background-color: var(--primary-dark-blue);
-}
-
-.list-item .nav-link:hover {
-	background-color: var(--primary-dark-blue);
-	transition: var(--std-transition);
-}
-
-.nav-link .material-symbols-rounded {
-	margin-right: .4rem;
-	font-size: 16px;
+.input-container input::placeholder {
 	color: var(--primary-white);
 }
 
-.nav-link .link {
-	font-size: 12px;
-	color: white;
+.input-container input:focus {
+	border-color: var(--primary-white);
 }
 
-.link #notif-number {
-	background-color: var(--primary-light-blue);
-	--std-border-radius: 5px;
-	border-radius: var(--std-border-radius);
-	padding: 0.3rem .4rem;
-	margin-left: .5rem;
+.input-container input:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+/* ---------- submit button(s) ---------- */
+.submit-container {
+	margin: 2rem 0 0;
+}
+
+/* sign in button */
+#sign-in-submit-btn {
+	background-color: var(--primary-dark-blue);
+	border: 3px solid var(--primary-dark-blue);
+	border-radius: 100px;
+	width: 12rem;
+	padding: 1rem 1.5rem;
+	text-transform: uppercase;
+	transition: var(--std-transition);
+}
+
+/* sign up button */
+#sign-up-submit-btn {
+	background-color: var(--primary-dark-blue);
+	border: 3px solid var(--primary-dark-blue);
+	border-radius: 100px;
+	width: 12rem;
+	padding: 1rem 1.5rem;
+	text-transform: uppercase;
+	transition: var(--std-transition);
+}
+
+/* =================== media query =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+
+	/* =================== hide desktop =================== */
+	.log-in-container.desktop {
+		display: none;
+	}
+
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		text-align: center;
+	}
+
+	.log-in-container.mobile {
+		grid-column: span 4;
+	}
+
+	/* ---------- menu list ---------- */
+	.menu-list {
+		margin: 1rem 1rem .5rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+
+	.menu-list button {
+		background-color: var(--primary-form-colour);
+		border: 2px solid var(--primary-form-colour);
+		margin-right: 2rem;
+		width: 8rem;
+		padding: .5rem 0;
+		border-radius: 10000px;
+		transition: var(--std-transition);
+	}
+
+	.menu-list button:hover {
+		cursor: pointer;
+	}
+
+	.menu-list button.current {
+		cursor: pointer;
+		background-color: var(--primary-dark-blue);
+		border-color: var(--primary-dark-blue);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- triangle ---------- */
+	.triangle {
+		margin-left: 4.5rem;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 20px solid var(--primary-card-colour);
+		border-radius: 3px;
+	}
+
+	/* ---------- sign in section ---------- */
+	.sign-in-section {
+		background-color: var(--primary-card-colour);
+		padding: 1rem;
+		box-shadow: var(--std-box-shadow);
+	}
+
+	.create-account-section {
+		background-color: var(--primary-card-colour);
+		padding: 1rem;
+		box-shadow: var(--std-box-shadow);
+		display: none;
+	}
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	/* =================== hide desktop =================== */
+	.log-in-container.desktop {
+		display: none;
+	}
+
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+		text-align: center;
+	}
+
+	.log-in-container.mobile {
+		grid-column: span 6;
+	}
+
+	/* ---------- menu list ---------- */
+	.menu-list {
+		margin: 1rem 1rem .5rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+
+	.menu-list button {
+		background-color: var(--primary-form-colour);
+		border: 2px solid var(--primary-form-colour);
+		margin-right: 2rem;
+		width: 8rem;
+		padding: .5rem 0;
+		border-radius: 10000px;
+		transition: var(--std-transition);
+	}
+
+	.menu-list button:hover {
+		cursor: pointer;
+	}
+
+	.menu-list button.current {
+		cursor: pointer;
+		background-color: var(--primary-dark-blue);
+		border-color: var(--primary-dark-blue);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- triangle ---------- */
+	.triangle {
+		margin-left: 4.5rem;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 20px solid var(--primary-card-colour);
+		border-radius: 3px;
+	}
+
+	/* ---------- sign in section ---------- */
+	.sign-in-section {
+		background-color: var(--primary-card-colour);
+		box-shadow: var(--std-box-shadow);
+		padding: 1rem;
+	}
+
+	.create-account-section {
+		background-color: var(--primary-card-colour);
+		padding: 1rem;
+		box-shadow: var(--std-box-shadow);
+		display: none;
+	}
+
+
+	/* ---------- create account section ---------- */
+	.create-account-section {
+		background-color: var(--primary-card-colour);
+	}
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+
+	/* =================== hide mobile =================== */
+	.log-in-container.mobile {
+		display: none;
+	}
+
+	/* =================== main grid =================== */
+	.main-grid {
+		grid-template-columns: repeat(12, 1fr);
+		height: 100vh;
+
+		padding: 3rem 7rem;
+	}
+
+	/* =================== login container =================== */
+	.log-in-container.desktop {
+		grid-column: span 12;
+		position: relative;
+		height: 100%;
+		box-shadow: var(--std-box-shadow);
+	}
+
+	/* =================== LEFT AND RIGHT SIDES =================== */
+	/* =================== left side =================== */
+	.left-side {
+		position: absolute;
+
+		left: 0;
+		width: 70%;
+		height: calc(100vh - 6rem);
+
+		background-color: var(--primary-card-colour);
+		padding: 1rem;
+		border-radius: 10px 0px 0px 10px;
+	}
+
+	/* =================== right side =================== */
+	.right-side {
+		position: absolute;
+
+		right: 0;
+		width: 30%;
+		height: calc(100vh - 6rem);
+
+		background-color: var(--primary-dark-blue);
+		padding: 1rem;
+		border-radius: 0px 10px 10px 0px;
+	}
+
+	/* =================== ON LOAD =================== */
+	/* ---------- sign in container ---------- */
+	.sign-in-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		margin: auto;
+		height: 100%;
+	}
+
+	/* ---------- new user container ---------- */
+	.new-user-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		height: 100%;
+		text-align: center;
+	}
+
+	/* =================== ON SWITCH =================== */
+	/* ---------- sign up container (left) ---------- */
+	.sign-up-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		margin: auto;
+		height: 100%;
+
+		display: none;
+	}
+
+	/* ---------- old user container (right) ---------- */
+	.old-user-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		height: 100%;
+		text-align: center;
+		display: none;
+	}
+
+
+	/* =================== STYLES =================== */
+	/* ---------- sign in form ---------- */
+	#sign-in-form {
+		padding: 1rem 0;
+	}
+
+	#sign-up-form {
+		padding: 1rem 0;
+	}
+
+	/* ---------- forgot container style ---------- */
+	.underline-effect a {
+		color: var(--primary-white);
+		text-decoration: none;
+		font-size: 12px;
+		font-style: italic;
+		display: inline-block;
+		padding: .5rem 1rem;
+		position: relative;
+	}
+
+	.underline-effect a::after {
+		background: none repeat scroll 0 0 transparent;
+		bottom: 0;
+		content: "";
+		display: block;
+		height: 2px;
+		left: 50%;
+		position: absolute;
+		background: var(--primary-light-blue);
+		transition: width 0.3s ease 0s, left 0.3s ease 0s;
+		width: 0;
+	}
+
+	.underline-effect a:hover::after {
+		width: 100%; 
+		left: 0; 
+	}
+
+	/* ---------- logo container ---------- */
+	/* .logo-container.right * {
+		display: none;
+	} */
+
+	/* ---------- new user container ---------- */
+	.new-user-container h1 {
+		margin-bottom: 1rem;
+	}
+
+	.new-user-container h4 {
+		width: 30ch;
+		margin: 0 auto 2rem;
+	}
+
+	/* ---------- old user container ---------- */
+	.old-user-container h1 {
+		margin-bottom: 1rem;	
+	}
+
+	.old-user-container h4 {
+		width: 30ch;
+		margin: 0 auto 2rem;
+	}
+
+	/* ---------- submit button(s) ---------- */
+	#sign-in-submit-btn:hover {
+		cursor: pointer;
+		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	#sign-up-submit-btn:hover {
+		cursor: pointer;
+		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- go to sign up button ---------- */
+	#go-to-sign-up-btn {
+		background-color: var(--primary-dark-blue);
+		border: 3px solid var(--primary-light-blue);
+		padding: 1rem 2rem;
+		border-radius: 100px;
+		width: 14rem;
+		text-transform: uppercase;
+		transition: var(--std-transition);
+	}
+
+	#go-to-sign-up-btn:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		border: 3px solid var(--primary-light-blue);
+		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
+	/* ---------- go to sign in button ---------- */
+	#go-to-sign-in-btn {
+		background-color: var(--primary-dark-blue);
+		border: 3px solid var(--primary-light-blue);
+		padding: 1rem 2rem;
+		border-radius: 100px;
+		width: 14rem;
+		text-transform: uppercase;
+		transition: var(--std-transition);
+	}
+
+	#go-to-sign-in-btn:hover {
+		cursor: pointer;
+		background-color: var(--primary-input-colour);
+		border: 3px solid var(--primary-light-blue);
+		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		transition: var(--std-transition);
+	}
+
 }

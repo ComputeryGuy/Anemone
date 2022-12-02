@@ -1,6 +1,7 @@
 
 /* =================== imported fonts =================== */
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700;800&display=swap');
+/* Nunito Sans: Black, Bold, Semi-bold, Regular*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;900&display=swap');
 
 /* =================== global variables =================== */
 :root {
@@ -23,6 +24,16 @@
 
 	/* 50% of the primary-light-blue */
 	--primary-input-colour: rgba(107, 175, 255, 50%);
+
+	/* =================== Re-Style =================== */
+	--background-colour: #FFF9ED;
+	--font-colour: #22254C;
+	--accent-blue: #6488E5;
+	--accent-orange: #F9BE7D;
+	--accent-red: #E56372;
+	--accent-light-blue: #BAC4E1;
+	--sub-shadow: #D1D1D6;
+
 }
 
 /* =================== reset default styles =================== */
@@ -31,43 +42,42 @@
 	padding: 0;
 	box-sizing: border-box;
 	
-	font-family: 'M PLUS 1', sans-serif;
-	color: var(--primary-white);
+	font-family: 'Nunito Sans', sans-serif;
+	color: var(--font-colour);
 }
 
 /* =================== base page styles =================== */
 body {
-	background-color: var(--primary-background-colour);
+	background-color: var(--background-colour);
+}
+
+button {
+	font-family: 'Nunito Sans', sans-serif;
 }
 
 /* =================== font styles =================== */
 h1 {
-	/* extra bold */
-	font-weight: 800;
+	/* black */
+	font-weight: 900;
 	font-size: 30px;
 }
 
 h2 {
 	/* bold */
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 20px;
 }
 
 h3 {
-	/* medium */
-	font-weight: 500;
-	font-size: 16px;
-}
-
-h4 {
-	font-weight: 500;
-	font-size: 14px;
+	/* semi bold */
+	font-weight: 600;
+	font-size: 18px;
 }
 
 p {
 	/* regular */
 	font-weight: 400;
-	font-size: 12px;
+	font-size: 16px;
 }
 
 /* =================== main grid global =================== */
