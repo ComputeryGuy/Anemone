@@ -1,13 +1,14 @@
 /* =================== CONSTANTS =================== */
 button {
-	background-color: var(--primary-dark-blue);
 	padding: .5rem 1rem;
-	border: 2px solid var(--primary-dark-blue);
-	border-radius: var(--std-border-radius);
+	background-color: var(--font-colour);
+	border: 2px solid var(--font-colour);
+	border-radius: 1000px;
 	transition: var(--std-transition);
 }
 
 button a {
+	color: var(--primary-white);
 	text-decoration: none;
 }
 
@@ -28,22 +29,39 @@ button a {
 
 	margin: 0 auto;
 	padding: 1rem;
-	background-color: var(--primary-card-colour);
+
 	border-radius: var(--std-border-radius);
 	text-align: center;
-	min-width: 8rem;
+	min-width: 10rem;
 	height: 8rem;
 	transition: var(--std-transition);
-	box-shadow: var(--std-box-shadow);
+	
+}
+
+.info-square:nth-child(1n) {
+	background-color: var(--accent-blue);
+}
+
+.info-square:nth-child(2n) {
+	background-color: var(--accent-orange);
+}
+
+.info-square:nth-child(3n) {
+	background-color: var(--accent-red);
+}
+
+.info-square:nth-child(4n) {
+	background-color: var(--accent-light-blue);
 }
 
 .info-square h1 {
 	font-size: 54px;
+	color: var(--primary-white);
 }
 
 .info-square h3 {
 	font-size: 12px;
-	color: var(--primary-light-blue);
+	color: var(--primary-white);
 }
 
 /* ---------- tasks available ---------- */
@@ -51,12 +69,12 @@ button a {
 	padding: 1rem;
 	display: grid;
 	text-align: center;
-	background-color: var(--primary-card-colour);
+	background-color: var(--primary-white);
 	border-radius: var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
+	border: 2px solid var(--font-colour);
 }
 
-.todays-total-container p {
+.todays-total-container h2 {
 	grid-column: span 1;
 	font-size: 16px;
 	margin: auto auto;
@@ -65,8 +83,7 @@ button a {
 #todays-points {
 	grid-column: span 1;
 	font-size: 60px;
-	font-weight: 500;
-	color: var(--primary-light-blue);
+	color: var(--accent-red);
 }
 
 .go-to-tasks-container {
@@ -83,10 +100,10 @@ button a {
 
 /* ---------- recent notifications ---------- */
 .recent-notifs-container {
-	background-color: var(--primary-card-colour);
+	background-color: var(--primary-white);
 	border-radius: var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
-	padding: 1rem;
+	border: 2px solid var(--font-colour);
+	padding: 1.5rem;
 }
 
 .notifs-header {
@@ -120,7 +137,7 @@ button a {
 	grid-template-columns: min-content auto;
 	gap: 10px;
 	padding: .3rem .5rem;
-	border-left: var(--std-left-border);
+	border-left: 4px solid var(--accent-blue);
 	border-radius: 0 10px 10px 0;
 	margin-left: 1rem;
 	transition: var(--std-transition);
@@ -133,11 +150,15 @@ button a {
 }
 
 .user-profile img {
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 3rem;
+	height: 3rem;
 	border-radius: 100%;
-	border: 3px solid var(--primary-dark-blue);
+	border: 4px solid var(--accent-blue);
 	margin-bottom: .3rem;
+}
+
+.user-name {
+	font-size: 14px;
 }
 
 .user-post {
@@ -145,64 +166,13 @@ button a {
 }
 
 .user-post .time-date-header {
-	color: var(--primary-dark-blue);
+	color: var(--accent-blue);
+	font-size: 14px;
 }
 
 .user-post .notif-style {
-	color: var(--primary-grey);
+	color: var(--sub-shadow);
 }
-
-/* =================== right section =================== */
-.right-section {
-	background-color: var(--primary-card-colour);
-	border-radius: var(--std-border-radius) 0px 0px var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
-	padding: 1rem;
-
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: min-content min-content;
-	gap: 20px;
-	height: 100%;
-}
-
-/* ---------- today's events ---------- */
-.event-container h2 {
-	margin-bottom: 1rem;
-}
-
-.a-event {
-	grid-column: span 1;
-	border-left: var(--std-left-border);
-	border-radius: 0 10px 10px 0;
-	padding: 0.3rem;
-	padding-left: .5rem;
-	transition: var(--std-transition);
-	margin-left: 1rem;
-}
-
-/* selects all elements except the last one */
-.a-event:not(:last-child) {
-	margin-bottom: 1rem;
-}
-
-.a-event p {
-	color: var(--primary-grey);;
-}
-
-/* ---------- go to calendar btn ---------- */
-.go-to-cal-container {
-	grid-column: span 1;
-	display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    flex-wrap: wrap;
-}
-
-#go-to-cal-btn {
-	font-size: 12px;
-}
-
 
 /* =================== primary media query =================== */
 
@@ -223,10 +193,6 @@ button a {
 	.middle-section {
 		grid-column: span 4;
 	}
-	
-	.right-section {
-		grid-column: span 4;
-	}
 
 	.info-square-container {
 		grid-template-columns: repeat(2, 1fr);
@@ -236,6 +202,7 @@ button a {
 	.todays-total-container {
 		display: grid;
 		grid-template-rows: repeat(4, min-content);
+		gap: 10px;
 	}
 	
 }
@@ -283,8 +250,8 @@ button a {
 
 	button:hover {
 		cursor: pointer;
-		background-color: var(--primary-input-colour);
-		border-color: var(--primary-light-blue);
+		background-color: var(--accent-blue);
+		/* border-color: var(--accent-blue); */
 		transition: var(--std-transition);
 	}
 
@@ -299,13 +266,8 @@ button a {
 	}
 	
 	.middle-section {
-		grid-column: span 8;
-		padding: 1rem;
-	}
-	
-	.right-section {
-		grid-column: span 3;
-		height: 100vh;
+		grid-column: span 11;
+		padding: 2rem;
 	}
 
 	/* ---------- middle section ---------- */

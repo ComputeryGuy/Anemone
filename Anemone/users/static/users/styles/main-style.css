@@ -15,16 +15,15 @@
 	--primary-background-colour: #212229;
 	--primary-card-colour: #30353f;
 
-	--std-border-radius: 10px;
 	--std-left-border: 3px solid var(--primary-light-blue);
 	--std-transition: all .3s ease-in-out;
 	--std-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 45%);
-
+	
 	--primary-form-colour: #005FCF;
-
+	
 	/* 50% of the primary-light-blue */
 	--primary-input-colour: rgba(107, 175, 255, 50%);
-
+	
 	/* =================== Re-Style =================== */
 	--background-colour: #FFF9ED;
 	--font-colour: #22254C;
@@ -33,6 +32,7 @@
 	--accent-red: #E56372;
 	--accent-light-blue: #BAC4E1;
 	--sub-shadow: #D1D1D6;
+	--std-border-radius: 30px;
 
 }
 

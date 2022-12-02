@@ -56,10 +56,10 @@
 			<!-- creating a household -->
 			<div class="create-selected-container">
 				<h1>Welcome to Phourtnight!</h1>
-				<h4>
+				<p>
 					It seems you trying to create a household. <br>
 					Click the button below to generate a pin and share with your roommates.
-				</h4>
+				</p>
 
 				<form action="" method="post">
 					<button type="submit" id="gen-pin-btn">Generate Pin</button>
@@ -74,8 +74,8 @@
 				</div>
 
 				<div class="your-pin-container">
-					<h4>Thanks for waiting! <br> Your household pin is:</h4>
-					<h4><span id="your_house">{{ household_pin }}</span></h4>
+					<p>Thanks for waiting! <br> Your household pin is:</p>
+					<p><span id="your_house">{{ household_pin }}</span></p>
 				</div>
 
 				<div class="contain">
@@ -91,10 +91,10 @@
 			<!-- joining a household -->
 			<div class="join-selected-container">
 				<h1>Welcome to Phourtnight!</h1>
-				<h4>
+				<p>
 					It seems you are trying to join a household. <br>
 					To join your house, type in your house pin below.
-				</h4>
+				</p>
 
 				<form action="" method="post" id="house-pin-form">
 					{% csrf_token %}
