@@ -1,45 +1,44 @@
 
 /* =================== task =================== */
 .a-task {
-	background-color: var(--primary-card-colour);
-	padding: .8rem;
+	background-color: var(--primary-white);
+	padding: 1.5rem;
 	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-card-colour);
-	box-shadow: var(--std-box-shadow);
+	border: 2px solid var(--font-colour);
 	margin-bottom: 1rem;
-	
+	transition: var(--std-transition);
 }
 
 /* for claimed tasks only */
 .a-task.claimed:hover {
 	cursor: pointer;
-	border: 2px dashed rgba(0, 111, 242, 50%);
+	border: 2px dashed var(--accent-blue);
+	transition: var(--std-transition);
 }
 
+/* ---------- task description container ---------- */
 .task-description-container {
 	margin-bottom: 1rem;
-}
-
-.task-description-container h3 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-/* bell icon */
-.task-description-container #reminder {
-	font-size: 20px;
-	color: var(--primary-light-blue);
 }
 
 .task-description-container *:not(:last-child) {
 	margin-bottom: .5rem;
 }
 
+.task-description.bid {
+	font-size: 14px;
+	color: var(--accent-darker-grey);
+}
+
+#bidtext {
+	color: var(--accent-red);
+}
+
+/* ---------- task priority container ---------- */
 .task-priority-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-items: center;
 	margin-bottom: 1rem;
 }
@@ -74,64 +73,50 @@
 }
 
 /* =================== task user image =================== */
+.task-user-img {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .task-user-img img {
-	width: 2rem;
-	height: 2rem;
+	width: 3rem;
+	height: 3rem;
 	border-radius: 100%;
+	border: 2px solid var(--accent-blue);
+}
+
+.task-horz-line {
+	border: 1px solid var(--accent-red);
 }
 
 /* =================== task stats =================== */
 .task-stats {
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 }
 
-.task-stats * {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+.task-stats div p {
 	font-size: 12px;
-	color: #b0b0b0;
+	color: var(--accent-darker-grey);
 }
 
-.task-stats-top {
-	margin-bottom: .5rem;
-}
-
-.task-stats-top div span,
-.task-stats-bottom div span {
+.task-stats div span {
 	margin-left: .3rem;
-	color: white;
-	font-size: 10px;
+	color: var(--accent-blue);
 }
 
-.task-stats-top {
-	justify-content: space-between;
-}
 
 /* =================== task stats -- unclaimed =================== */
 
 .bid-container input[type=number] {
-	color: white;
+	background-color: var(--accent-grey);
+	border: 2px solid var(--accent-grey);
+	color: var(--font-colour);
+	border-radius: 10px;
+	
 }
 
-.bid-container intput[type=number]:focus {
-	border: 2px solid var(--primary-white);
-}
-.task-stats-bottom {
-	justify-content: space-between;
-}
-
-#submit-bid-btn {
-	padding: .5rem 1rem;
-	background-color: var(--primary-dark-blue);
-	border: 2px solid var(--primary-dark-blue);
-	border-radius: var(--std-border-radius);
-	color: var(--primary-white);
-	transition: var(--std-transition);
-}
-
-#submit-bid-btn:hover {
-	cursor: pointer;
-	background-color: rgba(0, 111, 242, 50%);
-	transition: var(--std-transition);
+.bid-container input[type=number]:focus {
+	border-color: var(--font-colour);
 }

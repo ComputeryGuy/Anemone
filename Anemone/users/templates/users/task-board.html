@@ -164,24 +164,6 @@
 				</form>
 			</div>
 	
-			<!-- TODO: task information -->
-			<div id="task-info-overlay" style="display: none;">
-	
-				<div class="task-information-container">
-	
-					<!-- name -->
-	
-					<!-- description -->
-	
-					<!-- sub tasks -- as list -->
-	
-					<!-- due date -->
-	
-					<!-- if repeats in sentence show how repeatsl;kj., -->
-				</div>
-	
-			</div>
-	
 			<section class="left-section">
 	
 				<nav id="nav-sidebar">
@@ -315,7 +297,7 @@
 									<p class="task-description">
 										{{ task.body }}
 									</p>
-									<p class="task-description" , id="bidtext{{ task.id }}">
+									<p class="task-description bid" , id="bidtext{{ task.id }}">
 										Current bid: {{ task.points }}
 									</p>
 								</div>
@@ -399,31 +381,27 @@
 	
 								<div class="task-stats">
 	
-									<div class="task-stats-top">
-	
-										<div class="task-points">
-											<p>
-												Points:
-												<span id="current-points">{{ task.points }}</span>
-											</p>
-	
-										</div>
-										<!-- not currently in scope
-										<div class="task-sub-tasks">
-											<p>Subtasks:
-												<span id="total-sub-tasks">1</span>
-											</p>
-										</div>
-										-->
+									<div class="task-points">
+										<p>
+											Points:
+											<span id="current-points">{{ task.points }}</span>
+										</p>
+
 									</div>
-	
-									<div class="task-stats-bottom">
-										<div class="task-due-date">
-											<p>
-												Due:
-												<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
-											</p>
-										</div>
+									
+
+									<div class="task-bid-ends">
+										<p>
+											Bid Ends:
+											<span id="bid-ends">{{ task.due_date + 1|date:'l, F d, Y' }}</span>
+										</p>
+									</div>
+									
+									<div class="task-due-date">
+										<p>
+											Due:
+											<span id="due-date">{{ task.due_date|date:'h:i A | l, F d, Y' }}</span>
+										</p>
 									</div>
 								</div>
 							</div>

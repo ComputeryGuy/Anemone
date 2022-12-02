@@ -15,7 +15,6 @@
 	--primary-card-colour: #30353f;
 	
 	--std-left-border: 3px solid var(--primary-light-blue);
-	--std-transition: all .3s ease-in-out;
 	--std-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 45%);
 	
 	--primary-form-colour: #005FCF;
@@ -33,6 +32,7 @@
 	--accent-grey: #D1D1D6;
 	--accent-darker-grey: #b0b0b0;
 	--std-border-radius: 30px;
+	--std-transition: all .3s ease-in-out;
 
 }
 
