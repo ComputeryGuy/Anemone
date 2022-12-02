@@ -28,7 +28,7 @@
 
 						<!-- dashboard -->
 						<li class="list-item">
-							<a href="." class="nav-link desktop-current">
+							<a href="{% url 'dashboard' %}" class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
@@ -55,6 +55,14 @@
 							<a href="{% url 'leaderboard' %}" class="nav-link">
 								<span class="material-symbols-rounded">leaderboard</span>
 								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+						<!-- lootbox -->
+						<li class="list-item">
+							<a href="{% url 'lootbox' %}" class="nav-link">
+								<span class="material-symbols-rounded">redeem</span>
+								<span class="link">Lootbox</span>
 							</a>
 						</li>
 

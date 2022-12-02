@@ -167,7 +167,7 @@
 			<section class="left-section">
 	
 				<nav id="nav-sidebar">
-	
+
 					<div class="logo-container">
 						<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
 					</div>
@@ -176,28 +176,23 @@
 	
 						<ul class="list">
 	
+							<!-- dashboard -->
 							<li class="list-item">
-	
 								<a href="{% url 'dashboard' %}" class="nav-link">
-									<span class="material-symbols-rounded">dashboard</span>
+									<span class="material-symbols-rounded mobile-current">dashboard</span>
 									<span class="link">Dashboard</span>
 								</a>
 							</li>
 	
+							<!-- tasks -->
 							<li class="list-item">
 								<a href="{% url 'taskboard' %}" class="nav-link desktop-current">
-									<span class="material-symbols-rounded mobile-current">task_alt</span>
+									<span class="material-symbols-rounded">task_alt</span>
 									<span class="link">Tasks</span>
 								</a>
 							</li>
 	
-							<li class="list-item">
-								<a href="." class="nav-link">
-									<span class="material-symbols-rounded">calendar_month</span>
-									<span class="link">Calendar</span>
-								</a>
-							</li>
-	
+							<!-- notifications/bulletin -->
 							<li class="list-item">
 								<a href="{% url 'bulletin' %}" class="nav-link">
 									<span class="material-symbols-rounded">notifications</span>
@@ -205,6 +200,7 @@
 								</a>
 							</li>
 	
+							<!-- leaderboard -->
 							<li class="list-item">
 								<a href="{% url 'leaderboard' %}" class="nav-link">
 									<span class="material-symbols-rounded">leaderboard</span>
@@ -212,42 +208,44 @@
 								</a>
 							</li>
 	
-							<li class="list-item mobile">
-								<a href="./settings.html" class="nav-link">
-									<span class="material-symbols-rounded">settings</span>
-									<span class="link">Settings</span>
-								</a>
-							</li>
-	
-							<li class="list-item mobile">
-								<a href="{% url 'logout' %}" class="nav-link">
-									<span class="material-symbols-rounded">logout</span>
-									<span class="link">Logout</span>
+							<!-- lootbox -->
+							<li class="list-item">
+								<a href="{% url 'lootbox' %}" class="nav-link">
+									<span class="material-symbols-rounded">redeem</span>
+									<span class="link">Lootbox</span>
 								</a>
 							</li>
 	
 						</ul>
 	
+	
 						<div class="list-bottom-content">
 	
+							<!-- settings -->
 							<li class="list-item">
-								<a href="./settings.html" class="nav-link">
+								<a href="#" class="nav-link">
 									<span class="material-symbols-rounded">settings</span>
 									<span class="link">Settings</span>
 								</a>
 							</li>
 	
+							<!-- game guide -->
+							<li class="list-item">
+								<a href="#" class="nav-link">
+									<span class="material-symbols-rounded">help</span>
+									<span class="link">Game Guide</span>
+								</a>
+							</li>
+	
+							<!-- logout -->
 							<li class="list-item">
 								<a href="{% url 'logout' %}" class="nav-link">
 									<span class="material-symbols-rounded">logout</span>
 									<span class="link">Logout</span>
 								</a>
 							</li>
-	
 						</div>
-	
 					</div>
-	
 				</nav>
 	
 			</section>
