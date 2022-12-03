@@ -417,22 +417,30 @@
 	/* sign in button */
 	#sign-in-submit-btn {
 		background-color: var(--font-colour);
+		border: 2px solid var(--font-colour);
 		width: 20rem
 	}
 
 	/* sign up button */
 	#sign-up-submit-btn {
 		background-color: var(--font-colour);
+		border: 2px solid var(--font-colour);
 		width: 20rem;
 	}
 
 	#sign-in-submit-btn:hover {
 		cursor: pointer;
+		background-color: var(--primary-white);
+		border-color: var(--font-colour);
+		color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 
 	#sign-up-submit-btn:hover {
 		cursor: pointer;
+		background-color: var(--primary-white);
+		border-color: var(--font-colour);
+		color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 
