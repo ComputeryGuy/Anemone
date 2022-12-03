@@ -82,7 +82,7 @@
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 100%;
-	border: 2px solid var(--accent-blue);
+	border: 3px solid var(--accent-blue);
 }
 
 #user-name {

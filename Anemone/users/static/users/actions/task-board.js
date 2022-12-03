@@ -122,7 +122,6 @@ $(document).ready(function () {
 	$("#todays-date").html(newOutput);
 	
 	/* =================== SHOW NUMBER OF DAYS LEFT BEFORE DUE DATE =================== */
-	// TODO: here
 
 	$("#end_date").change(
 		function (e) { 
@@ -148,20 +147,20 @@ $(document).ready(function () {
 	
 
 	/* =================== SHOW AND HIDE REPEAT INFORMATION ON FORM =================== */
-	// if "Repeats?" is checked then show the expaned info about repeat
-	$(".repeat-toggle-container #repeat_toggle").click(
-		function () {
-			if ( $(this).prop("checked") == true) {
-				// alert ("Checkbox is checked.")
+	// // if "Repeats?" is checked then show the expaned info about repeat
+	// $(".repeat-toggle-container #repeat_toggle").click(
+	// 	function () {
+	// 		if ( $(this).prop("checked") == true) {
+	// 			// alert ("Checkbox is checked.")
 				
-				// show the extra info regarding repeats
-				$(".repeat-expanded").show(); 
-			}
-			else {			
-				// hide repeat extra information
-				$(".repeat-expanded").hide();
-			}
-	});
+	// 			// show the extra info regarding repeats
+	// 			$(".repeat-expanded").show(); 
+	// 		}
+	// 		else {			
+	// 			// hide repeat extra information
+	// 			$(".repeat-expanded").hide();
+	// 		}
+	// });
 
 	/* =================== CLOSE FORM ON SUBMIT =================== */
 	// make the submit button on the form close the form

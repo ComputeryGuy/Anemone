@@ -153,7 +153,7 @@ button a {
 	width: 3rem;
 	height: 3rem;
 	border-radius: 100%;
-	border: 2px solid var(--accent-blue);
+	border: 3px solid var(--accent-blue);
 	margin-bottom: .3rem;
 }
 
@@ -165,13 +165,9 @@ button a {
 	max-width: 44rem;
 }
 
-.user-post .time-date-header {
-	color: var(--accent-blue);
+.user-post .time-date-header, .user-post .notif-style  {
+	color: var(--accent-darker-grey);
 	font-size: 14px;
-}
-
-.user-post .notif-style {
-	color: var(--accent-grey);
 }
 
 /* =================== primary media query =================== */
