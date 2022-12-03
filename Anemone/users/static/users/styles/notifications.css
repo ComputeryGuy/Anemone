@@ -74,6 +74,7 @@
 	background-color: var(--accent-light-blue);
 	border-radius: var(--std-border-radius);
 	padding: .5rem 0;
+	text-align: center;
 }
 
 .row.header h3:not(:last-child) {

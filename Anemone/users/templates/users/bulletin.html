@@ -37,6 +37,7 @@
 
 	<!-- include navbar -->
 	<section class="left-section">
+
 		<nav id="nav-sidebar">
 
 			<div class="logo-container">
@@ -57,7 +58,7 @@
 
 					<!-- tasks -->
 					<li class="list-item">
-						<a href="{% url 'taskboard' %}" class="nav-link desktop-current">
+						<a href="{% url 'taskboard' %}" class="nav-link">
 							<span class="material-symbols-rounded">task_alt</span>
 							<span class="link">Tasks</span>
 						</a>
@@ -65,7 +66,7 @@
 
 					<!-- notifications/bulletin -->
 					<li class="list-item">
-						<a href="{% url 'bulletin' %}" class="nav-link">
+						<a href="{% url 'bulletin' %}" class="nav-link desktop-current">
 							<span class="material-symbols-rounded">notifications</span>
 							<span class="link">Notifications</span>
 						</a>
@@ -210,5 +211,5 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{% static " users/actions/notifications.js"%}"></script>
+<script src="{% static 'users/actions/notifications.js' %}"></script>
 {% endblock %}
