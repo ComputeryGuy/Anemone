@@ -146,6 +146,8 @@
 				</div>
 			</div>
 
+			<!-- FIXME: if the window expands the chart will expand
+			if the window shinks the chart will not shrink; messes up the grid -->
 			<div class="bar-chart-container">
 				<h2 id="bar-chart-title">Progress Chart</h2>
 
@@ -160,18 +162,18 @@
 
 			<div class="user-container">
 				<div class="user-image-container">
-					<img src="" alt="">
+					<img src="{{ profile.profile_picture }}" alt="">
 					<h3 class="user-name-container">
 						<span id="firstname">{{ profile.first_name }}</span>
-						<span id="adjective">"INSERT HERE"</span>
+						<span id="adjective">"{{ profile.nickname }}"</span>
 						<span id="lastname">{{ profile.last_name }}</span>
 					</h3>
 				</div>
 
 				<div class="user-stats-container">
-					<h3 id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></h3>
-					<h3 id="my-rank">Rank: <span id="my-rank-numb">1</span></h3>
-					<h3 id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></h3>
+					<p id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></p>
+					<p id="my-rank">Rank: <span id="my-rank-numb">INSERT HERE</span></p>
+					<p id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></p>
 				</div>
 			</div>
 
@@ -183,7 +185,7 @@
 					<div class="user-kudo-container">
 
 						<div class="user-kudo">
-							<p>{{ profile.first_name}} {{ profile.first_name }}</p>
+							<p>{{ profile.first_name}} {{ profile.last_name }}</p>
 
 							<button class="kudos-btn">
 								<span class="material-symbols-rounded">thumb_up</span>
@@ -222,6 +224,7 @@
 			
 		</section>
 	</div>
+
 	<script type="text/javascript">
 		$(document).ready(function () {
 

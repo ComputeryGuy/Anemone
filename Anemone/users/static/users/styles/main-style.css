@@ -83,7 +83,7 @@ p {
 /* =================== main grid global =================== */
 .main-grid {
 	display: grid;
-	grid-template-columns: repeat(12, 1fr);
+	grid-template-columns: min-content repeat(11, 1fr);
 	gap: 10px;
 }
 

@@ -1,9 +1,7 @@
 /* =================== CONSTANTS =================== */
 .middle-section {
-	grid-column: span 8;
-	display: grid;
+	padding: 0 1rem;
 }
-
 /* ---------- leaderboard container ---------- */
 .leaderboard-container {
 	margin-bottom: 1rem;
@@ -24,7 +22,7 @@
 }
 
 .table-row.header {
-	padding: 0.5rem 0;
+	padding: 0.5rem 0.2rem;
 	background-color: var(--accent-light-blue);
 	border-radius: 10000px;
 }
@@ -45,6 +43,7 @@
 .table-row.data {
 	border: 2px solid var(--accent-grey);
 	border-radius: 10000px;
+	padding: .2rem;
 }
 
 .table-row.data .name {
@@ -79,7 +78,6 @@
 
 /* ---------- bar chart ---------- */
 .bar-chart-container {
-	position: relative;
 	margin: 1rem 0;
 }
 
@@ -94,25 +92,17 @@
 }
 
 #chart {
-	width: 100%;
 	padding: 1.5rem;
 }
 
 /* =================== right section =================== */
 .right-section {
-	grid-column: span 3;
 	text-align: center;
-	padding: 1rem 1rem 1rem 2rem;
-
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: min-content min-content;
-	gap: 10px;
+	padding: 1rem;
 }
 
 /* ---------- user stats container ---------- */
 .user-container {
-	grid-row: span 1;
 	padding: 1rem;
 	background-color: var(--primary-white);
 	border-radius: var(--std-border-radius);
@@ -227,16 +217,36 @@
 	.right-section {
 		grid-row: 1;
 		grid-column: span 4;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content min-content;
+		gap: 10px;
+	}
+
+	.user-container {
+		grid-column: span 1;
+	}
+
+	.kudos-container {
+		grid-column: span 1;
 	}
 
 	.middle-section {
 		grid-row: 2;
 		grid-column: span 4;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content;
 	}
 
-	.chart-container {
-		position: relative;
-		width: 99%;
+	.leaderboard-container {
+		grid-column: span 1;
+	}
+
+	.bar-chart-container {
+		display: none;
 	}
 }
 
@@ -257,18 +267,37 @@
 	.right-section {
 		grid-row: 1;
 		grid-column: span 6;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content min-content;
+		gap: 10px;
+	}
+
+	.user-container {
+		grid-column: span 1;
+	}
+
+	.kudos-container {
+		grid-column: span 1;
 	}
 
 	.middle-section {
 		grid-row: 2;
 		grid-column: span 6;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content;
 	}
 
-	.chart-container {
-		position: relative;
-		width: 99%;
+	.leaderboard-container {
+		grid-column: span 1;
 	}
 
+	.bar-chart-container {
+		display: none;
+	}
 }
 
 /* =================== DESKTOP AND BEYOND =================== */
@@ -282,13 +311,36 @@
 	.middle-section {
 		grid-column: span 8;
 		margin-top: 3rem;
-		grid-template-rows: repeat(2, min-content);
+		
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content min-content;
 		gap: 10px;
 	}
 
-	.chart-container {
-		position: relative;
-		width: 100%;
+	.leaderboard-container {
+		grid-column: span 1;
+	}
+
+	.bar-chart-container {
+		grid-column: span 1;
+	}
+
+	.right-section {
+		grid-column: span 3;
+
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content min-content;
+		gap: 10px;
+	}
+
+	.user-container {
+		grid-column: span 1;
+	}
+
+	.kudos-container {
+		grid-column: span 1;
 	}
 
 	.kudos-btn:hover {
