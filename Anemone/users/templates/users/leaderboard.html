@@ -49,52 +49,68 @@
 
 					<ul class="list">
 
+						<!-- dashboard -->
 						<li class="list-item">
 							<a href="{% url 'dashboard' %}" class="nav-link">
-								<span class="material-symbols-rounded">dashboard</span>
+								<span class="material-symbols-rounded mobile-current">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
 						</li>
 
+						<!-- tasks -->
 						<li class="list-item">
 							<a href="{% url 'taskboard' %}" class="nav-link">
 								<span class="material-symbols-rounded">task_alt</span>
 								<span class="link">Tasks</span>
 							</a>
 						</li>
-		
-						<li class="list-item">
-							<a href="." class="nav-link">
-								<span class="material-symbols-rounded">calendar_month</span>
-								<span class="link">Calendar</span>
-							</a>
-						</li>
 
+						<!-- notifications/bulletin -->
 						<li class="list-item">
 							<a href="{% url 'bulletin' %}" class="nav-link">
 								<span class="material-symbols-rounded">notifications</span>
-								<span class="link">
-									Notifications 
-								</span>
+								<span class="link">Notifications</span>
 							</a>
 						</li>
 
+						<!-- leaderboard -->
 						<li class="list-item">
 							<a href="{% url 'leaderboard' %}" class="nav-link desktop-current">
-								<span class="material-symbols-rounded mobile-current">leaderboard</span>
+								<span class="material-symbols-rounded">leaderboard</span>
 								<span class="link">Leaderboard</span>
+							</a>
+						</li>
+
+						<!-- lootbox -->
+						<li class="list-item">
+							<a href="{% url 'lootbox' %}" class="nav-link">
+								<span class="material-symbols-rounded">redeem</span>
+								<span class="link">Lootbox</span>
 							</a>
 						</li>
 
 					</ul>
 
+
 					<div class="list-bottom-content">
+
+						<!-- settings -->
 						<li class="list-item">
-							<a href="./settings.html" class="nav-link">
+							<a href="#" class="nav-link">
 								<span class="material-symbols-rounded">settings</span>
 								<span class="link">Settings</span>
 							</a>
 						</li>
+
+						<!-- game guide -->
+						<li class="list-item">
+							<a href="#" class="nav-link">
+								<span class="material-symbols-rounded">help</span>
+								<span class="link">Game Guide</span>
+							</a>
+						</li>
+
+						<!-- logout -->
 						<li class="list-item">
 							<a href="{% url 'logout' %}" class="nav-link">
 								<span class="material-symbols-rounded">logout</span>
@@ -102,7 +118,6 @@
 							</a>
 						</li>
 					</div>
-					
 				</div>
 			</nav>
 		</section>
@@ -115,10 +130,11 @@
 				<div class="table-container">
 
 					<div class="table-row header">
-						<h4>Rank</h4>
-						<h4>Name</h4>
-						<h4>Score</h4>
+						<h3>Rank</h3>
+						<h3>Name</h3>
+						<h3>Score</h3>
 					</div>
+
 					{% for member in members_by_pts %}
 					<div class="table-row data">
 						<p class="rank">{{ forloop.counter }}</p>
@@ -126,34 +142,6 @@
 						<p class="score">{{ member.fortnight_xp }}</p>
 					</div>
 					{% endfor %}
-<!--
-					<div class="table-row data">
-						<p class="rank">02</p>
-						<p class="name">Name</p>
-						<p class="score">1000</p>
-					</div>
-					<div class="table-row data">
-						<p class="rank">03</p>
-						<p class="name">Name</p>
-						<p class="score">100</p>
-					</div>
-					<div class="table-row data">
-						<p class="rank">04</p>
-						<p class="name">Name</p>
-						<p class="score">10</p>
-					</div>
-						
-					<div class="table-row data">
-						<p class="rank">05</p>
-						<p class="name">Name</p>
-						<p class="score">1</p>
-					</div>
-					<div class="table-row data">
-						<p class="rank">06</p>
-						<p class="name">Name</p>
-						<p class="score">1</p>
-					</div>
--->
 					
 				</div>
 			</div>
@@ -172,39 +160,73 @@
 
 			<div class="user-container">
 				<div class="user-image-container">
-					<img src="./assets/pictures/nrd-y3kC_7Qhmjk-unsplash.jpg" alt="">
-					<h4 id="user-nme">{{ profile.first_name }}</h4>
+					<img src="" alt="">
+					<h3 class="user-name-container">
+						<span id="firstname">{{ profile.first_name }}</span>
+						<span id="adjective">"INSERT HERE"</span>
+						<span id="lastname">{{ profile.last_name }}</span>
+					</h3>
 				</div>
 
 				<div class="user-stats-container">
-					<h4 id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></h4>
-					<h4 id="my-rank">Rank: <span id="my-rank-numb">1</span></h4>
-					<h4 id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></h4>
+					<h3 id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></h3>
+					<h3 id="my-rank">Rank: <span id="my-rank-numb">1</span></h3>
+					<h3 id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></h3>
 				</div>
 			</div>
-			<!--
-			<div class="my-labels">
-				<h4>My Labels:</h4>
 
-				<div class="labels-table">
-					<p>"The Best Cleaner" </p>
-					<p>"The Greatest Roommate"</p>
-					<p>"Trash Thrower" </p>
-					<p>"Legendary Swifer"</p>
+			<div class="kudos-container">
+				<h3>Give Some Kudos</h3>
+
+				<div class="user-kudos-list">
+
+					<div class="user-kudo-container">
+
+						<div class="user-kudo">
+							<p>{{ profile.first_name}} {{ profile.first_name }}</p>
+
+							<button class="kudos-btn">
+								<span class="material-symbols-rounded">thumb_up</span>
+							</button>
+
+							<p>
+								+<span class="total-clicks">0</span>pts
+							</p>
+						</div>
+
+						<div class="end-kudos-container">
+							<p>Uh oh, looks like you've ran out of kudos! Try again tommarrow.</p>
+						</div>
+					</div>
+
+					<!-- <div class="user-kudo-container">
+
+						<div class="user-kudo">
+							<p>Karen ???</p>
+							<button class="kudos-btn">
+								<span class="material-symbols-rounded">thumb_up</span>
+							</button>
+							<p>
+								+<span class="total-clicks">0</span>pts
+							</p>
+						</div>
+
+						<div class="end-kudos-container">
+							<p>Uh oh, looks like you've ran out of kudos! Try again tommarrow.</p>
+						</div>
+					</div> -->
 
 				</div>
+				
 			</div>
-			-->
 			
 		</section>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function () {
 
-			
+			/* =================== LEADERBOARD CHART =================== */
 			var chart = $("#chart");
-			// var ls = chart.getContext('2d'); -- why does this break?
-
 
 			// labels for each data
 			const labels = [
@@ -218,12 +240,12 @@
 				labels: labels,
 				datasets: [{
 					label: 'This Fortnight\'s Leaderboard',
-					backgroundColor: ['#BB86FC', '#6bafff', '#03DAC6', '#000000'],
+					backgroundColor: ['#6488E5', '#F9BE7D', '#E56372', '#BAC4E1', '#B0B0B0'],
 					data: [
-					       {% for member in members_by_name %}
+						{% for member in members_by_name %}
 						{{ member.fortnight_xp }}, 
-					       {% endfor %}
-                                              ],
+						{% endfor %}
+					],
 				}]
 			};
 
@@ -240,14 +262,14 @@
 					scales: {
 						yAxes: [{
 							ticks: {
-								fontColor: "white",
+								fontColor: "#22254C",
 								beginAtZero: true
 							}
 						}],
 
 						xAxes: [{
 							ticks: {
-								fontColor: "white",
+								fontColor: "#22254C",
 								beginAtZero: true
 							}
 						}]
@@ -259,6 +281,27 @@
 			// display the chart
 			const myChart = new Chart (chart, config);
 			
+			/* =================== UPDATE # OF KUDOS POINTS PER USER =================== */
+			var kudos_count = 0;
+
+			// make the count not for only the selected user
+			$(".kudos-btn").click (
+				function (e) { 
+					e.preventDefault();
+					
+					if (kudos_count < 10 ) {
+						kudos_count = kudos_count + 1;
+						$(".total-clicks").html(kudos_count);
+					}
+					else {
+						$(".kudos-btn").attr("disabled", "disabled");
+						$(".kudos-btn").css("background-color", "#D1D1D6");
+						$(".kudos-btn").css("border-color", "#D1D1D6");
+						$(".end-kudos-container").fadeIn();
+					}
+				}
+			);
+
 		});
 	</script>
 </body>
