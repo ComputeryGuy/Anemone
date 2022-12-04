@@ -70,6 +70,6 @@ $(document).ready(function () {
 	((''+day).length<2 ? '0' : '') + day;
 
 	// restricts due date input to only selecting dates after today's date
-	// $('#end_date').attr('min', maxDate);
+	$('#notif-deadline').attr('min', maxDate);
 
 });

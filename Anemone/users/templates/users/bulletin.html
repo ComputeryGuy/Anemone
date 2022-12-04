@@ -11,6 +11,7 @@
 
 {% block content %}
 <div id="add-notif-form-container">
+
 	<div class="exit-btn-container">
 		<button id="exit-btn">
 			<span class="material-symbols-rounded">close</span>
@@ -165,9 +166,8 @@
 					{% for bulletin in bulletins %}
 					<div class="a-notification">
 						<div class="user-profile">
-							<img src="{% static '/users/assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg' %}"
-								alt="">
-							<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
+							<img src="{% static '/users/assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg' %}" alt="">
+							<p class="user-name">{{ bulletin.profile.first_name }}</p>
 						</div>
 						<div class="user-post">
 							<p class="time-date-header">Posted: 

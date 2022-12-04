@@ -23,6 +23,10 @@ input[type=date] {
 	padding-left: .8rem;
 }
 
+label {
+	font-size: 14px;
+}
+
 /* ---------- notification form style---------- */
 #add-notif-form-container {
 	position: absolute;
@@ -81,6 +85,20 @@ input[type=date] {
 }
 
 /* styling for form HERE */
+#notif-title {
+	width: 100%;
+	padding: .5rem;
+	margin-bottom: 1rem;
+}
+
+#notif-detail {
+	padding: .5rem;
+	margin-bottom: 1rem;
+}
+
+#notif-deadline {
+	width: 85%;
+}
 
 /* ---------- submit form ---------- */
 #submit-btn {
@@ -90,7 +108,7 @@ input[type=date] {
 
 	padding: .5rem;
 	width: 100%;
-
+	margin-top: 2rem;
 	transition: var(--std-transition);
 }
 

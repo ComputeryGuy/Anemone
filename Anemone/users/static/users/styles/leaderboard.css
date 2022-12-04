@@ -93,6 +93,8 @@
 
 #chart {
 	padding: 1.5rem;
+	max-width: 808px;
+	max-height: 380px;
 }
 
 /* =================== right section =================== */
@@ -318,10 +320,12 @@
 		gap: 10px;
 	}
 
+	/* ---------- leaderboard ---------- */
 	.leaderboard-container {
 		grid-column: span 1;
 	}
 
+	/* ---------- bar chart ---------- */
 	.bar-chart-container {
 		grid-column: span 1;
 	}
@@ -335,10 +339,12 @@
 		gap: 10px;
 	}
 
+	/* ---------- user information container ---------- */
 	.user-container {
 		grid-column: span 1;
 	}
 
+	/* ---------- kudos ---------- */
 	.kudos-container {
 		grid-column: span 1;
 	}

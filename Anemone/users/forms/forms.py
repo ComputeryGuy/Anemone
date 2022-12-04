@@ -9,9 +9,9 @@ from users.models import Household, Profile, Task
 
 
 class BulletinForm(forms.Form):
-    title = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Title'}))
-    bulletin_body = forms.CharField(max_length=500, label="", widget=forms.Textarea(attrs={'placeholder':'Detail', 'rows':3}))
-    expire_date = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date'}))
+    title = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Title', 'id':'notif-title'}))
+    bulletin_body = forms.CharField(max_length=500, label="", widget=forms.Textarea(attrs={'placeholder':'Detail', 'rows':3, 'cols':70, 'id':'notif-detail'}))
+    expire_date = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date', 'id':'notif-deadline'}))
 
 
 class HouseholdCreateForm(forms.Form):
