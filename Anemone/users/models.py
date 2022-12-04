@@ -174,7 +174,7 @@ class TaskRecurrence(models.Model):
 def cache_previous_status(sender, instance, *args, **kwargs):
     if not instance._state.adding:
         original_status = None
-        if instance.user_claimed is not None:
+        if instance.user_claimed is not None and instance.claimed is True:
             original_status = Task.objects.get(pk=instance.id).task_status
 
         instance.__original_status = original_status
@@ -184,17 +184,18 @@ def cache_previous_status(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
-    if datetime.datetime.now(timezone.utc) >= instance.creation_time + datetime.timedelta(days=1) and not instance.claimed and instance.user_claimed is not None:
-        instance.claimed = 'True'
-        instance.save()
-    if datetime.datetime.now(timezone.utc) >= instance.creation_time + datetime.timedelta(days=1) and not instance.claimed and instance.user_claimed is None:
-        profiles = Profile.objects.filter(household=instance.household)
-        count = profiles.aggregate(count=Count('user'))['count']
-        random_index = randint(0, count - 1)
-        instance.user_claimed = profiles[random_index]
-        instance.claimed = 'True'
-        instance.points = int(instance.points / 2)
-        instance.save()
+    if datetime.datetime.now(timezone.utc) > instance.creation_time + datetime.timedelta(hours=24) and instance.claimed is False:
+        if instance.user_claimed is not None:
+            instance.claimed = 'True'
+            instance.save()
+        else:
+            profiles = Profile.objects.filter(household=instance.household)
+            count = profiles.aggregate(count=Count('user'))['count']
+            random_index = randint(0, count - 1)
+            instance.user_claimed = profiles[random_index]
+            instance.claimed = 'True'
+            instance.points = int(instance.points / 2)
+            instance.save()
     if instance.task_status != instance.__original_status and instance.user_claimed is not None and instance.__original_status is not None:
         profile = instance.user_claimed
         if instance.task_status:

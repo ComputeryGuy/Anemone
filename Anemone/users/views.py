@@ -333,7 +333,7 @@ def tasks(request):
 
 def task_assign(request):
     bid_end = timezone.now() + timezone.timedelta(days=-1)  # bids end after this amount of days
-    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__gte=bid_end)
+    unclaimed_tasks = Task.objects.filter(claimed='False', creation_time__lte=bid_end)
     for task in unclaimed_tasks:
         if task.user_claimed is not None:
             task.claimed = True
@@ -398,7 +398,7 @@ def create_task(request):
                                 body = task_body,
                                 creation_time = timezone.now(),
                                 due_date = due_datetime,
-                                points = 1000,
+                                points = 100,
                                 user_created = profile_created,
                                 household = household)
     # Frequency information
