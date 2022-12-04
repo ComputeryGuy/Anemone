@@ -303,6 +303,14 @@
 										<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
 									</div>
 	
+				
+									<div class="task-bid-ends">
+										<p>
+											Bid Ends:
+											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
+										</p>
+									</div>
+
 									<div class="task-due-date">
 										<p>
 											Due:
@@ -356,13 +364,7 @@
 										</p>
 
 									</div>
-									
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
-										</p>
-									</div>
+				
 									
 									<div class="task-due-date">
 										<p>
@@ -414,13 +416,6 @@
 										</p>
 
 									</div>
-
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
-										</p>
-									</div>
 	
 									<div class="task-due-date">
 										<p>
@@ -469,13 +464,6 @@
 										<p>
 											Points:
 											<span id="current-points">{{ task.points }}pts</span>
-										</p>
-									</div>
-
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
 										</p>
 									</div>
 	
