@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
@@ -64,6 +64,11 @@ def login_reg(request):
     user_creation_form = UserCreationForm()
     context = {'user_creation_form': user_creation_form}
     return render(request, 'users/log-in.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def join(request):
