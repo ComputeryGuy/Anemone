@@ -147,6 +147,7 @@ class Task(models.Model):
     claimed = models.BooleanField(default=False)
     in_progress = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not
+    expired = models.BooleanField(default=False)
     user_created = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='task_user_created')
     user_claimed = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
@@ -184,7 +185,7 @@ def cache_previous_status(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
-    if datetime.datetime.now(timezone.utc) > instance.creation_time + datetime.timedelta(hours=24) and instance.claimed is False:
+    if timezone.now() > instance.creation_time + timezone.timedelta(hours=24) and instance.claimed is False:
         if instance.user_claimed is not None:
             instance.claimed = 'True'
             instance.save()
@@ -202,6 +203,10 @@ def point_updater(sender, instance, **kwargs):
             profile.modify_points(instance.points, instance)
         else:
             profile.modify_points(-instance.points, instance)
+    if timezone.now() > instance.due_date:
+        instance.expired = True
+        instance.save()
+
 
 class Lootbox(models.Model):
     owner = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,

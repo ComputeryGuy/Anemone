@@ -189,25 +189,28 @@ def dashboard(request):
         task_assign(request)
         household = request.user.profile.household
         tasks = household.task_set.all()
-        user_name = request.user.username
-        total_points = None
-        new_tasks = None
-        completed_tasks = None
-        points_earned_today = None
-        unclaimed_tasks = tasks.filter(claimed=False)
-        unclaimed_tasks_count = unclaimed_tasks.count()
+        user = request.user
+        
+        unclaimed_tasks = tasks.filter(expired=False, claimed=False)
+        unclaimed_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
-        unstarted_count = None
-        in_progress_count = None
+        unstarted_tasks = tasks.filter(user_claimed=request.user.profile)
+        unstarted_tasks = unstarted_tasks.filter(expired=False, claimed=True, task_status=False, in_progress=False, user_claimed=request.user.profile)
+        unstarted_count = unstarted_tasks.count()
+        in_progress_tasks = tasks.filter(expired=False, in_progress=True, task_status=False, user_claimed=request.user.profile)
+        in_progress_count = in_progress_tasks.count()
+        completed_tasks = tasks.filter(expired=False, task_status=True, user_claimed=request.user.profile)
+        completed_count = completed_tasks.count()
+        print(completed_count)
         if unclaimed_points == None:
             unclaimed_points = 0
-        bulletins = household.bulletin_set.all()
-        values = {'user_name': user_name,
-                 'total_points': total_points,
-                 'new_tasks': new_tasks,
-                 'completed_tasks': completed_tasks,
+        points_earned_today = 0
+
+        bulletins = household.bulletin_set.all().filter(expire_date__gte=timezone.now())
+        values = {'user': user,
+                 'completed_count': completed_count,
                  'points_earned_today': points_earned_today,
-                 'unclaimed_tasks_count': unclaimed_tasks_count,
+                 'unclaimed_count': unclaimed_count,
                  'unclaimed_points': unclaimed_points,
                  'unstarted_count': unstarted_count,
                  'in_progress_count': in_progress_count,

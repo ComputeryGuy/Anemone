@@ -103,7 +103,7 @@
 
 			<div class="welcome-container">
 				<!-- change this to profile.first_name -->
-				<h1>Welcome back, {{ user_name }}!</h1>
+				<h1>Welcome back, {{ user.profile.first_name }} "Nick Name" {{ user.profile.last_name }}!</h1>
 			</div>
 
 			<div class="information-container">
@@ -111,7 +111,7 @@
 				<div class="info-square-container">
 
 					<div class="info-square">
-						<h1>{{ new_tasks }}</h1>
+						<h1>{{ unclaimed_count }}</h1>
 						<h3>Unclaimed Tasks</h3>
 					</div>
 
@@ -126,7 +126,7 @@
 					</div>
 					
 					<div class="info-square">
-						<h1>{{ completed_tasks }}</h1>
+						<h1>{{ completed_count }}</h1>
 						<h3>Completed Tasks</h3>
 					</div>
 
@@ -134,11 +134,11 @@
 
 				<div class="todays-total-container">
 
-					<h2>You have earned</h2>
+					<h2>There are </h2>
 
-					<h1 id="todays-points">{{ points_earned_today }}pts</h1>
+					<h1 id="todays-points">{{ unclaimed_points }} pts</h1>
 		
-					<h2>today</h2>
+					<h2>available from unclaimed tasks.</h2>
 
 					<div class="go-to-tasks-container">
 						<button id="go-to-tasks-btn">
