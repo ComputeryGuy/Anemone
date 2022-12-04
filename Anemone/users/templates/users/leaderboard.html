@@ -163,7 +163,9 @@
 
 			<div class="user-container">
 				<div class="user-image-container">
-					<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+					<div class="curr-user-container">
+						<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+					</div>
 					<h3 class="user-name-container">
 						<span id="firstname">{{ profile.first_name }}</span>
 						<span id="adjective">"{{ profile.nickname }}"</span>

@@ -149,12 +149,31 @@ button a {
 	text-align: center;
 }
 
+.curr-user-container {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 100%;
+    border: 3px solid var(--accent-red);
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.other-user-container {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 100%;
+    border: 3px solid var(--accent-blue);
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .user-profile img {
-	width: 3rem;
-	height: 3rem;
-	border-radius: 100%;
-	border: 3px solid var(--accent-blue);
-	margin-bottom: .3rem;
+	width: 2.5rem;
+	height: 2.5rem;
 }
 
 .user-name {

@@ -167,9 +167,13 @@
 					<div class="a-notification">
 						<div class="user-profile">
 							{% if user.profile.pk == bulletin.profile.pk %}
-							<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+							<div class="curr-user-container">
+								<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+							</div>
 							{% else %}
-							<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+							<div class="other-user-container">
+								<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+							</div>
 							{% endif %}
 							<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
 						</div>

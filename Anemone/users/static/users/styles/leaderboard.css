@@ -115,20 +115,28 @@
 	margin-bottom: 1rem;
 }
 
+.curr-user-container {
+	width: 6rem;
+    height: 6rem;
+    border-radius: 100%;
+    border: 4px solid var(--accent-red);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-image-container img {
+	width: 5.5rem;
+	height: 5.5rem;
+}
+
 .user-name-container {
 	font-size: 16px;
 }
 
 #adjective {
 	color: var(--accent-red);
-}
-
-.user-image-container img {
-	width: 6rem;
-	height: 6rem;
-	border-radius: 100%;
-	border: 4px solid var(--accent-blue);
-	margin-bottom: .5rem;
 }
 
 /* ---------- kudos container ---------- */

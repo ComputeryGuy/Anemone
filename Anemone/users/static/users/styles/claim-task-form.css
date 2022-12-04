@@ -1,5 +1,5 @@
-
-/* =================== overlay container =================== */
+/* 
+=================== overlay container ===================
 #claim-overlay {
 	position: absolute;
 	background-color: rgba(33, 34, 41, 50%);
@@ -9,7 +9,7 @@
 	display: none;
 }
 
-/* =================== claim task form container =================== */
+=================== claim task form container ===================
 .claim-task-container {
 	position: absolute;
 
@@ -26,7 +26,7 @@
 	padding: 1rem;
 }
 
-/* ---------- exit button ---------- */
+---------- exit button ----------
 .claim-exit-container {
 	margin-bottom: .5rem;
 }
@@ -52,7 +52,7 @@
 	transition: var(--std-transition);
 }
 
-/* ---------- form container ---------- */
+---------- form container ----------
 #question {
 	margin-bottom: .5rem;
 }
@@ -66,7 +66,7 @@
 	margin-left: 1rem;
 }
 
-/* ---------- submit button ---------- */
+---------- submit button ----------
 .claim-submit-container {
 	display: flex;
 	flex-direction: row;
@@ -87,4 +87,5 @@
 	background-color: var(--primary-input-colour);
 	border-color: var(--primary-light-blue);
 	transition: var(--std-transition);
-}
+} 
+*/

@@ -145,10 +145,10 @@
 		text-align: center;
 	}
 
-	.forget-container a, .forget-container p {
+	/* .forget-container a, .forget-container p {
 		color: var(--accent-blue);
 		font-style: italic;
-	}
+	} */
 
 	/* ---------- create account section ---------- */
 	.create-account-section {
@@ -228,10 +228,10 @@
 		text-align: center;
 	}
 
-	.forget-container a, .forget-container p {
+	/* .forget-container a, .forget-container p {
 		color: var(--accent-blue);
 		font-style: italic;
-	}
+	} */
 
 	/* ---------- create account section ---------- */
 	.create-account-section {
@@ -358,8 +358,8 @@
 	#sign-up-form {
 		padding: 1rem 0;
 	}
-
-	/* ---------- forgot container style ---------- */
+	/* 
+	---------- forgot container style ----------
 	.underline-effect a {
 		color: var(--primary-white);
 		text-decoration: none;
@@ -386,7 +386,8 @@
 	.underline-effect a:hover::after {
 		width: 100%; 
 		left: 0; 
-	}
+	} 
+	*/
 
 	/* ---------- logo container ---------- */
 	/* .logo-container.right * {

@@ -139,7 +139,7 @@
 
 					<h1 id="todays-points">{{ unclaimed_points }} pts</h1>
 		
-					<h2>available from unclaimed tasks.</h2>
+					<h2>available for you to claim.</h2>
 
 					<div class="go-to-tasks-container">
 						<button id="go-to-tasks-btn">
@@ -167,17 +167,21 @@
 						{% for bulletin in bulletins %}
 						<div class="a-notification">
 							<div class="user-profile">
-								{% if user.profile.pk == bulletin.profile.pk %}
-								<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
-								{% else %}
-								<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
-								{% endif %}
-								<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
+									{% if user.profile.pk == bulletin.profile.pk %}
+									<div class="curr-user-container">
+										<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+									</div>
+									{% else %}
+									<div class="other-user-container">
+										<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+									</div>
+									{% endif %}
+								<p class="user-name">{{ bulletin.profile.first_name }}</p>
 							</div>
 
 							<div class="user-post">
 								<p class="time-date-header">Posted: <span class="notif-style">{{ bulletin.creation_time|date:'h:i A | l, F d, Y' }}</span></p>
-								<h2 class="notif-title">{{ bulletin.title }}</h2>
+								<h3 class="notif-title">{{ bulletin.title }}</h3>
 								<p class="notif-body">
 									{{ bulletin.body }}
 								</p>
