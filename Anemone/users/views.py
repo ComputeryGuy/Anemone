@@ -135,7 +135,7 @@ def post_bulletin(request):
             bulletins = Bulletin.objects.filter(household=request.user.profile.household)
             bulletins = bulletins.filter(expire_date__gte=timezone.now())
             household = request.user.profile.household
-            log = household.task_set.all().filter(task_status=True)
+            log = household.task_set.all().filter(kudos=False, task_status=True)
             return render(request, 'users/bulletin.html', {
                 'form': form,
                 'bulletins': bulletins,
@@ -192,7 +192,7 @@ def dashboard(request):
     if request.user.is_authenticated:
         task_assign(request)
         household = request.user.profile.household
-        tasks = household.task_set.all()
+        tasks = household.task_set.all().filter(kudos=False)
         user = request.user
         
         unclaimed_tasks = tasks.filter(expired=False, claimed=False)
@@ -313,7 +313,7 @@ def tasks(request):
         
         household = request.user.profile.household
         user = request.user
-        tasks = household.task_set.all()
+        tasks = household.task_set.all().filter(kudos=False)
         unclaimed_tasks = list(tasks.filter(claimed=False))
         todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
         in_prog_tasks = list(tasks.filter(in_progress=True))
@@ -354,8 +354,8 @@ def task_assign(request):
 def last_fortnight():   
     #Calculates first and third monday of current month chooses most recent of two slowly
     c = calendar.Calendar(firstweekday=calendar.SUNDAY)
-    year = datetime.datetime.now().year
-    month = datetime.datetime.now().month
+    year = timezone.now().year
+    month = timezone.now().month
     monthcal = c.monthdatescalendar(year, month)
     first_third_mon = [day for week in monthcal for day in week if \
                        day.weekday() == calendar.MONDAY and \
@@ -363,6 +363,7 @@ def last_fortnight():
     del first_third_mon[1] #Deletes second Monday
     del first_third_mon[2] #Deletes fourth Monday
     last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
+    last_fortnight = last_fortnight + datetime.timedelta(-14) if datetime.date.today() < last_fortnight else last_fortnight
     return last_fortnight
 
 
@@ -536,6 +537,32 @@ def leaderboard(request):
             else:
                 member.fortnight_xp = 0
             member.save()
+
+        if request.method == "POST":
+            payload = json.loads(request.body)
+            if payload.get("type") == "kudos":
+                kudos_pk = payload.get("pk")
+            
+            bonus_member = User.objects.get(pk=kudos_pk)
+            bonus_profile = bonus_member.profile
+            points = 1
+
+            task_name = 'Kudos for {member}'.format(member = bonus_member)
+            task_body = "Bonus Points"
+            
+            task = Task.objects.create(title = task_name,
+                                        body = task_body,
+                                        creation_time = timezone.now(),
+                                        due_date = timezone.now() + timezone.timedelta(seconds=10),
+                                        points = 1,
+                                        kudos = True,
+                                        claimed = True,
+                                        task_status = True,
+                                        user_created = profile,
+                                        user_claimed = bonus_profile,
+                                        household = household)
+
+            bonus_profile.modify_points(points, task)
 
         members_by_pts = household_members.order_by('-fortnight_xp')
         members_by_name = household_members.order_by('first_name')

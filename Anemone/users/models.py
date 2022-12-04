@@ -98,7 +98,6 @@ class Profile(models.Model):
     def modify_points(self, points, chore):  # add in views when task is marked as complete
         self.points += points
         
-        self
         ##update xp
         self.update_levelSystem(points)
 
@@ -148,6 +147,7 @@ class Task(models.Model):
     claimed = models.BooleanField(default=False)
     in_progress = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not
+    kudos = models.BooleanField(default=False)  # Is the task created by kudos system?
     expired = models.BooleanField(default=False)
     user_created = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='task_user_created')
@@ -204,7 +204,7 @@ def point_updater(sender, instance, **kwargs):
             profile.modify_points(instance.points, instance)
         else:
             profile.modify_points(-instance.points, instance)
-    if timezone.now() > instance.due_date:
+    if timezone.now() > instance.due_date and instance.expired == False:
         instance.expired = True
         instance.save()
 
