@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
@@ -66,6 +66,11 @@ def login_reg(request):
     return render(request, 'users/log-in.html', context)
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
 def join(request):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -117,7 +122,7 @@ def post_bulletin(request):
             if form.is_valid():
                 if form.cleaned_data['expire_date'].date() >= datetime.date.today():
                     bulletin = Bulletin(
-                        user=request.user.username,
+                        profile=request.user.profile,
                         title=form.cleaned_data['title'],
                         bulletin_body=form.cleaned_data['bulletin_body'], 
                         expire_date=form.cleaned_data['expire_date'], 
@@ -133,9 +138,13 @@ def post_bulletin(request):
         else:
             form = BulletinForm()
             bulletins = Bulletin.objects.filter(household=request.user.profile.household)
+            bulletins = bulletins.filter(expire_date__gte=timezone.now())
+            household = request.user.profile.household
+            log = household.task_set.all().filter(kudos=False, task_status=True)
             return render(request, 'users/bulletin.html', {
                 'form': form,
-                'bulletins': bulletins
+                'bulletins': bulletins,
+                'log': log,
             })
 
 
@@ -188,26 +197,29 @@ def dashboard(request):
     if request.user.is_authenticated:
         task_assign(request)
         household = request.user.profile.household
-        tasks = household.task_set.all()
-        user_name = request.user.username
-        total_points = None
-        new_tasks = None
-        completed_tasks = None
-        points_earned_today = None
-        unclaimed_tasks = tasks.filter(claimed=False)
-        unclaimed_tasks_count = unclaimed_tasks.count()
+        tasks = household.task_set.all().filter(kudos=False)
+        user = request.user
+        
+        unclaimed_tasks = tasks.filter(expired=False, claimed=False)
+        unclaimed_count = unclaimed_tasks.count()
         unclaimed_points = unclaimed_tasks.aggregate(Sum('points'))['points__sum']
-        unstarted_count = None
-        in_progress_count = None
+        unstarted_tasks = tasks.filter(user_claimed=request.user.profile)
+        unstarted_tasks = unstarted_tasks.filter(expired=False, claimed=True, task_status=False, in_progress=False, user_claimed=request.user.profile)
+        unstarted_count = unstarted_tasks.count()
+        in_progress_tasks = tasks.filter(expired=False, in_progress=True, task_status=False, user_claimed=request.user.profile)
+        in_progress_count = in_progress_tasks.count()
+        completed_tasks = tasks.filter(expired=False, task_status=True, user_claimed=request.user.profile)
+        completed_count = completed_tasks.count()
+        print(completed_count)
         if unclaimed_points == None:
             unclaimed_points = 0
-        bulletins = household.bulletin_set.all()
-        values = {'user_name': user_name,
-                 'total_points': total_points,
-                 'new_tasks': new_tasks,
-                 'completed_tasks': completed_tasks,
+        points_earned_today = 0
+
+        bulletins = household.bulletin_set.all().filter(expire_date__gte=timezone.now())
+        values = {'user': user,
+                 'completed_count': completed_count,
                  'points_earned_today': points_earned_today,
-                 'unclaimed_tasks_count': unclaimed_tasks_count,
+                 'unclaimed_count': unclaimed_count,
                  'unclaimed_points': unclaimed_points,
                  'unstarted_count': unstarted_count,
                  'in_progress_count': in_progress_count,
@@ -306,7 +318,7 @@ def tasks(request):
         
         household = request.user.profile.household
         user = request.user
-        tasks = household.task_set.all()
+        tasks = household.task_set.all().filter(kudos=False)
         unclaimed_tasks = list(tasks.filter(claimed=False))
         todo_tasks = list(tasks.filter(claimed=True).filter(in_progress=False).filter(task_status=False))
         in_prog_tasks = list(tasks.filter(in_progress=True))
@@ -347,8 +359,8 @@ def task_assign(request):
 def last_fortnight():   
     #Calculates first and third monday of current month chooses most recent of two slowly
     c = calendar.Calendar(firstweekday=calendar.SUNDAY)
-    year = datetime.datetime.now().year
-    month = datetime.datetime.now().month
+    year = timezone.now().year
+    month = timezone.now().month
     monthcal = c.monthdatescalendar(year, month)
     first_third_mon = [day for week in monthcal for day in week if \
                        day.weekday() == calendar.MONDAY and \
@@ -356,6 +368,7 @@ def last_fortnight():
     del first_third_mon[1] #Deletes second Monday
     del first_third_mon[2] #Deletes fourth Monday
     last_fortnight = first_third_mon[1] if datetime.date.today() > first_third_mon[1] else first_third_mon[0]
+    last_fortnight = last_fortnight + datetime.timedelta(-14) if datetime.date.today() < last_fortnight else last_fortnight
     return last_fortnight
 
 
@@ -529,6 +542,32 @@ def leaderboard(request):
             else:
                 member.fortnight_xp = 0
             member.save()
+
+        if request.method == "POST":
+            payload = json.loads(request.body)
+            if payload.get("type") == "kudos":
+                kudos_pk = payload.get("pk")
+            
+            bonus_member = User.objects.get(pk=kudos_pk)
+            bonus_profile = bonus_member.profile
+            points = 1
+
+            task_name = 'Kudos for {member}'.format(member = bonus_member)
+            task_body = "Bonus Points"
+            
+            task = Task.objects.create(title = task_name,
+                                        body = task_body,
+                                        creation_time = timezone.now(),
+                                        due_date = timezone.now() + timezone.timedelta(seconds=10),
+                                        points = 1,
+                                        kudos = True,
+                                        claimed = True,
+                                        task_status = True,
+                                        user_created = profile,
+                                        user_claimed = bonus_profile,
+                                        household = household)
+
+            bonus_profile.modify_points(points, task)
 
         members_by_pts = household_members.order_by('-fortnight_xp')
         members_by_name = household_members.order_by('first_name')

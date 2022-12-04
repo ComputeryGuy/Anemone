@@ -98,7 +98,6 @@ class Profile(models.Model):
     def modify_points(self, points, chore):  # add in views when task is marked as complete
         self.points += points
         
-        self
         ##update xp
         self.update_levelSystem(points)
 
@@ -124,7 +123,8 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Bulletin(models.Model):
-    user = models.CharField(max_length=500)
+    profile = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
+                                     null=True, blank=True, related_name='bulletin_user')
     title = models.CharField(max_length=100)
     bulletin_body = models.CharField(max_length=500)
     creation_time = models.DateTimeField(auto_now_add=True)
@@ -147,6 +147,8 @@ class Task(models.Model):
     claimed = models.BooleanField(default=False)
     in_progress = models.BooleanField(default=False)
     task_status = models.BooleanField(default=False)  # finished/not
+    kudos = models.BooleanField(default=False)  # Is the task created by kudos system?
+    expired = models.BooleanField(default=False)
     user_created = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='task_user_created')
     user_claimed = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
@@ -184,7 +186,7 @@ def cache_previous_status(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=Task)
 def point_updater(sender, instance, **kwargs):
-    if datetime.datetime.now(timezone.utc) > instance.creation_time + datetime.timedelta(hours=24) and instance.claimed is False:
+    if timezone.now() > instance.creation_time + timezone.timedelta(hours=24) and instance.claimed is False:
         if instance.user_claimed is not None:
             instance.claimed = 'True'
             instance.save()
@@ -202,6 +204,10 @@ def point_updater(sender, instance, **kwargs):
             profile.modify_points(instance.points, instance)
         else:
             profile.modify_points(-instance.points, instance)
+    if timezone.now() > instance.due_date and instance.expired == False:
+        instance.expired = True
+        instance.save()
+
 
 class Lootbox(models.Model):
     owner = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,

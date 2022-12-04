@@ -303,6 +303,14 @@
 										<input type="number" name="" id="bid{{ task.id }}" placeholder="Your Bid">
 									</div>
 	
+				
+									<div class="task-bid-ends">
+										<p>
+											Bid Ends:
+											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
+										</p>
+									</div>
+
 									<div class="task-due-date">
 										<p>
 											Due:
@@ -344,7 +352,7 @@
 
 										<div class="task-user-img">
 											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-											<p id="user-name"> {{ task.user_claimed }} </p>
+											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
 									</div>
@@ -356,13 +364,7 @@
 										</p>
 
 									</div>
-									
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
-										</p>
-									</div>
+				
 									
 									<div class="task-due-date">
 										<p>
@@ -402,7 +404,7 @@
 
 										<div class="task-user-img">
 											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-											<p id="user-name"> {{ task.user_claimed }} </p>
+											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
 									</div>
@@ -413,13 +415,6 @@
 											<span id="current-points">{{ task.points }}pts</span>
 										</p>
 
-									</div>
-
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
-										</p>
 									</div>
 	
 									<div class="task-due-date">
@@ -460,7 +455,7 @@
 
 										<div class="task-user-img">
 											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
-											<p id="user-name"> {{ task.user_claimed }} </p>
+											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
 									</div>
@@ -469,13 +464,6 @@
 										<p>
 											Points:
 											<span id="current-points">{{ task.points }}pts</span>
-										</p>
-									</div>
-
-									<div class="task-bid-ends">
-										<p>
-											Bid Ends:
-											<span id="bid-ends">{{ task.due_date|date:'F d, Y' }}</span>
 										</p>
 									</div>
 	

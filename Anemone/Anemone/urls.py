@@ -27,7 +27,7 @@ urlpatterns = [
     path('bulletin/', user_views.post_bulletin, name='bulletin'),
     path('createTask/', user_views.create_task, name='createTask'),
     path('login/', user_views.login_reg, name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logout/', user_views.logout_view, name='logout'),
     path('join/', user_views.join, name='join'),
     path('createHousehold/', user_views.create_household, name='createGroup'),
     path('joinHousehold/', user_views.join_household, name='joinGroup'),
