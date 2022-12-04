@@ -150,7 +150,7 @@
 						<div class="user-profile">
 							<img src="{% static '/users/assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg' %}"
 								alt="">
-							<p class="user-name">{{ bulletin.user }}</p>
+							<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
 						</div>
 						<div class="user-post">
 							<p class="time-date-header">Posted: 
@@ -175,27 +175,26 @@
 				<div class="table-container">
 					<div class="table">
 
-						<!-- table header -->
 						<div class="row header">
 							<h3>User</h3>
 							<h3>Task Completed</h3>
 							<h3>Earned Points</h3>
-						</div>
+						</div> 
 
 						<div class="row-data-container">
 							
 							<!-- table data -->
-							{% for task in tasks %}
+							{% for item in log %}
 							<div class="row data">
 								<div class="user-prof">
-									<img src="{{ task.user_img }}" alt="">
-									<p>{{ task.user_name }}</p>
+									<!--<img src="{{ task.user_img }}" alt="">-->
+									<p>{{ item.user_claimed.first_name }} {{ item.user_claimed.last_name }}</p>
 								</div>
 								<div class="comp-task">
-									<p>{{ task.title }}</p>
+									<p>{{ item.title }}</p>
 								</div>
 								<div class="earned-pts">
-									<p>{{ task.pts }}</p>
+									<p>{{ item.points }}</p>
 								</div>
 							</div>
 							{% endfor %}

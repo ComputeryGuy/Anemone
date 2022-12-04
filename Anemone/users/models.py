@@ -124,7 +124,8 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Bulletin(models.Model):
-    user = models.CharField(max_length=500)
+    profile = models.ForeignKey(Profile, default=None, on_delete=models.SET_NULL,
+                                     null=True, blank=True, related_name='bulletin_user')
     title = models.CharField(max_length=100)
     bulletin_body = models.CharField(max_length=500)
     creation_time = models.DateTimeField(auto_now_add=True)

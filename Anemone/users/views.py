@@ -117,7 +117,7 @@ def post_bulletin(request):
             if form.is_valid():
                 if form.cleaned_data['expire_date'].date() >= datetime.date.today():
                     bulletin = Bulletin(
-                        user=request.user.username,
+                        user=request.user.profile,
                         title=form.cleaned_data['title'],
                         bulletin_body=form.cleaned_data['bulletin_body'], 
                         expire_date=form.cleaned_data['expire_date'], 
@@ -133,9 +133,13 @@ def post_bulletin(request):
         else:
             form = BulletinForm()
             bulletins = Bulletin.objects.filter(household=request.user.profile.household)
+            bulletins = bulletins.filter(expire_date__gte=timezone.now())
+            household = request.user.profile.household
+            log = household.task_set.all().filter(task_status=True)
             return render(request, 'users/bulletin.html', {
                 'form': form,
-                'bulletins': bulletins
+                'bulletins': bulletins,
+                'log': log,
             })
 
 
