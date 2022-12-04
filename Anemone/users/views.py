@@ -141,10 +141,12 @@ def post_bulletin(request):
             bulletins = bulletins.filter(expire_date__gte=timezone.now())
             household = request.user.profile.household
             log = household.task_set.all().filter(kudos=False, task_status=True)
+            user = request.user
             return render(request, 'users/bulletin.html', {
                 'form': form,
                 'bulletins': bulletins,
                 'log': log,
+                'user': user,
             })
 
 
@@ -215,7 +217,8 @@ def dashboard(request):
             unclaimed_points = 0
         points_earned_today = 0
 
-        bulletins = household.bulletin_set.all().filter(expire_date__gte=timezone.now())
+        bulletins = household.bulletin_set.all().filter(expire_date__gte=timezone.now()).order_by('-creation_time')
+        bulletins = list(bulletins[:2])
         values = {'user': user,
                  'completed_count': completed_count,
                  'points_earned_today': points_earned_today,

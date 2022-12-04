@@ -165,8 +165,11 @@
 					{% for bulletin in bulletins %}
 					<div class="a-notification">
 						<div class="user-profile">
-							<img src="{% static '/users/assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg' %}"
-								alt="">
+							{% if user.profile.pk == bulletin.profile.pk %}
+							<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+							{% else %}
+							<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+							{% endif %}
 							<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
 						</div>
 						<div class="user-post">
