@@ -48,4 +48,6 @@ urlpatterns = [
     #path('openLootbox/', user_views.open_Lootbox, name="lootbox"),
     path('leaderboard/', user_views.leaderboard, name="leaderboard"),
     path('lootbox/', user_views.lootbox, name="lootbox"),
+    path('settings/', user_views.settings, name="settings"),
+    path('guide/', user_views.guide, name="guide"),
 ]

@@ -608,6 +608,16 @@ def lootbox(request):
         return render(request, 'users/lootbox.html', context)
 
 
+def settings(request):
+    if request.user.is_authenticated:
+        return render(request, 'users/settings.html', {})
+        
+
+def guide(request):
+    if request.user.is_authenticated:
+        return render(request, 'users/game-guide.html', {})
+
+
 '''        household = request.user.profile.household
         householdMembers = household.members.all()
         mList = []
