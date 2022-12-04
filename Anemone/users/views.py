@@ -117,7 +117,7 @@ def post_bulletin(request):
             if form.is_valid():
                 if form.cleaned_data['expire_date'].date() >= datetime.date.today():
                     bulletin = Bulletin(
-                        user=request.user.profile,
+                        profile=request.user.profile,
                         title=form.cleaned_data['title'],
                         bulletin_body=form.cleaned_data['bulletin_body'], 
                         expire_date=form.cleaned_data['expire_date'], 
