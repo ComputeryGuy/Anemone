@@ -350,7 +350,11 @@
 										<p>Claimed By:</p>
 
 										<div class="task-user-img">
-											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											{% if user.profile.pk == task.user_claimed.pk %}
+											<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+											{% else %}
+											<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+											{% endif %}
 											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
@@ -402,7 +406,11 @@
 										<p>Claimed By:</p>
 
 										<div class="task-user-img">
-											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											{% if user.profile.pk == task.user_claimed.pk %}
+											<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+											{% else %}
+											<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+											{% endif %}
 											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
@@ -453,7 +461,11 @@
 										<p>Claimed By:</p>
 
 										<div class="task-user-img">
-											<img src="./assets/pictures/filippo-ruffini-6rsnRElhycs-unsplash.jpg" alt="">
+											{% if user.profile.pk == task.user_claimed.pk %}
+											<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+											{% else %}
+											<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+											{% endif %}
 											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>
 
