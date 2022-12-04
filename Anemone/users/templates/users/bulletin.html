@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="header-container">
-		<h2>Let's Create a Notification!</h2>
+		<h2>Let's Create a Bulletin!</h2>
 	</div>
 
 	<form method="post" class="notif-form">
@@ -26,7 +26,7 @@
 		{{ form.as_p }}
 		<div class="submit-notif-container">
 			<button type="submit" id="submit-btn">
-				<p>Create Notification</p>
+				<p>Create Bulletin</p>
 			</button>
 		</div>
 	</form>
@@ -36,18 +36,103 @@
 <div class="main-grid">
 
 	<!-- include navbar -->
-	{% include 'users/includes/nav.html'%}
+	<section class="left-section">
+
+		<nav id="nav-sidebar">
+
+			<div class="logo-container">
+				<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+			</div>
+
+			<div class="nav-sidebar-content">
+
+				<ul class="list">
+
+					<!-- dashboard -->
+					<li class="list-item">
+						<a href="{% url 'dashboard' %}" class="nav-link">
+							<span class="material-symbols-rounded mobile-current">dashboard</span>
+							<span class="link">Dashboard</span>
+						</a>
+					</li>
+
+					<!-- tasks -->
+					<li class="list-item">
+						<a href="{% url 'taskboard' %}" class="nav-link">
+							<span class="material-symbols-rounded">task_alt</span>
+							<span class="link">Tasks</span>
+						</a>
+					</li>
+
+					<!-- notifications/bulletin -->
+					<li class="list-item">
+						<a href="{% url 'bulletin' %}" class="nav-link desktop-current">
+							<span class="material-symbols-rounded">notifications</span>
+							<span class="link">Notifications</span>
+						</a>
+					</li>
+
+					<!-- leaderboard -->
+					<li class="list-item">
+						<a href="{% url 'leaderboard' %}" class="nav-link">
+							<span class="material-symbols-rounded">leaderboard</span>
+							<span class="link">Leaderboard</span>
+						</a>
+					</li>
+
+					<!-- lootbox -->
+					<li class="list-item">
+						<a href="{% url 'lootbox' %}" class="nav-link">
+							<span class="material-symbols-rounded">redeem</span>
+							<span class="link">Lootbox</span>
+						</a>
+					</li>
+
+				</ul>
+
+
+				<div class="list-bottom-content">
+
+					<!-- settings -->
+					<li class="list-item">
+						<a href="#" class="nav-link">
+							<span class="material-symbols-rounded">settings</span>
+							<span class="link">Settings</span>
+						</a>
+					</li>
+
+					<!-- game guide -->
+					<li class="list-item">
+						<a href="#" class="nav-link">
+							<span class="material-symbols-rounded">help</span>
+							<span class="link">Game Guide</span>
+						</a>
+					</li>
+
+					<!-- logout -->
+					<li class="list-item">
+						<a href="{% url 'logout' %}" class="nav-link">
+							<span class="material-symbols-rounded">logout</span>
+							<span class="link">Logout</span>
+						</a>
+					</li>
+				</div>
+			</div>
+		</nav>
+	</section>
 
 	<section class="middle-section">
+
 		<div class="button-container">
 			{% for message in messages %}
 			<div class="alert alert-success">
 				<h2>{{ message }}</h2>
 			</div>
 			{% endfor %}
+
 			<button id="add-notif-btn">
 				<span class="material-symbols-rounded">add</span>
-				<p>Add Notification</p>
+				<p>Add Bulletin</p>
 			</button>
 		</div>
 
@@ -55,7 +140,7 @@
 
 			<div class="left-container">
 
-				<h2>Notifications</h2>
+				<h2>Bulletins</h2>
 
 				<div class="todays-notification-container">
 
@@ -68,9 +153,12 @@
 							<p class="user-name">{{ bulletin.user }}</p>
 						</div>
 						<div class="user-post">
-							<p class="time-date-header">Posted: <span class="notif-style">{{
-									bulletin.creation_time|date:'h:ia' }} | {{ bulletin.creation_time|date:'D, F j,
-									Y'}}</span></p>
+							<p class="time-date-header">Posted: 
+								<span class="notif-style">
+									{{ bulletin.creation_time|date:'h:ia' }} | 
+									{{ bulletin.creation_time|date:'D, F j, Y' }}
+								</span>
+							</p>
 							<h3 class="notif-title">{{ bulletin.title }}</h3>
 							<p class="notif-body">{{ bulletin.bulletin_body }}</p>
 						</div>
@@ -81,19 +169,21 @@
 			</div>
 
 			<div class="right-container">
-				<h2>[Today/This Weeks] Completed Tasks</h2>
+
+				<h2>Completed Tasks</h2>
 
 				<div class="table-container">
 					<div class="table">
 
 						<!-- table header -->
 						<div class="row header">
-							<h4>User</h4>
-							<h4>Task Completed</h4>
-							<h4>Earned Points</h4>
+							<h3>User</h3>
+							<h3>Task Completed</h3>
+							<h3>Earned Points</h3>
 						</div>
 
 						<div class="row-data-container">
+							
 							<!-- table data -->
 							{% for task in tasks %}
 							<div class="row data">
@@ -102,10 +192,10 @@
 									<p>{{ task.user_name }}</p>
 								</div>
 								<div class="comp-task">
-									<h4>{{ task.title }}</h4>
+									<p>{{ task.title }}</p>
 								</div>
 								<div class="earned-pts">
-									<h4>{{ task.pts }}</h4>
+									<p>{{ task.pts }}</p>
 								</div>
 							</div>
 							{% endfor %}
@@ -121,5 +211,5 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{% static " users/actions/notifications.js"%}"></script>
+<script src="{% static 'users/actions/notifications.js' %}"></script>
 {% endblock %}

@@ -1,18 +1,4 @@
 /* =================== CONSTANTS =================== */
-
-/* ---------- sub-header ---------- */
-
-/* =================== left section =================== */
-.left-section {
-	grid-column: span 1;
-}
-
-/* =================== middle section =================== */
-.middle-section {
-	grid-column: span 11;
-	text-align: center;
-}
-
 .lootbox-container {
 	width: 100%;
 	height: 100%;
@@ -27,16 +13,11 @@
 /* slot machine */
 #slot-machine {
 	width: 540px;
-	background-color: var(--primary-form-colour);
-	background-image: linear-gradient(var(--primary-form-colour), #025cc2, #014797);
+	background-color: var(--font-colour);
+	background-image: linear-gradient( #3c3f6f, var(--font-colour), #111434);
 	margin: 10px auto 20px;
 	padding: 20px;
 	border-radius: 50px;
-	box-shadow: var(--std-box-shadow);
-}
-
-#slot-machine, .lever button {
-	box-shadow: var(--std-box-shadow);
 }
 
 .group, .reel, .lever {
@@ -44,8 +25,8 @@
 }
 
 .group, .lever {
-	background-color: var(--primary-light-blue);
-	background-image: linear-gradient(var(--primary-light-blue), #65a2e8, #5a94d6);
+	background-color: var(--accent-blue);
+	background-image: linear-gradient( #6a8fec, var(--accent-blue), #4165c0);
 }
 
 .group {
@@ -76,10 +57,7 @@
 	font-weight: bold;
 	height: 60px;
 	margin-top: 10px;
-}
-
-.reel p {
-	color: black;
+	color: var(--font-colour);
 }
 
 .lever {
@@ -99,14 +77,96 @@
 	-moz-transition: all .2s ease;
 	-o-transition: all .2s ease;
 
-	background-color: var(--primary-dark-blue);
-	background-image: linear-gradient(var(--primary-dark-blue), #0360cc, #0050ab);
+	background-color: var(--accent-light-blue);
+	background-image: linear-gradient( #dee4f3, var(--accent-light-blue), #8a95ba);
 	cursor: pointer;
 	
 }
 
 .lever button:active {
-	color: var(--primary-background-colour);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+	color: var(--font-colour);
+	box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 45%);
 	margin: 2px 0 -2px;
+}
+
+
+/* =================== primary media query =================== */
+
+/* =================== media queries =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 4;
+		padding: 5rem 1rem 1rem;
+	}
+
+	/* slot machine */
+	#slot-machine {
+		width: 347px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.group:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+
+	.reel {
+		width: 120px;
+	}
+
+	.lever {
+		float: none;
+		padding-right: 20px;
+		width: 100%;
+	}
+
+	.lever button {
+		line-height: 60px;
+		width: 100%;
+		
+	}
+
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 6;
+		padding: 16rem 0 0;
+	}
+
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+	/* =================== left section =================== */
+	.left-section {
+		grid-column: span 1;
+	}
+
+	/* =================== middle section =================== */
+	.middle-section {
+		grid-column: span 11;
+		text-align: center;
+	}
 }

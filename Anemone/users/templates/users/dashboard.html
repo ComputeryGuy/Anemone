@@ -28,7 +28,7 @@
 
 						<!-- dashboard -->
 						<li class="list-item">
-							<a href="." class="nav-link desktop-current">
+							<a href="{% url 'dashboard' %}" class="nav-link desktop-current">
 								<span class="material-symbols-rounded mobile-current">dashboard</span>
 								<span class="link">Dashboard</span>
 							</a>
@@ -39,14 +39,6 @@
 							<a href="{% url 'taskboard' %}" class="nav-link">
 								<span class="material-symbols-rounded">task_alt</span>
 								<span class="link">Tasks</span>
-							</a>
-						</li>
-		
-						<!-- calendar -->
-						<li class="list-item">
-							<a href="." class="nav-link">
-								<span class="material-symbols-rounded">calendar_month</span>
-								<span class="link">Calendar</span>
 							</a>
 						</li>
 
@@ -66,6 +58,14 @@
 							</a>
 						</li>
 
+						<!-- lootbox -->
+						<li class="list-item">
+							<a href="{% url 'lootbox' %}" class="nav-link">
+								<span class="material-symbols-rounded">redeem</span>
+								<span class="link">Lootbox</span>
+							</a>
+						</li>
+
 					</ul>
 
 
@@ -76,6 +76,14 @@
 							<a href="#" class="nav-link">
 								<span class="material-symbols-rounded">settings</span>
 								<span class="link">Settings</span>
+							</a>
+						</li>
+
+						<!-- game guide -->
+						<li class="list-item">
+							<a href="#" class="nav-link">
+								<span class="material-symbols-rounded">help</span>
+								<span class="link">Game Guide</span>
 							</a>
 						</li>
 
@@ -94,6 +102,7 @@
 		<section class="middle-section">
 
 			<div class="welcome-container">
+				<!-- change this to profile.first_name -->
 				<h1>Welcome back, {{ user_name }}!</h1>
 			</div>
 
@@ -125,15 +134,15 @@
 
 				<div class="todays-total-container">
 
-					<p>You have earned</p>
+					<h2>You have earned</h2>
 
 					<h1 id="todays-points">{{ points_earned_today }}pts</h1>
 		
-					<p>today</p>
+					<h2>today</h2>
 
 					<div class="go-to-tasks-container">
 						<button id="go-to-tasks-btn">
-							<a href=".">Go to Tasks</a>
+							<a href="{% url 'taskboard' %}">Go to Tasks</a>
 						</button>
 					</div>
 				</div>
@@ -142,11 +151,11 @@
 
 					<div class="notifs-header">
 
-						<h2>Recent Notifications</h2>
+						<h2>Bulletins</h2>
 
 						<div class="go-to-notifs-container">
 							<button id="go-to-notifs-btn">
-								<a href=".">Go to Notifications</a>
+								<a href="{% url 'bulletin' %}">Go to Notifications</a>
 							</button>
 						</div>
 
@@ -163,7 +172,7 @@
 
 							<div class="user-post">
 								<p class="time-date-header">Posted: <span class="notif-style">{{ bulletin.creation_time|date:'h:i A | l, F d, Y' }}</span></p>
-								<h3 class="notif-title">{{ bulletin.title }}</h3>
+								<h2 class="notif-title">{{ bulletin.title }}</h2>
 								<p class="notif-body">
 									{{ bulletin.body }}
 								</p>
@@ -188,36 +197,6 @@
 				</div>
 
 			</div>
-		</section>
-
-		<section class="right-section">
-
-			<div class="event-container">
-				<h2>Today's Events</h2>
-
-				<div class="a-event">
-					<h4>Group Event 1</h4>
-					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
-				</div>
-
-				<div class="a-event">
-					<h4>Group Event 1</h4>
-					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
-				</div>
-
-				<div class="a-event">
-					<h4>Group Event 1</h4>
-					<p>08:00 AM - 12:00 PM | Thursday, Oct 6, 2022</p>
-				</div>
-
-			</div>
-
-			<div class="go-to-cal-container">
-				<button id="go-to-cal-btn">
-					<a href="./calendar.html">Go to Calendar</a>
-				</button>
-			</div>
-
 		</section>
 
 	</div>

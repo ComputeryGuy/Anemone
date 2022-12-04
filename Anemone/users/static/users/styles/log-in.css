@@ -21,23 +21,30 @@
 /* ---------- input styles ---------- */
 .input-container {
 	margin: 1rem 0 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .input-container input {
 	padding: .8rem;
-	width: 50%;
-	border-radius: var(--std-border-radius);
-	background-color: var(--primary-input-colour);
-	border: 2px solid var(--primary-light-blue);
+	width: 15rem;
 	outline: none;
+	
+	background-color: var(--primary-white);
+	border: 2px solid var(--font-colour);
+	border-radius: 15px;
+	transition: var(--std-transition);
 }
 
 .input-container input::placeholder {
-	color: var(--primary-white);
+	color: var(--font-colour);
 }
 
 .input-container input:focus {
-	border-color: var(--primary-white);
+	border-color: var(--accent-red);
+	transition: var(--std-transition);
 }
 
 .input-container input:not(:last-child) {
@@ -51,10 +58,11 @@
 
 /* sign in button */
 #sign-in-submit-btn {
-	background-color: var(--primary-dark-blue);
-	border: 3px solid var(--primary-dark-blue);
+	background-color: var(--accent-blue);
+	border: none;
+	color: var(--primary-white);
+	width: 100%;
 	border-radius: 100px;
-	width: 12rem;
 	padding: 1rem 1.5rem;
 	text-transform: uppercase;
 	transition: var(--std-transition);
@@ -62,10 +70,11 @@
 
 /* sign up button */
 #sign-up-submit-btn {
-	background-color: var(--primary-dark-blue);
-	border: 3px solid var(--primary-dark-blue);
+	background-color: var(--accent-blue);
+	border: none;
+	color: var(--primary-white);
 	border-radius: 100px;
-	width: 12rem;
+	width: 100%;
 	padding: 1rem 1.5rem;
 	text-transform: uppercase;
 	transition: var(--std-transition);
@@ -84,6 +93,7 @@
 	/* =================== main grid =================== */
 	.main-grid {
 		grid-template-columns: repeat(4, 1fr);
+		padding: 1rem;
 		text-align: center;
 	}
 
@@ -100,8 +110,8 @@
 	}
 
 	.menu-list button {
-		background-color: var(--primary-form-colour);
-		border: 2px solid var(--primary-form-colour);
+		background-color: var(--accent-orange);
+		border: 2px solid var(--accent-orange);
 		margin-right: 2rem;
 		width: 8rem;
 		padding: .5rem 0;
@@ -114,10 +124,7 @@
 	}
 
 	.menu-list button.current {
-		cursor: pointer;
-		background-color: var(--primary-dark-blue);
-		border-color: var(--primary-dark-blue);
-		transition: var(--std-transition);
+		border: 2px solid var(--font-colour);
 	}
 
 	/* ---------- triangle ---------- */
@@ -125,29 +132,42 @@
 		margin-left: 4.5rem;
 		width: 0;
 		height: 0;
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-bottom: 20px solid var(--primary-card-colour);
-		border-radius: 3px;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 25px solid var(--accent-light-blue);
 	}
 
 	/* ---------- sign in section ---------- */
 	.sign-in-section {
-		background-color: var(--primary-card-colour);
-		padding: 1rem;
-		box-shadow: var(--std-box-shadow);
+		background-color: var(--accent-light-blue);
+		padding: 1.5rem;
+		border-radius: 30px;
+		text-align: center;
 	}
 
+	.forget-container a, .forget-container p {
+		color: var(--accent-blue);
+		font-style: italic;
+	}
+
+	/* ---------- create account section ---------- */
 	.create-account-section {
-		background-color: var(--primary-card-colour);
-		padding: 1rem;
-		box-shadow: var(--std-box-shadow);
+		background-color: var(--accent-light-blue);
+		padding: 1.5rem;
+		border-radius: 30px;
+		text-align: center;
 		display: none;
+	}
+
+	.create-account-section p {
+		width: 25ch;
+		margin: 0 auto;
 	}
 }
 
 /* =================== TABLET =================== */
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+
 	/* =================== hide desktop =================== */
 	.log-in-container.desktop {
 		display: none;
@@ -156,11 +176,12 @@
 	/* =================== main grid =================== */
 	.main-grid {
 		grid-template-columns: repeat(6, 1fr);
+		padding: 1rem;
 		text-align: center;
 	}
 
 	.log-in-container.mobile {
-		grid-column: span 6;
+		grid-column: 2 / 6;
 	}
 
 	/* ---------- menu list ---------- */
@@ -172,8 +193,8 @@
 	}
 
 	.menu-list button {
-		background-color: var(--primary-form-colour);
-		border: 2px solid var(--primary-form-colour);
+		background-color: var(--accent-orange);
+		border: 2px solid var(--accent-orange);
 		margin-right: 2rem;
 		width: 8rem;
 		padding: .5rem 0;
@@ -186,10 +207,7 @@
 	}
 
 	.menu-list button.current {
-		cursor: pointer;
-		background-color: var(--primary-dark-blue);
-		border-color: var(--primary-dark-blue);
-		transition: var(--std-transition);
+		border: 2px solid var(--font-colour);
 	}
 
 	/* ---------- triangle ---------- */
@@ -197,35 +215,45 @@
 		margin-left: 4.5rem;
 		width: 0;
 		height: 0;
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-bottom: 20px solid var(--primary-card-colour);
-		border-radius: 3px;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 25px solid var(--accent-light-blue);
 	}
 
 	/* ---------- sign in section ---------- */
 	.sign-in-section {
-		background-color: var(--primary-card-colour);
-		box-shadow: var(--std-box-shadow);
-		padding: 1rem;
+		background-color: var(--accent-light-blue);
+		padding: 1.5rem;
+		border-radius: 30px;
+		text-align: center;
 	}
 
-	.create-account-section {
-		background-color: var(--primary-card-colour);
-		padding: 1rem;
-		box-shadow: var(--std-box-shadow);
-		display: none;
+	.forget-container a, .forget-container p {
+		color: var(--accent-blue);
+		font-style: italic;
 	}
-
 
 	/* ---------- create account section ---------- */
 	.create-account-section {
-		background-color: var(--primary-card-colour);
+		background-color: var(--accent-light-blue);
+		padding: 1.5rem;
+		border-radius: 30px;
+		text-align: center;
+		display: none;
+	}
+
+	.create-account-section p {
+		width: 25ch;
+		margin: 0 auto;
 	}
 }
 
 /* =================== DESKTOP AND BEYOND =================== */
 @media only screen and (min-width: 64.063em) {
+
+	.input-container input {
+		width: 20rem;
+	}
 
 	/* =================== hide mobile =================== */
 	.log-in-container.mobile {
@@ -245,7 +273,7 @@
 		grid-column: span 12;
 		position: relative;
 		height: 100%;
-		box-shadow: var(--std-box-shadow);
+		border-radius: 50px;
 	}
 
 	/* =================== LEFT AND RIGHT SIDES =================== */
@@ -257,9 +285,9 @@
 		width: 70%;
 		height: calc(100vh - 6rem);
 
-		background-color: var(--primary-card-colour);
+		background-color: var(--accent-blue);
 		padding: 1rem;
-		border-radius: 10px 0px 0px 10px;
+		border-radius: 50px 0px 0px 50px;
 	}
 
 	/* =================== right side =================== */
@@ -270,9 +298,9 @@
 		width: 30%;
 		height: calc(100vh - 6rem);
 
-		background-color: var(--primary-dark-blue);
+		background-color: var(--accent-light-blue);
 		padding: 1rem;
-		border-radius: 0px 10px 10px 0px;
+		border-radius: 0px 50px 50px 0px;
 	}
 
 	/* =================== ON LOAD =================== */
@@ -306,7 +334,6 @@
 		text-align: center;
 		margin: auto;
 		height: 100%;
-
 		display: none;
 	}
 
@@ -321,7 +348,6 @@
 		text-align: center;
 		display: none;
 	}
-
 
 	/* =================== STYLES =================== */
 	/* ---------- sign in form ---------- */
@@ -352,7 +378,7 @@
 		height: 2px;
 		left: 50%;
 		position: absolute;
-		background: var(--primary-light-blue);
+		background: var(--font-colour);
 		transition: width 0.3s ease 0s, left 0.3s ease 0s;
 		width: 0;
 	}
@@ -372,7 +398,7 @@
 		margin-bottom: 1rem;
 	}
 
-	.new-user-container h4 {
+	.new-user-container p {
 		width: 30ch;
 		margin: 0 auto 2rem;
 	}
@@ -382,59 +408,77 @@
 		margin-bottom: 1rem;	
 	}
 
-	.old-user-container h4 {
+	.old-user-container p {
 		width: 30ch;
 		margin: 0 auto 2rem;
 	}
 
 	/* ---------- submit button(s) ---------- */
+	/* sign in button */
+	#sign-in-submit-btn {
+		background-color: var(--font-colour);
+		border: 2px solid var(--font-colour);
+		width: 20rem
+	}
+
+	/* sign up button */
+	#sign-up-submit-btn {
+		background-color: var(--font-colour);
+		border: 2px solid var(--font-colour);
+		width: 20rem;
+	}
+
 	#sign-in-submit-btn:hover {
 		cursor: pointer;
-		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		background-color: var(--primary-white);
+		border-color: var(--font-colour);
+		color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 
 	#sign-up-submit-btn:hover {
 		cursor: pointer;
-		box-shadow: 0px 8px 8px 0px  rgba(0, 0, 0, 45%);
+		background-color: var(--primary-white);
+		border-color: var(--font-colour);
+		color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 
 	/* ---------- go to sign up button ---------- */
 	#go-to-sign-up-btn {
-		background-color: var(--primary-dark-blue);
-		border: 3px solid var(--primary-light-blue);
+		background-color: var(--accent-orange);
+		border: 2px solid var(--accent-orange);
+
+		color: var(--font-colour);
+
 		padding: 1rem 2rem;
-		border-radius: 100px;
+		border-radius: 1000px;
 		width: 14rem;
 		text-transform: uppercase;
+		font-family: 'Nunito Sans', sans-serif;
 		transition: var(--std-transition);
 	}
 
 	#go-to-sign-up-btn:hover {
 		cursor: pointer;
-		background-color: var(--primary-input-colour);
-		border: 3px solid var(--primary-light-blue);
-		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		border-color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 
 	/* ---------- go to sign in button ---------- */
 	#go-to-sign-in-btn {
-		background-color: var(--primary-dark-blue);
-		border: 3px solid var(--primary-light-blue);
+		background-color: var(--accent-orange);
+		border: 2px solid var(--accent-orange);
 		padding: 1rem 2rem;
 		border-radius: 100px;
-		width: 14rem;
+		width: 16rem;
 		text-transform: uppercase;
 		transition: var(--std-transition);
 	}
 
 	#go-to-sign-in-btn:hover {
 		cursor: pointer;
-		background-color: var(--primary-input-colour);
-		border: 3px solid var(--primary-light-blue);
-		box-shadow: 0px 5px 8px 0px  rgba(0, 0, 0, 45%);
+		border-color: var(--font-colour);
 		transition: var(--std-transition);
 	}
 

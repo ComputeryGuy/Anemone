@@ -1,19 +1,19 @@
 /* =================== CONSTANTS =================== */
 /* ---------- input styles ---------- */
 input[type=number] {
-	background-color: var(--primary-input-colour);
-	border-radius: var(--std-border-radius);
-	border: 2px solid var(--primary-light-blue);
+	background-color: var(--primary-white);
+	border-radius: 15px;
+	border: 2px solid var(--font-colour);
 	outline: none;
 
-	padding: .3rem;
+	padding: .5rem;
 	padding-left: .8rem;
 
 	margin-right: 1rem;
 }
 
 input[type=number]::placeholder {
-	color: var(--primary-white)
+	color: var(--font-colour)
 }
 
 input[type=number]:focus {
@@ -49,7 +49,7 @@ input[type=number]:focus {
 	width: 15px;
 	height: 15px;
 	border-radius: 100%;
-	background-color: var(--primary-light-blue);
+	background-color: var(--accent-red);
 	margin: 0 .5rem;
 }
 
@@ -64,9 +64,8 @@ input[type=number]:focus {
 
 /* ---------- join container ---------- */
 .join-container {
-	background-color: var(--primary-card-colour);
+	background-color: var(--accent-orange);
 	border-radius: var(--std-border-radius);
-	box-shadow: var(--std-box-shadow);
 
 	display: flex;
 	flex-direction: column;
@@ -92,8 +91,11 @@ input[type=number]:focus {
 
 .opt-container button {
 	border-radius: 1000px;
-	background-color: var(--primary-dark-blue);
-	border: none;
+	background-color: var(--accent-red);
+	border: 2px solid var(--accent-red);
+	font-family: 'Nunito Sans', sans-serif;
+	color: var(--primary-white);
+	text-transform: capitalize;
 }
 
 .opt-container button:not(:last-child) {
@@ -109,15 +111,17 @@ input[type=number]:focus {
 	margin-bottom: .5rem;
 }
 
-.create-selected-container h4 {
+.create-selected-container p {
 	margin: 0 auto 2rem;
+	width: 35ch;
 }
 
 /* generate pin button */
 #gen-pin-btn {
-	background-color: var(--primary-dark-blue);
-	border: none;
+	background-color: var(--accent-blue);
+	border: 2px solid var(--accent-blue);
 	border-radius: 10000px;
+	color: var(--primary-white);
 }
 
 /* your pin container */
@@ -127,8 +131,9 @@ input[type=number]:focus {
 
 .your-pin-container span {
 	font-size: 30px;
-	color: var(--primary-light-blue);
+	color: var(--accent-red);
 }
+
 .contain {
 	display: flex;
 	flex-direction: row;
@@ -159,15 +164,17 @@ input[type=number]:focus {
 }
 
 .woops button {
-	background-color: var(--primary-card-colour);
+	background-color: var(--accent-orange);
+	font-weight: 700;
 	border: none;
 }
 
 /* submit button */
 #house_pin_submit_btn {
-	background-color: var(--primary-dark-blue);
-	border: none;
-	border-radius: var(--std-border-radius);
+	background-color: var(--accent-blue);
+	border: 2px solid var(--accent-blue);
+	border-radius: 1000px;
+	color: var(--primary-white);
 }
 
 /* ---------- join household view ---------- */
@@ -179,7 +186,7 @@ input[type=number]:focus {
 	margin-bottom: .5rem;
 }
 
-.join-selected-container h4 {
+.join-selected-container p {
 	margin: 0 auto 2rem;
 	width: 50ch;
 }
@@ -188,6 +195,7 @@ input[type=number]:focus {
 @media only screen and (max-width: 40em) {
 	.main-grid {
 		grid-template-columns: repeat(4, 1fr);
+		padding: 1rem;
 	}
 
 	.join-container {
@@ -237,6 +245,7 @@ input[type=number]:focus {
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
 	.main-grid {
 		grid-template-columns: repeat(6, 1fr);
+		padding: 1rem;
 	}
 
 	.join-container {
@@ -286,7 +295,7 @@ input[type=number]:focus {
 	
 	.opt-container button:hover {
 		cursor: pointer;
-		box-shadow: var(--std-box-shadow);
+		border-color: var(--font-colour);
 		translate: 0 -4px ;
 		transition: var(--std-transition);
 	}
@@ -307,18 +316,19 @@ input[type=number]:focus {
 
 	#gen-pin-btn:hover {
 		cursor: pointer;
-		box-shadow: var(--std-box-shadow);
+		border-color: var(--font-colour);
 		translate: 0 -4px ;
 		transition: var(--std-transition);
 	}
 
 	.go-to-dash a {
+		font-weight: 700;
 		transition: var(--std-transition);
 	}
 
 	.go-to-dash a:hover {
 		cursor: pointer;
-		color: var(--primary-light-blue);
+		color: var(--primary-white);
 		transition: var(--std-transition);
 	}
 
@@ -328,7 +338,7 @@ input[type=number]:focus {
 
 	.woops button:hover {
 		cursor: pointer;
-		color: var(--primary-light-blue);
+		color: var(--primary-white);
 		transition: var(--std-transition);
 	}
 
@@ -340,7 +350,7 @@ input[type=number]:focus {
 	/* ---------- join household view ---------- */
 	#house_pin_submit_btn:hover {
 		cursor: pointer;
-		box-shadow: var(--std-box-shadow);
+		border-color: var(--font-colour);
 		translate: 0 -2px ;
 		transition: var(--std-transition);
 	}

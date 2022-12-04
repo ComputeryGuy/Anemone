@@ -26,6 +26,14 @@ $(document).ready(function () {
 	$("#add-notif-btn").click(
 		function (e) { 
 			e.preventDefault();
+
+			// on open reset form values to default
+			$(':input','#add-notif-form-container')
+				.not(':button, :submit, :reset, :hidden')
+				.val('')
+				.prop('checked', false)
+				.prop('selected', false);
+			
 			$("#add-notif-form-container").show({
 				duration: '1000'
 			});
@@ -36,9 +44,32 @@ $(document).ready(function () {
 	$("#exit-btn").click(
 		function (e) { 
 			e.preventDefault();
+
+			// on exit reset form values to default
+			$(':input','#add-notif-form-container')
+				.not(':button, :submit, :reset, :hidden')
+				.val('')
+				.prop('checked', false)
+				.prop('selected', false);
+			
 			$("#add-notif-form-container").hide({
 				duration: '1000'
 			});
 		}
 	);
+
+	/* =================== RESTRICT DUE DATE =================== */
+	// return today's date as MM/DD/YYYY
+	var d = new Date(); // creates a date object
+	var month = d.getMonth()+1; // gets the month
+	var day = d.getDate(); // gets the day
+
+	// returns today's date as YYYY-MM-DD
+	var maxDate = d.getFullYear() + '-' 
+	+ ((''+month).length<2 ? '0' : '') + month + '-' +
+	((''+day).length<2 ? '0' : '') + day;
+
+	// restricts due date input to only selecting dates after today's date
+	// $('#end_date').attr('min', maxDate);
+
 });
