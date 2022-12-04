@@ -1,0 +1,223 @@
+/* =================== CONSTANTS =================== */
+form {
+	margin-top: .5rem;
+	margin-left: 1rem;
+}
+
+input {
+	margin-right: .5rem;
+}
+
+input[type=text], input[type=number], input[type=password] {
+	background-color: var(--primary-white);
+	border: 2px solid var(--font-colour);
+	padding: .5rem;
+	outline: none;
+	border-radius: 10px;
+	color: var(--font-colour);
+	transition: var(--std-transition);
+}
+
+input:focus {
+	border-color: var(--accent-red);
+	transition: var(--std-transition);
+}
+
+input::placeholder {
+	color: var(--accent-darker-grey);
+}
+
+button {
+	background-color: var(--accent-orange);
+	border: 2px solid var(--accent-orange);
+	border-radius: 10000px;
+	padding: .5rem 1rem;
+	transition: var(--std-transition);
+}
+
+hr {
+	margin: 1.5rem 0;
+	border: 5px dotted;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-color: var(--accent-grey);
+}
+
+#user-prof, #update-acct, #del-smthing {
+	color: var(--accent-blue);
+	/* transition: var(--std-transition); */
+}
+
+/* =================== settings nav =================== */
+.nav-list {
+	list-style: none;
+}
+
+/* =================== settings container =================== */
+.settings-container {
+	padding: 1rem;
+}
+
+/* ---------- user container ---------- */
+.user-container div:not(:first-child) {
+	margin-top: 1rem;
+}
+
+#user-prof {
+	margin-bottom: 1rem;
+}
+
+.current-user-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.container {
+	margin: 0 4rem;
+	text-align: center;
+}
+
+.curr-user {
+	width: 8rem;
+	height: 8rem;
+	border: 4px solid var(--accent-red);
+	border-radius: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: .3rem;
+	margin: 0 auto 0.5rem;
+}
+
+.current-user-container img {
+	width: 6.5rem;
+	height: 6.5rem;
+}
+
+/* ---------- user information container ---------- */
+.user-information-container div {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	margin-bottom: .5rem;
+}
+
+.user-information-container p {
+	margin-right: .5rem;
+}
+
+/* ---------- list of roommates ---------- */
+.user-container h3 {
+	margin-bottom: .3rem;
+}
+
+.roommates-list {
+	list-style: none;
+	margin-left: 1rem;
+}
+
+
+.updating-account-container, .deleting-smthing-container {
+	margin-top: 6rem;
+}
+
+/* ---------- updating user account container ---------- */
+.updating-account-container div h3, .deleting-smthing-container div h3 {
+	margin-bottom: .3rem;
+}
+
+/* ---------- updating account container ---------- */
+#update-acct, #del-smthing {
+	margin-bottom: .7rem;
+}
+
+
+
+/* =================== primary media query =================== */
+
+/* =================== media queries =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 4;
+		padding: 1rem;
+	}
+
+	/* =================== settings nav =================== */
+	.settings-nav {
+		display: none;
+	}
+}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 6;
+		padding: 1rem;
+	}
+
+	/* =================== settings nav =================== */
+	.settings-nav {
+		display: none;
+	}
+}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {
+
+	.left-section {
+		grid-column: span 1;
+	}
+
+	.middle-section {
+		grid-column: span 11;
+		padding: 1rem;
+
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 10px;
+	}
+
+	/* =================== settings nav =================== */
+	.settings-nav {
+		grid-column: span 1;
+	}
+
+	.settings-container {
+		grid-column: span 1;
+	}
+
+	button:hover {
+		cursor: pointer;
+		background-color: var(--accent-red);
+		border-color: var(--accent-red);
+		transition: var(--std-transition);
+	}
+}
