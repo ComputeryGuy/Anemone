@@ -22,6 +22,23 @@
 	</div>
 
 	<form method="post" class="notif-form">
+		<!-- <div class="notif-title-container">
+			<label for="notif_title"></label>
+			<input type="text" name="" id="notif_title" placeholder="Title">
+		</div>
+		
+		<div class="notif-detail-container">
+			<label for="notif_detail"></label>
+			<textarea name="" id="notif_detail" cols="70" maxlength="60" rows="3" placeholder="Details"></textarea>
+		</div>
+		
+		<div class="notif-deadline-container">
+			<label for="notif_deadline">
+				<p>Deadline:</p>
+			</label>
+			<input type="date" name="" id="notif_deadline">
+		</div> -->
+		
 		{% csrf_token %}
 		{{ form.as_p }}
 		<div class="submit-notif-container">
