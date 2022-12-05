@@ -1,4 +1,3 @@
-
 /* =================== CONSTANTS =================== */
 .middle-section {
 	padding: 1rem;
@@ -97,6 +96,69 @@ column ---------- */
 	.column {
 		grid-column: span 1;
 	}
+
+	
+	/* =================== global: navigation -- mobile =================== */
+	.mobile-nav-container {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+
+	.mobile-nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 0 2rem;
+		background-color: var(--font-colour);
+	}
+
+	.menu-item {
+		background-color: var(--font-colour);
+		width: 3.5rem;
+		height: 3.5rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.menu-item.mobile-current {
+		background-color: var(--accent-light-blue);
+	}
+
+	.menu-item:nth-child(n):hover {
+		background-color: var(--accent-red);
+	}
+
+	.menu-item:nth-child(2n):hover {
+		background-color: var(--accent-orange);
+	}
+
+	.menu-item:nth-child(3n):hover {
+		background-color: var(--accent-blue);
+	}
+
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.nav-link .material-symbols-rounded {
+		margin: 0;
+		color: var(--primary-white);
+	}
+
+	.menu-item:hover {
+		cursor: pointer;
+	}
+
 }
 
 /* =================== TABLET =================== */
@@ -126,6 +188,69 @@ column ---------- */
 	.column {
 		grid-column: span 1;
 	}
+
+
+	/* =================== global: navigation -- mobile =================== */
+	.mobile-nav-container {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+
+	.mobile-nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 0 2rem;
+		background-color: var(--font-colour);
+	}
+
+	.menu-item {
+		background-color: var(--font-colour);
+		width: 3.5rem;
+		height: 3.5rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.menu-item.mobile-current {
+		background-color: var(--accent-light-blue);
+	}
+
+	.menu-item:nth-child(n):hover {
+		background-color: var(--accent-red);
+	}
+
+	.menu-item:nth-child(2n):hover {
+		background-color: var(--accent-orange);
+	}
+
+	.menu-item:nth-child(3n):hover {
+		background-color: var(--accent-blue);
+	}
+
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.nav-link .material-symbols-rounded {
+		margin: 0;
+		color: var(--primary-white);
+	}
+
+	.menu-item:hover {
+		cursor: pointer;
+	}
+
 }
 
 /* =================== DESKTOP AND BEYOND =================== */
