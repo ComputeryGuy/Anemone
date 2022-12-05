@@ -1,30 +1,26 @@
 /* =================== CONSTANTS =================== */
-h3 {
+.middle-section h3 {
 	color: var(--accent-red);
 	margin-bottom: .3rem;
 }
 
-br {
+.middle-section div:not(:first-child) {
 	margin: 1rem 0;
 }
 
-div:not(:first-child) {
-	margin: 1rem 0;
-}
-
-a {
+.middle-section a {
 	cursor: pointer;
 	color: var(--accent-blue);
 	text-decoration: underline;
 	transition: var(--std-transition);
 }
 
-a:hover {
+.middle-section  a:hover {
 	color: var(--accent-red);
 	transition: var(--std-transition);
 }
 
-span {
+.middle-section span {
 	font-weight: 600;
 	color: var(--accent-blue);
 }
@@ -83,6 +79,9 @@ span {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		border: 2px solid var(--font-colour);
+		border-radius: 100%;
 	}
 
 	.menu-item.mobile-current {
@@ -91,22 +90,25 @@ span {
 
 	.menu-item:nth-child(n):hover {
 		background-color: var(--accent-red);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(2n):hover {
 		background-color: var(--accent-orange);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(3n):hover {
 		background-color: var(--accent-blue);
+		transition: var(--std-transition);
 	}
-
 
 	.nav-link {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		text-decoration: none;
 	}
 
 	.nav-link .material-symbols-rounded {
@@ -163,6 +165,9 @@ span {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		border: 2px solid var(--font-colour);
+		border-radius: 100%;
 	}
 
 	.menu-item.mobile-current {
@@ -171,22 +176,25 @@ span {
 
 	.menu-item:nth-child(n):hover {
 		background-color: var(--accent-red);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(2n):hover {
 		background-color: var(--accent-orange);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(3n):hover {
 		background-color: var(--accent-blue);
+		transition: var(--std-transition);
 	}
-
 
 	.nav-link {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		text-decoration: none;
 	}
 
 	.nav-link .material-symbols-rounded {
@@ -213,5 +221,6 @@ span {
 	.middle-section {
 		grid-column: span 11;
 		padding: 1rem;
+		padding-right: 7rem;
 	}
 }

@@ -230,6 +230,9 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		border: 2px solid var(--font-colour);
+		border-radius: 100%;
 	}
 
 	.menu-item.mobile-current {
@@ -238,22 +241,25 @@
 
 	.menu-item:nth-child(n):hover {
 		background-color: var(--accent-red);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(2n):hover {
 		background-color: var(--accent-orange);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(3n):hover {
 		background-color: var(--accent-blue);
+		transition: var(--std-transition);
 	}
-
 
 	.nav-link {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		text-decoration: none;
 	}
 
 	.nav-link .material-symbols-rounded {
@@ -321,6 +327,9 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
+		border: 2px solid var(--font-colour);
+		border-radius: 100%;
 	}
 
 	.menu-item.mobile-current {
@@ -329,24 +338,27 @@
 
 	.menu-item:nth-child(n):hover {
 		background-color: var(--accent-red);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(2n):hover {
 		background-color: var(--accent-orange);
+		transition: var(--std-transition);
 	}
 
 	.menu-item:nth-child(3n):hover {
 		background-color: var(--accent-blue);
+		transition: var(--std-transition);
 	}
-
 
 	.nav-link {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		text-decoration: none;
 	}
-
+	
 	.nav-link .material-symbols-rounded {
 		margin: 0;
 		color: var(--primary-white);
