@@ -1,6 +1,6 @@
 /* =================== CONSTANTS =================== */
 
-/* ---------- sub-header ---------- */
+
 
 
 /* =================== primary media query =================== */
@@ -8,10 +8,49 @@
 /* =================== media queries =================== */
 
 /* =================== MOBILE =================== */
-@media only screen and (max-width: 40em) {}
+@media only screen and (max-width: 40em) {
+	.main-grid {
+		grid-template-columns: repeat(4, 1fr);
+		/* grid-template-rows: ; */
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 4;
+		padding: 1rem;
+	}
+}
 
 /* =================== TABLET =================== */
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.main-grid {
+		grid-template-columns: repeat(6, 1fr);
+		/* grid-template-rows: ; */
+	}
+
+	/* ---------- hide desktop nav ---------- */
+	.left-section {
+		display: none;
+	}
+
+	.middle-section {
+		grid-column: span 6;
+		padding: 1rem;
+	}
+}
 
 /* =================== DESKTOP AND BEYOND =================== */
-@media only screen and (min-width: 64.063em) {}
+@media only screen and (min-width: 64.063em) {
+	.left-section {
+		grid-column: span 1;
+	}
+
+	.middle-section {
+		grid-column: span 11;
+		padding: 1rem;
+	}
+}
