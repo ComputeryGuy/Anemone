@@ -131,30 +131,31 @@
 							<img src="{% static '/users/assets/icons/logo-current-user.png' %}" alt="">
 						</div>
 						<!-- user first and last name -->
-						<p>{{ user.profile.first_name }} "NickName" {{ user.profile.last_name }}</p>
+						<p>{{ user.profile.first_name }} "{{ user.profile.adjective }} {{ user.profile.noun }}" {{ user.profile.last_name }}</p>
 					</div>
 
 					<div class="user-information-container">
 						<div>
 							<!-- user username -->
-							<p>Username: {{ user_name }}</p>
+							<p>Username: {{ user.username }}</p>
 						</div>
 
+						<!--
 						<div>
-							<!-- user password -->
 							<p>
 								Password: 
 								<span id="user-pass">******</span>
 							</p>
 							<button>Show</button>
 						</div>
+						-->
 
 						<div>
 							<!-- house pin -->
 							<p>
-								Your house pin is: <span id="house-pin">XXXX</span>
+								Your house pin is: <span id="house-pin">{{ household.pin }}</span>
 							</p>
-							<button>Show</button>
+							<!--<button>Show</button>-->
 						</div>
 					</div>
 				</div>
@@ -182,18 +183,25 @@
 							Your name is visible to all roommates.
 						</p>
 						<form action="" method="post">
-							<input type="text" name="" id="" placeholder="{{ user.profile.first_name }}">
+							{% csrf_token %}
+							<input type="text" name="first_name" id="" value="{{ user.profile.first_name }}">
 
-							<select name="nickname" id="nickname_noun_list">
-								<option value="noun">insertNoun</option>
+							<select name="adjective" id="nickname_adjective_list">
+								<option value="No">No</option>
+								{% for adjective in adjectives %}
+								<option value="{{ adjective }}">{{ adjective }}</option>
+								{% endfor %}
 							</select>
 
-							<select name="nickname" id="nickname_adjective_list">
-								<option value="adjective">insertADJ</option>
+							<select name="noun" id="nickname_noun_list">
+								<option value="Nickname">Nickname</option>
+								{% for noun in nouns %}
+								<option value="{{ noun }}">{{ noun }}</option>
+								{% endfor %}
 							</select>
 
-							<input type="text" name="" id="" placeholder="{{ user.profile.last_name }}">
-							<button type="submit">Update Name</button>
+							<input type="text" name="last_name" id="" value="{{ user.profile.last_name }}">
+							<button type="submit" name="submit" value="name_change">Update Name</button>
 						</form>
 						
 					</div>
@@ -203,20 +211,32 @@
 					<div class="change-username">
 						<h3>Change Username</h3>
 						<form action="" method="post">
-							<input type="text" name="" id="change_username" placeholder="{{ user_name }}">
-							<button type="submit">Update username</button>
+							{% csrf_token %}
+							<input type="text" name="user_name" id="change_username" placeholder="{{ user_name }}">
+							<button type="submit" name="submit" value="username_change">Update username</button>
+							{% if messages %}
+							<ul class="messages">
+							    {% for message in messages %}
+     							    {%if "username" in message.tags %}
+							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    {% endif %}
+							    {% endfor %}
+							</ul>
+							{% endif %}
 						</form>
 					</div>
 
+					<!--
 					<hr>
-					<!-- change password form -->
 					<div class="change-password">
 						<h3>Change Password</h3>
 						<form action="" method="post">
-							<input type="password" name="" id="change_password" placeholder="*****">
-							<button type="submit">Change password</button>
+							{% csrf_token %}
+							<input type="password" name="password" id="change_password" placeholder="*****">
+							<button type="submit" name="submit" value="password_change">Change password</button>
 						</form>
 					</div>
+					-->
 
 					<hr>
 					<!-- leave household -->
@@ -226,8 +246,18 @@
 							Please enter the pin of the household you would like to join.
 						</p>
 						<form action="" method="post">
-							<input type="number" name="" id="change_house">
-							<button>Change Household</button>
+							{% csrf_token %}
+							<input type="number" name="new_pin" id="change_house">
+							<button type="submit" name="submit" value="household_change">Change Household</button>
+							{% if messages %}
+							<ul class="messages">
+							    {% for message in messages %}
+							    {%if "change_household" in message.tags %}
+							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    {% endif %}
+							    {% endfor %}
+							</ul>
+							{% endif %}
 						</form>
 					</div>
 				</div>
@@ -246,8 +276,16 @@
 							To delete your account, enter your password below.
 						</p>
 						<form action="" method="post">
-							<input type="password" name="" id="del_acct_pass">
-							<button type="submit">Delete Account</button>
+							{% csrf_token %}
+							<input type="password" name="password" id="del_acct_pass">
+							<button type="submit" name="submit" value="delete_account">Delete Account</button>
+							<ul class="messages">
+							    {% for message in messages %}
+							    {%if "delete_account" in message.tags %}
+							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    {% endif %}
+							    {% endfor %}
+							</ul>						
 						</form>
 					</div>
 
@@ -264,8 +302,16 @@
 							To delete your household, enter the household pin below.
 						</p>
 						<form action="" method="post">
-							<input type="number" name="" id="del_house">
-							<button type="submit">Delete Household</button>
+							{% csrf_token %}
+							<input type="number" name="pin" id="del_house">
+							<button type="submit" name="submit" value="delete_household">Delete Household</button>
+							<ul class="messages">
+							    {% for message in messages %}
+							    {%if "delete_household" in message.tags %}
+							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    {% endif %}
+							    {% endfor %}
+							</ul>							
 						</form>
 					</div>
 				</div>

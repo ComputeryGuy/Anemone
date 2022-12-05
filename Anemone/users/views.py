@@ -610,7 +610,71 @@ def lootbox(request):
 
 def settings(request):
     if request.user.is_authenticated:
-        return render(request, 'users/settings.html', {})
+        user = request.user
+        household = user.profile.household
+        if request.method == 'POST':
+            if request.POST.get('submit') == 'name_change':
+                first_name = request.POST.get('first_name', '')
+                last_name = request.POST.get('last_name', '')
+                adjective = request.POST.get('adjective', '')
+                noun = request.POST.get('noun', '')
+                profile = user.profile
+                profile.first_name = first_name
+                profile.last_name = last_name
+                profile.adjective = adjective
+                profile.noun = noun
+                profile.save()
+            if request.POST.get('submit') == 'username_change':
+                try:
+                    new_username = request.POST.get('user_name', '')
+                    user = User.objects.exclude(pk=self.instance.pk).get(username=new_username)
+                    user.username = new_username
+                    user.save()
+                except:
+                    messages.add_message(request, messages.INFO, 'Username is taken or invalid.', extra_tags="username")
+            if request.POST.get('submit') == 'household_change':
+                try:
+                    new_pin = int(request.POST.get('new_pin', ''))
+                    new_household = Household.objects.get(pin=new_pin)
+                    user.profile.household = new_household
+                    user.profile.save()
+                except:
+                    messages.add_message(request, messages.INFO, 'No household with that pin found.', extra_tags="change_household")
+                return redirect('settings')
+            if request.POST.get('submit') == 'delete_account':
+                try:
+                    password = request.POST.get('password', '')
+                    pass_correct = user.check_password(password)
+                    if not pass_correct:
+                        raise Exception
+                    logout(request)
+                    user.delete()
+                    return redirect('home')
+                except:
+                    messages.add_message(request, messages.INFO, 'Password was incorrect.', extra_tags="delete_account")
+            if request.POST.get('submit') == 'delete_household':
+                try:
+                    pin = request.POST.get('pin', '')
+                    print(pin != household.pin)
+                    if pin != household.pin:
+                        raise Exception
+                    household.delete()
+                    return redirect('home')
+                except:
+                    messages.add_message(request, messages.INFO, 'Pin was incorrect.', extra_tags="delete_household")
+
+
+        members_by_name = household.members.all().order_by('first_name')
+        lootboxes = user.profile.lootbox_owner
+        adjectives = lootboxes.values_list('adjective', flat=True)
+        nouns = lootboxes.values_list('noun', flat=True)
+        
+        context = {'user': user,
+                   'household': household,
+                   'members_by_name': members_by_name,
+                   'adjectives': adjectives,
+                   'nouns': nouns,}
+        return render(request, 'users/settings.html', context)
         
 
 def guide(request):

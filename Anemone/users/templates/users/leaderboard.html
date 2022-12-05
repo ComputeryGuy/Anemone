@@ -140,7 +140,7 @@
 					{% for member in members_by_pts %}
 					<div class="table-row data">
 						<p class="rank">{{ forloop.counter }}</p>
-						<p class="name">{{ member.first_name }} "Nickname" {{ member.last_name }}</p>
+						<p class="name">{{ member.first_name }} "{{ member.adjective }} {{ member.noun }}" {{ member.last_name }}</p>
 						<p class="score">{{ member.fortnight_xp }}</p>
 					</div>
 					{% endfor %}
@@ -169,7 +169,7 @@
 					</div>
 					<h3 class="user-name-container">
 						<span id="firstname">{{ profile.first_name }}</span>
-						<span id="adjective">"{{ profile.nickname }}"</span>
+						<span id="adjective">"{{ profile.adjective }} {{ profile.noun }}"</span>
 						<span id="lastname">{{ profile.last_name }}</span>
 					</h3>
 				</div>
@@ -270,7 +270,7 @@
 			// labels for each data
 			const labels = [
 				{% for member in members_by_name %}
-					'{{ member.first_name }} "nickname" {{ member.last_name }}', 
+					'{{ member.first_name }} "{{ member.adjective }} {{ member.noun }}" {{ member.last_name }}', 
 				{% endfor %}
 			];
 			const bgclrs = [

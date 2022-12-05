@@ -34,6 +34,9 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=20, null=True)
     profile_picture = models.ImageField(null=True, blank=True, upload_to="images/", default='images/logo-round.jpg')
     
+    adjective = models.CharField(max_length=55, null=True, default="No")
+    noun = models.CharField(max_length=55, null=True, default="Nickname")
+
     points = models.IntegerField(default=0, verbose_name="points")
     tasks_finished = models.IntegerField(default=0, verbose_name="tasks finished")
     household = models.ForeignKey(Household, default=None, on_delete=models.SET_NULL, null=True, related_name = "members")
@@ -49,7 +52,7 @@ class Profile(models.Model):
     highestLevelReached = models.IntegerField(default=0)
 
     ##lootbox/ lootbox rewards
-    lootboxes = models.IntegerField(default=0, verbose_name="lootboxes")
+    lootboxes = models.IntegerField(default=3, verbose_name="lootboxes")
 
     fortnight_xp = models.IntegerField(default=0)
     def open_lootbox(self):
