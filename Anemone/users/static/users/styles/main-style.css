@@ -5,25 +5,8 @@
 
 /* =================== global variables =================== */
 :root {
-	/* primary colours */
-	--primary-white: white;
-	
-	--primary-light-blue: #6bafff;
-	--primary-dark-blue: #006FF2;
-	
-	--primary-background-colour: #212229;
-	--primary-card-colour: #30353f;
-	
-	--std-left-border: 3px solid var(--primary-light-blue);
-	--std-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 45%);
-	
-	--primary-form-colour: #005FCF;
-	
-	/* 50% of the primary-light-blue */
-	--primary-input-colour: rgba(107, 175, 255, 50%);
-	
-	/* =================== Re-Style =================== */
 	--background-colour: #FFF9ED;
+
 	--font-colour: #22254C;
 	--accent-blue: #6488E5;
 	--accent-orange: #F9BE7D;
@@ -31,8 +14,10 @@
 	--accent-light-blue: #BAC4E1;
 	--accent-grey: #D1D1D6;
 	--accent-darker-grey: #b0b0b0;
+	--primary-white: white;
+
 	--std-border-radius: 30px;
-	--std-transition: all .3s ease-in-out;
+	--std-transition: all .2s ease-in-out;
 
 }
 

@@ -94,93 +94,138 @@
 	</section>
 	
 	<section class="middle-section">
-	
+		
 		<div class="game-guide-container">
-			<h1>Game Play Guide</h1>
-			<p><em>Hello, and Welcome to Phourtnight&reg;&trade;!</em>
-				<br>
-				<em>You and all your roommates are in a household and ready to play?</em>
-				<br>
-				<em>Then let’s get started!</em>
-				<br>
-				<br>
+			<h1 class="header">Game Play Guide</h1>
 
-				<b>How the game actually works:</b>
+			<div class="opening-sub-text">
+				<em>Hello and Welcome to Phourtnight!</em>
 				<br>
-				
-				<b>Overview:</b>
-				Phourtnight&reg;&trade; is a collaborative game that can be played with any group of people that shares a living space. The goal of the game is to collect points by completing tasks, level up, and get lootboxes with special rewards!
+				<em>Are you and all your roommates in a household and ready to play?</em>
 				<br>
-				<br>
-				<b>Task Creation:</b>
-				To begin, household members create tasks that the household needs done. These can be any kind of tasks, your imagination is the limit. Using the navbar, navigate to the “Tasks” page. 
-				Then click the "Add Task" button, and add a descriptive name for the task, details about the task, and the day the task is due by. Then click the "Create Task" button to confirm. 
-				<br>
-				<br>
-				Every member of the household can now see this task in their “Unclaimed” column on the task board. And now they can bid.
-				<br>
-				<br>
+				<em>Then let's get started!</em>
+			</div>
 
-				<b>Bidding:</b>
-				Users bid the lowest amount of points they are willing to complete a task for. After 24 hours the task is assigned to the lowest bidder. But if no one bids, 
-				then the task is assigned randomly. This ensures even tasks no one wants to do get done!
-				<br>
-				<br>
+			<h2>How the Game Works</h2>
 
-				
-				
-				<b>Getting Points:</b>
-				Once someone is assigned a task, it will show up in the "To Do" section of the task board. Once a player has started a task, they can move the task from "To Do" to "In Progress" to help everyone track the work of the household. Upon completion a player can drag and drop the task to "Completed" and they are then awarded points! 
-				Players have until the specified deadline to complete tasks. 
-				Upon completion, they will be rewarded the amount of points they agreed to complete the task for. 
-				<br>
-				<br>
-				(Note that all tasks assigned to all players in the household are visible on the task board. This ensure transparency and accountability amongst players.)
-				<br>
-				<br>
-
-
-				Points gained over the course of a two week period--“Phourtnight&reg;&trade;”, if you will-- show up in the leaderboard. The player with the most points at the end wins the "Phourtnight&reg;&trade;” and gets bragging rights!
-				<br>
-				<br>
-
-				<b>Kudos:</b>
-				In addition, players can award points to each other for actions they deem beneficial to the household, whether it be acts of kindness, short notice favors, or anything else. The sky's the limit.
-				<br>
-				<br>
-				Do this by navigating to the Leaderboard and clicking on the THUMBS UP next to the deserving party's name. 
-				Each click grants them 10 points. Click as many times as you think they deserve. 
-				<br>
-				<br>
-				Did they help you tie your shoes? Maybe just one click.
-				<br>
-				Did they <em>teach</em> you how to tie your shoes? I'd say they deserve five clicks.
-				<br>
-				<br>
-				Think of this as sort of a "Like Button" for anything other players do.
-				
-
-				<br>
-				<br>
-
-				<b>Leveling UP:</b>
-				When a player gets enough points, they level up. Leveling up to a new level awards a player with a loot box, which contains customization options for a player’s leaderboard name. The more you level up, the more lootboxes you recieve, and 
-				the more customization options you unlock!
-				<br>
-				<br>
-				Click on the "Loot Box" section of your nav bar to navigate to the Loot Box opening page and click roll. 
-				The words that pop up are now yours to keep and customize your Leaderboard Display Name with! 
-				<br>
-				<br>
-				<b>Finally:</b>
-				There are other pretty useful features to the app, like household notifications, but make sure you play the game. 
-				<br>
-				<b>Conquer</b> your roommates. 
-				<br>
-				<b>Rule</b> the household. 
-				<br>
-				<b>Become king</b> of – <b><em>The Phourtnight&reg;&trade;!</em></b>
+			<div class="overview-container">
+				<h3>Overview</h3>
+				<p>
+					Phourtnight is a collaborative game
+					that may be played with any number of people
+					who share a house.
+					The purpose of the game is to accumulate points by completing tasks,
+					levelling up, and obtaining lootboxes containing special rewards!
 				</p>
+			</div>
+
+			<div class="task-create-container">
+				<h3>Task Creation</h3>
+				<p>
+					To begin, members of the household set tasks that must be completed.
+					Your creativity is the only restriction on what they may be.
+					Using the navigation bar on your left, navigate to the 
+					<span>
+						<a href="{% url 'taskboard' %}">Tasks</a>
+					</span> page.
+					<br>
+					<br>
+					Then click on the <span>Add Task</span> button, add a name for the task, details about the task,
+					and the day the task is due by. 
+					Finally, click the <span>Create Task</span> button to confirm.
+					<br>
+					<br>
+					Now, every member of the household can see this task in the <span>Uncalimed</span>
+					column on the task board. From here, every member can bid.
+				</p>
+			</div>
+
+			<div class="bid-container">
+				<h3>Bidding</h3>
+				<p>
+					Members bid the lowest number of points they are willing to complete a task for. 
+					After 24 hours the task is assigned to the lowest bidder.
+					If no one bids, the task is assigned at random.
+					This ensures that tasks that on one wishes to complete are done!
+				</p>
+			</div>
+			
+			<div class="get-points-container">
+				<h3>Getting Points</h3>
+				<p>
+					Once a member is assigned a task, the now claimed task will show in the <span>To Do</span> column of the task board.
+					Once a member has started a task, only they can move the task from the <span>To Do</span> column
+					to the <span>In Progress</span> column.
+					This will help members keep track of the tasks currently being completed.
+					Members have until the specified deadline to compelete tasks.
+					Upon completion, the member who claimed the task can drag-and-drop the task into the <span>Completed</span> column and
+					they are awared points accordingly!
+					<br>
+					<br>
+					Please note that all tasks on the task board are visible to all members in the household.
+					This ensures transparency and accountability amongst members.
+					<br>
+					<br>
+					Points gained over the course of a two week period - a <span>Phourtnight</span> - will show in the leaderboard.
+					The member with the most points at the end wins the Phourtnight and gets bragging rights!
+				</p>
+			</div>
+
+			<div class="kudos-container">
+				<h3>Kudos</h3>
+				<p>
+					In addition, members can award other members points for actions they deem beneficial to the household,
+					wheither that be acts of kindness, short notice favours, or anything else. The sky's the limit!
+					<br>
+					<br>
+					To award kudos, navigate to the 
+					<span>
+						<a href="{% url 'leaderboard' %}">Leaderboard</a>
+					</span> and click the &#128077; next to the members name. Each click grants them +10 points.
+					Click as many times as you believe they deserve.
+					<br>
+					<br>
+					Think of kudos as sort of a "Like Button" for anything a member does.
+				</p>
+			</div>
+
+			<div class="levelling-container">
+				<h3>Levelling Up</h3>
+				<p>
+					When a member gains enough points, they level up.
+					A member who has levelled up will gain a lootbox which contains customisation options for a player's leaderboard name.
+					The more a member levels up, the more lootboxes a member receives, and the more customisation options a member unlocks!
+					<br>
+					<br>
+					Click on the 
+					<span>
+						<a href="{% url 'lootbox' %}">Lootbox</a>
+					</span> section of the navigation bar to go to the lootbox and click <span>Roll</span>.
+					The noun-adjective combination that is rolled is yours to keep and to customise your leaderboard display name with.
+				</p>
+			</div>
+
+			<div class="end-notes">
+				<h3>Finally</h3>
+				<p>
+					There are some other pretty useful features to our app, like household notificatoins, 
+					but you have to play the game to find out!
+				</p>
+			</div>
+
+			<div class="ending-sub-text">
+				<h3>
+					<em>Conquer your Roommates.</em>
+				</h3>
+
+				<h3>
+					<em>Rule the Household.</em>
+				</h3>
+
+				<h3>
+					<em>Become the King or Queen of the Phourtnight!</em>
+				</h3>
+			</div>
 		</div>
 	</section>
 </div>

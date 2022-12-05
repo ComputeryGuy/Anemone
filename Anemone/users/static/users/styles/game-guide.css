@@ -1,5 +1,41 @@
 /* =================== CONSTANTS =================== */
+h3 {
+	color: var(--accent-red);
+	margin-bottom: .3rem;
+}
 
+br {
+	margin: 1rem 0;
+}
+
+div:not(:first-child) {
+	margin: 1rem 0;
+}
+
+a {
+	cursor: pointer;
+	color: var(--accent-blue);
+	text-decoration: underline;
+	transition: var(--std-transition);
+}
+
+a:hover {
+	color: var(--accent-red);
+	transition: var(--std-transition);
+}
+
+span {
+	font-weight: 600;
+	color: var(--accent-blue);
+}
+
+.opening-sub-text *, .ending-sub-text * {
+	color: var(--accent-darker-grey);
+}
+
+.ending-sub-text {
+	text-align: center;
+}
 
 /* =================== primary media query =================== */
 
@@ -9,7 +45,6 @@
 @media only screen and (max-width: 40em) {
 	.main-grid {
 		grid-template-columns: repeat(4, 1fr);
-		/* grid-template-rows: ; */
 	}
 
 	/* ---------- hide desktop nav ---------- */
@@ -27,7 +62,6 @@
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
 	.main-grid {
 		grid-template-columns: repeat(6, 1fr);
-		/* grid-template-rows: ; */
 	}
 
 	/* ---------- hide desktop nav ---------- */
