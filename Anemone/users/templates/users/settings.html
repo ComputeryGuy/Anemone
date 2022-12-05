@@ -99,7 +99,7 @@
 		<nav class="settings-nav">
 			<ul class="nav-list">
 				<li class="list-item">
-					<a href="#user-prof" class="nav-link desktop-current">
+					<a href="#user-prof" class="nav-link">
 						User Profile
 					</a>
 				</li>
@@ -160,6 +160,7 @@
 					</div>
 				</div>
 
+				<hr>
 				<div class="roommates-list-container">
 					<!-- list of house members -->
 					<h3>Roommates</h3>
@@ -170,7 +171,7 @@
 					</ul>
 				</div>
 			</div>
-
+			
 			<div class="user-settings-container">
 
 				<div class="updating-account-container">
@@ -184,23 +185,23 @@
 						</p>
 						<form action="" method="post">
 							{% csrf_token %}
-							<input type="text" name="first_name" id="" value="{{ user.profile.first_name }}">
+							<input type="text" name="first_name" id="" placeholder="{{ user.profile.first_name }}">
 
 							<select name="adjective" id="nickname_adjective_list">
-								<option value="No">No</option>
+								<option value="">Adjective</option>
 								{% for adjective in adjectives %}
 								<option value="{{ adjective }}">{{ adjective }}</option>
 								{% endfor %}
 							</select>
 
 							<select name="noun" id="nickname_noun_list">
-								<option value="Nickname">Nickname</option>
+								<option value="">Noun</option>
 								{% for noun in nouns %}
 								<option value="{{ noun }}">{{ noun }}</option>
 								{% endfor %}
 							</select>
 
-							<input type="text" name="last_name" id="" value="{{ user.profile.last_name }}">
+							<input type="text" name="last_name" id="" placeholder="{{ user.profile.last_name }}">
 							<button type="submit" name="submit" value="name_change">Update Name</button>
 						</form>
 						
@@ -218,8 +219,8 @@
 							<ul class="messages">
 							    {% for message in messages %}
      							    {%if "username" in message.tags %}
-							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-							    {% endif %}
+							    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    	{% endif %}
 							    {% endfor %}
 							</ul>
 							{% endif %}
@@ -252,9 +253,9 @@
 							{% if messages %}
 							<ul class="messages">
 							    {% for message in messages %}
-							    {%if "change_household" in message.tags %}
-							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-							    {% endif %}
+							    	{%if "change_household" in message.tags %}
+							    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							   		{% endif %}
 							    {% endfor %}
 							</ul>
 							{% endif %}
@@ -281,9 +282,9 @@
 							<button type="submit" name="submit" value="delete_account">Delete Account</button>
 							<ul class="messages">
 							    {% for message in messages %}
-							    {%if "delete_account" in message.tags %}
-							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-							    {% endif %}
+							    	{%if "delete_account" in message.tags %}
+							    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+									{% endif %}
 							    {% endfor %}
 							</ul>						
 						</form>
@@ -307,9 +308,9 @@
 							<button type="submit" name="submit" value="delete_household">Delete Household</button>
 							<ul class="messages">
 							    {% for message in messages %}
-							    {%if "delete_household" in message.tags %}
-							    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-							    {% endif %}
+							    	{%if "delete_household" in message.tags %}
+							    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							    	{% endif %}
 							    {% endfor %}
 							</ul>							
 						</form>
@@ -323,5 +324,4 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{% static 'users/actions/settings.js' %}"></script>
 {% endblock %}
