@@ -9,6 +9,89 @@
 <div class="main-grid">
 		
 	<section class="left-section">
+
+		<!-- desktop nav -->
+		<nav id="nav-sidebar">
+
+			<div class="logo-container">
+				<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+			</div>
+
+			<div class="nav-sidebar-content">
+
+				<ul class="list">
+
+					<!-- dashboard -->
+					<li class="list-item">
+						<a href="{% url 'dashboard' %}" class="nav-link">
+							<span class="material-symbols-rounded mobile-current">dashboard</span>
+							<span class="link">Dashboard</span>
+						</a>
+					</li>
+
+					<!-- tasks -->
+					<li class="list-item">
+						<a href="{% url 'taskboard' %}" class="nav-link">
+							<span class="material-symbols-rounded">task_alt</span>
+							<span class="link">Tasks</span>
+						</a>
+					</li>
+
+					<!-- notifications/bulletin -->
+					<li class="list-item">
+						<a href="{% url 'bulletin' %}" class="nav-link">
+							<span class="material-symbols-rounded">notifications</span>
+							<span class="link">Notifications</span>
+						</a>
+					</li>
+
+					<!-- leaderboard -->
+					<li class="list-item">
+						<a href="{% url 'leaderboard' %}" class="nav-link">
+							<span class="material-symbols-rounded">leaderboard</span>
+							<span class="link">Leaderboard</span>
+						</a>
+					</li>
+
+					<!-- lootbox -->
+					<li class="list-item">
+						<a href="{% url 'lootbox' %}" class="nav-link">
+							<span class="material-symbols-rounded">redeem</span>
+							<span class="link">Lootbox</span>
+						</a>
+					</li>
+
+				</ul>
+
+
+				<div class="list-bottom-content">
+
+					<!-- settings -->
+					<li class="list-item">
+						<a href="{% url 'settings' %}" class="nav-link desktop-current">
+							<span class="material-symbols-rounded">settings</span>
+							<span class="link">Settings</span>
+						</a>
+					</li>
+
+					<!-- game guide -->
+					<li class="list-item">
+						<a href="{% url 'guide' %}" class="nav-link">
+							<span class="material-symbols-rounded">help</span>
+							<span class="link">Game Guide</span>
+						</a>
+					</li>
+
+					<!-- logout -->
+					<li class="list-item">
+						<a href="{% url 'logout' %}" class="nav-link">
+							<span class="material-symbols-rounded">logout</span>
+							<span class="link">Logout</span>
+						</a>
+					</li>
+				</div>
+			</div>
+		</nav>
 	</section>
 
 	<section class="middle-section">
@@ -45,22 +128,23 @@
 					<div class="container">
 						<!-- current user image -->
 						<div class="curr-user">
-							<img src="./assets/icons/logo-no-outline.png" alt="">
+							<img src="{% static '/users/assets/icons/logo-current-user.png' %}" alt="">
 						</div>
 						<!-- user first and last name -->
-						<p>First Last</p>
+						<p>{{ user.profile.first_name }} "NickName" {{ user.profile.last_name }}</p>
 					</div>
 
 					<div class="user-information-container">
 						<div>
 							<!-- user username -->
-							<p>Username: USERNAME</p>
+							<p>Username: {{ user_name }}</p>
 						</div>
 
 						<div>
 							<!-- user password -->
 							<p>
-								Password: <span id="user-pass">******</span>
+								Password: 
+								<span id="user-pass">******</span>
 							</p>
 							<button>Show</button>
 						</div>
@@ -75,12 +159,13 @@
 					</div>
 				</div>
 
-				<div>
+				<div class="roommates-list-container">
 					<!-- list of house members -->
 					<h3>Roommates</h3>
 					<ul class="roommates-list">
-						<li class="li-roommate">John Smith</li>
-						<li class="li-roommate">John Smith</li>
+						{% for member in members_by_name %}
+						<li class="li-roommate">{{ member.first_name }} {{ member.last_name }}</li>
+						{% endfor%}
 					</ul>
 				</div>
 			</div>
@@ -91,14 +176,23 @@
 					<h2 id="update-acct">Updating Your Account</h2>
 					
 					<!-- change display name form -->
-					<div class="change-user-name">
+					<div class="change-display-name">
 						<h3>Change Display Name</h3>
 						<p>
 							Your name is visible to all roommates.
 						</p>
 						<form action="" method="post">
-							<input type="text" name="" id="" placeholder="First Name">
-							<input type="text" name="" id="" placeholder="Last Name">
+							<input type="text" name="" id="" placeholder="{{ user.profile.first_name }}">
+
+							<select name="nickname" id="nickname_noun_list">
+								<option value="noun">insertNoun</option>
+							</select>
+
+							<select name="nickname" id="nickname_adjective_list">
+								<option value="adjective">insertADJ</option>
+							</select>
+
+							<input type="text" name="" id="" placeholder="{{ user.profile.last_name }}">
 							<button type="submit">Update Name</button>
 						</form>
 						
@@ -109,7 +203,7 @@
 					<div class="change-username">
 						<h3>Change Username</h3>
 						<form action="" method="post">
-							<input type="text" name="" id="change_username" placeholder="Username">
+							<input type="text" name="" id="change_username" placeholder="{{ user_name }}">
 							<button type="submit">Update username</button>
 						</form>
 					</div>
@@ -147,7 +241,7 @@
 							By deleting your account,
 							you will lose all of your associated data and access to your houshold.
 							<br>
-							This action cannot be undone.
+							<span>This action cannot be undone.</span>
 							<br>
 							To delete your account, enter your password below.
 						</p>
@@ -165,7 +259,7 @@
 							By deleting your household,
 							you will lose all associated informaton related to you and your household.
 							<br>
-							This action cannot be undone.
+							<span>This action cannot be undone.</span>
 							<br>
 							To delete your household, enter the household pin below.
 						</p>
@@ -183,4 +277,5 @@
 {% endblock %}
 
 {% block js_files %}
+<script src="{% static 'users/actions/settings.js' %}"></script>
 {% endblock %}

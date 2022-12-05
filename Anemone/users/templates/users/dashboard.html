@@ -12,11 +12,9 @@
 {% block content %}
 	<div class="main-grid">
 		
-		<!-- navigation -->
 		<section class="left-section">
 
-			<nav id="nav-mobile"></nav>
-
+			<!-- desktop nav -->
 			<nav id="nav-sidebar">
 
 				<div class="logo-container">
@@ -176,7 +174,7 @@
 										<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
 									</div>
 									{% endif %}
-								<p class="user-name">{{ bulletin.profile.first_name }}</p>
+								<p class="user-name">{{ bulletin.profile.first_name }} {{ bulletin.profile.last_name }}</p>
 							</div>
 
 							<div class="user-post">

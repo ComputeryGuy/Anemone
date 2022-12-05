@@ -103,7 +103,7 @@
 	padding: 1rem;
 }
 
-/* ---------- user stats container ---------- */
+/* ---------- user container ---------- */
 .user-container {
 	padding: 1rem;
 	background-color: var(--primary-white);
@@ -111,8 +111,13 @@
 	border: 2px solid var(--font-colour);
 }
 
+/* ---------- user image ---------- */
 .user-image-container {
 	margin-bottom: 1rem;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .curr-user-container {
@@ -122,21 +127,26 @@
     border: 4px solid var(--accent-red);
     margin-bottom: 0.5rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .user-image-container img {
-	width: 5.5rem;
-	height: 5.5rem;
+	width: 5rem;
+    height: 5rem;
 }
 
-.user-name-container {
+.user-name-container span {
 	font-size: 16px;
 }
 
 #adjective {
 	color: var(--accent-red);
+}
+/* ---------- user stats container ---------- */
+.user-stats-container span {
+	color: var(--accent-blue);
 }
 
 /* ---------- kudos container ---------- */

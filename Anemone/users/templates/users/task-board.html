@@ -164,8 +164,8 @@
 				</form>
 			</div>
 	
-			<!-- navigation -->
 			<section class="left-section">
+				<!-- desktop nav -->
 				<nav id="nav-sidebar">
 
 					<div class="logo-container">
@@ -351,9 +351,13 @@
 
 										<div class="task-user-img">
 											{% if user.profile.pk == task.user_claimed.pk %}
-											<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+											<div class="curr-user-container">
+												<img src="{% static 'users/assets/icons/logo-current-user.png' %}" alt="">
+											</div>
 											{% else %}
-											<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+											<div class="other-user-container">
+												<img src="{% static 'users/assets/icons/logo-round.png' %}" alt="">
+											</div>
 											{% endif %}
 											<p id="user-name"> {{ task.user_claimed.first_name }} {{ task.user_claimed.last_name }} </p>
 										</div>

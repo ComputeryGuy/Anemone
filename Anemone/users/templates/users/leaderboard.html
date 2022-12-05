@@ -39,7 +39,8 @@
 	
 	<div class="main-grid">
 		<section class="left-section">
-			<!-- navigation desktop -->
+			
+			<!-- desktop nav -->
 			<nav id="nav-sidebar">
 
 				<div class="logo-container">
@@ -174,10 +175,16 @@
 				</div>
 
 				<div class="user-stats-container">
-					<p id="my-level">Level: <span id="my-level-numb">{{ profile.level }}</span></p>
+					<p id="my-level">Level: 
+						<span id="my-level-numb">{{ profile.level }}</span>
+					</p>
 					<!--<p id="my-rank">Rank: <span id="my-rank-numb">INSERT HERE</span></p>-->
-					<p id="my-score">XP: <span id="my-score-numb">{{ profile.points }} pts</span></p>
-					<p id="my-score">Next Level at: <span id="my-score-numb">{{ profile.nextLevelThresh }} pts</span></p>
+					<p id="my-score">XP: 
+						<span id="my-score-numb">{{ profile.points }}pts</span>
+					</p>
+					<p id="my-score">Next Level:
+						<span id="my-score-numb">{{ profile.nextLevelThresh }}pts</span>
+					</p>
 				</div>
 			</div>
 

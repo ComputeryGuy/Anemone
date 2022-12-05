@@ -1,16 +1,17 @@
-/* =================== imported fonts =================== */
+/* =================== CONSTANTS =================== */
 
 /* ---------- sub-header ---------- */
 
-/* =================== global variables =================== */
-
-/* =================== reset default styles =================== */
-
-
-/* =================== base page styles =================== */
-
-/* =================== font styles =================== */
 
 /* =================== primary media query =================== */
 
 /* =================== media queries =================== */
+
+/* =================== MOBILE =================== */
+@media only screen and (max-width: 40em) {}
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {}
+
+/* =================== DESKTOP AND BEYOND =================== */
+@media only screen and (min-width: 64.063em) {}

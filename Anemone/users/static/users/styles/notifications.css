@@ -118,7 +118,7 @@
 	border-radius: var(--std-border-radius);
 
 	display: grid;
-	grid-template-columns: min-content auto;
+	grid-template-columns: max-content auto;
 	gap: 20px;
 
 	margin-bottom: 1rem;
@@ -128,8 +128,11 @@
 
 .user-profile {
 	margin: auto auto;
-	padding: .3rem;
-	text-align: center;
+	padding: 0.3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .curr-user-container {

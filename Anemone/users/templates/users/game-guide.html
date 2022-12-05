@@ -6,6 +6,95 @@
 {% endblock %}
 
 {% block content %}
+<section class="left-section">
+
+	<!-- desktop nav -->
+	<nav id="nav-sidebar">
+
+		<div class="logo-container">
+			<img id="logo" src="{% static 'users/assets/icons/logo-round.png' %}" alt="logo">
+		</div>
+
+		<div class="nav-sidebar-content">
+
+			<ul class="list">
+
+				<!-- dashboard -->
+				<li class="list-item">
+					<a href="{% url 'dashboard' %}" class="nav-link">
+						<span class="material-symbols-rounded mobile-current">dashboard</span>
+						<span class="link">Dashboard</span>
+					</a>
+				</li>
+
+				<!-- tasks -->
+				<li class="list-item">
+					<a href="{% url 'taskboard' %}" class="nav-link">
+						<span class="material-symbols-rounded">task_alt</span>
+						<span class="link">Tasks</span>
+					</a>
+				</li>
+
+				<!-- notifications/bulletin -->
+				<li class="list-item">
+					<a href="{% url 'bulletin' %}" class="nav-link">
+						<span class="material-symbols-rounded">notifications</span>
+						<span class="link">Notifications</span>
+					</a>
+				</li>
+
+				<!-- leaderboard -->
+				<li class="list-item">
+					<a href="{% url 'leaderboard' %}" class="nav-link">
+						<span class="material-symbols-rounded">leaderboard</span>
+						<span class="link">Leaderboard</span>
+					</a>
+				</li>
+
+				<!-- lootbox -->
+				<li class="list-item">
+					<a href="{% url 'lootbox' %}" class="nav-link">
+						<span class="material-symbols-rounded">redeem</span>
+						<span class="link">Lootbox</span>
+					</a>
+				</li>
+
+			</ul>
+
+
+			<div class="list-bottom-content">
+
+				<!-- settings -->
+				<li class="list-item">
+					<a href="{% url 'settings' %}" class="nav-link">
+						<span class="material-symbols-rounded">settings</span>
+						<span class="link">Settings</span>
+					</a>
+				</li>
+
+				<!-- game guide -->
+				<li class="list-item">
+					<a href="{% url 'guide' %}" class="nav-link desktop-current">
+						<span class="material-symbols-rounded">help</span>
+						<span class="link">Game Guide</span>
+					</a>
+				</li>
+
+				<!-- logout -->
+				<li class="list-item">
+					<a href="{% url 'logout' %}" class="nav-link">
+						<span class="material-symbols-rounded">logout</span>
+						<span class="link">Logout</span>
+					</a>
+				</li>
+			</div>
+		</div>
+	</nav>
+</section>
+
+<section class="middle-section">
+
+</section>
 {% endblock %}
 
 {% block js_files %}

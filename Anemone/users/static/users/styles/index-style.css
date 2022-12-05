@@ -134,8 +134,9 @@ button a {
 	grid-column: span 1;
 
 	display: grid;
-	grid-template-columns: min-content auto;
+	grid-template-columns: max-content auto;
 	gap: 10px;
+
 	padding: .3rem .5rem;
 	border-left: 4px solid var(--accent-blue);
 	border-radius: 0 10px 10px 0;
@@ -146,7 +147,10 @@ button a {
 .user-profile {
 	margin: auto auto;
 	padding: .3rem;
-	text-align: center;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .curr-user-container {
