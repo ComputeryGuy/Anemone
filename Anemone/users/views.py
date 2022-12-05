@@ -553,7 +553,7 @@ def leaderboard(request):
             
             bonus_member = User.objects.get(pk=kudos_pk)
             bonus_profile = bonus_member.profile
-            points = 1
+            points = 10
 
             task_name = 'Kudos for {member}'.format(member = bonus_member)
             task_body = "Bonus Points"
@@ -562,7 +562,7 @@ def leaderboard(request):
                                         body = task_body,
                                         creation_time = timezone.now(),
                                         due_date = timezone.now() + timezone.timedelta(seconds=10),
-                                        points = 1,
+                                        points = 10,
                                         kudos = True,
                                         claimed = True,
                                         task_status = True,

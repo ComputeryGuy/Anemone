@@ -347,7 +347,7 @@
 						contentType: "application/json",
 						success: function(result) {
 							kudos_count = kudos_count + 1;
-							$(".total-clicks").html(kudos_count);
+							$(".total-clicks").html(kudos_count * 10);
 						},
 						error: function(response) {
 							alert("Something went wrong in processing your move.");
