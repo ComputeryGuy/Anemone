@@ -21,6 +21,7 @@
 
 	.middle-section {
 		grid-column: span 4;
+		padding: 1rem;
 	}
 }
 
@@ -38,6 +39,7 @@
 
 	.middle-section {
 		grid-column: span 6;
+		padding: 1rem;
 	}
 }
 
