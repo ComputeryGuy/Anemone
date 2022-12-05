@@ -138,6 +138,10 @@ column ---------- */
 		grid-column: span 1;
 	}
 
+	.mobile-nav-container {
+		display: none;
+	}
+	
 	/* ---------- middle section ---------- */
 	.middle-section {
 		grid-column: span 11;

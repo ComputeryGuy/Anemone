@@ -239,6 +239,10 @@
 		grid-column: span 1;
 	}
 
+	.mobile-nav-container {
+		display: none;
+	}
+
 	.middle-section {
 		padding: 1.5rem;
 	}

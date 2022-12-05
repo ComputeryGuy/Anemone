@@ -250,6 +250,11 @@ hr {
 		grid-column: span 1;
 	}
 
+	.mobile-nav-container {
+		display: none;
+	}
+	
+
 	.middle-section {
 		grid-column: span 11;
 		padding: 1rem;

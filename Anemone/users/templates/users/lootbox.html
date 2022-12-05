@@ -33,6 +33,70 @@
 </head>
 <body>
 
+	 <!-- mobile nav -->
+	 <div class="mobile-nav-container">
+
+		<nav class="mobile-nav">
+			<!-- dashboard -->
+			<button class="menu-item">
+				<a href="{% url 'dashboard' %}" class="nav-link">
+					<span class="material-symbols-rounded mobile-current">dashboard</span>
+				</a>
+			</button>
+		
+			<!-- tasks -->
+			<button class="menu-item">
+				<a href="{% url 'taskboard' %}" class="nav-link">
+					<span class="material-symbols-rounded">task_alt</span>
+				</a>
+			</button>
+		
+			<!-- notificatoins -->
+			<button class="menu-item">
+				<a href="{% url 'bulletin' %}" class="nav-link">
+					<span class="material-symbols-rounded">notifications</span>
+				</a>
+			</button>
+		
+			<!-- leaderboard -->
+			<button class="menu-item">
+				<a href="{% url 'leaderboard' %}" class="nav-link">
+					<span class="material-symbols-rounded">leaderboard</span>
+				</a>
+			</button>
+		
+			<!-- lootbox -->
+			<button class="menu-item mobile-current">
+				<a href="{% url 'lootbox' %}" class="nav-link">
+					<span class="material-symbols-rounded">redeem</span>
+				</a>
+			</button>
+		
+			<!-- settings -->
+			<button class="menu-item">
+				<a href="{% url 'settings' %}" class="nav-link">
+					<span class="material-symbols-rounded">settings</span>
+				</a>
+			</button>
+		
+			<!-- game guide -->
+			<button class="menu-item">
+				<a href="{% url 'guide' %}" class="nav-link">
+					<span class="material-symbols-rounded">help</span>
+				</a>
+			</button>
+		
+			<!-- login/logout -->
+			<button class="menu-item">
+				<a href="{% url 'logout' %}" class="nav-link">
+					<span class="material-symbols-rounded">logout</span>
+				</a>
+			</button>
+		</nav>
+
+		<div class="hump-container"></div>
+	</div>
+
 	<div class="main-grid">
 
 		<section class="left-section">

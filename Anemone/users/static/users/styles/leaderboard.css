@@ -328,6 +328,10 @@
 		grid-column: span 1;
 	}
 
+	.mobile-nav-container {
+		display: none;
+	}
+	
 	.middle-section {
 		grid-column: span 8;
 		margin-top: 3rem;
