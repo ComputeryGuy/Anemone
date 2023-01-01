@@ -248,7 +248,7 @@
 						</p>
 						<form action="" method="post">
 							{% csrf_token %}
-							<input type="text" name="first_name" id="" placeholder="{{ user.profile.first_name }}">
+							<input type="text" name="first_name" id="" value="{{ user.profile.first_name }}">
 
 							<select name="adjective" id="nickname_adjective_list">
 								<option value="">Adjective</option>
@@ -264,7 +264,7 @@
 								{% endfor %}
 							</select>
 
-							<input type="text" name="last_name" id="" placeholder="{{ user.profile.last_name }}">
+							<input type="text" name="last_name" id="" value="{{ user.profile.last_name }}">
 							<button type="submit" name="submit" value="name_change">Update Name</button>
 						</form>
 						

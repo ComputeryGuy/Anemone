@@ -272,7 +272,7 @@
 							</button>
 
 							<p>
-								+<span class="total-clicks">0</span>pts
+								+<span class="total-clicks" id="{{ member.pk }}">0</span>pts
 							</p>
 						</div>
 						{% endif %}
@@ -393,7 +393,7 @@
 			var kudos_count = 0;
 
 			// make the count not for only the selected user
-			$(".kudos-btn").click (
+			$(".kudos-btn#{{ member.pk }}").click (
 				function (e) { 
 					//e.preventDefault();
 					profile_pk = this.id;
@@ -411,7 +411,7 @@
 						contentType: "application/json",
 						success: function(result) {
 							kudos_count = kudos_count + 1;
-							$(".total-clicks").html(kudos_count * 10);
+							$(".total-clicks#{{ member.pk }}").html(kudos_count * 10);
 						},
 						error: function(response) {
 							alert("Something went wrong in processing your move.");
